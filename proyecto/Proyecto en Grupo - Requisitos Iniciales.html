@@ -126,126 +126,101 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** En general se tendrán funciones básicas de Alta, Modificación, Baja, Consulta, Búsquedas/Filtrado.
 <ul>
   <li><strong>Mantenimiento de Usuarios:</strong>
-  Crear usuarios bajo demanda por petición para ser patrocinadores (Anunciantes) o para ser moderadores o administradores. El resto serán usuarios que se registran ellos mismos. Se podrán revisar los nuevos usuarios registrados automáticamente, bloquear usuarios por exceso de libros o de comentarios denunciados, desbloquear usuarios que han fallado el límite de intentos de acceso al sitio, ver el registro de fallos de acceso, eliminar registros antiguos de fallos de acceso, etc.
-  <br>
-  *** En la gestión de usuarios colaboradores (Moderadores) se deberá tener en cuenta la opción de moderador de géneros para establecerlos, es decir, la relación de un moderador registrado con los géneros que se les permite moderar.
-  Como cada libro estará relacionado con algún género, se podrá localizar todos los libros y comentarios relacionados para que puedan ser moderados.
-  <br>
-  *** En el detalle de la gestión de un usuario concreto, un administrador podrá ver la ficha con todas las opciones vinculadas con ese usuario, más o menos como se indica en el apartado "Perfil de Usuario".
-  <br>
-  *** Los roles disponibles estarán predefinidos de entre los indicados anteriormente.
+    Creación y gestión de usuarios: Los usuarios normales se registran por sí mismos, mientras que los patrocinadores (anunciantes) o moderadores/administradores se crean o asignan bajo demanda.
+    Control y revisión:
+    Bloquear usuarios por exceso de anuncios o comentarios denunciados.
+    Desbloquear usuarios que han fallado repetidamente en los intentos de acceso.
+    Revisar y eliminar registros antiguos de fallos de acceso.
+    Gestión avanzada: Los administradores podrán ver la ficha de un usuario con todas las opciones vinculadas, como se detalla en el apartado "Perfil de Usuario".
+    Roles disponibles:
+    Los roles incluyen Invitado, Usuario, Cliente, Proveedor, Comercio, Moderador, Administrador y Super.
   </li>
   <br>
   
-  <li><strong>Mantenimiento de Géneros/Categorías:</strong>
-  Poder gestionar la lista de géneros/categorías que sirven para clasificar los libros. No se debería eliminar un género que esté siendo usado por algún libro. Se debería poder unificar géneros que se consideren como duplicados o sean muy parecidos en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan un género por el bueno.
-  <br>
-  *** Los géneros/categorías pueden tener jerarquía para mejorar la clasificación, es decir, que un género contiene subgéneros o a la inversa, que un género está contenido en uno más general hasta llegar al género raíz. Como un libro estará asociado a un género, el funcionamiento de las búsquedas de libros por este criterio debería incluir tanto al género seleccionado como a los subgéneros que contenga, para así proporcionar datos más precisos sin perdernos posibles libros.
-  <br>
-  *** Un moderador asignado a un género podrá gestionar y moderar todos los libros y comentarios asociados a cualquier subgéneros que contenga.
-  <br>
-  *** A la hora de crear libros, un usuario podrá proponer géneros nuevos si de entre las existentes no existe el adecuado para clasificarlo. Con esto se deberá tener un control de revisión de géneros nuevos para que los moderadores o administradores puedan detectarlos, revisarlos y actuar en consecuencia. Lo más oportuno es que al crear un género nueva, se genere un aviso de notificación para los moderadores o administradores avisando de lo ocurrido.
+  <li><strong>Mantenimiento de Categorías:</strong>
+    Gestión de categorías: Administradores podrán gestionar las categorías que clasifican las ofertas.
+    No se podrá eliminar una categoría que esté siendo usada activamente por alguna oferta.
+    Permitirá unificar categorías duplicadas o similares.
+    Jerarquía de categorías:
+    Las categorías tendrán una estructura jerárquica (categorías principales y subcategorías).
+    Las búsquedas incluirán tanto la categoría seleccionada como sus subcategorías para resultados más precisos.
+    Propuestas de nuevas categorías:
+    Los usuarios podrán proponer nuevas categorías si las existentes no son adecuadas.
+    Estas propuestas serán revisadas por moderadores o administradores, quienes recibirán una notificación para evaluarlas.
   </li>
   <br>
   
-  <li><strong>Mantenimiento de Etiquetas temáticas:</strong>
-  Poder gestionar la lista de etiquetas que sirven para caracterizar a los libros. No se debería eliminar una etiqueta que esté siendo usada por algún libro. Se debería poder unificar etiquetas que se consideren como duplicadas o sean muy parecidas en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan una etiqueta por la buena.
-  <br>
-  *** Las etiquetas son múltiples por libro, por tanto se deberá poder almacenar N etiquetas para 1 libro.
-  <br>
-  *** A la hora de crear libros, las etiquetas inicialmente se intentarán extraer de las palabras contenidas en el título y en la descripción, se limpiarán de caracteres no alfabéticos, se pasarán a minúscula y se ignorarán las palabras no significativas como artículos, conjunciones, etc. Si no fuera factible, se crearán las etiquetas manualmente, pudiendo un usuario proponer etiquetas nuevas si de entre las existentes no son adecuadas para etiquetar el libro en cuestión. Con esto se deberá tener un control de revisión de etiquetas nuevas para que los moderadores o administradores puedan detectarlas, revisarlas y actuar en consecuencia. Lo más oportuno es que al crear una etiqueta nueva, se genere un aviso de notificación para los moderadores o administradores avisando de lo ocurrido.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Autores (Entidades de tipo Autor):</strong>
-  Un mantenimiento generalizado de autores, los cuales se asociarán con los libros que han escrito.
-  <br>
-  *** Puede haber más de un autor por libro, así que existirá una relación múltiple entre autores y libros.
-  <br>
-  *** Aunque exista este mantenimiendo para moderadores y administradores, el mantenimiento de los autores se realiza principalmente desde la creacion de los datos de libros. Se propondrá buscar el autor de entre los existentes y si no está, se permitirá crear nuevo.
-  <br>
-  *** Deberá poderse unificar autores que sean el mismo pero estén escritos de manera diferente, para así limpiar y mantener la base de datos coherente.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Ilustradores (Entidades de tipo Ilustrador):</strong>
-  Un mantenimiento generalizado de ilustradores, similar al de autores y prácticamente con las mismas funcionalidades.
-  <br>
-  *** Aunque pudiera haber más de un ilustrador por libro, sólo se permitirá uno, así que no existirá una relación múltiple entre ilustradores y libros, sino que se incluirá en el libro directamente.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Traductores (Entidades de tipo Traductor):</strong>
-  Un mantenimiento generalizado de traductores, similar al de autores y prácticamente con las mismas funcionalidades.
-  <br>
-  *** Lo mismo que se indica para los ilustradores, sólo se permitirá un traductor por libro, así que la relación se incluirá en directamente en él.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Editoriales (Entidades de tipo Editorial):</strong>
-  Un mantenimiento generalizado de empresas editoriales, similar al de autores y con las mismas funcionalidades.
-  <br>
-  *** Lo mismo que se indica para los ilustradores y traductores, sólo se permitirá una editorial por libro, así que la relación se incluirá en directamente en él.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Idiomas:</strong>
-  Un mantenimiento simple de los idiomas que pueden aplicarse a los libros.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Libros:</strong>
-  Un mantenimiento generalizado de los libros a nivel administrador, en la que se podrán ver y gestionar todos los existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha concreta se podrán ver los datos del libro, tal y como se pueden gestionar desde un usuario normal, a excepción de algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo el bloqueo/desbloqueo del libro, etc.
-  <br>
-  *** El mantenimiento de un libro incluirá la posible vinculación con una o varias imágenes, una o varias URLs, uno o varios patrocinadores, la revisión-gestión de los usuarios que están siguiéndolo actualmente, la revisión-gestión de las valoraciones y comentarios creados, la revisión-gestión de los eventos creados (charlas / presentaciones / reuniones, ...), la revisión-gestión de los usuarios asistentes a los eventos, los posibles avisos/notificaciones/alertas de ese libro, etc.
-  <br>
-  *** <strong>Mantenimiento de Imágenes.</strong> 
-  <br>
-  *** <strong>Mantenimiento de URLs.</strong> 
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Comentarios y Valoraciones de Libros:</strong>
-  Un mantenimiento generalizado de los comentarios hechos a los libros a nivel administrador, en la que se podrán ver y gestionar todos los existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de comentario se podrán ver/mantener todos sus detalles y algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo el control de denuncias, el bloqueo/desbloqueo del comentario, el cierre del mismo para que no se pueda responder, etc.
-  <br>
-  *** El mantenimiento de un comentario incluirá la posible vinculación con el libro al que se refiere el comentario, al comentario "padre" al que se responde (si es una respuesta), a los comentarios "hijo" que tiene como respuesta, las posibles alertas del comentario, denuncias, etc.
-  </li>
-  <br>
-  
-  <li><strong>Mantenimiento de Patrocinadores-Anunciantes:</strong>
-  Un mantenimiento de los usuarios que se registran o solicitan ser anunciantes / patrocinadores y tienen interés en gestionar los anuncios y/o libros por su cuenta.
-  <br>
-  *** Se crearán los patrocinadores a partir de usuarios registrados que hacen la solicitud de ser anunciante rellenando la ficha con sus datos adicionales, como por ejemplo su NIF, Razón Social, Correo, Teléfono, etc. Los administradores realizarán la aceptación del usuario como anunciante asignando el privilegio (Rol) asociado al usuario para que pueda realizar las acciones propias de dicho perfil.
-  <br>
-  *** Se deberá permitir realizar una gestión más o menos completa de los anuncios y/o libros que den de alta estos usuarios "anunciantes" y la información relacionada con ellos.
+  <li><strong>Mantenimiento de Etiquetas:</strong>
+    Gestión de etiquetas:
+    Administradores podrán gestionar etiquetas para caracterizar las ofertas.
+    Se permitirá unificar etiquetas duplicadas o similares.
+    Asignación múltiple: Las ofertas podrán tener varias etiquetas asociadas.
+    Etiquetas automáticas:
+    Las etiquetas se generarán automáticamente a partir de las palabras clave en el título y descripción de las ofertas.
+    Se limpiarán de caracteres no alfabéticos, se pasarán a minúsculas, y se ignorarán palabras no significativas.
+    Propuestas de etiquetas nuevas:
+    Los usuarios podrán proponer etiquetas si las generadas automáticamente no son adecuadas.
+    Estas etiquetas serán revisadas por los moderadores o administradores, quienes recibirán una notificación para actuar en consecuencia.
   </li>
   <br>
   
   <li><strong>Mantenimiento de Anuncios:</strong>
-  Un mantenimiento de anuncios por parte de los patrocinadores (si son suyos), o por moderadores o administradores.
-  <br>
-  *** Los anuncios tendrán al menos relación con el patrocinador-anunciante y de forma opcional con una editorial, un libro, un géneros, o un evento. Con estar posibles se pueden tener anuncios generales, de una editorial concreta, de un libro en promoción (por ejemplo), por género literario y por un evento organizado con publicidad.
+    Gestión de anuncios:
+    Los patrocinadores gestionarán sus propios anuncios.
+    Los moderadores o administradores podrán gestionar todos los anuncios, realizar bloqueos/desbloqueos y gestionar denuncias.
+    Relaciones de los anuncios:
+    Cada anuncio estará relacionado con al menos un patrocinador.
+    Opcionalmente, podrán vincularse a una categoría, oferta, o etiquetas específicas.
   </li>
   <br>
   
-  <li><strong>Mantenimiento de Eventos (Charlas / Presentaciones / Reuniones, ...):</strong>
-  El mantenimiento generalizado a nivel administrador de los eventos que se organizan. Se podrán ver y gestionar todos los datos existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de evento se podrán ver los datos de su celebración, al menos la fecha/hora de inicio, su texto descriptivo, la descripción del lugar, etc., y algunas acciones adicionales para cerrar manualmente el evento antes de que pase la fecha/hora del mismo.
-  <br>
-  *** El mantenimiento de un evento incluirá la posible vinculación con el usuario que lo publica, con el anunciante que lo patrocina (en su caso), el libro relacionado, la fecha/hora de inicio, y opcionalmente la fecha/hora de finalización, bloqueo o no por denuncia, etc.
+  <li><strong>Mantenimiento de Ofertas:</strong>
+    Gestión completa: Los administradores podrán gestionar todas las ofertas existentes, incluyendo su alta, baja y modificación.
+    Datos relacionados:
+    Las ofertas podrán incluir imágenes, URL del proveedor, patrocinadores relacionados, etiquetas, y categorías.
+    Se gestionarán los usuarios que siguen una oferta, así como los comentarios y valoraciones asociadas.
+    Moderación avanzada:
+    Bloqueo o desbloqueo de ofertas.
+    Gestión de denuncias y alertas relacionadas con las ofertas.
   </li>
   <br>
   
-  <li><strong>Mantenimiento de Avisos / Incidencias:</strong>
-  El mantenimiento generalizado de los avisos e incidencias a nivel administrador, en el que se podrán ver y gestionar todos los avisos existentes, incluso dar de alta o baja según se considere oportuno. En cada ficha de aviso se podrán ver los datos del mismo y algunas acciones adicionales para permitir revisar y dar respuesta al aviso desde el punto de vista de un moderador/administrador. En el caso de la vista con la versión para otros usuarios registrados, se podrá responder al mismo.
-  <br>
-  *** El mantenimiento de un aviso incluirá la posible vinculación con el usuario origen y destino del mismo, con el anuncio, o libro y/o comentario relacionado (si lo hay), la fecha/hora de lectura por el usuario destino, y la fecha/hora de aceptación por un moderador/administrador.
+  <li><strong>Mantenimiento de Comentarios y Valoraciones:</strong>
+    Gestión de comentarios: Los administradores podrán visualizar, bloquear, desbloquear o eliminar comentarios según sea necesario.
+    Denuncias:
+    Los comentarios denunciados serán revisados por moderadores o administradores.
+    Los comentarios podrán ser bloqueados temporalmente o eliminados si no cumplen con las normas.
   </li>
   <br>
   
-  <li><strong>Mantenimiento de Registros (LOG): </strong>
-  Mantenimiento y visualización de los registro de LOG que se generen en el sistema, con posibilidad de poder exportar los registros en archivo de texto o de eliminar los registros que cumplan un filtro establecido. Además se deberá tener un proceso que permita eliminar automáticamente los registros "anticuados".
+  <li><strong>Mantenimiento de Patrocinadores:</strong>
+    Gestión de patrocinadores:
+    Los patrocinadores se crean a partir de usuarios registrados que solicitan este rol.
+    Deberán proporcionar datos adicionales como NIF, Razón Social, Teléfono y Correo Electrónico.
+    Aprobación: Los administradores realizarán la aceptación y asignarán el rol de patrocinador.
+    Gestión de anuncios: Los patrocinadores podrán gestionar sus propios anuncios y ofertas relacionadas.
   </li>
   <br>
+  
+  <li><strong>Mantenimiento de Incidencias y Denuncias:</strong>
+    Gestión de incidencias:
+    Los administradores podrán revisar y dar respuesta a incidencias reportadas por los usuarios.
+    Cada incidencia estará vinculada a un usuario, oferta, anuncio o comentario relacionado.
+    Denuncias: Los moderadores podrán revisar y tomar decisiones sobre ofertas o comentarios denunciados.  
+  </li>
+  <br>
+  
+  <li><strong>Mantenimiento de Configuraciones:</strong>
+    Parámetros generales:
+    Configuración de límites para comentarios, valoraciones, e intentos de acceso fallidos.
+    Gestión de filtros automáticos para búsquedas y contenido.
+    Copias de seguridad:
+    Procesos de backup y restauración de datos y archivos relacionados.
+    Eliminación automática de registros y datos obsoletos.
+    
+  </li>
+  <br>
+  
   
   <li><strong>Utilidades: </strong>
     <ul>
@@ -268,232 +243,127 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** Información y Datos que debe almacenar y manejar el sistema para proporcionar las funcionalidades indicadas en los requisitos.
 
 <ul>
-  <li><strong>Libro: </strong>
-  Elemento con → título, resumen, 
-  Autor principal, [Autores adicionales,]
-  Ilustrador, 
-  Traductor, 
-  Editorial, 
-  Género, Etiquetas temáticas, colección,
-  Idioma, Formato, páginas,
-  Portada o Imagen principal, [Imágenes adicionales,]
-  URLs externas,
-  Estados del Libro,
-  Comentarios,
-  Valoración Resumen (contadores de votos),
-  Seguimientos,
-  Eventos,
-  Registro de usuario,
-  notas administrador.
+  <li><strong>Oferta/Chollo: </strong>
+  Elemento con: 
+  Título: Nombre del chollo/oferta.
+  Descripción: Explicación detallada de la oferta o chollo.
+  Precio original: Precio antes del descuento.
+  Precio actual: Precio después del descuento.
+  Descuento: Porcentaje o cantidad del descuento aplicado.
+  Categoría: Relación con la categoría de la oferta.
+  Etiquetas: Palabras clave relacionadas con la oferta.
+  Proveedor: Relación con el proveedor o comercio que ofrece la oferta.
+  Zonas: Áreas geográficas relacionadas con la oferta.
+  Visibilidad: Si el chollo está activo o visible en el portal.
+  Imágenes: Galería de imágenes asociadas a la oferta.
+  URLs externas: Enlaces a páginas externas relacionadas.
+  Fecha de inicio y fin: Vigencia de la oferta.
+  Estado: Visible, caducado, eliminado, bloqueado, etc.
+  Denuncias: Contador de denuncias recibidas.
+  Fecha/hora de creación: Momento en que se creó.
+  Usuario creador: Usuario que añadió la oferta.
+  Comentarios: Relación con los comentarios asociados a la oferta.
+  Valoraciones: Relación con las valoraciones dadas por los usuarios.
+  Seguimientos: Relación con los usuarios interesados en la oferta.
   </li>
   <br>
   
-  <li><strong>Autor, Ilustrador, Traductor, Editorial:</strong>
-  Elemento con → nombre o razón social de la entidad, URL de la entidad (opcional), descripción adicional de la entidad (opcional), revisado por moderador/admimnistrador.
+  <li><strong>Categoría:</strong>
+  Elemento con:
+  Nombre: Identificación de la categoría.
+  Descripción: Explicación de la categoría.
+  Icono: Imagen representativa (opcional).
+  Categoría padre: Para jerarquizar subcategorías.
+  Revisado: Marcado si ha sido validado por un moderador o administrador.
   </li>
   <br>
   
-  <li><strong>Autores:</strong>
-  Elemento con → Autor, Libro. *** Relaciona un autor con un libro y así se pueden tener múltiples por cada uno.
-  <br>
-  *** Se puede tener la posibilidad de establecer el orden de aparición de los mismos si se incluye además el dato "orden".
+  <li><strong>Etiquetas:</strong>
+  Elemento con:
+  Nombre: Palabra clave o etiqueta.
+  Descripción: Contexto de la etiqueta.
+  Revisada: Marcada si ha sido validada por un moderador o administrador.
   </li>
   <br>
   
-  <li><strong>Género:</strong>
-  Elemento de clasificación o agrupación de libros.
-  Es un elemento con → nombre, descripción, icono (opcional), Género padre para poder crear jerarquías con subgéneros, revisado por moderador/admimnistrador.
-  </li>
-  <br>
-  
-  <li><strong>Etiquetas temáticas:</strong>
-  Sustituto de relación que vincula un libro con una o varias etiquetas. Puede ser una de la opciones:
-    <ul type="decimal">
-      <li>Elemento con → Libro, Etiqueta. *** Relaciona ambas clases de objeto. En este caso debe definirse:
-        <ul>
-          <li><strong>Etiqueta: </strong>Elemento con → nombre, descripción, revisada por moderador/admimnistrador. 
-          *** Un conjunto de palabras clave utilizadas para identificar y clasificar de diferentes maneras los libros.
-          </li>
-        </ul>
-      </li>
-      <li>Sustituto de → etiquetas_id. *** Una lista de identificadores de Etiqueta con los que se relaciona el libro.
-      </li>
-      <li>Sustituto de → etiquetas_nombre. *** Una lista de datos "nombre" de las propias etiquetas con las que se relaciona el libro.
-      </li>
-    </ul>
-    *** En el caso de usar listas serían cadenas de datos separados por comas, teniendo especial cuidado en que la coma no aparezca en el propio contenido de los datos.
-    <br>
-    *** Para gestionar adecuadamente las etiquetas de nueva creación propuestas por los usuarios, se generará una alerta para los moderadores o administradores que indique la etiqueta creada, la fecha/hora del momento y el usuario que lo ha realizado para que tengan constancia de ello y se pueda revisar / actuar en consecuencia.
-  </li>
-  <br>
-  
-  <li><strong>Idioma:</strong>
-  Elemento con → idioma, código de lenguaje (opcional).
-  </li>
-  <br>
-  
-  <li><strong>Formato:</strong>
-  Sustituto de / Elemento con → código de formato. Por ejemplo una enumeración: P=Papel, B=Papel/Bolsillo, D=Digital, E=Digital/EBook, A=Digital/Audible, ...
-  </li>
-  <br>
-  
-  <li><strong>Imagen:</strong>
-  Sustituto de → nombre(identificador) de archivo externo en carpeta predefinida (ruta conocida y escribible por el servidor web) o campo binario con la imagen embebida.
-  </li>
-  <br>
-  
-  <li><strong>Imágenes:</strong>
-  Elemento con → Imagen, Libro. *** Relaciona una imagen con un libro y así se pueden tener múltiples por cada uno.
-  <br>
-  *** Se puede tener la posibilidad de establecer el orden de aparición de las mismas si se incluye además el dato "orden" entre sus datos.
-  </li>
-  <br>
-  
-  <li><strong>URLs:</strong>
-  Elemento con → URL, Libro. *** Relaciona una URL con un libro y así se pueden tener múltiples por cada uno.
-  <br>
-  *** Se puede tener la posibilidad de establecer el orden de aparición de las mismas si se incluye además el dato "orden" entre sus datos.
-  </li>
-  <br>
-  
-  <li><strong>URL:</strong>
-  Sustituto de → url, titulo (opcional).
-  </li>
-  <br>
-  
-  <li><strong>Estados de Libro:</strong>
-  Sustituto de → visible (lógico), terminado (0:No, 1:Eliminado por usuario, 2:Suspendido, 3:Cancelado por inadecuado), fecha/hora de terminación, motivo de terminación, número denuncias, fecha/hora de la primera denuncia, bloqueado, fecha/hora del bloqueo, motivo del bloqueo.
-  </li>
-  <br>
-  
-  <li><strong>Comentarios:</strong>
-  Sustituto de relación que vincula un libro con una serie de valoraciones y comentarios realizados por los usuarios del sistema. Es un elemento con → Libro, Comentario.
-  </li>  
-  <br>
-  
-  <li><strong>Comentario:</strong>
-  Sustituto de →
-  valoración, texto, número denuncias, fecha/hora de la primera denuncia, bloqueado, fecha/hora del bloqueo, motivo del bloqueo, Registro de usuario.
-  </li>  
-  <br>
-  
-  <li><strong>Valoración Resumen:</strong>
-  Sustituto de una de estas opciones:
-  <br>
-    <ul type="decimal">
-      <li>suma_valores, total_votos. *** Si se desea una valoración media por nota en un rango de valores posibles [0..N] sin necesidad de almacenar los votos independientes.</li>
-      <li>votos1, votos2, ..., votosN[, votosTotal]. *** Si se permiten N opiniones diferentes en la valoración y se desea almacenar la cuenta de votos independientes. Aquí se puede tener "votosTotal" como el acumulado de los N campos de votos para agilizar los cálculos en caso de necesidad. Esta opción permite, además de hacer la media, hacer una estadística detallada por cada tipo de voto.</li>
-    </ul>
-  </li>
-  <br>
-  
-  <li><strong>Seguimientos:</strong>
-  Sustituto de relación que vincula un libro con un usuario que desea estar al tanto de los avisos y notificaciones del mismo. Es un elemento con → fecha/hora de seguimiento, Libro, Usuario seguidor.
-  </li>
-  <br>
-  
-  <li><strong>Eventos:</strong>
-  Sustituto de relación que vincula un libro con una charla, presentación, reunión, etc. Es un elemento con → Libro, Evento, Asistentes.
-  </li>  
-  <br>
-  
-  <li><strong>Evento:</strong>
-  Elemento con →
-  texto, fecha/hora de inicio, fecha/hora de finalizacion (opcional), publico,
-  número denuncias, fecha/hora de la primera denuncia, bloqueado, fecha/hora del bloqueo, motivo del bloqueo, Registro de usuario.
-  </li>  
-  <br>
-  
-  <li><strong>Asistentes:</strong>
-  Sustituto de relación que vincula un libro y un evento con los usuarios que desean asistir al mismo. 
-  Es un elemento con → fecha/hora de activación como asistente, Libro, Evento, Usuario asistente.
-  </li>
-  <br>
-  
-  <li><strong>Patrocinador:</strong>
-  Sustituto de relación que vincula un anuncio con un usuario anunciante / patrocinador. Es un elemento con → Usuario, nif/cif, razon social, telefono comercial, telefono de contacto, url a la web del patrocinador (si tiene), fecha/hora de alta como patrocinador.
-    <ul>
-      <li><strong>Usuario:</strong>Sustituto de relación que vincula al patrocinador con el usuario principal al que pertenece.
-      <br>
-      *** Se describe más abajo.
-      </li>
-    </ul>
-  </li>
-  <br>
-
-  <li><strong>Anuncio:</strong>
-  Elemento con →
-  Patrocinador, 
-  titulo, descripción, prioridad, visible, 
-  Editorial (NULO si no está relacionado con una editorial),
-  Libro (NULO si no está relacionado con un libro),
-  Género (NULO si no está relacionado con un género),
-  Evento (NULO si no está relacionado con un evento),
-  Registro de usuario.
-  </li>  
-  <br>
-
-  <li><strong>Registro de usuario:</strong>
-  Sustituto de → 
-  fecha/hora de creación, Usuario creador, fecha/hora de modificación, Usuario modificador.
-  <br>
-  *** Sirve tanto para relacionar algún elemento de información con los usuarios que lo han creado y/o modificado, como para conocer el momento de cuando lo han realizado.
+  <li><strong>Proveedor/Comercio:</strong>
+  Elemento con:
+  Nombre o Razón Social: Identificación del proveedor.
+  Descripción: Información adicional sobre el proveedor.
+  URL: Página web del proveedor (opcional).
+  Teléfono de contacto: Para comunicaciones.
+  Correo electrónico: Contacto del proveedor.
+  Zonas: Áreas donde opera el proveedor.
+  Revisado: Validación por moderador o administrador.
   </li>
   <br>
   
   <li><strong>Usuario:</strong>
-  Elemento con → email, password, nick, nombre, apellidos, fecha_nacimiento (opcional), dirección (opcional), relación con el Perfil/Rol, fecha/hora de registro, registro confirmado, ultimo acceso, intentos acceso, bloqueado, fecha/hora del bloqueo, motivo del bloqueo, [Valoración usuario,] Géneros de moderación, Seguimientos, Preferencias de Libros (por géneros, por etiquetas), Comentarios, Eventos como asistente, Avisos.
-    <ul>
-      <li><strong>Valoración usuario:</strong> Sustituto de una de las opciones de → Valoración.
-      <br>
-      *** Esta información es opcional, y por ahora no se incluye en la base de datos inicial.
-      </li>
-      <li><strong>Géneros de moderación:</strong> Sustituto de relación que vincula un usuario con un género para actuar como moderador dentro de el. Se utiliza a la hora de aplicar/validar los permisos de acceso a las opciones de moderación. Es un elemento con → Usuario, Género.
-      </li>
-      <li><strong>Seguimientos, Preferencias de Libros, Comentarios, Eventos como asistente, Avisos: </strong>Tablas relacionadas ya comentadas por su relación con los Libros.
-      </li>
-    </ul>
-  *** El perfil de un usuario y los permisos de acceso se deberán a gestionar aplicando el sistema RBAC de control de acceso basado en roles. Para ello se deberá aprovechar el sistema integrado en el framework de trabajo. Ver el documento de asignación de tareas con la desceripción de los perfiles.
+  Elemento con:
+  Correo electrónico: Email único de identificación.
+  Contraseña: Hash de la contraseña del usuario.
+  Nick: Nombre público del usuario.
+  Nombre y Apellidos: Identificación personal (opcional).
+  Roles: Relación con el rol del usuario (Invitado, Usuario, Moderador, etc.).
+  Fecha/hora de registro: Momento del alta en el sistema.
+  Confirmación de registro: Estado de activación del usuario.
+  Último acceso: Momento del último inicio de sesión.
+  Intentos fallidos: Contador de intentos de inicio de sesión incorrectos.
+  Bloqueado: Estado de cuenta bloqueada.
+  Fecha/hora del bloqueo: Momento en que se bloqueó la cuenta.
+  Preferencias: Categorías, etiquetas, o zonas de interés para el usuario.
+  Seguimientos: Relación con ofertas que sigue.
+  Comentarios: Relación con los comentarios realizados.
   </li>
   <br>
   
-  <li><strong>Incidencias / Avisos / Notificaciones:</strong>
-  Elemento con → fecha/hora, código de clase de aviso (A:Aviso, N:Notificación, D:Denuncia, C:Consulta, M:Mensaje, B:Bloqueo), texto,
-  Usuario destino (NULO si es para un moderador o administrador y no se conoce su usuario o aún no ha sido aceptado el aviso por uno de ellos),
-  Usuario origen (NULO si es generado por el sistema),
-  Evento (NULO si no está relacionado con un evento),
-  Libro (NULO si no está relacionado con un libro),
-  Comentario (NULO si no está relacionado con un comentario),
-  fecha/hora de lectura (NULO si no se ha leído o se ha desmarcado como leído),
-  fecha/hora de aceptación (NULO si no se ha aceptado para su gestión por un moderador o administrador, no usado en otros usuarios).
-  <br>
-  *** Un aviso pasa a estar "leído" si el usuario destino lo abre estando a NULO la fecha/hora de lectura. Si el usuario lo desea puede cambiarlo a "no leído"; en este caso se establace a NULO el dato.
-  <br>
-  *** Un aviso que esta "leído" se eliminará definitivamente del sistema durante el proceso de limpieza cuando haya transcurrido el tiempo predeterminado de borrado de avisos ya leídos.
-  <br>
-  *** Un aviso pasa a estar "aceptado" si el usuario destino es un moderador o administrador que lo marca para gestionarlo. En el caso de que el usuario destino sea NULO, cualquier moderador o administrador de la zona de influencia del aviso podrá aceptarlo, momento en el que se completará el dato con el usuario que lo ha aceptado. Si un aviso no ha sido aceptado, no podrá ser marcado como borrado.
+  <li><strong>Comentarios:</strong>
+  Elemento con:
+  Texto: Contenido del comentario.
+  Usuario: Relación con el usuario que hizo el comentario.
+  Oferta: Relación con la oferta comentada.
+  Fecha/hora: Momento del comentario.
+  Denuncias: Contador de denuncias recibidas.
+  Bloqueado: Si el comentario fue moderado o eliminado.
   </li>
   <br>
   
-  <li><strong>Configuraciones:</strong>
-  Será un elemento con → variable, valor. Concretamente un conjunto de información que servirá para establecer datos más o menos fijos (invariables en el tiempo) que se utilizan en la aplicación durante su ejecución. Por ejemplo...
-    <ul type="disc">
-      <li><strong>numero_libros_portada:</strong> el número máximo de libros más relevantes para los bloques de la página principal, </li>
-      <li><strong>numero_lineas_pagina:</strong> el número máximo de líneas por página de datos en las diferentes gestiones, </li>
-      <li><strong>numero_denuncias_libro:</strong> el número mínimo de denuncias para un libro antes de ser bloqueado, </li>
-      <li><strong>numero_denuncias_comentario:</strong> el número mínimo de denuncias para un comentario antes de ser bloqueado, </li>
-      <li><strong>numero_intentos_usuario:</strong> el número mínimo de intentos de acceso de un usuario antes de ser bloqueado, </li>
-      <li><strong>tiempo_borrar_avisos_leidos:</strong> el tiempo en días que debe transcurrir para que los avisos marcados como leídos se eliminen definitivamente de forma automática, </li>
-      <li>... </li>
-      
-    </ul>
+  <li><strong>Valoraciones:</strong>
+  Elemento con:
+  Usuario: Relación con el usuario que realizó la valoración.
+  Oferta: Relación con la oferta valorada.
+  Puntuación: Valor entre un rango (p.ej., 1 a 5).
+  Fecha/hora: Momento de la valoración.
   </li>
   <br>
   
   <li><strong>Logs:</strong>
-  Elemento con → fecha/hora, clase del nivel de log (E:Error, A:Aviso, I:Información, D:Depuración), modulo aplicación, texto.
+  Elemento con:
+  Fecha/hora: Momento del registro.
+  Nivel: Tipo de log (Error, Aviso, Información).
+  Módulo: Parte de la aplicación relacionada con el log.
+  Descripción: Detalle del evento registrado.
   </li>
   <br>
+  
+  <li><strong>Configuración:</strong>
+  Elemento con:
+  Variable: Nombre de la configuración.
+  Valor: Dato asociado.
+  Ejemplo:
+  Tiempo para eliminar comentarios bloqueados.
+  Número mínimo de denuncias para bloquear una oferta.
+  Límite de intentos de inicio de sesión antes de bloqueo.
+  </li>
+  <br>
+  
+  <li><strong>URLs:</strong>
+  Elemento con → URL, Chollo. *** Relaciona una URL con un chollo y así se pueden tener múltiples por cada uno.
+  <br>
+  *** Se puede tener la posibilidad de establecer el orden de aparición de las mismas si se incluye además el dato "orden" entre sus datos.
+  </li>
+  <br>
+  
   
 </ul>
 </div>
