@@ -1,0 +1,484 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Proyecto en Grupo - Analisis Inicial de Funciones y Tareas</title>
+</head>
+<body class="papel" style="background-color:#F0F0C0;">
+<style>
+table.tabla tbody td { text-align:center;}
+table.tabla tbody td:first-child { text-align:justify}
+</style>
+<div class="bloque" style="font-family:arial;font-size:1.25em;text-align:justify;border:1.5mm solid #508050;margin:0.25em;padding:1em;">
+
+<div class="titulo titulo0" style="margin:5mm;font-size:2.0em;font-weight:bold;color:#4040F0">Comenta Libros</div>
+<div class="titulo titulo1" style="margin:5mm;font-size:2.0em;font-weight:bold">Proyecto en Grupo</div>
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">Analisis Inicial de Funciones y Tareas</div>
+
+<br>
+&nbsp;&nbsp;&nbsp;De los requisitos iniciales planteados, se extraen una serie de funciones básicas a implementar, además de una serie de tareas adicionales a desarrollar dentro del sistema.
+<br>
+<br>
+
+<hr>
+
+<div class="titulo titulo3" style="margin:0.5em 0;padding:0.5em;font-size:1.0em;font-weight:bold;background-color:#F0C060">Roles / Perfiles:</div>
+<div style="text-align:justify;margin:0em">
+<ul>
+  <li>
+  <strong>Usuario Invitado (guest): </strong>Cualquier usuario que navega por las partes públicas del portal, sin necesidad de estar registrado o validado en la aplicación.
+  </li>
+  <li>
+  <strong>Usuario Registrado (normal): </strong>Pensado para los usuarios que quieren utilizar la web a la hora de buscar, consultar / visualizar los libros de su interés, gestionar su perfil, gestionar sus avisos, notificaciones y mensajes con moderadores o administradores, gestionar sus propios libros propuestos, los libros de los que es seguidor, los eventos de charlas/reuniones/... propias y a las que asistirá, las preferencias de géneros y de etiquetas, las valoraciones y comentarios creados, etc.
+  </li>
+  <li>
+  <strong>Usuario Moderador (moderador): </strong>Pensado para los usuarios que además deseen colaborar con la web a la hora de moderar y mantener los datos que se manejan, como son los libros, valoraciones y comentarios de una o varis géneros.
+  </li>
+  <li>
+  <strong>Usuario Anunciante / Patrocinador (patrocinador): </strong>Pensado para los usuarios que deseen poner sus anuncios de forma destacada o "antes" que otros para que lleguen más veces a la vista de los usuarios que visitan la página. Podrán gestionar sus anuncios relacionados con libros, géneros, editoriales y eventos. Podrán configurar la importancia (prioridad) de cada anuncio en función de los patrocinios que tengan adquiridos. Estos usuarios se registran de la misma forma que los demás, pero deberán solicitar su activación como anunciantes mediante un aviso/incidencia especial, para que los administradores le den el permiso en la aplicación.
+  </li>
+  <li>
+  <strong>Administrador del Portal (admin): </strong>Pensado para aquellos usuarios que realizan las tareas de mantenimiento de los datos del sistema, pueden gestionar cualquier cosa de la parte privada como usuarios, libros y datos asociados, valoraciones/comentarios, géneros, etiquetas, anunciantes y anuncios, configuración, hacer copias de seguridad o restaurarlas.
+  </li>
+  <li>
+  <strong>Administrador del Sistema (sysadmin): </strong>Pensado para los programadores de la aplicación y/o administradores generales del sistema donde se instale, tendrá acceso a todas las funciones de la aplicación sin restricciones, y opcionalmente deberá poder activar el rol que desee para trabajar como un usuario de ese tipo.
+  </li>
+</ul>
+</div>
+
+<hr>
+
+<div class="titulo titulo3" style="margin:0.5em 0;padding:0.5em;font-size:1.0em;font-weight:bold;background-color:#60B0D0">Funcionalidades de Gestión Interna:</div>
+<div style="text-align:justify;margin:0em">
+
+<table class="tabla" border="1" style="background-color:#C0E0F0;border:4px ridge #70D0F0;border-collapse:collapse;font-size:1.0em;">
+<thead style="background-color:#60B0D0">
+<tr>
+<th style="width:73em;padding-left:2.5em;">Páginas y Partes Privadas</th>
+<th style="width:3em;">G1</th>
+<th style="width:3em;">G2</th>
+<th style="width:3em;">G3</th>
+<th style="width:3em;">G4</th>
+<th style="width:3em;">G5</th>
+<th style="width:3em;">G6</th>
+<th style="width:3em;">G7</th>
+</tr>
+</thead>
+<tbody>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Usuarios.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista fija de clases de Perfiles o Roles.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Asignación de Roles a los usuarios (sistema RBAC)</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Revisión del registro de nuevos usuarios.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Ampliación de Usuario registrado a: Patrocinador, Moderador, Administrador.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Géneros/Categorías.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Relación jerarquica con género padre.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Proceso de unificación de géneros.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento del seguimiento de Géneros por Usuarios.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento de géneros para moderar por usuarios de tipo moderador.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Etiquetas temáticas.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Posible proceso de extracción de etiquetas.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Proceso de unificación de etiquetas.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento del seguimiento de Etiquetas por Usuarios.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento de etiquetas para moderar por usuarios de tipo moderador.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Autores (Entidades de tipo Autor)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista de Libros relacionados con Autores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Ilustradores (Entidades de tipo Ilustrador)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista de Libros relacionados con Ilustradores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Traductores (Entidades de tipo Traductor)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista de Libros relacionados con Traductores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Editoriales (Entidades de tipo Editorial)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista de Libros relacionados con Editoriales.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Idiomas.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Libros.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista fija de clases de Bloqueo.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista fija de clases de Estados de Terminación.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Paginas: Mantenimiento de Imágenes.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Paginas: Mantenimiento de URLs.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento del seguimiento de Libros por Usuarios.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Comentarios y Valoraciones de Libros.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Control de denuncias y bloqueos en los libros.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Control de denuncias y bloqueos en los comentarios.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Control de denuncias y bloqueos en los eventos.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Patrocinadores-Anunciantes.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Relación con usuario registrado.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Anuncios.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Relaciones con: patrocinador, editorial, libro, género y evento.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Eventos (Charlas / Presentaciones / Reuniones, ...)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Relación con Libro y Usuario organizador.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Mantenimiento de la asistencia a Eventos por los Usuarios.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Avisos / Incidencias.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista fija de clases de Aviso.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Relación con usuario origen, usuario destino, con evento, libro y/o comentario.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Procesos de limpieza de mensajes antiguos.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Registros (LOG)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista fija de clases de mensajes de Log.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Procesos de limpieza de registros antiguos.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Configuraciones.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Paginas: Mantenimiento de Copias de Seguridad y Restauración de copias.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Lista de archivos con copias realizadas.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Limpieza de archivos de copias.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+
+<!-- tr>
+<td style="padding-left:0em;">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+&check;
+&cross;
+&bull;
+&compfn;
+&otimes;
+&omicron;
+
+&#8226;   Bullet
+&#9885;   Outlined White Star 
+&#9733;   Black Star
+
+</tr -->
+
+</tbody>
+</table>
+</div>
+
+<hr>
+
+<div class="titulo titulo3" style="margin:0.5em 0;padding:0.5em;font-size:1.0em;font-weight:bold;background-color:#60C060">Funcionalidades del Portal Web:</div>
+<div style="text-align:justify;margin:0em">
+
+<table class="tabla" border="1" style="background-color:#C0F0B0;border:4px ridge #70F070;border-collapse:collapse;font-size:1.0em;">
+<thead style="background-color:#60C060">
+<tr>
+<th style="width:73em;padding-left:2.5em;">Páginas y Partes Públicas</th>
+<th style="width:3em;">W1</th>
+<th style="width:3em;">W2</th>
+<th style="width:3em;">W3</th>
+<th style="width:3em;">W4</th>
+<th style="width:3em;">W5</th>
+<th style="width:3em;">W6</th>
+<th style="width:3em;">W7</th>
+</tr>
+</thead>
+<tbody>
+
+<tr><td style="padding-left:2em;">Plantilla Principal:<br>
+<span style="padding-left:2em;">Composición de la plantilla pública principal del Portal aplicando alguna de las plantillas/temas públicos creados en <a href="https://yii2.themefactory.net/" target="_blank">https://yii2.themefactory.net</a>, y usando las piezas necesarias (propias o de otros compañeros) para mostrar en la misma.</span>
+</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Menu Principal.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Usuario conectado / Registro.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Arbol Géneros. Búsqueda de libros(*) por géneros.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Nube Etiquetas. Búsqueda de libros(*) por etiquetas.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador Simple. Búsqueda de libros(*) por término de búsqueda.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador Avanzado. Búsqueda de libros(*) por múltiples filtros.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:2em;">*** Todas las partes que implican algún tipo de búsqueda deben mostrar los resultados utilizando las piezas/vistas desarrolladas en la parte "Ficha resumen" de "Libros mas…".</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Visor Eventos.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Visor Anuncios.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Portada (sin filtro activo)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Partes: "Ficha resumen" de "Libros mas…".<br>
+<span style="padding-left:2em;">Pieza/Vista con la <strong>"ficha resumida"</strong> de un libro.</span><br>
+<span style="padding-left:2em;">Pieza/Vista con la <strong>"Lista de Libros"</strong> con la "ficha resumida".</span><br>
+<span style="padding-left:0em;">*** Ambas piezas/vistas se deben poder utilizar desde otras vistas o usar varias veces en la misma página para mostrar los resultados obtenidos en función de los filtros de datos aplicados en cada uso.</span><br>
+</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Portada (con filtro activo y/o paginado)</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: "Ficha resumen" Libros con paginación.<br>
+<span style="padding-left:0em;">*** Reutilizar las piezas/vistas desarrolladas en la parte "Ficha resumen" de "Libros mas…"</span><br>
+</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: "Ficha detallada" Libro.<br>
+<span style="padding-left:2em;">Vista con la <strong>"ficha detallada"</strong> de un Libro. Usando las piezas/vistas (propias o de otros compañeros) necesarias para mostrar toda la información indicada en las partes siguientes.</span><br>
+*** Se incluyen aquí las acciones para cumplir con las funcionalidades indicadas para la consulta de libros según los perfiles de los usuarios.
+</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Datos Libro.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Imágenes Libro con Portada principal y con visor de imágenes relacionadas o forma de visualizarlas.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: URLs Libro.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Estado del Libro con opción de poder denunciarlo.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Valoración Libro. Resumen de las valoraciones recibidas.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Comentarios Libro. Ver las valoraciones y comentarios por fecha/hora de creación más reciente y poder denunciarlos.
+</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Valorar/Comentar Libro. Añadir un comentario o responder a uno si no está cerrado el hilo.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Seguir Libro o quitar seguimiento por un Usuario.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Eventos Libro. Ver los eventos futuros o aún no terminados que están relacionados directamente con el libro.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Entidades, con y sin filtro y paginación.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador simple de Entidad.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador A-Z de Entidad.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: "Ficha resumen" Entidades con paginación.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+  
+<tr><td style="padding-left:2em;">Pagina: Libros de Entidad con paginación.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador simple de Libro en Entidad.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>✓*</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:2em;" colspan="8">*** En estas dos últimas páginas, "Entidades" y/o "Entidad" se refiere a tener páginas para la visualización y consulta de los tipos de entidad, y deben ser implementados cada uno de ellos por el grupo asignado:</td>
+</tr>
+<tr><td style="padding-left:4em;">- Autores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">- Ilustradores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">- Traductores.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">- Editoriales.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Patrocinadores y Anuncios.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Buscador simple de Anunciantes/Patrocinadores que muestra su lista de anuncios.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Acceso de Usuario.<br>
+<span style="padding-left:2em;">Acciones y vistas del <strong>Formulario de Acceso</strong> (login, logout)</span></td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Registro de Usuario.<br>
+<span style="padding-left:2em;">Acciones y vistas del <strong>Formulario de Registro</strong> de Usuarios.</span></td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+
+<tr><td style="padding-left:2em;">Pagina: Gestión de Usuario.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Mi perfil - Mantenimiento de datos del usuario.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Mi perfil - Cambio de Contraseña.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte: Mi perfil - Solicitud de Baja.</td>
+<td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Avisos y Notificaciones.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Libros Creados-Recomendados.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Libros en Seguimiento.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Géneros en Seguimiento.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Etiquetas en Seguimiento.</td>
+<td>&nbsp;</td><td>✓</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Eventos Propuestos.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Eventos como Asistente.</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Valoraciones/Comentarios de Libros.	</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+<tr><td style="padding-left:4em;">Parte o Página: Mant. Alertas y Notas de Moderadores/Administradores.	</td>
+<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>✓</td><td>&nbsp;</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<hr>
+
+<div style="text-align:justify;margin:0em;background-color:#F0F080">
+<hr>
+
+<div style="padding:0 0.5em;">
+<span style="padding-left:2em;">*** Los grupos que se formen deberán diseñar, implementar y documentar al menos dos de los bloques trabajo, uno de tareas privadas o "Funcionalidades de Gestión Interna" de código "Gx" y otro de tareas públicas o "Funcionalidades del Portal Web" de código "Wx", de entre las indicadas anteriormente.</span>
+<br>
+<span style="padding-left:2em;">*** Una combinación de bloques de trabajo más o menos apropiada para esta aplicación es:</span>
+<br>
+<span style="padding-left:4em;">(G1,W1), (G2,W2), (G3,W3), (G4,W4), (G5,W5), (G6,W6), (G7,W7)</span>
+<br>
+</div>
+
+<hr>
+</div>
+
+
+</div></body></html>
