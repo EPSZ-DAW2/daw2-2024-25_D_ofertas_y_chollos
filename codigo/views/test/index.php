@@ -94,6 +94,7 @@ $this->title = 'Test de funcionamiento de extensiones.';
     </div>
   </div>
 
+  <div> Prueba de acceso</div>
 
   
 </div>
