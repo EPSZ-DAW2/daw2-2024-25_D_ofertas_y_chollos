@@ -51,16 +51,15 @@ $config = [
             ],
         ],
         */
-'view' => [
-    'class' => 'yii\web\View',
-    'theme' => [
-        'class' => 'yii\base\Theme',
-        'pathMap' => ['@app/views' => '@app/themes/material-default/views'],
-        'baseUrl' => '@web/themes/material-default',
+        'view' => [
+            'class' => 'yii\web\View',
+            'theme' => [
+                'class' => 'yii\base\Theme',
+                'pathMap' => ['@app/views' => '@app/themes/material-default/views'],
+                'baseUrl' => '@web/themes/material-default',
+            ],
+        ],
     ],
-],
-
-    'params' => $params,
 ];
 
 if (YII_ENV_DEV) {
