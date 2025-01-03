@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'vendorPath' => implode( DIRECTORY_SEPARATOR, [ dirname( dirname( __DIR__)), 'librerias', 'vendor']),
+    'vendorPath' => implode(DIRECTORY_SEPARATOR, [dirname(dirname(__DIR__)), 'librerias', 'vendor']),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -51,6 +51,14 @@ $config = [
             ],
         ],
         */
+        'view' => [
+            'class' => 'yii\web\View',
+            'theme' => [
+                'class' => 'yii\base\Theme',
+                'pathMap' => ['@app/views' => '@app/themes/[THEME_NAME]/views'],
+                'baseUrl' => '@web/themes/[THEME_NAME]',
+            ],
+        ],
     ],
     'params' => $params,
 ];
