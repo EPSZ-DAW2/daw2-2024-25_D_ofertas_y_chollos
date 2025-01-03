@@ -51,15 +51,14 @@ $config = [
             ],
         ],
         */
-        'view' => [
-            'class' => 'yii\web\View',
-            'theme' => [
-                'class' => 'yii\base\Theme',
-                'pathMap' => ['@app/views' => '@app/themes/[THEME_NAME]/views'],
-                'baseUrl' => '@web/themes/[THEME_NAME]',
-            ],
-        ],
+'view' => [
+    'class' => 'yii\web\View',
+    'theme' => [
+        'class' => 'yii\base\Theme',
+        'pathMap' => ['@app/views' => '@app/themes/default/views'],
+        'baseUrl'   => '@web/themes/default',
     ],
+],
     'params' => $params,
 ];
 
