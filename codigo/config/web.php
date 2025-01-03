@@ -60,6 +60,7 @@ $config = [
             ],
         ],
     ],
+    'name' => 'Ofertas y Chollos',
 ];
 
 if (YII_ENV_DEV) {
