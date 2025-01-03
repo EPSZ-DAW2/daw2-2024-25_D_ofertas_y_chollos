@@ -51,16 +51,14 @@ $config = [
             ],
         ],
         */
-'view' => [
-    'class' => 'yii\web\View',
-    'theme' => [
-        'class' => 'yii\base\Theme',
-        'basePath' => '@app/themes/material-default', // Ruta base del tema
-        'baseUrl' => '@web/themes/material-default', // URL base para recursos
-    ],
-],
-
-
+        'view' => [
+            'class' => 'yii\web\View',
+            'theme' => [
+                'class' => 'yii\base\Theme',
+                'pathMap' => ['@app/views' => '@app/themes/material-default'],
+                'baseUrl' => '@web/themes/material-default',
+            ],
+        ],
     ],
     'name' => 'Ofertas y Chollos',
 ];
