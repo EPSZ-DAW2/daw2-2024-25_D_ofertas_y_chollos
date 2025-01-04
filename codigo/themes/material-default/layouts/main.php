@@ -23,8 +23,8 @@ use yii\widgets\Breadcrumbs;
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   
   <!-- CSS -->
-  <link href="/chollos2/codigo/themes/material-default/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="/chollos2/codigo/themes/material-default/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= $this->theme->baseUrl ?>/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= $this->theme->baseUrl ?>/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
