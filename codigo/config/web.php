@@ -56,7 +56,7 @@ $config = [
             'theme' => [
                 'class' => 'yii\base\Theme',
                 'pathMap' => ['@app/views' => '@app/themes/material-default'],
-                'baseUrl' => '/chollos2/codigo/themes/material-default',
+                'baseUrl' => '@web/themes/material-default',
             ],
         ],
     ],
