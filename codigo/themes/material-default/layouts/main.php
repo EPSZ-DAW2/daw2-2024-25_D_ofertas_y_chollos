@@ -151,6 +151,7 @@
         <a href="#">Categorías</a>
         <a href="#">Mi Perfil</a>
         <a href="#">Logout</a>
+
     </nav>
 
     <div class="container">

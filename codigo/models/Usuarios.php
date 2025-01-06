@@ -55,7 +55,11 @@ class Usuarios extends \yii\db\ActiveRecord
         return [
             [['email', 'password', 'nick'], 'required'],
             [['fecha_registro', 'fecha_ultimo_acceso', 'fecha_bloqueo'], 'safe'],
-            [['registro_confirmado', 'accesos_fallidos', 'bloqueado', 'rol'], 'integer'],
+            [['registro_confirmado'], 'boolean'],
+            ['registro_confirmado', 'filter', 'filter' => function ($value) {
+                return $value ? 1 : 0;
+            }], //Asegurar que siempre sea 1 o 0            
+            [['accesos_fallidos', 'bloqueado', 'rol'], 'integer'],
             [['email', 'nombre', 'apellidos'], 'string', 'max' => 100],
             [['password', 'motivo_bloqueo'], 'string', 'max' => 255],
             [['nick'], 'string', 'max' => 50],
@@ -78,7 +82,7 @@ class Usuarios extends \yii\db\ActiveRecord
             'nombre' => Yii::t('app', 'Nombre'),
             'apellidos' => Yii::t('app', 'Apellidos'),
             'fecha_registro' => Yii::t('app', 'Fecha Registro'),
-            'registro_confirmado' => Yii::t('app', 'Registro Confirmado'),
+            'registro_confirmado' => Yii::t('app', 'Confirmado (Si/No)'),
             'fecha_ultimo_acceso' => Yii::t('app', 'Fecha Ultimo Acceso'),
             'accesos_fallidos' => Yii::t('app', 'Accesos Fallidos'),
             'bloqueado' => Yii::t('app', 'Bloqueado'),
@@ -183,7 +187,7 @@ class Usuarios extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRol0()
+    public function getRol()
     {
         return $this->hasOne(Roles::class, ['id' => 'rol']);
     }
@@ -244,5 +248,23 @@ class Usuarios extends \yii\db\ActiveRecord
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+
+    /**
+     * Getter para que devuelva registroConfirmado en tipo booleano
+     */
+    public function getRegistroConfirmado()
+    {
+        return (bool) $this->registro_confirmado;
+    }
+
+
+    /**
+     * Getter para que devuelva registroConfirmado en tipo booleano
+     */
+    public function setRegistroConfirmado($value)
+    {
+        $this->registro_confirmado = $value ? 1 : 0; //Guardamos un 1 si es true, 0 false
     }
 }
