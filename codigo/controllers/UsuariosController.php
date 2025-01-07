@@ -166,17 +166,25 @@ class UsuariosController extends Controller
         $model = new Usuarios();
         //Comprobamos si se ha enviado el formulario
         if ($this->request->isPost) {
-            //Encriptamos la contraseña
-            $model->setPassword($model->password);
+            if ($model->load($this->request->post())) {
+                $model->registro_confirmado = 0;
+                $model->fecha_registro = date('Y-m-d H:i:s');
+                $model->accesos_fallidos = 0;
+                $model->bloqueado = 0;
+                $model->rol = 5;
 
-            $model->registro_confirmado = 0; //sera 0 hasta que un admin y la acepte
+                //Encriptamos la contraseña
+                $model->setPassword($model->password);
+
+                $model->registro_confirmado = 0; //sera 0 hasta que un admin y la acepte
 
 
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Registro correcto. Espera hasta que tu cuenta sea aceptada');
-                return $this->redirect(['site/login']);
-            } else {
-                Yii::$app->session->setFlash('error', 'Error al registrar el usuario.');
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Registro correcto. Espera hasta que tu cuenta sea aceptada');
+                    return $this->redirect(['site/login']);
+                } else {
+                    Yii::$app->session->setFlash('error', 'Error al registrar el usuario.');
+                }
             }
         }
         return $this->render('registro', [

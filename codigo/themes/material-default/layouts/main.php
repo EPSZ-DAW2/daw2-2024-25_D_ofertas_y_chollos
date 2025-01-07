@@ -139,7 +139,10 @@
         }
     </style>
 </head>
-<?php Use yii\helpers\Url; ?>
+<?php
+
+use yii\helpers\Url; ?>
+
 <body>
     <header>
         <h1>Bienvenido a Ofertas y Chollos</h1>
@@ -152,6 +155,7 @@
         <a href="#">Categorías</a>
         <a href="#">Mi Perfil</a>
         <a href="#">Logout</a>
+        <a href="/usuarios/registro">Registro</a>
 
     </nav>
 
