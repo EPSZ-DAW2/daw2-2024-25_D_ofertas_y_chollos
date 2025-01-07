@@ -191,4 +191,21 @@ class UsuariosController extends Controller
             'model' => $model,
         ]);
     }
+
+
+
+    /**
+     * Accion para acceder a la vista de gestion de usuarios por parte del administrador de la aplicación
+     */
+
+    public function actionFichaUsuariosAdmin()
+    {
+        $searchModel = new UsuariosSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('fichaUsuariosAdmin', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

@@ -156,6 +156,8 @@ use yii\helpers\Url; ?>
         <a href="#">Mi Perfil</a>
         <a href="#">Logout</a>
         <a href="/usuarios/registro">Registro</a>
+        <a href="/usuarios/ficha-usuarios-admin">Gestion Usuarios</a>
+
 
     </nav>
 
