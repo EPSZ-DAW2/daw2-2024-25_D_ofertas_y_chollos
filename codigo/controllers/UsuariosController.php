@@ -208,4 +208,27 @@ class UsuariosController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+
+
+    /**
+     * Accion para confirmar un usuario en la aplicacion por parte del administrador
+     */
+
+    public function actionConfirmarUsuario($id)
+    {
+        //Buscamos el usuario por su id y modificamos el valor de resgitro 1 
+        $model = $this->findModel($id);
+
+        if ($model->registro_confirmado == 0) {
+            $model->registro_confirmado = 1;
+            $model->save(false); //no se vuelve a validar
+            Yii::$app->session->setFlash('success', 'Usuario confirmado.');
+        } else {
+            Yii::$app->session->setFlash('info', 'Este usuario ya está confirmado.');
+        }
+
+        return $this->redirect(['ficha-usuarios-admin']);
+    }
 }

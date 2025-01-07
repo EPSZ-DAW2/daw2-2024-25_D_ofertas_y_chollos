@@ -15,8 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
     <p>
-        <?= Html::a(Yii::t('app', 'Crear nuevo usuarios'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Crear nuevo usuarios'), ['create']) ?>
     </p>
 
 
@@ -33,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'apellidos',
             'fecha_registro',
-            'registro_confirmado',
+            [
+                'attribute' => 'registro_confirmado',
+                'format' => 'html',
+                'value' => 'registroConfirmadoVista',
+                'label' => Yii::t('app', 'Confirmado'),
+            ],
             'fecha_ultimo_acceso',
             'accesos_fallidos',
             'bloqueado',

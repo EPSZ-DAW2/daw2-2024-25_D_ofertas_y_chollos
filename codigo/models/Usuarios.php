@@ -1,8 +1,11 @@
 <?php
 
+
 namespace app\models;
 
+
 use Yii;
+use Yii\helpers\Html;
 
 /**
  * This is the model class for table "usuarios".
@@ -31,7 +34,7 @@ use Yii;
  * @property Oferta[] $ofertas
  * @property Oferta[] $ofertas0
  * @property OfertasValoraciones[] $ofertasValoraciones
- * @property Roles $rol0
+ * @property Roles $rol
  * @property Seguimiento[] $seguimientos
  * @property UsuariosCategoria[] $usuariosCategorias
  * @property UsuariosEtiqueta[] $usuariosEtiquetas
@@ -261,10 +264,35 @@ class Usuarios extends \yii\db\ActiveRecord
 
 
     /**
-     * Getter para que devuelva registroConfirmado en tipo booleano
+     * Setter para que da valor al registroConfirmado en tipo booleano
      */
     public function setRegistroConfirmado($value)
     {
         $this->registro_confirmado = $value ? 1 : 0; //Guardamos un 1 si es true, 0 false
+    }
+
+
+    /**
+     * Getter para mostrar si o no en las vistas de admin ademas de el boton de confirmacion
+     */
+    public function getRegistroConfirmadoVista()
+    {
+        $textoConfirmado = $this->registro_confirmado ? Yii::t('app', 'Sí') : Yii::t('app', 'No');
+        if (!$this->registro_confirmado) {
+            $boton = Html::a(
+                Yii::t('app', 'Confirmar'),
+                ['usuarios/confirmar-usuario', 'id' => $this->id],
+                [
+                    'class' => 'btn btn-success btn-sm',
+                    'data' => [
+                        'confirm' => Yii::t('app', '¿Estás seguro de que quieres confirmar a este usuario?'),
+                        'method' => 'post',
+                    ],
+                ]
+            );
+
+            return $textoConfirmado . ' ' . $boton;
+        }
+        return $textoConfirmado;
     }
 }
