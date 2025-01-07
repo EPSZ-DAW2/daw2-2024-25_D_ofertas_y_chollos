@@ -139,13 +139,14 @@
         }
     </style>
 </head>
-
+<?php Use yii\helpers\Url; ?>
 <body>
     <header>
         <h1>Bienvenido a Ofertas y Chollos</h1>
     </header>
 
     <nav>
+        <a href="/test/index">Test</a>
         <a href="#">Ofertas</a>
         <a href="#">Anuncios</a>
         <a href="#">Categorías</a>
@@ -155,6 +156,7 @@
     </nav>
 
     <div class="container">
+        <?= $content ?>
         <aside class="sidebar">
             <h3>Categorías</h3>
             <ul>
