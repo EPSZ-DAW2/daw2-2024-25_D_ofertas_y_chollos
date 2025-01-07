@@ -12,6 +12,7 @@ use app\models\Categorias;
             <p>Descripción: <?= Html::a($categoria->descripcion) ?></p>
             <?php if($categoria->categoria_padre_id != NULL): ?>
                 <?= Html::a($categoria->categoria_padre_id)?>
+            <?php endif ?>
         <?php endforeach; ?>
     </div>
 </div>

@@ -13,7 +13,7 @@ class CategoriasController extends \yii\web\Controller
         $this->view->title = 'Ofertas y Chollos - Categorías';
 
         // Mostramos todas las categorías
-        $query = PartidosJornada::find();
+        $query = Categorias::find();
         $categorias = $query->all();
 
         return $this->render('index', [
