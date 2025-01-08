@@ -1,250 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Ofertas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #343a40;
-            padding: 0.5rem 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-        }
-
-        nav a:hover {
-            background-color: #495057;
-        }
-
-        .container {
-            display: flex;
-            margin: 1rem;
-        }
-
-        .sidebar {
-            flex: 1;
-            max-width: 250px;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            margin-right: 1rem;
-        }
-
-        .sidebar h3 {
-            margin-top: 0;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin: 0.5rem 0;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        .content {
-            flex: 3;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 1rem;
-        }
-
-        .highlight {
-            text-align: center;
-            background-color: #e9ecef;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-        }
-
-        .highlight h2 {
-            color: #007bff;
-        }
-
-        .offers {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-        }
-
-        .offer {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 1rem;
-            width: 30%;
-            text-align: center;
-        }
-
-        .offer button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .offer button:hover {
-            background-color: #0056b3;
-        }
-
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        footer a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-links {
-            margin: 1rem 0;
-        }
-
-        .etiquetas-widget {
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ccc;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .etiqueta-link {
-            margin: 5px;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 3px;
-            font-size: 14px;
-            display: inline-block;
-        }
-
-        .etiqueta-link:hover {
-            background-color: #0056b3;
-        }
-
-        .sin-estilo {
-            text-decoration: none;
-            color: inherit;
-            font-family: inherit;
-            font-size: inherit;
-        }
-
-    </style>
-</head>
 <?php
 
-use yii\helpers\Url;
-use app\views\etiquetas\EtiquetasWidget; ?>
+use yii\helpers\Html;
+use yii\widgets\Menu;
+use yii\widgets\Breadcrumbs;
 
+/**
+ * @var $this \yii\base\View
+ * @var $content string
+ */
+
+?>
+<?php $this->beginPage(); ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  
+  <title><?= Html::encode($this->title ?: 'Ofertas y Chollos') ?></title>
+  <?php $this->head(); ?>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  
+  <!-- CSS -->
+  <link href="<?= $this->theme->baseUrl ?>/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= $this->theme->baseUrl ?>/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 <body>
-    <header>
-        <h1>Bienvenido a <a href="/index.php" class="sin-estilo">Ofertas y Chollos</a></h1>
-    </header>
+  <?php $this->beginBody(); ?>
 
-    <div class="navbar">
-     <?= EtiquetasWidget::widget() ?>
-    </div>
-
-    <nav>
-        <a href="/test/index">Test</a>
-        <a href="#">Ofertas</a>
-        <a href="#">Anuncios</a>
-        <a href="#">Categorías</a>
-        <a href="#">Mi Perfil</a>
-        <a href="#">Logout</a>
-        <a href="/usuarios/registro">Registro</a>
-        <a href="/usuarios/ficha-usuarios-admin">Gestion Usuarios</a>
-
-
-    </nav>
-
+  <nav class="light-blue lighten-1" role="navigation">
     <div class="container">
-        <?= $content ?>
-        <aside class="sidebar">
-            <h3>Categorías</h3>
-            <ul>
-                <li><a href="#">Tecnología</a></li>
-                <li><a href="#">Hogar</a></li>
-                <li><a href="#">Moda</a></li>
-                <li><a href="#">Deportes</a></li>
-                <li><a href="#">Juguetes</a></li>
-                <li><a href="#">Automóvil</a></li>
-                <li><a href="#">Más...</a></li>
-            </ul>
-        </aside>
+      <div class="nav-wrapper">
+        <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Bienvenido a Ofertas y Chollos</a>
+        <?= Menu::widget([
+            'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
+            'items' => [
+                ['label' => 'Inicio', 'url' => ['site/index']],
+                ['label' => 'Acerca de', 'url' => ['site/about']],
+                ['label' => 'Contacto', 'url' => ['site/contact']],
+                ['items' => [
+                            ['label' => 'Ofertas', 'url' => ['site/ofertas']],
+                            ['label' => 'Anuncios', 'url' => ['site/chollos']],
+                            ['label' => 'Categorías', 'url' => ['site/categorias']],
+                        ],
+                    ],
+                ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->username,
+                        'items' =>
+                        [
+                            ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                        ],'visible' => !Yii::$app->user->isGuest,],
+            ],
 
-        <main class="content">
-            <div class="highlight">
-                <h2>Ofertas exclusivas que no querrás perderte</h2>
-                <p>Aprovecha los mejores precios del mercado.</p>
-            </div>
+        ]); ?>
+        
+        <!-- Buscador 
+            <form action="<?= Yii::$app->urlManager->createUrl(['site/buscar']) ?>" method="GET" class="right">
+                <div class="input-field" style="margin-top: 0; margin-right: 10px;">
+                    <input id="search" type="text" name="q" placeholder="Buscar..." required>
+                    <label for="search" class="active"><i class="material-icons">search</i></label>
+                </div>
+            </form>
+        -->
 
-            <div class="offers">
-                <div class="offer">
-                    <h3>Oferta 1</h3>
-                    <p>Descripción breve de la oferta 1.</p>
-                    <button>Ver más</button>
-                </div>
-                <div class="offer">
-                    <h3>Oferta 2</h3>
-                    <p>Descripción breve de la oferta 2.</p>
-                    <button>Ver más</button>
-                </div>
-                <div class="offer">
-                    <h3>Oferta 3</h3>
-                    <p>Descripción breve de la oferta 3.</p>
-                    <button>Ver más</button>
-                </div>
-            </div>
-        </main>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
     </div>
+  </nav>
 
-    <footer>
-        <div class="footer-links">
-            <a href="#">Política de Privacidad</a> |
-            <a href="#">Términos y Condiciones</a> |
-            <a href="#">Contacto</a>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Bienvenido a Ofertas y Chollos</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">¡¡¡Tu portal web para los mejores chollos y ofertas!!!</h5>
+      </div>
+      
+      <br><br>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="row">
+        <div class="col s12 m12">
+          <?= $content; ?>
         </div>
-        <p>© 2025 Ofertas y Chollos. Todos los derechos reservados.</p>
-    </footer>
-</body>
+      </div>
+    </div>
+  </div>
 
+  <div class="container">
+    <div class="section">
+      <!-- Icon Section -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2> 
+            <h5 class="center">Acelera el desarrollo</h5>
+            <p class="light">Hemos creado un diseño predeterminado que incorpora nuestros componentes personalizados, con animaciones y transiciones optimizadas para una experiencia fluida.</p>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Enfocado en la experiencia del usuario</h5>
+            <p class="light">Al usar principios de Material Design, creamos un sistema responsive unificado para una mejor experiencia en todas las plataformas.</p>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Fácil de usar</h5>
+            <p class="light">Ofrecemos documentación detallada y ejemplos de código para que los nuevos usuarios puedan comenzar rápidamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+  </div>
+
+  <footer class="azul-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Sobre Nosotros</h5>
+          <p class="grey-text lighten-4">Somos un equipo de estudiantes trabajando en este proyecto como si fuera nuestro trabajo a tiempo completo. Tu apoyo es muy apreciado.</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Enlaces</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Enlace 1</a></li>
+            <li><a class="white-text" href="#!">Enlace 2</a></li>
+            <li><a class="white-text" href="#!">Enlace 3</a></li>
+            <li><a class="white-text" href="#!">Enlace 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Conecta</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Facebook</a></li>
+            <li><a class="white-text" href="#!">Twitter</a></li>
+            <li><a class="white-text" href="#!">LinkedIn</a></li>
+            <li><a class="white-text" href="#!">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © <?= date('Y') ?> Ofertas y Chollos. Todos los derechos reservados.
+        <a class="orange-text lighten-3" href="#">Política de Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="<?= $this->theme->baseUrl ?>/js/materialize.js"></script>
+  <script src="<?= $this->theme->baseUrl ?>/js/init.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(elems);
+    });
+  </script>
+  
+  <?php $this->endBody(); ?>
+</body>
 </html>
+<?php $this->endPage(); ?>
