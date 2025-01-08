@@ -8,11 +8,14 @@ use app\models\Categorias;
 
     <div class="body-content">
         <?php foreach ($categorias as $categoria): ?>
-            <h2><?= Html::a($categoria->nombre)?></h2>
-            <p>Descripción: <?= Html::a($categoria->descripcion) ?></p>
-            <?php if($categoria->categoria_padre_id != NULL): ?>
-                <?= Html::a($categoria->categoria_padre_id)?>
-            <?php endif ?>
+            <div class="jumbotron text-center bg-transparent">
+                <h2><?= Html::a($categoria->nombre)?></h2>
+                <p>Descripción: <?= Html::a($categoria->descripcion) ?></p>
+                <?php if($categoria->categoria_padre_id != NULL): ?>
+                    <p><?= Html::a($categoria->categoria_padre_id)?></p>
+                <?php endif ?>
+                <?= Html::a('Ver Detalles', ['categorias/view', 'id'=> $categoria->id], ['class' => 'botonFormulario']) ?>
+            </div>
         <?php endforeach; ?>
     </div>
 </div>
