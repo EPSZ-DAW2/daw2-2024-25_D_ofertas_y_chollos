@@ -52,7 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'fecha_ultimo_acceso',
             'accesos_fallidos',
-            'bloqueado',
+            [
+                'attribute' => 'bloqueado',
+                'format' => 'html',
+                'value' => 'estadoBloqueoVista',
+                'label' => Yii::t('app', 'Bloqueado'),
+            ],
             'fecha_bloqueo',
             'motivo_bloqueo',
             'rol',

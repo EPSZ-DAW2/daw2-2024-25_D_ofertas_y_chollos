@@ -231,4 +231,38 @@ class UsuariosController extends Controller
 
         return $this->redirect(['ficha-usuarios-admin']);
     }
+
+
+    /**
+     * Accion de administrador para bloquear o desbloquear a los usuarios
+     */
+
+    public function actionBloquearUsuario($id)
+    {
+        //Buscar usuario con ese id
+        $model = $this->findModel($id);
+
+        //comprobamos si esta bloqueado o no el usuario
+        if ($model->bloqueado == 1) {
+
+
+            $model->bloqueado = 0;
+            //Modificamos valores en base de datos 
+            $model->fecha_bloqueo = null;
+            $model->motivo_bloqueo = null;
+            Yii::$app->session->setFlash('success', 'El usuario ha sido desbloqueado.');
+        } else { //Si no se bloquea modificando la fecha y el motivo
+
+            $model->bloqueado = 1;
+            //Modificamos valores en base de datos 
+            $model->fecha_bloqueo = date('Y-m-d H:i:s');
+            $model->motivo_bloqueo = 'Bloqueado por el Administrador';
+            Yii::$app->session->setFlash('success', 'El usuario ha sido bloqueado.');
+        }
+
+        $model->save(false); //guardamos las modificaciones realizadas
+
+        //redirigir a la ficha del administrador
+        return $this->redirect(['ficha-usuarios-admin']);
+    }
 }

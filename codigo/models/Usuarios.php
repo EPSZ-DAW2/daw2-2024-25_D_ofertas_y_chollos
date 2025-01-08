@@ -295,4 +295,29 @@ class Usuarios extends \yii\db\ActiveRecord
         }
         return $textoConfirmado;
     }
+
+    /**
+     * Getter para como se muestra en la tabla y para crear boton de bloqueo
+     * @return string
+     */
+    public function getEstadoBloqueoVista()
+    {
+        $textoBloqueo = $this->bloqueado ? Yii::t('app', 'Sí') : Yii::t('app', 'No');
+
+        $boton = Html::a(
+            $this->bloqueado ? Yii::t('app', 'Desbloquear') : Yii::t('app', 'Bloquear'),
+            ['usuarios/bloquear-usuario', 'id' => $this->id],
+            [
+                'class' => $this->bloqueado ? 'btn 1' : 'btn 2',
+                'data' => [
+                    'confirm' => $this->bloqueado
+                        ? Yii::t('app', '¿Estás seguro de que quieres desbloquear a este usuario?')
+                        : Yii::t('app', '¿Estás seguro de que quieres bloquear a este usuario?'),
+                    'method' => 'post',
+                ],
+            ]
+        );
+
+        return $textoBloqueo . ' ' . $boton;
+    }
 }
