@@ -65,8 +65,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
 
         ]); ?>
          <div class="navbar">
-     <?= EtiquetasWidget::widget() ?>
-    </div>
+     
         
         <!-- Buscador 
             <form action="<?= Yii::$app->urlManager->createUrl(['site/buscar']) ?>" method="GET" class="right">
@@ -82,7 +81,9 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </nav>
 
-
+  <div class="navbar">
+  <?= EtiquetasWidget::widget() ?>
+  </div>
 
   <div class="container">
     <div class="section">
