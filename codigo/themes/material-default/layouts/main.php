@@ -30,6 +30,11 @@ use yii\widgets\Breadcrumbs;
 <body>
   <?php $this->beginBody(); ?>
 
+  <?php
+
+use yii\helpers\Url;
+use app\views\etiquetas\EtiquetasWidget; ?>
+
   <header>
     <div id ="cabecera">
         <h1 class="titulo">¡¡¡Bienvenido a Ofertas y Chollos!!!</h1>
@@ -59,6 +64,9 @@ use yii\widgets\Breadcrumbs;
             ],
 
         ]); ?>
+         <div class="navbar">
+     <?= EtiquetasWidget::widget() ?>
+    </div>
         
         <!-- Buscador 
             <form action="<?= Yii::$app->urlManager->createUrl(['site/buscar']) ?>" method="GET" class="right">
