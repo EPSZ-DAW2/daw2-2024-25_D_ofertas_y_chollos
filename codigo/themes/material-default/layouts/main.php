@@ -137,16 +137,51 @@
         .footer-links {
             margin: 1rem 0;
         }
+
+        .etiquetas-widget {
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .etiqueta-link {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .etiqueta-link:hover {
+            background-color: #0056b3;
+        }
+
+        .sin-estilo {
+            text-decoration: none;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
     </style>
 </head>
 <?php
 
-use yii\helpers\Url; ?>
+use yii\helpers\Url;
+use app\views\etiquetas\EtiquetasWidget; ?>
 
 <body>
     <header>
-        <h1>Bienvenido a Ofertas y Chollos</h1>
+        <h1>Bienvenido a <a href="/index.php" class="sin-estilo">Ofertas y Chollos</a></h1>
     </header>
+
+    <div class="navbar">
+     <?= EtiquetasWidget::widget() ?>
+    </div>
 
     <nav>
         <a href="/test/index">Test</a>
