@@ -30,22 +30,26 @@ use yii\widgets\Breadcrumbs;
 <body>
   <?php $this->beginBody(); ?>
 
+  <header>
+    <div id ="cabecera">
+        <h1 class="titulo">¡¡¡Bienvenido a Ofertas y Chollos!!!</h1>
+    </div>
+  </header>
+
+
   <nav class="light-blue lighten-1" role="navigation">
     <div class="container">
       <div class="nav-wrapper">
-        <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Bienvenido a Ofertas y Chollos</a>
+        <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
         <?= Menu::widget([
             'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
             'items' => [
                 ['label' => 'Inicio', 'url' => ['site/index']],
                 ['label' => 'Acerca de', 'url' => ['site/about']],
                 ['label' => 'Contacto', 'url' => ['site/contact']],
-                ['items' => [
-                            ['label' => 'Ofertas', 'url' => ['site/ofertas']],
-                            ['label' => 'Anuncios', 'url' => ['site/chollos']],
-                            ['label' => 'Categorías', 'url' => ['site/categorias']],
-                        ],
-                    ],
+                ['label' => 'Ofertas', 'url' => ['site/ofertas']],
+                ['label' => 'Anuncios', 'url' => ['site/chollos']],
+                ['label' => 'Categorías', 'url' => ['site/categorias']],    
                 ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                 ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->username,
                         'items' =>
@@ -70,17 +74,7 @@ use yii\widgets\Breadcrumbs;
     </div>
   </nav>
 
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center orange-text">Bienvenido a Ofertas y Chollos</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">¡¡¡Tu portal web para los mejores chollos y ofertas!!!</h5>
-      </div>
-      
-      <br><br>
-    </div>
-  </div>
+
 
   <div class="container">
     <div class="section">
@@ -92,9 +86,10 @@ use yii\widgets\Breadcrumbs;
     </div>
   </div>
 
+  
   <div class="container">
     <div class="section">
-      <!-- Icon Section -->
+      
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
@@ -121,16 +116,16 @@ use yii\widgets\Breadcrumbs;
     </div>
     <br><br>
   </div>
-
-  <footer class="azul-footer">
+  
+  <footer class="color-footer">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Sobre Nosotros</h5>
-          <p class="grey-text lighten-4">Somos un equipo de estudiantes trabajando en este proyecto como si fuera nuestro trabajo a tiempo completo. Tu apoyo es muy apreciado.</p>
+          <h5 class="orange-text">Sobre Nosotros</h5>
+          <p class="grey-text lighten-4"  style="text-align: left;">Somos un equipo de estudiantes trabajando en este proyecto como si fuera nuestro trabajo a tiempo completo. Tu apoyo es muy apreciado.</p>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Enlaces</h5>
+          <h5 class="orange-text">Enlaces</h5>
           <ul>
             <li><a class="white-text" href="#!">Enlace 1</a></li>
             <li><a class="white-text" href="#!">Enlace 2</a></li>
@@ -139,7 +134,7 @@ use yii\widgets\Breadcrumbs;
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Conecta</h5>
+          <h5 class="orange-text">Redes Sociales</h5>
           <ul>
             <li><a class="white-text" href="#!">Facebook</a></li>
             <li><a class="white-text" href="#!">Twitter</a></li>
@@ -168,7 +163,7 @@ use yii\widgets\Breadcrumbs;
     });
   </script>
   
-  <?php $this->endBody(); ?>
+
 </body>
 </html>
 <?php $this->endPage(); ?>

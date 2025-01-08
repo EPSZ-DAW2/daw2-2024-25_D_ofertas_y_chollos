@@ -6,12 +6,40 @@
  * Made By MaterializeCSS.com
  */
 
+.site-index {
+    padding-top: 50px;
+    display: flex; /* Activa el diseño Flexbox */
+    gap: 100px; /* Espaciado entre el aside y el recuadro */
+}
+
+/* Estilo del aside */
+.contenedor-categorias {
+    flex: 0 0 15%; /* El aside ocupa el 20% del ancho del contenedor */
+    max-width: 500px; /* Limita el ancho máximo */
+}
+
+.categorias {
+
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Estilo del recuadro (jumbotron) */
+.jumbotron {
+    flex: 1; /* Ocupa el espacio restante del contenedor */
+    text-align: center;
+    background-color: #ddd;
+    border: 2px solid #c4c4c4;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
 .icon-block {
   padding: 0 15px;
 }
 
-/* Yii2.ThemeFactory.net */
-.jumbotron {
-    text-align: center;
-    border: 1px solid #ddd;
-}

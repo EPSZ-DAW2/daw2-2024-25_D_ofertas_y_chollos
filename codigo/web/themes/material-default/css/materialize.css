@@ -12,6 +12,13 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 2 */ }
 
+header
+{
+  margin-top: -32px;
+  margin-bottom: -25px;
+  background-color: #007bff !important;
+}
+
 /**
  * Remove default margin.
  */
@@ -27,6 +34,7 @@ body {
  */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
   display: block; }
+
 
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
@@ -908,7 +916,7 @@ td, th {
   color: #4fc3f7 !important; }
 
 .light-blue.lighten-1 {
-  background-color: #29b6f6 !important; }
+  background-color: #343A40 !important; }
 
 .light-blue-text.lighten-1 {
   color: #29b6f6 !important; }
@@ -1556,7 +1564,7 @@ td, th {
   color: #ffab00 !important; }
 
 .orange.lighten-5 {
-  background-color: #fff3e0 !important; }
+  background-color: #fff3E0 !important; }
 
 .orange-text.lighten-5 {
   color: #fff3e0 !important; }
@@ -1924,8 +1932,8 @@ td, th {
 .white {
   background-color: #FFFFFF !important; }
 
-.white-text {
-  color: #FFFFFF !important; }
+.orange-text {
+  color: #FF8000 !important; }
 
 ul {
   list-style-type: none; }
@@ -2070,6 +2078,7 @@ img.responsive-img {
     text-align: center; } }
 
 footer {
+  text-align: center;
   margin-top: 20px;
   padding-top: 20px;
   background-color: #ee6e73; }
@@ -4434,7 +4443,7 @@ img.circle {
 .container {
   padding: 0 1.5rem;
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1500px;
   width: 90%; }
 
 @media only screen and (min-width : 600px) {
@@ -4444,7 +4453,7 @@ img.circle {
 
 @media only screen and (min-width : 992px) {
   .container {
-    width: 70%; }
+    width: 75%; }
  }
 
 .container .row {
@@ -4713,6 +4722,8 @@ img.circle {
 
 nav {
   color: #fff;
+  margin: 0;
+  padding: 0;
   background-color: #ee6e73;
   width: 100%;
   height: 56px;
@@ -4731,10 +4742,11 @@ nav {
       height: 56px;
       line-height: 56px; }
   nav .brand-logo {
+    color: #ff8000;
     position: absolute;
-    color: #fff;
     display: inline-block;
     font-size: 2.1rem;
+    margin-left: 17px;
     padding: 0; }
     @media only screen and (max-width : 992px) {
       nav .brand-logo {
@@ -5265,7 +5277,7 @@ ul.tabs li.tab {
 .btn, .btn-large {
   text-decoration: none;
   color: #FFFFFF;
-  background-color: #2196F3;
+  background-color: #007bff;
   text-align: center;
   letter-spacing: 0.8px;
   -webkit-transition: 0.2s ease-out;
@@ -5275,7 +5287,7 @@ ul.tabs li.tab {
   transition: 0.2s ease-out;
   cursor: pointer; }
   .btn:hover, .btn-large:hover {
-    background-color: #39a1f4; }
+    background-color: #343A40; }
 
 .btn-floating {
   display: inline-block;
@@ -5619,7 +5631,7 @@ input[type=text], input[type=password], input[type=email], input[type=date], tex
   transition: 0.3s; }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=date]:focus, textarea:focus {
-  border-bottom: 1px solid #03a9f4;
+  border-bottom: 1px solid #007bff;
   -webkit-box-shadow: 0 1px 0 0 #03a9f4;
   -moz-box-shadow: 0 1px 0 0 #03a9f4;
   box-shadow: 0 1px 0 0 #03a9f4; }
@@ -7186,3 +7198,22 @@ ul.table-of-contents a {
   .picker--time .picker__box {
     margin-bottom: 5em; }
  }
+
+.titulo
+{
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.color-footer
+{
+  background-color: #343A40 !important;
+}
+
+.texto-inicial
+{
+  font-size: 60px;
+  color: #007bff;
+}
