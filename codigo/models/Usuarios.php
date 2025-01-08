@@ -190,7 +190,7 @@ class Usuarios extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRol()
+    public function getRol0()
     {
         return $this->hasOne(Roles::class, ['id' => 'rol']);
     }
@@ -320,4 +320,67 @@ class Usuarios extends \yii\db\ActiveRecord
 
         return $textoBloqueo . ' ' . $boton;
     }
+
+
+    /**
+     * Funcion que devuelve el nombre del rol del usuario
+     */
+    public function getNombreRol()
+    {
+        return $this->rol0 ? $this->rol0->nombre : Yii::t('app', 'Rol no asignado');
+    }
+
+
+    /**
+     * Lista d los roles para utilizar en el desplegable
+     */
+
+    public function getListaRoles()
+    {
+        return \app\models\Roles::find()->select(['nombre', 'id'])->indexBy('id')->column();
+    }
+
+
+
+
+
+    /**
+     * Genera formulario para seleccionar nuevo usuario
+     */
+
+
+    public function getRolFormulario()
+    {
+        $rolesLista = Roles::find()->select(['nombre', 'id'])->indexBy('id')->column();
+        return Html::dropDownList(
+            'rol',
+            $this->rol,
+            $rolesLista,
+            ['class' => 'form-control']
+        );
+    }
+
+
+
+
+    /*
+    public function getFormularioRol()
+    {
+        return Html::beginForm(['usuarios/cambiar-rol'], 'post') .
+
+            Html::dropDownList(
+                'rol',
+                $this->rol,
+                \app\models\Roles::getListaRoles(),
+                ['class' => 'form-control']
+
+            ) .
+            Html::hiddenInput('id', $this->id) .
+            Html::submitButton(
+                Yii::t('app', 'Cambiar Rol')
+            ) .
+
+            Html::endForm();
+    }
+*/
 }

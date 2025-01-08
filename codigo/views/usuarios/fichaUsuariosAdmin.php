@@ -59,8 +59,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('app', 'Bloqueado'),
             ],
             'fecha_bloqueo',
-            'motivo_bloqueo',
-            'rol',
+            'motivo_bloqueo',/*
+            [
+                'attribute' => 'rol',
+                'format' => 'html',
+                'value' => 'nombreRol',
+
+                'label' => Yii::t('app', 'Rol'),
+            ],*/
+            [
+                'attribute' => 'rol',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->rolFormulario;
+                },
+                'label' => Yii::t('app', 'Rol'),
+            ],
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',

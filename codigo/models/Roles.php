@@ -63,4 +63,16 @@ class Roles extends \yii\db\ActiveRecord
     {
         return new RolesQuery(get_called_class());
     }
+
+    /**
+     * Devuelve la lista de los roles
+     */
+
+    public static function getListaRoles()
+    {
+        return self::find()
+            ->select(['nombre'])
+            ->indexBy(['id'])
+            ->column();
+    }
 }
