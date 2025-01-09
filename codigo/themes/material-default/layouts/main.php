@@ -96,6 +96,8 @@ use app\views\etiquetas\EtiquetasWidget; ?>
       </div>
     </div>
   </div>
+
+  
   
   <footer class="color-footer">
     <div class="container">

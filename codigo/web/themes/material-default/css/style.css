@@ -61,18 +61,18 @@
     display: flex;
     flex-direction: column; /* Cambiamos el diseño a columna */
     align-items: center; /* Centramos todos los elementos horizontalmente */
-    gap: 30px; /* Espaciado entre los contenedores */
+    gap: 50px; /* Espaciado entre los contenedores */
 }
 
 /* Estilo del contenedor de categorías (arriba) */
-.contenedor-categorias {
-    width: 80%; /* El contenedor ocupa el 80% del ancho de la pantalla */
+.contenedor-categorias
+{
     max-width: 600px; /* Limita el ancho máximo en pantallas grandes */
 }
 
 
-
-.categorias {
+.categorias
+{
     background-color: #f8f9fa;
     border: 1px solid #ccc;
     padding: 20px;

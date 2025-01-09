@@ -9,15 +9,15 @@ $this->title = 'Ofertas y Chollos';
     <!-- CONTENEDOR ARRIBA (CATEGORÍAS) -->
     <div class="contenedor-categorias">
         <div class="categorias">
-            <p><a style="color: #000;" href="<?= Yii::$app->urlManager->createUrl(['categorias/index']) ?>"><strong>Categorías</strong></a></p>
+            <p style="font-size: 30px; margin-top: -10px;"><a style="color: #000;" href="<?= Yii::$app->urlManager->createUrl(['categorias/index']) ?>"><strong>Explora todas nuestras categorías</strong></a></p>
             <ul>
                 <li><a href="#">Tecnología</a></li>
                 <li><a href="#">Hogar</a></li>
                 <li><a href="#">Moda</a></li>
                 <li><a href="#">Deportes</a></li>
                 <li><a href="#">Juguetes</a></li>
-                <li><a href="#">Automóvil</a></li>
-                <li><a href="#">Más...</a></li>
+                <li><a href="#">Coches</a></li>
+                <li><a href="<?= Yii::$app->urlManager->createUrl(['categorias/index']) ?>">Más...</a></li>
             </ul>
         </div>
     </div>
@@ -45,6 +45,18 @@ $this->title = 'Ofertas y Chollos';
             <div class="offer">
                 <h3>Oferta 4</h3>
                 <p>Descripción breve de la oferta 4.</p>
+                <button>Ver más</button>
+            </div>
+
+            <div class="offer">
+                <h3>Oferta 5</h3>
+                <p>Descripción breve de la oferta 5.</p>
+                <button>Ver más</button>
+            </div>
+
+            <div class="offer">
+                <h3>Oferta 6</h3>
+                <p>Descripción breve de la oferta 6.</p>
                 <button>Ver más</button>
             </div>
            
