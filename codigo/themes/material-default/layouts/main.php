@@ -14,30 +14,32 @@ use yii\widgets\Breadcrumbs;
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
   <title><?= Html::encode($this->title ?: 'Ofertas y Chollos') ?></title>
   <?php $this->head(); ?>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+
   <!-- CSS -->
-  <link href="<?= $this->theme->baseUrl ?>/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="<?= $this->theme->baseUrl ?>/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?= $this->theme->baseUrl ?>/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="<?= $this->theme->baseUrl ?>/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
   <?php $this->beginBody(); ?>
 
   <?php
 
-use yii\helpers\Url;
-use app\views\etiquetas\EtiquetasWidget; ?>
+  use yii\helpers\Url;
+  use app\views\etiquetas\EtiquetasWidget; ?>
 
   <header>
-    <div id ="cabecera">
-        <h1 class="titulo">¡¡¡Bienvenido a Ofertas y Chollos!!!</h1>
+    <div id="cabecera">
+      <h1 class="titulo">¡¡¡Bienvenido a Ofertas y Chollos!!!</h1>
     </div>
   </header>
 
@@ -47,26 +49,29 @@ use app\views\etiquetas\EtiquetasWidget; ?>
       <div class="nav-wrapper">
         <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
         <?= Menu::widget([
-            'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
-            'items' => [
-                ['label' => 'Inicio', 'url' => ['site/index']],
-                ['label' => 'Acerca de', 'url' => ['site/about']],
-                ['label' => 'Contacto', 'url' => ['site/contact']],
-                ['label' => 'Ofertas', 'url' => ['site/ofertas']],
-                ['label' => 'Anuncios', 'url' => ['site/chollos']],
-                ['label' => 'Categorías', 'url' => ['categorias/index']],    
-                ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->username,
-                        'items' =>
-                        [
-                            ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
-                        ],'visible' => !Yii::$app->user->isGuest,],
+          'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
+          'items' => [
+            ['label' => 'Inicio', 'url' => ['site/index']],
+            ['label' => 'Acerca de', 'url' => ['site/about']],
+            ['label' => 'Contacto', 'url' => ['site/contact']],
+            ['label' => 'Ofertas', 'url' => ['site/ofertas']],
+            ['label' => 'Anuncios', 'url' => ['site/chollos']],
+            ['label' => 'Categorías', 'url' => ['categorias/index']],
+            ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+            [
+              'label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
+              'items' =>
+              [
+                ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
+              ],
+              'visible' => !Yii::$app->user->isGuest,
             ],
+          ],
 
         ]); ?>
-        
-     
-        
+
+
+
         <!-- Buscador 
             <form action="<?= Yii::$app->urlManager->createUrl(['site/buscar']) ?>" method="GET" class="right">
                 <div class="input-field" style="margin-top: 0; margin-right: 10px;">
@@ -81,11 +86,11 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </nav>
 
-        <div class="container-nav">
-          <div class="navbar" id="navbar">
-              <?= EtiquetasWidget::widget() ?>
-          </div>
-        </div>
+  <div class="container-nav">
+    <div class="navbar" id="navbar">
+      <?= EtiquetasWidget::widget() ?>
+    </div>
+  </div>
 
   <div class="container">
     <div class="section">
@@ -97,14 +102,14 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </div>
 
-  
-  
+
+
   <footer class="color-footer">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
           <h5 class="orange-text">Sobre Nosotros</h5>
-          <p class="grey-text lighten-4"  style="text-align: left;">Somos un equipo de estudiantes trabajando en este proyecto como si fuera nuestro trabajo a tiempo completo. Tu apoyo es muy apreciado.</p>
+          <p class="grey-text lighten-4" style="text-align: left;">Somos un equipo de estudiantes trabajando en este proyecto como si fuera nuestro trabajo a tiempo completo. Tu apoyo es muy apreciado.</p>
         </div>
         <div class="col l3 s12">
           <h5 class="orange-text">Enlaces</h5>
@@ -144,8 +149,9 @@ use app\views\etiquetas\EtiquetasWidget; ?>
       M.Sidenav.init(elems);
     });
   </script>
-  
+
 
 </body>
+
 </html>
 <?php $this->endPage(); ?>

@@ -13,7 +13,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $nick;
     public $password;
     public $recordarme = true;
 
@@ -27,7 +27,7 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['nick', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['recordarme', 'boolean'],
             // password is validated by validatePassword()
@@ -47,9 +47,33 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
+            if (!$user) {
                 $this->addError($attribute, 'Usuario o contraseña incorrectos');
             }
+
+            //Verifcar si el usuario no esta bloqueado
+            if ($user->bloqueado) {
+                $this->addError($attribute, 'La cuenta esta bloqueada, un administrador debe desbloquearla');
+                return;
+            }
+
+            //Comprobar si la comtraseña que ha introducido es correcta 
+            if (!$user->validatePassword($this->password)) {
+                //incrementamos los intentos del usuario
+                $user->accesos_fallidos++;
+                if ($user->accesos_fallidos >= 3) {
+                    $user->bloqueado = 1;
+                    $user->fecha_bloqueo = date('Y-m-d H:i:s');
+                }
+
+                $user->save(false); //Almacenar en usuario
+                $this->addError($attribute, 'Usuario o contraseña incorrectos');
+                return;
+            }
+
+            //si ha iniciado sesion eliminamos los posibles intentos fallidos
+            $user->accesos_fallidos = 0;
+            $user->save(false);
         }
     }
 
@@ -60,7 +84,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->recordarme ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->recordarme ? 3600 * 24 * 30 : 0);
         }
         return false;
     }
@@ -73,7 +97,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Usuario::findByUsername($this->username);
+            $this->_user = Usuarios::findOne(['nick' => $this->nick]);
         }
 
         return $this->_user;

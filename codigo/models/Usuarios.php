@@ -6,6 +6,9 @@ namespace app\models;
 
 use Yii;
 use Yii\helpers\Html;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+
 
 /**
  * This is the model class for table "usuarios".
@@ -40,7 +43,7 @@ use Yii\helpers\Html;
  * @property UsuariosEtiqueta[] $usuariosEtiquetas
  * @property UsuariosZona[] $usuariosZonas
  */
-class Usuarios extends \yii\db\ActiveRecord
+class Usuarios extends ActiveRecord implements IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -338,5 +341,73 @@ class Usuarios extends \yii\db\ActiveRecord
     public function getListaRoles()
     {
         return \app\models\Roles::find()->select(['nombre', 'id'])->indexBy('id')->column();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Encuentra un usuario por su ID.
+     *
+     * @param int|string $id
+     * @return IdentityInterface|null
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
+
+    /**
+     * Encuentra un usuario por un token de acceso.
+     * No implementado (devuelve null si no usas tokens).
+     *
+     * @param string $token
+     * @param null|string $type
+     * @return IdentityInterface|null
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null; // No implementado
+    }
+
+    /**
+     * Devuelve el identificador único del usuario.
+     *
+     * @return int|string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Devuelve una clave de autenticación persistente (opcional).
+     *
+     * @return string|null
+     */
+    public function getAuthKey()
+    {
+        return null; // No implementado
+    }
+
+    /**
+     * Valida una clave de autenticación persistente (opcional).
+     *
+     * @param string $authKey
+     * @return bool
+     */
+    public function validateAuthKey($authKey)
+    {
+        return false; // No implementado
     }
 }
