@@ -31,6 +31,23 @@ class AnunciosController extends Controller
         );
     }
 
+
+
+
+
+    /*
+
+    * Funcion para obtener un registro aleatorio
+
+    */
+
+    protected function getRandomAnuncio()
+    {
+        return Anuncio::getAnuncioAleatorio();
+    }
+
+
+
     /**
      * Lists all Anuncio models.
      *
@@ -38,14 +55,23 @@ class AnunciosController extends Controller
      */
     public function actionIndex()
     {
+
+        //obtener el registro aleatorio
+        $randomAnuncio = $this->getRandomAnuncio();
+
         $searchModel = new AnunciosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'randomAnuncio' => $randomAnuncio,
         ]);
     }
+    
+
+
+    
 
     /**
      * Displays a single Anuncio model.
