@@ -6,19 +6,6 @@
  * Made By MaterializeCSS.com
  */
 
- .site-index {
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column; /* Cambiamos el diseño a columna */
-    align-items: center; /* Centramos todos los elementos horizontalmente */
-    gap: 30px; /* Espaciado entre los contenedores */
-}
-
-/* Estilo del contenedor de categorías (arriba) */
-.contenedor-categorias {
-    width: 80%; /* El contenedor ocupa el 80% del ancho de la pantalla */
-    max-width: 600px; /* Limita el ancho máximo en pantallas grandes */
-}
 
 /* Barra de navegación principal */
 .container-nav {
@@ -69,6 +56,20 @@
     }
 }
 
+ .site-index {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column; /* Cambiamos el diseño a columna */
+    align-items: center; /* Centramos todos los elementos horizontalmente */
+    gap: 30px; /* Espaciado entre los contenedores */
+}
+
+/* Estilo del contenedor de categorías (arriba) */
+.contenedor-categorias {
+    width: 80%; /* El contenedor ocupa el 80% del ancho de la pantalla */
+    max-width: 600px; /* Limita el ancho máximo en pantallas grandes */
+}
+
 
 
 .categorias {
@@ -82,13 +83,15 @@
 }
 
 .categorias ul {
+    display: flex;
+    gap: 15px;
     list-style-type: none; /* Quitamos los puntos de la lista */
     padding: 0;
     margin: 0;
 }
 
 .categorias ul li {
-    margin-bottom: 10px;
+    margin: 0px;
 }
 
 .categorias ul li a {
