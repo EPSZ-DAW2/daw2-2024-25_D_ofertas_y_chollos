@@ -64,7 +64,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
             ],
 
         ]); ?>
-         <div class="navbar">
+        
      
         
         <!-- Buscador 
@@ -81,9 +81,11 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </nav>
 
-  <div class="navbar">
-  <?= EtiquetasWidget::widget() ?>
-  </div>
+        <div class="container-nav">
+          <div class="navbar" id="navbar">
+              <?= EtiquetasWidget::widget() ?>
+          </div>
+        </div>
 
   <div class="container">
     <div class="section">

@@ -20,6 +20,57 @@
     max-width: 600px; /* Limita el ancho máximo en pantallas grandes */
 }
 
+/* Barra de navegación principal */
+.container-nav {
+    margin-top: 0.025px;
+    font-size: 30px; 
+    text-align: center; 
+    background-color: #ff8000;  
+}
+
+/* Enlaces dentro de la barra de navegación */
+.navbar a {
+    font-weight: bold;
+    padding-right: 100px; /* Espaciado entre enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    color: #007bff; /* Color del texto */
+}
+
+/* Media queries para hacerlo responsive */
+
+/* Para pantallas pequeñas (como móviles) */
+@media (max-width: 768px) {
+    .container-nav {
+        font-size: 20px; /* Reduce el tamaño de la fuente */
+        padding: 10px 0; /* Agrega espacio vertical */
+    }
+    
+    .navbar a {
+        padding-right: 20px; /* Reduce el espacio entre enlaces */
+        display: inline-block; /* Permite apilarlos si es necesario */
+    }
+}
+
+/* Para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+    .container-nav {
+        font-size: 18px; /* Ajusta aún más el tamaño de la fuente */
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap; /* Los enlaces se apilan si no caben */
+        justify-content: center; /* Asegura que estén centrados */
+    }
+
+    .navbar a {
+        padding-right: 10px; /* Reduce el espacio entre enlaces */
+        padding-bottom: 10px; /* Agrega espacio vertical entre enlaces */
+    }
+}
+
+
+
 .categorias {
     background-color: #f8f9fa;
     border: 1px solid #ccc;
@@ -128,3 +179,5 @@
         width: 100%; /* Las ofertas ocupan todo el ancho en pantallas pequeñas */
     }
 }
+
+
