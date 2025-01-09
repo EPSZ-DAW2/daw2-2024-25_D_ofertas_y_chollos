@@ -75,4 +75,15 @@ class Anuncio extends \yii\db\ActiveRecord
     {
         return new AnunciosQuery(get_called_class());
     }
+
+
+
+        //Función para obtener un registro aleatorio de la tabla anuncios
+    public static function getAnuncioAleatorio()
+    {
+        $anuncio = Anuncio::find()->orderBy('rand()')->one();
+        return $anuncio;
+    }
+
+    
 }
