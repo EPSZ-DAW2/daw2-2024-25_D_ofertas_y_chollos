@@ -79,5 +79,26 @@ class CategoriasController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+
+    // Acción para borrar un partido
+    public function actionDelete($id)
+    {
+        /*if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->id_rol != 1 && Yii::$app->user->identity->id_rol != 2 && Yii::$app->user->identity->id_rol != 4))
+        {
+            // Usuario no autenticado o no tiene el rol adecuado
+            Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
+            return $this->redirect(['index']);
+        }*/
+
+        $categoria = Categorias::findOne($id);
+
+        if ($categoria === null) {
+            throw new NotFoundHttpException('El partido no fue encontrado.');
+        }
+
+        $categoria->delete();
+
+        return $this->redirect(['index']);
+    }
 }
 ?>

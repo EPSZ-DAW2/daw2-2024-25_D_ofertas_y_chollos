@@ -32,9 +32,10 @@ use Yii;
     public function rules()
     {
         return [
-            [['nombre', 'descripcion', 'revisado', 'categoria_padre_id'],'required', 'message' => 'Este campo es obligatorio.'],
+            [['nombre', 'descripcion', 'revisado'],'required', 'message' => 'Este campo es obligatorio.'],
             [['nombre','descripcion'], 'string', 'max' => 255],
             [['revisado'], 'integer'],
+            [['revisado'],'default','value'=>0],
             [['categoria_padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::class, 'targetAttribute' => ['categoria_padre_id' => 'id']],
         ];
     }
@@ -59,7 +60,7 @@ use Yii;
      */
     public function getCategoriaPadre()
     {
-        return $this->hasMany(Categorias::class, ['categoria_padre_id' => 'id']);
+        return $this->hasOne(Categorias::class, ['id' => 'categoria_padre_id']);
     }
  }
 ?>
