@@ -3,9 +3,9 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Incidencias]].
+ * This is the ActiveQuery class for [[Incidencia]].
  *
- * @see Incidencias
+ * @see Incidencia
  */
 class IncidenciasQuery extends \yii\db\ActiveQuery
 {
@@ -16,7 +16,7 @@ class IncidenciasQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Incidencias[]|array
+     * @return Incidencia[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class IncidenciasQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Incidencias|array|null
+     * @return Incidencia|array|null
      */
     public function one($db = null)
     {

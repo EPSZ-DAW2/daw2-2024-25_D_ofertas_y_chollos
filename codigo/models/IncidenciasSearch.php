@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Incidencias;
+use app\models\Incidencia;
 
 /**
- * IncidenciasSearch represents the model behind the search form of `app\models\Incidencias`.
+ * IncidenciasSearch represents the model behind the search form of `app\models\Incidencia`.
  */
-class IncidenciasSearch extends Incidencias
+class IncidenciasSearch extends Incidencia
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class IncidenciasSearch extends Incidencias
      */
     public function search($params)
     {
-        $query = Incidencias::find();
+        $query = Incidencia::find();
 
         // add conditions that should always apply here
 
