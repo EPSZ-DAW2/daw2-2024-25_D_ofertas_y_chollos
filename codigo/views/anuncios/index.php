@@ -46,3 +46,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+
+
+
+<!-- DIV para mostrar el anuncio aleatorio -->
+
+
+<div style="border: 1px solid #ccc; padding: 20px; width: 300px; margin: 20px auto; text-align: center;">
+    <?php if ($randomAnuncio): ?>    
+    <h3>Random Anuncio</h3>
+    <p>
+        <?= Html::encode($randomAnuncio->titulo) ?>
+    </p>
+    <p>
+        <?= Html::encode($randomAnuncio->descripcion) ?>
+    </p>
+    <p>
+        <?= Html::encode($randomAnuncio->precio) ?>
+    </p>
+    <p>
+        <?= Html::encode($randomAnuncio->fecha) ?>
+    </p>
+    <p>
+        <?= Html::encode($randomAnuncio->oferta_id) ?>
+    </p>
+    <?php else: ?>
+        <p>No hay anuncio aleatorio</p>
+    <?php endif; ?>
+</div>
