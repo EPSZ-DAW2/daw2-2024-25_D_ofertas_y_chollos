@@ -36,8 +36,24 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'motivo_bloqueo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'rol')->textInput() ?>
+    <?= $form->field($model, 'rol')->textInput([
+        'maxlength' => true,
+        //mostrar el nombre del rol
+        'value' => $model->rol . ' ' . ($model->nombreRol ? '(' . $model->nombreRol . ')' : Yii::t('app', 'Rol no asignado'))
+    ]) ?>
 
+    <div class="form-group">
+        <!---Mostramos el valor que tiene cada rol para la modificacion--->
+        <label><?= Yii::t('app', 'Roles Disponibles') ?></label>
+        <p>
+            <?php
+            $roles = \app\models\Roles::find()->select(['id', 'nombre'])->orderBy('id')->all();
+            foreach ($roles as $rol) {
+                echo $rol->id . ' -> ' . $rol->nombre . '<br>';
+            }
+            ?>
+        </p>
+    </div>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

@@ -339,48 +339,4 @@ class Usuarios extends \yii\db\ActiveRecord
     {
         return \app\models\Roles::find()->select(['nombre', 'id'])->indexBy('id')->column();
     }
-
-
-
-
-
-    /**
-     * Genera formulario para seleccionar nuevo usuario
-     */
-
-
-    public function getRolFormulario()
-    {
-        $rolesLista = Roles::find()->select(['nombre', 'id'])->indexBy('id')->column();
-        return Html::dropDownList(
-            'rol',
-            $this->rol,
-            $rolesLista,
-            ['class' => 'form-control']
-        );
-    }
-
-
-
-
-    /*
-    public function getFormularioRol()
-    {
-        return Html::beginForm(['usuarios/cambiar-rol'], 'post') .
-
-            Html::dropDownList(
-                'rol',
-                $this->rol,
-                \app\models\Roles::getListaRoles(),
-                ['class' => 'form-control']
-
-            ) .
-            Html::hiddenInput('id', $this->id) .
-            Html::submitButton(
-                Yii::t('app', 'Cambiar Rol')
-            ) .
-
-            Html::endForm();
-    }
-*/
 }

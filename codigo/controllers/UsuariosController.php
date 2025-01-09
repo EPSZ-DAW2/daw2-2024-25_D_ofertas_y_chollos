@@ -265,34 +265,4 @@ class UsuariosController extends Controller
         //redirigir a la ficha del administrador
         return $this->redirect(['ficha-usuarios-admin']);
     }
-
-
-
-    /**
-     * Funcion que cambia el rol de un usuario por su id
-     */
-
-
-
-    public function actionCambiarRol($id)
-    {
-        $model = $this->findModel($id);
-
-        if (Yii::$app->request->isPost) {
-            $nuevoRol = Yii::$app->request->post('rol'); //almacenamos en la variable nuevoRol el rol seleccionado
-            if ($nuevoRol && array_key_exists($nuevoRol, $model->listaRoles)) //Verificamos que existe y que este en listaRoles
-
-                //Almacenar el nuevo valor
-                $model->rol = $nuevoRol;
-            if ($model->save(false)) {
-                Yii::$app->session->setFlash('success', 'Rol actualizado correctamente.');
-            } else {
-                Yii::$app->session->setFlash('error', 'Error al actualizar el rol.');
-            }
-        } else {
-            Yii::$app->session->setFlash('error', 'Rol no válido.');
-        }
-        //redirigir a la vista de admin
-        return $this->redirect(['ficha-usuarios-admin']);
-    }
 }

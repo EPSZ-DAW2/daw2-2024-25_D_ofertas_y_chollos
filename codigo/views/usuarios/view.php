@@ -42,7 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'bloqueado',
             'fecha_bloqueo',
             'motivo_bloqueo',
-            'rol',
+            //Mostrar el nombre del rol en la vista de un usuario
+            [
+                'attribute' => 'rol',
+                'value' => $model->nombreRol ? '(' . $model->nombreRol . ')' : Yii::t('app', 'Rol no asignado'),
+            ]
         ],
     ]) ?>
 
