@@ -6,7 +6,6 @@
  * Made By MaterializeCSS.com
  */
 
-
 /* Barra de navegación principal */
 .container-nav {
     margin-top: 0.025px;
@@ -14,6 +13,7 @@
     text-align: center; 
     background-color: #ff8000;  
 }
+
 
 /* Enlaces dentro de la barra de navegación */
 .navbar a {
@@ -56,7 +56,7 @@
     }
 }
 
- .site-index {
+.site-index {
     padding-top: 30px;
     display: flex;
     flex-direction: column; /* Cambiamos el diseño a columna */
@@ -65,14 +65,14 @@
 }
 
 /* Estilo del contenedor de categorías (arriba) */
-.contenedor-categorias
-{
+.contenedor-categorias {
     max-width: 600px; /* Limita el ancho máximo en pantallas grandes */
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 10px; /* Espaciado interno */
+    width: 100%; /* Ancho completo por defecto */
 }
 
-
-.categorias
-{
+.categorias {
     background-color: #f8f9fa;
     border: 1px solid #ccc;
     padding: 20px;
@@ -88,10 +88,14 @@
     list-style-type: none; /* Quitamos los puntos de la lista */
     padding: 0;
     margin: 0;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que las categorías se apilen si no caben */
 }
 
 .categorias ul li {
     margin: 0px;
+    flex: 1 1 45%; /* Cada categoría ocupa un 45% del ancho disponible */
+    text-align: center;
 }
 
 .categorias ul li a {
@@ -105,11 +109,33 @@
     color: #0056b3; /* Cambia el color al pasar el ratón */
 }
 
+/* Responsividad para el contenedor de categorías */
+@media (max-width: 768px) {
+    .contenedor-categorias {
+        max-width: 90%; /* Reduce el ancho máximo en pantallas más pequeñas */
+    }
+
+    .categorias ul li {
+        margin-bottom: 10px; /* Espaciado vertical entre filas */
+    }
+}
+
+@media (max-width: 480px) {
+    .contenedor-categorias {
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 5px; /* Reduce el espaciado interno */
+    }
+
+    .categorias ul li {
+        flex: 1 1 100%; /* Cada categoría ocupa una fila completa */
+    }
+}
+
 /* Estilo del contenedor de ofertas (debajo) */
 .jumbotron {
     width: 90%; /* El contenedor ocupa el 90% del ancho de la pantalla */
     max-width: 1200px; /* Limita el ancho máximo */
-    background-color: #ffffff;
+    background-color: #ec937f;
     border: 2px solid #c4c4c4;
     padding: 30px;
     border-radius: 10px;
@@ -127,7 +153,7 @@
 }
 
 .offer {
-    background-color: #f5f5f5;
+    background-color: lightgreen;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 15px;
@@ -171,6 +197,10 @@
     background-color: #0056b3;
 }
 
+body {
+    background-color: #fff7e6; /* Color cálido (naranja claro), asociado a ofertas */
+}
+
 /* Responsividad */
 @media (max-width: 768px) {
     .contenedor-categorias,
@@ -182,5 +212,3 @@
         width: 100%; /* Las ofertas ocupan todo el ancho en pantallas pequeñas */
     }
 }
-
-
