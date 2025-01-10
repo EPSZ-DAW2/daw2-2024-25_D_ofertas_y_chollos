@@ -17,6 +17,7 @@ $this->title = 'Detalles de la Categoría';
             <?= Html::a($model->categoriaPadre->nombre)?>
         <?php endif ?>
         <p>Descripción: <?= Html::a($model->descripcion) ?></p>
+        <p><?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'botonFormulario']) ?></p>
         <?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
             'class' => 'botonFormulario',
             'data' => [

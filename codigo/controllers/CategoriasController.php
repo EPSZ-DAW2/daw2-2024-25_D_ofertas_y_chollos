@@ -100,5 +100,37 @@ class CategoriasController extends \yii\web\Controller
 
         return $this->redirect(['index']);
     }
+
+    public function actionUpdate($id)
+    {
+        /*if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->id_rol != 1 && Yii::$app->user->identity->id_rol != 2 && Yii::$app->user->identity->id_rol != 4))
+        {
+            // Usuario no autenticado o no tiene el rol adecuado
+            Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
+            return $this->redirect(['index']);
+        }*/
+
+        // Buscar el partido por su ID
+        $categoria = Categorias::findOne($id);
+
+        // Verificar si el partido existe
+        if ($categoria === null) {
+            throw new NotFoundHttpException('La categoría no fue encontrada.');
+        }
+
+        // Procesar el formulario cuando se envía
+        if (Yii::$app->request->isPost) {
+            // Cargar los datos del formulario en el modelo de jornada
+            if ($categoria->load(Yii::$app->request->post()) && $categoria->save()) {
+                // Redirigir a la vista de detalles después de la actualización exitosa
+                return $this->redirect(['view', 'id' => $categoria->id]);
+            }
+        }
+
+        // Renderizar la vista de actualización con el formulario y el modelo de jornada
+        return $this->render('update', [
+            'categoria' => $categoria,
+        ]);
+    }
 }
 ?>
