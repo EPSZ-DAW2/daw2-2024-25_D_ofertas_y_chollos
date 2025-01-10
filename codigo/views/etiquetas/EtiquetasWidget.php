@@ -17,7 +17,7 @@ class EtiquetasWidget
         foreach ($etiquetas as $etiqueta) {
             $output .= Html::a(
                 Html::encode($etiqueta->nombre),
-                ['etiqueta/ver', 'id' => $etiqueta->id], // Ruta corregida para la acción "ver"
+                ['etiquetas/ver', 'id' => $etiqueta->id], // Ruta corregida para la acción "ver"
                 ['class' => 'etiqueta-link']
             ) . ' ';
         }

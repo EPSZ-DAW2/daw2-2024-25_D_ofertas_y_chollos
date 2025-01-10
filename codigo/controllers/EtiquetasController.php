@@ -155,7 +155,8 @@ class EtiquetasController extends Controller
     }
         */
 
-    public function actionVer($id)
+    
+        /*    public function actionVer($id)
     {
         $etiqueta = Etiqueta::findOne($id);
         if (!$etiqueta) {
@@ -166,6 +167,29 @@ class EtiquetasController extends Controller
             'etiqueta' => $etiqueta,
             ]);
     }
+            */
+            public function actionVer($id)
+{
+    // Buscar la etiqueta por ID
+    $etiqueta = Etiqueta::findOne($id);
+    if (!$etiqueta) {
+        throw new NotFoundHttpException("La etiqueta no existe.");
+    }
+
+    // Datos de ejemplo para las ofertas
+    $ofertas = [
+        ['id' => 1, 'titulo' => 'Oferta 1', 'descripcion' => 'Descripción de la oferta 1'],
+        ['id' => 2, 'titulo' => 'Oferta 2', 'descripcion' => 'Descripción de la oferta 2'],
+        ['id' => 3, 'titulo' => 'Oferta 3', 'descripcion' => 'Descripción de la oferta 3'],
+    ];
+
+    // Renderizar la vista y pasar la etiqueta y las ofertas
+    return $this->render('ver', [
+        'etiqueta' => $etiqueta,
+        'ofertas' => $ofertas,
+    ]);
+}
+
     /*
     public function actionVer($id)
     {
