@@ -37,7 +37,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
 
   <header>
     <div id ="cabecera">
-        <h1 class="titulo">¡¡¡Bienvenido a Ofertas y Chollos!!!</h1>
+        <h1 class="titulo">Bienvenido a Ofertas y Chollos</h1>
     </div>
   </header>
 
