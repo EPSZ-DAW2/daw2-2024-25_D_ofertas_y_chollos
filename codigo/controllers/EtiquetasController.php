@@ -131,4 +131,62 @@ class EtiquetasController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /*
+    public function actionVer($id)
+    {
+        // Busca la etiqueta por su ID
+        $etiqueta = Etiqueta::findOne($id);
+        if (!$etiqueta) {
+            throw new NotFoundHttpException("La etiqueta no existe.");
+        }
+
+        // Obtén las ofertas asociadas con esta etiqueta
+        $ofertas = Oferta::find()
+            ->joinWith('etiquetas') // Relación entre ofertas y etiquetas
+            ->where(['etiquetas.id' => $id])
+            ->all();
+
+        // Renderiza la vista y pasa los datos
+        return $this->render('ver', [
+            'etiqueta' => $etiqueta,
+            'ofertas' => $ofertas,
+        ]);
+    }
+        */
+
+    public function actionVer($id)
+    {
+        $etiqueta = Etiqueta::findOne($id);
+        if (!$etiqueta) {
+            throw new NotFoundHttpException("La etiqueta no existe.");
+        }
+
+        return $this->render('ver', [
+            'etiqueta' => $etiqueta,
+            ]);
+    }
+    /*
+    public function actionVer($id)
+    {
+        // Busca la etiqueta por su ID
+        $etiqueta = Etiqueta::findOne($id);
+        if (!$etiqueta) {
+            throw new NotFoundHttpException("La etiqueta no existe.");
+        }
+
+        // Ofertas simuladas
+        $ofertasEjemplo = [
+            ['titulo' => 'Oferta 1: Descuento en Smartphones', 'descripcion' => 'Hasta un 30% de descuento en modelos seleccionados.'],
+            ['titulo' => 'Oferta 2: Rebajas de Invierno', 'descripcion' => 'Descuentos especiales en ropa de invierno.'],
+            ['titulo' => 'Oferta 3: Promoción en Electrónica', 'descripcion' => 'Compra 1 y obtén otro al 50%.'],
+        ];
+
+        // Renderiza la vista
+        return $this->render('ver', [
+            'etiqueta' => $etiqueta,
+            'ofertas' => $ofertasEjemplo,
+        ]);
+    }
+        */
 }

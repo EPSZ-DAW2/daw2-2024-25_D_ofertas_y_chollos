@@ -48,7 +48,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
             'enableStrictParsing' => false,
-            'rules' => [],
+            'rules' => [
+                'etiqueta/<id:\d+>' => 'etiqueta/ver'
+            ],
         ],
 
         'view' => [
