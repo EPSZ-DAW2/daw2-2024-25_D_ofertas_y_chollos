@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Comentario;
 use app\models\ComentarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ComentarioController implements the CRUD actions for Comentario model.
@@ -21,10 +23,39 @@ class ComentarioController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear', 'revisar-denuncias'],
+                    'rules' => [
+                        // Administradores
+                        [
+                            'allow' => true,
+                            'actions' => ['bloquear', 'desbloquear', 'revisar-denuncias', 'delete', 'update'],
+                            'roles' => ['@'],
+                            'matchCallback' => function ($rule, $action) {
+                                return Yii::$app->user->identity->rol === 'admin';
+                            },
+                        ],
+                        // Usuarios autenticados
+                        [
+                            'allow' => true,
+                            'actions' => ['create', 'view'],
+                            'roles' => ['@'],
+                        ],
+                        // Invitados
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view'],
+                            roles => ['?'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                        'bloquear' => ['POST'],
+                        'desbloquear' => ['POST'],
                     ],
                 ],
             ]
@@ -117,6 +148,59 @@ class ComentarioController extends Controller
     }
 
     /**
+     * Bloquea un comentario
+     */
+    public function actionBloquear($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->bloqueado == 0) {
+            $model->bloqueado = 1;
+            $model->fecha_bloqueo = date('Y-m-d H:i:s');
+            $model->motivo_bloqueo = 'Bloqueado por el Administrador';
+            if ($model->save(false)) {
+                Yii::$app->session->setFlash('success', 'Comentario bloqueado correctamente.');
+            }
+        } else {
+            Yii::$app->session->setFlash('info', 'El comentario ya está bloqueado.');
+        }
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    /**
+     * Desbloquea un comentario
+     */
+    public function actionDesbloquear($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->bloqueado == 1) {
+            $model->bloqueado = 0;
+            $model->fecha_bloqueo = null;
+            $model->motivo_bloqueo = null;
+            if ($model->save(false)) {
+                Yii::$app->session->setFlash('success', 'Comentario desbloqueado correctamente.');
+            }
+        } else {
+            Yii::$app->session->setFlash('info', 'El comentario no está bloqueado.');
+        }
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    /**
+     * Revisa los comentarios denunciados
+     */
+    public function actionRevisarDenuncias()
+    {
+        $searchModel = new ComentarioSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['>', 'denuncias', 0]);
+
+        return $this->render('revisar-denuncias', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Finds the Comentario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
@@ -129,6 +213,6 @@ class ComentarioController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('El comentario solicitado no existe.');
     }
 }
