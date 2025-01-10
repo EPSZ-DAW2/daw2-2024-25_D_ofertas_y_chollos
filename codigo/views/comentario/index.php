@@ -18,12 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Comentario', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Comentario', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Revisar Denuncias', ['revisar-denuncias'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,26 +32,47 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'oferta_id',
             'texto:ntext',
-            'comentario_origen_id',
             'cerrado',
-            //'denuncias',
-            //'fecha_primer_denuncia',
-            //'motivo_denuncia:ntext',
-            //'bloqueado',
-            //'fecha_bloqueo',
-            //'motivo_bloqueo:ntext',
-            //'usuario_id',
-            //'fecha_creacion',
-            //'fecha_modificacion',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Comentario $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'attribute' => 'bloqueado',
+                'value' => function($model) {
+                    return $model->bloqueado ? 'Sí' : 'No';
+                },
+                'filter' => [1 => 'Sí', 0 => 'No'],
+            ],
+            'denuncias',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {bloquear} {desbloquear}',
+                'buttons' => [
+                    'bloquear' => function($url, $model, $key) {
+                        if (!$model->bloqueado) {
+                            return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                                'class' => 'btn btn-danger btn-sm',
+                                'data' => [
+                                    'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
+                                    'method' => 'post',
+                                ],
+                            ]);
+                        }
+                        return '';
+                    },
+                    'desbloquear' => function($url, $model, $key) {
+                        if ($model->bloqueado) {
+                            return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                                'class' => 'btn btn-success btn-sm',
+                                'data' => [
+                                    'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
+                                    'method' => 'post',
+                                ],
+                            ]);
+                        }
+                        return '';
+                    },
+                ],
             ],
         ],
     ]); ?>
-
     <?php Pjax::end(); ?>
 
 </div>
