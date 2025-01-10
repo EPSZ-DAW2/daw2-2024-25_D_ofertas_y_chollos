@@ -20,8 +20,33 @@
     font-weight: bold;
     padding-right: 100px; /* Espaciado entre enlaces */
     text-decoration: none; /* Elimina el subrayado */
-    color: #007bff; /* Color del texto */
+    /*color: #007bff; /* Color del texto */
+    color: #fff; 
 }
+
+.etiquetas-widget {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    color: #fff;
+}
+
+.etiqueta-link {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.etiqueta-link:hover {
+    background-color: #0056b3;
+}
+
 
 /* Media queries para hacerlo responsive */
 
