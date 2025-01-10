@@ -51,6 +51,14 @@ class Comentario extends \yii\db\ActiveRecord
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Oferta::class, 'targetAttribute' => ['oferta_id' => 'id']],
             [['comentario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_origen_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['usuario_id' => 'id']],
+            // Filtro automático para palabras inapropiadas
+            ['texto', 'filter', 'filter' => function($value) {
+                $palabrasProhibidas = Yii::$app->params['palabrasProhibidas'];
+                foreach ($palabrasProhibidas as $palabra) {
+                    $value = preg_replace('/' . preg_quote($palabra, '/') . '/iu', '****', $value);
+                }
+                return $value;
+            }],
         ];
     }
 
@@ -125,5 +133,31 @@ class Comentario extends \yii\db\ActiveRecord
     public function getUsuario()
     {
         return $this->hasOne(Usuario::class, ['id' => 'usuario_id']);
+    }
+
+    /**
+     * Método antes de guardar el registro
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Verificar límite de comentarios por usuario
+            if ($this->isNewRecord) {
+                $usuarioId = Yii::$app->user->id;
+                $limite = Yii::$app->params['limiteComentarios'];
+                $conteo = self::find()->where(['usuario_id' => $usuarioId])->count();
+
+                if ($conteo >= $limite) {
+                    $this->addError('texto', 'Has alcanzado el límite de comentarios permitidos.');
+                    return false;
+                }
+            }
+
+            // Actualizar fecha de modificación
+            $this->fecha_modificacion = date('Y-m-d H:i:s');
+
+            return true;
+        }
+        return false;
     }
 }
