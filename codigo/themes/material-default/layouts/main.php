@@ -56,7 +56,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
                 //['label' => 'Anuncios', 'url' => ['site/chollos']],
                 ['label' => 'Categorías', 'url' => ['categorias/index']],    
                 ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->username,
+                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
                         'items' =>
                         [
                             ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
