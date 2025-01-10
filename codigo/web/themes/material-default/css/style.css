@@ -160,7 +160,8 @@
 .jumbotron {
     width: 90%; /* El contenedor ocupa el 90% del ancho de la pantalla */
     max-width: 1200px; /* Limita el ancho máximo */
-    background-color: #ec937f;
+    /*background-color: #ec937f;*/
+    background-color: #f7f3df;
     border: 2px solid #c4c4c4;
     padding: 30px;
     border-radius: 10px;
@@ -178,7 +179,8 @@
 }
 
 .offer {
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
+    background-color: rgb(198, 219, 198);
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 15px;
