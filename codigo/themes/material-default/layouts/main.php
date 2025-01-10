@@ -52,7 +52,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
                 ['label' => 'Inicio', 'url' => ['site/index']],
                 ['label' => 'Acerca de', 'url' => ['site/about']],
                 ['label' => 'Contacto', 'url' => ['site/contact']],
-                ['label' => 'Ofertas', 'url' => ['site/ofertas']],
+                ['label' => 'Ofertas', 'url' => ['ofertas/index']],
                 //['label' => 'Anuncios', 'url' => ['site/chollos']],
                 ['label' => 'Categorías', 'url' => ['categorias/index']],    
                 ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
