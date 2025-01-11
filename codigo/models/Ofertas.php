@@ -1,3 +1,5 @@
+<?
+
 namespace app\models;
 
 use Yii;

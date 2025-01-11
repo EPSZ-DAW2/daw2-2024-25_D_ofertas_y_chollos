@@ -63,12 +63,12 @@ class Etiqueta extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery|UsuariosEtiquetasQuery
      */
-    /*
+
     public function getUsuariosEtiquetas()
     {
         return $this->hasMany(UsuariosEtiquetas::class, ['etiqueta_id' => 'id']);
     }
-        */
+
 
     /**
      * {@inheritdoc}
