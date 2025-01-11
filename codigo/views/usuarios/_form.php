@@ -38,12 +38,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'rol')->textInput([
         'maxlength' => true,
-        //mostrar el nombre del rol
         'value' => $model->rol . ' ' . ($model->nombreRol ? '(' . $model->nombreRol . ')' : Yii::t('app', 'Rol no asignado'))
     ]) ?>
 
     <div class="form-group">
-        <!---Mostramos el valor que tiene cada rol para la modificacion--->
         <label><?= Yii::t('app', 'Roles Disponibles') ?></label>
         <p>
             <?php

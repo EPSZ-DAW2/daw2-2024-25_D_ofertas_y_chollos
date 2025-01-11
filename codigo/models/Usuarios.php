@@ -72,6 +72,12 @@ class Usuarios extends ActiveRecord implements IdentityInterface
             [['email'], 'unique'],
             [['nick'], 'unique'],
             [['rol'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::class, 'targetAttribute' => ['rol' => 'id']],
+
+
+            [['nombre', 'apellidos'], 'string', 'max' => 100],
+            [['nick', 'email'], 'required'],
+            [['email'], 'email'],
+            [['email', 'nick'], 'unique'],
         ];
     }
 
@@ -409,5 +415,23 @@ class Usuarios extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return false; // No implementado
+    }
+
+
+
+
+
+    /**
+     * Funcion para que un usuario actualice campos de su perfil
+     * @param mixed $datos
+     * @return bool
+     */
+    public function actualizarPerfil($datos)
+    {
+        $this->scenario = 'perfil';
+        if ($this->load($datos) && $this->save()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -265,4 +265,67 @@ class UsuariosController extends Controller
         //redirigir a la ficha del administrador
         return $this->redirect(['ficha-usuarios-admin']);
     }
+
+
+
+
+
+
+    /**
+     * Cambio de campos de su perfil de usuario
+     * @return string|Yii\web\Response
+     */
+    public function actionMiPerfil()
+    {
+        // Obtener el modelo del usuario autenticado
+        $usuario = Yii::$app->user->identity;
+
+        // Comprobar si se envió el formulario y guardar los datos
+        if ($usuario->load(Yii::$app->request->post()) && $usuario->save()) {
+            Yii::$app->session->setFlash('success', 'Tu perfil se actualizó correctamente.');
+            return $this->redirect(['mi-perfil']); // Redirigir para evitar reenvío de formulario
+        }
+
+        // Mostrar la vista con el modelo del usuario
+        return $this->render('mi-perfil', [
+            'model' => $usuario,
+        ]);
+    }
+
+
+
+    /**
+     * Cambio de contraseña de un usuario
+     */
+    public function actionCambiarContrasena()
+    {
+        $usuario = Yii::$app->user->identity; // Usuario autenticado
+
+        $model = new \app\models\FormCambiarContrasena(); // Usamos un modelo de formulario creado 
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Validar que la contraseña actual es correcta
+            if (!$usuario->validatePassword($model->contrasena_actual)) {
+                Yii::$app->session->setFlash('error', 'La contraseña actual es incorrecta.');
+            } else {
+                // Actualizar la contraseña
+                $usuario->setPassword($model->nueva_contrasena);
+                if ($usuario->save()) {
+                    Yii::$app->session->setFlash('success', 'Tu contraseña se ha actualizado correctamente.');
+                    return $this->redirect(['mi-perfil']); // Redirigir al perfil
+                } else {
+                    Yii::$app->session->setFlash('error', 'No se ha podido actualizar la contraseña.');
+                }
+            }
+        }
+
+        return $this->render('cambiar-contrasena', [
+            'model' => $model,
+        ]);
+    }
+
+
+    /**
+     * Eliminar la cuenta de un usuario por pedir baja
+     */
 }
