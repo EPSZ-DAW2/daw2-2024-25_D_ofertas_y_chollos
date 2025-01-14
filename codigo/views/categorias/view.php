@@ -17,14 +17,27 @@ $this->title = 'Detalles de la Categoría';
             <?= Html::a($model->categoriaPadre->nombre)?>
         <?php endif ?>
         <p>Descripción: <?= Html::a($model->descripcion) ?></p>
-        <p><?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'botonFormulario']) ?></p>
-        <?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
+        <button><?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'botonFormulario']) ?></button>
+        </br>
+        <button id="delete"><?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
             'class' => 'botonFormulario',
             'data' => [
-                'confirm' => Yii::t('app', '¿Estás seguro de que quieres eliminar este elemento?'),
-                'method' => 'post',
+                'method' => 'post', // Elimina 'confirm' aquí si usas el JS personalizado
             ],
-        ]) ?>
-        <p><?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'botonFormulario']) ?></p>
+        ]) ?></button>
+        </br>
+        <button><?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'botonFormulario']) ?></button>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('delete').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevenir la acción por defecto
+            if (confirm('¿Estás seguro de eliminar esta categoría?')) {
+                // Si se confirma, redirige manualmente al enlace
+                window.location.href = this.querySelector('a').getAttribute('href');
+            }
+        });
+    });
+  </script>
