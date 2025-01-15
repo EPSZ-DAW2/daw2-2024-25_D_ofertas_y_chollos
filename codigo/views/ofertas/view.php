@@ -59,10 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->proveedor->razon_social,
             ],
             [
-                'label' => 'Valoración promedio',
-                'value' => $model->getPromedioValoraciones(),
-            ],
-            [
                 'label' => 'Comentarios',
                 'value' => function($model) {
                     return implode(', ', array_map(function ($comentario) {
