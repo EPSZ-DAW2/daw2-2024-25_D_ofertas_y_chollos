@@ -149,4 +149,85 @@ public function actionDesbloquear($id)
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+
+
+
+    public function actionVisor()
+    {
+        $queryRecientes = Ofertas::find()->orderBy(['fecha_creacion' => SORT_DESC])->all();
+        $queryDestacados = Ofertas::find()->orderBy(['fecha_inicio' => SORT_DESC])->all();
+        $queryPatrocinados = Ofertas::find()->orderBy(['fecha_creacion' => SORT_DESC])->all();
+        $queryPersonalizados = Ofertas::find()->orderBy(['fecha_inicio' => SORT_DESC])->all();
+        // Recientes: Ofertas ordenadas por fecha de creación (las más nuevas primero)
+        $queryRecientes = Ofertas::find()
+            ->where(['estado' => 'activa'])
+            ->orderBy(['fecha_creacion' => SORT_DESC]);
+    
+        $paginationRecientes = new \yii\data\Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $queryRecientes->count(),
+        ]);
+        
+        $recientes = $queryRecientes->offset($paginationRecientes->offset)
+            ->limit($paginationRecientes->limit)
+            ->all();
+    
+        // Destacados: Ofertas marcadas como 'destacadas'
+        $queryDestacados = Ofertas::find()
+            ->where(['estado' => 'activa', 'destacada' => 1])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
+        $paginationDestacados = new \yii\data\Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $queryDestacados->count(),
+        ]);
+    
+        $destacados = $queryDestacados->offset($paginationDestacados->offset)
+            ->limit($paginationDestacados->limit)
+            ->all();
+    
+        // Patrocinados: Ofertas patrocinadas por proveedores
+        $queryPatrocinados = Ofertas::find()
+            ->where(['estado' => 'activa', 'patrocinada' => 1])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
+        $paginationPatrocinados = new \yii\data\Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $queryPatrocinados->count(),
+        ]);
+    
+        $patrocinados = $queryPatrocinados->offset($paginationPatrocinados->offset)
+            ->limit($paginationPatrocinados->limit)
+            ->all();
+    
+        // Personalizados: Recomendación por categoría
+        $usuarioCategoriaPreferida = 1; // Ejemplo: ID de la categoría preferida
+        $queryPersonalizados = Ofertas::find()
+            ->where(['estado' => 'activa', 'categoria_id' => $usuarioCategoriaPreferida])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
+        $paginationPersonalizados = new \yii\data\Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $queryPersonalizados->count(),
+        ]);
+    
+        $personalizados = $queryPersonalizados->offset($paginationPersonalizados->offset)
+            ->limit($paginationPersonalizados->limit)
+            ->all();
+    
+        // Renderizamos la vista pasando los datos
+        return $this->render('visor', [
+            'recientes' => $recientes,
+            'destacados' => $destacados,
+            'patrocinados' => $patrocinados,
+            'personalizados' => $personalizados,
+            'paginationRecientes' => $paginationRecientes,
+            'paginationDestacados' => $paginationDestacados,
+            'paginationPatrocinados' => $paginationPatrocinados,
+            'paginationPersonalizados' => $paginationPersonalizados,
+        ]);
+    }
+    
+
+
 }
