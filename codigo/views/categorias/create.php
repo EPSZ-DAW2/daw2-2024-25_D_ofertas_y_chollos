@@ -32,9 +32,9 @@ $this->title = 'Crear Categoría';
         'class' => 'campo'
     ]); ?>
     <br>
-    <?= Html::submitButton('Añadir Categoría', ['class' => 'botonFormulario']) ?>
+    <?= Html::submitButton('Añadir Categoría', ['class' => 'btn btn-success']) ?>
     <br>
-    <button><?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'botonFormulario']) ?></button>
+    <?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'btn btn-success']) ?>
 
     <?php ActiveForm::end(); ?>
 </div>

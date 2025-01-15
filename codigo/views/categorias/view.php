@@ -9,24 +9,24 @@ use app\models\Categorias;
 $this->title = 'Detalles de la Categoría';
 ?>
 
-<div class="site-index">
+<div class="categorias-index">
 
     <h1><?= Html::a($model->nombre)?></h1>
     <div class="body-content">
-        <?php if($model->categoria_padre_id != NULL): ?>
-            <?= Html::a($model->categoriaPadre->nombre)?>
-        <?php endif ?>
-        <p>Descripción: <?= Html::a($model->descripcion) ?></p>
-        <button><?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'botonFormulario']) ?></button>
-        </br>
-        <button id="delete"><?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
-            'class' => 'botonFormulario',
-            'data' => [
-                'method' => 'post', // Elimina 'confirm' aquí si usas el JS personalizado
-            ],
-        ]) ?></button>
-        </br>
-        <button><?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'botonFormulario']) ?></button>
+        <div class="jumbotron text-center bg-transparent">
+            <h2>Descripción: <?= Html::a($model->descripcion) ?></h2>
+            <?php if($model->categoria_padre_id != NULL): ?>
+                <h3>Categoría padre: <?= Html::a($model->categoriaPadre->nombre)?></h3>
+            <?php endif ?>
+            <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <p id='delete'><?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-success',
+                'data' => [
+                    'method' => 'post', // Elimina 'confirm' aquí si usas el JS personalizado
+                ],
+            ]) ?></p>
+            </div>
+        <?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'btn btn-success']) ?>
     </div>
 </div>
 

@@ -35,9 +35,9 @@ $this->title = 'Actualizar datos de la categoría';
             'class' => 'campo'
         ]); ?>
         <br>
-        <?= Html::submitButton('Modificar Categoría', ['class' => 'botonFormulario']) ?>
+        <?= Html::submitButton('Modificar Categoría', ['class' => 'btn btn-success']) ?>
         <br>
-        <button><?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'botonFormulario']) ?></button>
+        <?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'btn btn-success']) ?>
 
         <?php ActiveForm::end(); ?>
     </div>

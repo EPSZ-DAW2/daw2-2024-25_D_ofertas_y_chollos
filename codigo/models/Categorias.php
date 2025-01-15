@@ -32,7 +32,7 @@ use Yii;
     public function rules()
     {
         return [
-            [['nombre', 'descripcion', 'revisado'],'required', 'message' => 'Este campo es obligatorio.'],
+            [['nombre', 'descripcion'],'required', 'message' => 'Este campo es obligatorio.'],
             [['nombre','descripcion'], 'string', 'max' => 255],
             [['revisado'], 'integer'],
             [['revisado'],'default','value'=>0],
