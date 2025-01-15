@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Ofertas'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Crear nueva oferta'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -67,13 +67,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'bloquear' => function ($url, $model, $key) {
                         return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
-                            'class' => 'btn btn-warning',
+                            'class' => 'btn boton-bloq',
                             'data-confirm' => '¿Estás seguro de bloquear esta oferta?',
                         ]);
                     },
                     'desbloquear' => function ($url, $model, $key) {
                         return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
-                            'class' => 'btn btn-success',
+                            'class' => 'btn boton-desbloq',
                             'data-confirm' => '¿Estás seguro de desbloquear esta oferta?',
                         ]);
                     },

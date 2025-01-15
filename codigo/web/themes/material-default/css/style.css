@@ -18,10 +18,13 @@
 /* Enlaces dentro de la barra de navegación */
 .navbar a {
     font-weight: bold;
-    padding-right: 100px; /* Espaciado entre enlaces */
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-right: 50px; /* Espaciado entre enlaces */
     text-decoration: none; /* Elimina el subrayado */
     /*color: #007bff; /* Color del texto */
     color: #fff; 
+
 }
 
 .etiquetas-widget {
