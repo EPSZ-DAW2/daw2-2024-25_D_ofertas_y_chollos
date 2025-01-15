@@ -14,6 +14,6 @@ CREATE TABLE `anuncios` (
   `precio` decimal(10,2) NOT NULL,
   `fecha` datetime NOT NULL,
   `oferta_id` int(11) NOT NULL,
-  FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`)
+  FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 

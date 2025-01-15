@@ -47,7 +47,7 @@ CREATE TABLE `usuarios` (
     `fecha_bloqueo` DATETIME DEFAULT NULL,
     `motivo_bloqueo` VARCHAR(255),
     `rol` INT, 
-    FOREIGN KEY (`rol`) REFERENCES `roles`(`id`)
+    FOREIGN KEY (`rol`) REFERENCES `roles`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -58,8 +58,8 @@ CREATE TABLE `moderadores_zonas` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `moderador_id` INT,
     `zona_id` INT, 
-    FOREIGN KEY (`moderador_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`)
+    FOREIGN KEY (`moderador_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -72,7 +72,7 @@ CREATE TABLE `categorias` (
     `descripcion` TEXT,
     `revisado` BOOLEAN DEFAULT FALSE, 
     `categoria_padre_id` INT DEFAULT NULL, 
-    FOREIGN KEY (`categoria_padre_id`) REFERENCES `categorias`(`id`)
+    FOREIGN KEY (`categoria_padre_id`) REFERENCES `categorias`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -89,8 +89,8 @@ CREATE TABLE `usuarios_categorias` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario_id` INT,
     `categoria_id` INT,
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`)
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -99,8 +99,8 @@ CREATE TABLE `usuarios_etiquetas` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario_id` INT,
     `etiqueta_id` INT,
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`etiqueta_id`) REFERENCES `etiquetas`(`id`)
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`etiqueta_id`) REFERENCES `etiquetas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -110,8 +110,8 @@ CREATE TABLE `usuarios_zonas` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario_id` INT,
     `zona_id` INT,
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`)
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -131,7 +131,7 @@ CREATE TABLE `proveedores` (
     `email` VARCHAR(100) NOT NULL,
     `zona_id` INT,
     `url_web` VARCHAR(255),
-    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`)
+    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -150,7 +150,7 @@ CREATE TABLE `ofertas` (
     `categoria_id` INT,
     `proveedor_id` INT,
     `anuncio_destacado` BOOLEAN DEFAULT FALSE,
-    `estado` ENUM('visible', 'eliminado', 'caducado', 'bloqueado') DEFAULT 'visible',	
+    `estado` VARCHAR(20) NOT NULL DEFAULT 'visible',	
     `denuncias` INT DEFAULT 0,
     `fecha_primer_denuncia` DATETIME DEFAULT NULL,
     `motivo_denuncia` TEXT,
@@ -161,11 +161,11 @@ CREATE TABLE `ofertas` (
     `fecha_creacion` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `usuario_modificador_id` INT,
     `fecha_modificacion` DATETIME DEFAULT NULL,
-    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`),
-    FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`),
-    FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores`(`id`),
-    FOREIGN KEY (`usuario_creador_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`usuario_modificador_id`) REFERENCES `usuarios`(`id`)
+    FOREIGN KEY (`zona_id`) REFERENCES `zonas`(`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (`categoria_id`) REFERENCES `categorias`(`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_creador_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_modificador_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -174,7 +174,7 @@ CREATE TABLE `ofertas_imagenes` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `oferta_id` INT,
     `url` VARCHAR(255) NOT NULL,
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`)
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 -- Tabla de enlaces de ofertas
@@ -183,7 +183,7 @@ CREATE TABLE `ofertas_enlaces` (
     `oferta_id` INT,
     `url` VARCHAR(255) NOT NULL,
     `texto` VARCHAR(255) NOT NULL,
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`)
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -195,8 +195,8 @@ CREATE TABLE `ofertas_valoraciones` (
     `usuario_id` INT,
     `valoracion` TINYINT CHECK (`valoracion` IN (1, -1)), 
     `fecha_valoracion` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`),
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -207,8 +207,8 @@ CREATE TABLE `ofertas_etiquetas` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `oferta_id` INT,
     `etiqueta_id` INT,
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`),
-    FOREIGN KEY (`etiqueta_id`) REFERENCES `etiquetas`(`id`)
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`etiqueta_id`) REFERENCES `etiquetas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -217,8 +217,8 @@ CREATE TABLE `seguimientos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario_id` INT,
     `oferta_id` INT,
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`)
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -240,9 +240,9 @@ CREATE TABLE `comentarios` (
     `usuario_id` INT, 
     `fecha_creacion` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `fecha_modificacion` DATETIME DEFAULT NULL, 
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`),
-    FOREIGN KEY (`comentario_origen_id`) REFERENCES `comentarios`(`id`),
-    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`comentario_origen_id`) REFERENCES `comentarios`(`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 -- Tabla de mensajes encriptados
@@ -252,8 +252,8 @@ CREATE TABLE `mensajes` (
     `texto` TEXT NOT NULL,
     `usuario_origen_id` INT,
     `usuario_destino_id` INT,
-    FOREIGN KEY (`usuario_origen_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`usuario_destino_id`) REFERENCES `usuarios`(`id`)
+    FOREIGN KEY (`usuario_origen_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_destino_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 -- Tabla de incidencias
@@ -268,10 +268,10 @@ CREATE TABLE `incidencias` (
     `comentario_id` INT DEFAULT NULL,
     `fecha_lectura` DATETIME DEFAULT NULL,
     `fecha_aceptado` DATETIME DEFAULT NULL,
-    FOREIGN KEY (`usuario_origen_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`usuario_destino_id`) REFERENCES `usuarios`(`id`),
-    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`),
-    FOREIGN KEY (`comentario_id`) REFERENCES `comentarios`(`id`)
+    FOREIGN KEY (`usuario_origen_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`usuario_destino_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`comentario_id`) REFERENCES `comentarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
 
@@ -281,7 +281,7 @@ CREATE TABLE `incidencias` (
 CREATE TABLE `logs` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `fecha_hora` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `nivel` ENUM('INFO', 'WARNING', 'ERROR'), 
+    `nivel` VARCHAR(20), 
     `modulo` VARCHAR(50),
     `descripcion` VARCHAR(250)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
