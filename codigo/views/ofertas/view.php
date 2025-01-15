@@ -26,6 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <!-- Aquí agregamos los botones de Bloquear y Desbloquear -->
+    <p>
+        <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -38,9 +44,34 @@ $this->params['breadcrumbs'][] = $this->title;
             'precio_actual',
             'precio_original',
             'descuento',
-            'zona_id',
-            'categoria_id',
-            'proveedor_id',
+            
+            // Aquí agregamos los cambios para mostrar la categoría, zona, proveedor, valoración y comentarios
+            [
+                'label' => 'Categoría',
+                'value' => $model->categoria->nombre,
+            ],
+            [
+                'label' => 'Zona',
+                'value' => $model->zona->nombre,
+            ],
+            [
+                'label' => 'Proveedor',
+                'value' => $model->proveedor->nombre,
+            ],
+            [
+                'label' => 'Valoración promedio',
+                'value' => $model->getPromedioValoraciones(),
+            ],
+            [
+                'label' => 'Comentarios',
+                'value' => function($model) {
+                    return implode(', ', array_map(function ($comentario) {
+                        return $comentario->texto;
+                    }, $model->comentarios));
+                },
+            ],
+
+            // El resto de atributos permanece igual
             'anuncio_destacado',
             'estado',
             'denuncias',

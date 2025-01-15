@@ -116,6 +116,24 @@ class OfertasController extends Controller
         return $this->redirect(['index']);
     }
 
+public function actionBloquear($id)
+{
+    $model = $this->findModel($id);
+    $model->estado = 'bloqueada';
+    $model->fecha_bloqueo = date('Y-m-d H:i:s');
+    $model->save();
+    return $this->redirect(['view', 'id' => $model->id]);
+}
+
+public function actionDesbloquear($id)
+{
+    $model = $this->findModel($id);
+    $model->estado = 'activa';
+    $model->fecha_bloqueo = null;
+    $model->save();
+    return $this->redirect(['view', 'id' => $model->id]);
+}
+
     /**
      * Finds the Ofertas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -230,6 +230,25 @@ class Ofertas extends \yii\db\ActiveRecord
         return $this->hasOne(Usuarios::class, ['id' => 'usuario_modificador_id']);
     }
 
+    public static function listaEstadosTerminacion()
+    {
+        return [
+            'finalizada' => 'Finalizada',
+            'cancelada' => 'Cancelada',
+            'en_curso' => 'En curso',
+        ];
+    }
+    
+    public static function listaClasesBloqueo()
+    {
+        return [
+            'fraude' => 'Fraude',
+            'contenido_inapropiado' => 'Contenido inapropiado',
+            'otros' => 'Otros',
+        ];
+    }
+    
+
     /**
      * Gets query for [[Zona]].
      *

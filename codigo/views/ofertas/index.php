@@ -38,26 +38,46 @@ $this->params['breadcrumbs'][] = $this->title;
             //'precio_actual',
             //'precio_original',
             //'descuento',
-            //'zona_id',
-            //'categoria_id',
-            //'proveedor_id',
-            //'anuncio_destacado',
-            //'estado',
-            //'denuncias',
-            //'fecha_primer_denuncia',
-            //'motivo_denuncia:ntext',
-            //'fecha_bloqueo',
-            //'motivo_bloqueo:ntext',
-            //'cerrado_comentar',
-            //'usuario_creador_id',
-            //'fecha_creacion',
-            //'usuario_modificador_id',
-            //'fecha_modificacion',
+            
+            // Aquí agregamos los cambios para mostrar la categoría, zona, proveedor y estado
+            [
+                'attribute' => 'categoria_id',
+                'value' => 'categoria.nombre',
+                'label' => 'Categoría',
+            ],
+            [
+                'attribute' => 'zona_id',
+                'value' => 'zona.nombre',
+                'label' => 'Zona',
+            ],
+            [
+                'attribute' => 'proveedor_id',
+                'value' => 'proveedor.nombre',
+                'label' => 'Proveedor',
+            ],
+            [
+                'attribute' => 'estado',
+                'label' => 'Estado',
+            ],
+
+            // Agregamos la columna de acciones con los botones de bloqueo/desbloqueo
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Ofertas $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template' => '{view} {update} {delete} {bloquear} {desbloquear}',
+                'buttons' => [
+                    'bloquear' => function ($url, $model, $key) {
+                        return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                            'class' => 'btn btn-warning',
+                            'data-confirm' => '¿Estás seguro de bloquear esta oferta?',
+                        ]);
+                    },
+                    'desbloquear' => function ($url, $model, $key) {
+                        return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                            'class' => 'btn btn-success',
+                            'data-confirm' => '¿Estás seguro de desbloquear esta oferta?',
+                        ]);
+                    },
+                ],
             ],
         ],
     ]); ?>

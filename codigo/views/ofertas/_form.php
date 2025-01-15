@@ -58,6 +58,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fecha_modificacion')->textInput() ?>
 
+    <?= $form->field($model, 'estado')->dropDownList(Ofertas::listaEstadosTerminacion()) ?>
+
+    <?= $form->field($model, 'motivo_bloqueo')->dropDownList(Ofertas::listaClasesBloqueo()) ?>
+
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
