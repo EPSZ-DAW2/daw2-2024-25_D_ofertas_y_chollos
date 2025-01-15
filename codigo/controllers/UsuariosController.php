@@ -328,4 +328,31 @@ class UsuariosController extends Controller
     /**
      * Eliminar la cuenta de un usuario por pedir baja
      */
+
+
+    public function actionSolicitarBaja()
+    {
+        //Buscamos quien es el usuario que esta accediendo
+        $usuario = Yii::$app->user->identity;
+
+
+        if (!$usuario) {
+            throw new NotFoundHttpException('No se ha encontrado el usuario.');
+        }
+
+        //Eliminamos al usuario y los datos relacionados con el
+        if ($usuario->delete()) {
+
+            Yii::$app->user->logout();
+
+
+            Yii::$app->session->setFlash('success', 'Tu cuenta y datos han sido eliminados correctamente.');
+            return $this->redirect(['site/index']);
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo procesar tu solicitud de baja.');
+        }
+
+        // Redirigir al perfil del usuario en caso de fallo
+        return $this->redirect(['mi-perfil']);
+    }
 }
