@@ -56,11 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Proveedor',
-                'value' => $model->proveedor->nombre,
-            ],
-            [
-                'label' => 'Valoración promedio',
-                'value' => $model->getPromedioValoraciones(),
+                'value' => $model->proveedor->razon_social,
             ],
             [
                 'label' => 'Comentarios',
