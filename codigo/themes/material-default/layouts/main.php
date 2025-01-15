@@ -50,11 +50,10 @@ use app\views\etiquetas\EtiquetasWidget; ?>
             'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
             'items' => [
                 ['label' => 'Inicio', 'url' => ['site/index']],
-                ['label' => 'Acerca de', 'url' => ['site/about']],
-                ['label' => 'Contacto', 'url' => ['site/contact']],
                 ['label' => 'Ofertas', 'url' => ['ofertas/index']],
                 //['label' => 'Anuncios', 'url' => ['site/chollos']],
                 ['label' => 'Categorías', 'url' => ['categorias/index']],    
+                ['label' => 'Contacto', 'url' => ['site/contact']],
                 ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                 ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
                         'items' =>

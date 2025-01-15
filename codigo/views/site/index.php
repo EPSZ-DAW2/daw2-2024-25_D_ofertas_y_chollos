@@ -24,7 +24,7 @@ $this->title = 'Ofertas y Chollos';
 
     <!-- CONTENEDOR DEBAJO (OFERTAS) -->
     <div class="jumbotron">
-        <h1 class="texto-inicial">Ofertas exclusivas que no querrás perderte</h1>
+        <h1 class="texto-inicial">Anuncios de ofertas</h1>
         <p style="font-size: 20px; font-weight: bold;">Aprovecha los mejores precios del mercado</p>
         <div class="offers">
             <div class="offer">
@@ -63,38 +63,5 @@ $this->title = 'Ofertas y Chollos';
             </div>
         </div>
     </div>
-
-
-    <!--
-  <div class="container">
-    <div class="section">
-      
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2> 
-            <h5 class="center">Acelera el desarrollo</h5>
-            <p class="light">Hemos creado un diseño predeterminado que incorpora nuestros componentes personalizados, con animaciones y transiciones optimizadas para una experiencia fluida.</p>
-          </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">Enfocado en la experiencia del usuario</h5>
-            <p class="light">Al usar principios de Material Design, creamos un sistema responsive unificado para una mejor experiencia en todas las plataformas.</p>
-          </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Fácil de usar</h5>
-            <p class="light">Ofrecemos documentación detallada y ejemplos de código para que los nuevos usuarios puedan comenzar rápidamente.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br><br>
-  </div>-->
-
 
 </div>
