@@ -13,8 +13,8 @@ use Yii;
  * @property int|null $usuario_origen_id
  * @property int|null $usuario_destino_id
  *
- * @property Usuario $usuarioDestino
- * @property Usuario $usuarioOrigen
+ * @property Usuarios $usuarioDestino
+ * @property Usuarios $usuarioOrigen
  */
 class Mensajes extends \yii\db\ActiveRecord
 {
@@ -36,8 +36,8 @@ class Mensajes extends \yii\db\ActiveRecord
             [['texto'], 'required'],
             [['texto'], 'string'],
             [['usuario_origen_id', 'usuario_destino_id'], 'integer'],
-            [['usuario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['usuario_origen_id' => 'id']],
-            [['usuario_destino_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['usuario_destino_id' => 'id']],
+            [['usuario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_origen_id' => 'id']],
+            [['usuario_destino_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_destino_id' => 'id']],
         ];
     }
 
@@ -62,7 +62,7 @@ class Mensajes extends \yii\db\ActiveRecord
      */
     public function getUsuarioDestino()
     {
-        return $this->hasOne(Usuario::class, ['id' => 'usuario_destino_id']);
+        return $this->hasOne(Usuarios::class, ['id' => 'usuario_destino_id']);
     }
 
     /**
@@ -72,7 +72,7 @@ class Mensajes extends \yii\db\ActiveRecord
      */
     public function getUsuarioOrigen()
     {
-        return $this->hasOne(Usuario::class, ['id' => 'usuario_origen_id']);
+        return $this->hasOne(Usuarios::class, ['id' => 'usuario_origen_id']);
     }
 
 
