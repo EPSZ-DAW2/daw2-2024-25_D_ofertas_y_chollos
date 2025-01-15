@@ -45,6 +45,6 @@ use yii\widgets\ActiveForm;
         ],
     ]) ?>
 
-    <?= Html::a('Notificaciones', [''], ['class' => 'btn']) ?>
+    <?= Html::a('Notificaciones', ['mensajes/index'], ['class' => 'btn']) ?>
 </div>
 </div>
