@@ -45,16 +45,30 @@ class MensajesController extends Controller
         // Usuario autenticado
         $usuarioId = Yii::$app->user->id;
 
-        //Consultamos los mensajes que ha recibido o enviado el usuario
-        $mensajes = Mensajes::find()
-            ->where(['usuario_origen_id' => $usuarioId])
-            ->orWhere(['usuario_destino_id' => $usuarioId])
-            ->orderBy(['fecha_hora' => $usuarioId]) //ordenamos por la hora de entrada del mensaje
+        //Consultamos los mensajes que ha recibido el usuario despues de la fecha de su ultimo login
+        $mensajesNoLeidos = Mensajes::find()
+            ->where(['usuario_destino_id' => $usuarioId])
+            //Comprobamos que la hora sea posterior a la hora del ultimo login del usuario
+            ->andWhere(['>', 'fecha_hora', Yii::$app->session->get('fechaUltimoAccesoAnterior', '2000-01-01 00:00:00')])
+            ->orderBy(['fecha_hora' => SORT_DESC]) //ordenamos por la hora de entrada del mensaje
             ->all();
+
+
+        //Consultamos los demas mensajes, tanto los que le han enviado antes como los que ha enviado
+        $mensajesOtros = Mensajes::find()
+            ->where([
+                'or',
+                ['usuario_destino_id' => $usuarioId],
+                ['usuario_origen_id' => $usuarioId]
+            ])
+            ->orderBy(['fecha_hora' => SORT_DESC]) //ordenamos por la hora de entrada del mensaje
+            ->all();
+
 
         //Mostramos la vista con los mensajes de la consulta
         return $this->render('index', [
-            'mensajes' => $mensajes,
+            'mensajesNoLeidos' => $mensajesNoLeidos,
+            'mensajesOtros' => $mensajesOtros,
         ]);
     }
 

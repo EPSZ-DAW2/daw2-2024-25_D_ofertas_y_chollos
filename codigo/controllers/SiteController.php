@@ -78,8 +78,18 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $usuario = Yii::$app->user->identity; // Obtiene el modelo del usuario autenticado
+
+
+            $fechaUltimoAccesoAnterior = $usuario->fecha_ultimo_acceso; //Guardamos su ultima fecha antes para las notificaciones
+
+            //Guardamos la variable en sesion
+            Yii::$app->session->set('fechaUltimoAccesoAnterior', $fechaUltimoAccesoAnterior);
+
+
             $usuario->fecha_ultimo_acceso = date('Y-m-d H:i:s'); // Actualizamos la fecha y hora actuales
             $usuario->save(false);
+
+
 
             return $this->goBack();
         }

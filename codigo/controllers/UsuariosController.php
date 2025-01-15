@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Usuarios;
+use app\models\Mensajes;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -280,15 +281,25 @@ class UsuariosController extends Controller
         // Obtener el modelo del usuario autenticado
         $usuario = Yii::$app->user->identity;
 
+        //Recuperamos de la sesion el la ultima vez que inicio sesion
+        $fechaUltimoAccesoAnterior = Yii::$app->session->get('fechaUltimoAccesoAnterior', '2000-01-01 00:00:00');
+
         // Comprobar si se envió el formulario y guardar los datos
         if ($usuario->load(Yii::$app->request->post()) && $usuario->save()) {
             Yii::$app->session->setFlash('success', 'Tu perfil se actualizó correctamente.');
             return $this->redirect(['mi-perfil']); // Redirigir para evitar reenvío de formulario
         }
 
+        $mensajesNuevos = Mensajes::find()
+            ->where(['usuario_destino_id' => $usuario->id])
+            ->andWhere(['>', 'fecha_hora', $fechaUltimoAccesoAnterior])
+            ->count();
+
+
         // Mostrar la vista con el modelo del usuario
         return $this->render('mi-perfil', [
             'model' => $usuario,
+            'mensajesNuevos' => $mensajesNuevos, //Mostramos los mensajes nuevos de ese usuario
         ]);
     }
 

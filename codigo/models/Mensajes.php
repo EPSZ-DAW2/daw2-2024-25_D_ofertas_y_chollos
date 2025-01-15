@@ -98,4 +98,20 @@ class Mensajes extends \yii\db\ActiveRecord
     {
         return $this->usuarioDestino ? $this->usuarioDestino->nombre : 'Desconocido';
     }
+
+
+
+    /**
+     * Obtener los nuevos mensajes del usuario que ha iniciado sesión la pagina
+     */
+
+
+    public static function obtenerMensajesNuevos($usuarioId, $fechaUltimoLogin)
+    {
+        return self::find()
+            //Consulta para obtener los mensajes enviados al usuario y en el que la fecha es posterior a su ultimo login
+            ->where(['usuario_destino_id' => $usuarioId])
+            ->andWhere(['>', 'fecha_hora', $fechaUltimoLogin])
+            ->all();
+    }
 }

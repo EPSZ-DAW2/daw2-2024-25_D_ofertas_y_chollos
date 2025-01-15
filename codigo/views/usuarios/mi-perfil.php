@@ -29,11 +29,15 @@ use yii\widgets\ActiveForm;
 </div>
 
 
-
+<?php
+$fechaUltimoAccesoAnterior = Yii::$app->session->get('fechaUltimoAccesoAnterior', 'No disponible');
+?>
 <hr>
 
 <div class="perfil-opciones">
     <h3>Opciones del perfil</h3>
+
+    <p><strong>Fecha de último acceso (anterior):</strong> <?= Html::encode($fechaUltimoAccesoAnterior) ?></p>
 
     <?= Html::a('Cambiar Contraseña', ['usuarios/cambiar-contrasena'], ['class' => 'btn btn-warning']) ?>
 
@@ -45,6 +49,38 @@ use yii\widgets\ActiveForm;
         ],
     ]) ?>
 
-    <?= Html::a('Notificaciones', ['mensajes/index'], ['class' => 'btn']) ?>
-</div>
+    <?= Html::a(
+        isset($mensajesNuevos) && $mensajesNuevos > 0
+            ? "Notificaciones ({$mensajesNuevos})"
+            : 'Notificaciones',
+        ['mensajes/index'],
+        ['class' => isset($mensajesNuevos) && $mensajesNuevos > 0 ? 'btn btn-primary' : 'btn']
+    ) ?>
+
+
+    <?php if ($mensajesNuevos > 0): ?>
+        <h4>Mensajes Nuevos:</h4>
+        <ul>
+            <?php
+            $mensajes = \app\models\Mensajes::find()
+                ->where(['usuario_destino_id' => Yii::$app->user->identity->id])
+                ->andWhere(['>', 'fecha_hora', Yii::$app->session->get('fechaUltimoAccesoAnterior', '2000-01-01 00:00:00')])
+                ->all();
+
+            foreach ($mensajes as $mensaje): ?>
+                <li><?= Html::encode($mensaje->texto) ?> - <em><?= $mensaje->fecha_hora ?></em></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>No tienes mensajes nuevos.</p>
+    <?php endif; ?>
+
+    <p><strong>Datos de depuración:</strong></p>
+    <ul>
+        <li><strong>Usuario ID:</strong> <?= Html::encode(Yii::$app->user->identity->id ?? 'No disponible') ?></li>
+        <li><strong>Fecha de Último Acceso (Anterior):</strong> <?= Html::encode(Yii::$app->session->get('fechaUltimoAccesoAnterior', 'No disponible')) ?></li>
+        <li><strong>Mensajes Nuevos:</strong> <?= Html::encode($mensajesNuevos ?? 'No disponible') ?></li>
+    </ul>
+
+
 </div>
