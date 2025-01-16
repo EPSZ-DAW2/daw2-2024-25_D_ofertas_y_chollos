@@ -134,7 +134,8 @@ $this->registerCss("
                     <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
                     <p class="oferta-description"><?= $oferta->descripcion ?></p>
                     <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
-                    <a href="<?= $oferta->url_externa ?>" class="oferta-link" target="_blank">Ver oferta</a>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+   
                 </div>
             <?php endforeach; ?>
         </div>
@@ -148,7 +149,8 @@ $this->registerCss("
                     <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
                     <p class="oferta-description"><?= $oferta->descripcion ?></p>
                     <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
-                    <a href="<?= $oferta->url_externa ?>" class="oferta-link" target="_blank">Ver oferta</a>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+
                 </div>
             <?php endforeach; ?>
         </div>
@@ -162,7 +164,8 @@ $this->registerCss("
                     <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
                     <p class="oferta-description"><?= $oferta->descripcion ?></p>
                     <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
-                    <a href="<?= $oferta->url_externa ?>" class="oferta-link" target="_blank">Ver oferta</a>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+
                 </div>
             <?php endforeach; ?>
         </div>
@@ -176,7 +179,8 @@ $this->registerCss("
                     <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
                     <p class="oferta-description"><?= $oferta->descripcion ?></p>
                     <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
-                    <a href="<?= $oferta->url_externa ?>" class="oferta-link" target="_blank">Ver oferta</a>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+
                 </div>
             <?php endforeach; ?>
         </div>
