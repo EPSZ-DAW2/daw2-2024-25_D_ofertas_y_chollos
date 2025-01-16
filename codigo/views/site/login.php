@@ -13,6 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1 style="text-align: center; margin-left: -12px"><?= Html::encode($this->title) ?></h1>
 
+
+
+
+
+
+
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -39,5 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+
+
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
 
 </div>

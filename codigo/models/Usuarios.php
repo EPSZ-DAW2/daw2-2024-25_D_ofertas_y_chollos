@@ -436,4 +436,14 @@ class Usuarios extends ActiveRecord implements IdentityInterface
         }
         return false;
     }
+
+
+
+    /**
+     * Devuelve si el usuario ha sido confirmado
+     */
+    public function usuarioConfirmado()
+    {
+        return $this->registro_confirmado === 1;
+    }
 }

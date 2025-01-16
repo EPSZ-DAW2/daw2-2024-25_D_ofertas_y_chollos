@@ -79,6 +79,14 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $usuario = Yii::$app->user->identity; // Obtiene el modelo del usuario autenticado
 
+            //Comprobar si ya ha sido confirmado el usuario si no debe esperar a ser aceptado
+            if (!$usuario->usuarioConfirmado()) {
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('error', 'Tu cuenta no está confirmada. Espera la confirmación del administrador.');
+                return $this->redirect(['site/login']);
+            }
+
+
 
             $fechaUltimoAccesoAnterior = $usuario->fecha_ultimo_acceso; //Guardamos su ultima fecha antes para las notificaciones
 
