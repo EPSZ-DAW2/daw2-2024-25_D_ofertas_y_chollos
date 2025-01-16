@@ -1,5 +1,5 @@
 <?php
-use yii\widgets\LinkPager;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $recientes array */
@@ -15,8 +15,9 @@ $this->title = 'Visor de Ofertas';
 $this->registerCssFile('@web/themes/material-default/css/visor.css');
 ?>
 
+   
 <div class="visor-container">
-    <div class="visor-header">
+<div class="visor-header">
         <a href="<?= yii\helpers\Url::to(['ofertas/create']) ?>" class="btn btn-primary">Crear Nueva Oferta</a>
     </div>
     <h1 class="visor-title">Visor de Ofertas</h1>
@@ -25,39 +26,56 @@ $this->registerCssFile('@web/themes/material-default/css/visor.css');
         <h2 class="section-title">Ofertas Recientes</h2>
         <div class="ofertas-list">
             <?php foreach ($recientes as $oferta): ?>
-                <?= $this->render('_ficha_resumen', ['model' => $oferta]) ?>
+                <div class="oferta-card">
+                    <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
+                    <p class="oferta-description"><?= $oferta->descripcion ?></p>
+                    <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?= LinkPager::widget(['pagination' => $paginationRecientes]) ?>
     </div>
 
     <div class="section">
         <h2 class="section-title">Ofertas Destacadas</h2>
         <div class="ofertas-list">
             <?php foreach ($destacados as $oferta): ?>
-                <?= $this->render('_ficha_resumen', ['model' => $oferta]) ?>
+                <div class="oferta-card">
+                    <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
+                    <p class="oferta-description"><?= $oferta->descripcion ?></p>
+                    <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?= LinkPager::widget(['pagination' => $paginationDestacados]) ?>
     </div>
 
     <div class="section">
         <h2 class="section-title">Ofertas Patrocinadas</h2>
         <div class="ofertas-list">
             <?php foreach ($patrocinados as $oferta): ?>
-                <?= $this->render('_ficha_resumen', ['model' => $oferta]) ?>
+                <div class="oferta-card">
+                    <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
+                    <p class="oferta-description"><?= $oferta->descripcion ?></p>
+                    <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?= LinkPager::widget(['pagination' => $paginationPatrocinados]) ?>
     </div>
 
     <div class="section">
         <h2 class="section-title">Ofertas Personalizadas</h2>
         <div class="ofertas-list">
             <?php foreach ($personalizados as $oferta): ?>
-                <?= $this->render('_ficha_resumen', ['model' => $oferta]) ?>
+                <div class="oferta-card">
+                    <h3 class="oferta-title"><?= $oferta->titulo ?></h3>
+                    <p class="oferta-description"><?= $oferta->descripcion ?></p>
+                    <p class="oferta-fecha">Fecha de inicio: <?= $oferta->fecha_inicio ?></p>
+                    <a href="<?= yii\helpers\Url::to(['view', 'id' => $oferta->id]) ?>" class="oferta-link">Ver oferta</a>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?= LinkPager::widget(['pagination' => $paginationPersonalizados]) ?>
     </div>
+
 </div>
