@@ -3,6 +3,8 @@
 use app\models\Usuarios;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
+use yii\bootstrap5\LinkPager;
 
 /** @var yii\web\View $this */
 /** @var app\models\UsuariosSearch $searchModel */
@@ -31,11 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-
+    <?php
+    $dataProvider->pagination->pageSize = 15;
+    $dataProvider->pagination->pageParam = 'p';
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'class' => LinkPager::class,
+            'maxButtonCount' => 5,
+            'options' => ['class' => 'pagination'],
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

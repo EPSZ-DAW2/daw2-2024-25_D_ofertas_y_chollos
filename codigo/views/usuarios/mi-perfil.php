@@ -10,6 +10,21 @@ use yii\widgets\ActiveForm;
 
 <div class="usuarios-form">
 
+
+
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
+
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -37,7 +52,7 @@ $fechaUltimoAccesoAnterior = Yii::$app->session->get('fechaUltimoAccesoAnterior'
 <div class="perfil-opciones">
     <h3>Opciones del perfil</h3>
 
-    <p><strong>Fecha de último acceso (anterior):</strong> <?= Html::encode($fechaUltimoAccesoAnterior) ?></p>
+
 
     <?= Html::a('Cambiar Contraseña', ['usuarios/cambiar-contrasena'], ['class' => 'btn btn-warning']) ?>
 
@@ -75,12 +90,7 @@ $fechaUltimoAccesoAnterior = Yii::$app->session->get('fechaUltimoAccesoAnterior'
         <p>No tienes mensajes nuevos.</p>
     <?php endif; ?>
 
-    <p><strong>Datos de depuración:</strong></p>
-    <ul>
-        <li><strong>Usuario ID:</strong> <?= Html::encode(Yii::$app->user->identity->id ?? 'No disponible') ?></li>
-        <li><strong>Fecha de Último Acceso (Anterior):</strong> <?= Html::encode(Yii::$app->session->get('fechaUltimoAccesoAnterior', 'No disponible')) ?></li>
-        <li><strong>Mensajes Nuevos:</strong> <?= Html::encode($mensajesNuevos ?? 'No disponible') ?></li>
-    </ul>
+
 
 
 </div>

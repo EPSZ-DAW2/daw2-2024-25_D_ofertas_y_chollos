@@ -251,6 +251,7 @@ class UsuariosController extends Controller
             //Modificamos valores en base de datos 
             $model->fecha_bloqueo = null;
             $model->motivo_bloqueo = null;
+            $model->accesos_fallidos = 0; //iniciamos a 0 los intentos del usario una vez se le desbloquea
             Yii::$app->session->setFlash('success', 'El usuario ha sido desbloqueado.');
         } else { //Si no se bloquea modificando la fecha y el motivo
 
