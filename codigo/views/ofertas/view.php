@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <!-- Aquí agregamos los botones de Bloquear y Desbloquear -->
+    <!-- Botones de Bloquear y Desbloquear -->
     <p>
         <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
@@ -44,19 +44,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'precio_actual',
             'precio_original',
             'descuento',
-            
-            // Aquí agregamos los cambios para mostrar la categoría, zona, proveedor, valoración y comentarios
+
+            // Mostrar la categoría, zona, proveedor y comentarios
             [
                 'label' => 'Categoría',
-                'value' => $model->categoria->nombre,
+                'value' => $model->categoria ? $model->categoria->nombre : 'Sin categoría',
             ],
             [
                 'label' => 'Zona',
-                'value' => $model->zona->nombre,
+                'value' => $model->zona ? $model->zona->nombre : 'Sin zona',
             ],
             [
                 'label' => 'Proveedor',
-                'value' => $model->proveedor->razon_social,
+                'value' => $model->proveedor ? $model->proveedor->razon_social : 'Sin proveedor',
             ],
             [
                 'label' => 'Comentarios',
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            // El resto de atributos permanece igual
+            // El resto de atributos
             'anuncio_destacado',
             'estado',
             'denuncias',
