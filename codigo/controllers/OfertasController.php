@@ -55,6 +55,7 @@ class OfertasController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -154,10 +155,6 @@ public function actionDesbloquear($id)
 
     public function actionVisor()
     {
-        $queryRecientes = Ofertas::find()->orderBy(['fecha_creacion' => SORT_DESC])->all();
-        $queryDestacados = Ofertas::find()->orderBy(['fecha_inicio' => SORT_DESC])->all();
-        $queryPatrocinados = Ofertas::find()->orderBy(['fecha_creacion' => SORT_DESC])->all();
-        $queryPersonalizados = Ofertas::find()->orderBy(['fecha_inicio' => SORT_DESC])->all();
         // Recientes: Ofertas ordenadas por fecha de creación (las más nuevas primero)
         $queryRecientes = Ofertas::find()
             ->where(['estado' => 'activa'])
@@ -167,14 +164,14 @@ public function actionDesbloquear($id)
             'defaultPageSize' => 10,
             'totalCount' => $queryRecientes->count(),
         ]);
-        
+    
         $recientes = $queryRecientes->offset($paginationRecientes->offset)
             ->limit($paginationRecientes->limit)
             ->all();
     
-        // Destacados: Ofertas marcadas como 'destacadas'
+        // Destacados: Ofertas marcadas como 'destacada'
         $queryDestacados = Ofertas::find()
-            ->where(['estado' => 'activa', 'destacada' => 1])
+            ->where(['estado' => 'activa', 'seccion' => 'destacada'])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         $paginationDestacados = new \yii\data\Pagination([
@@ -186,9 +183,9 @@ public function actionDesbloquear($id)
             ->limit($paginationDestacados->limit)
             ->all();
     
-        // Patrocinados: Ofertas patrocinadas por proveedores
+        // Patrocinados: Ofertas marcadas como 'patrocinada'
         $queryPatrocinados = Ofertas::find()
-            ->where(['estado' => 'activa', 'patrocinada' => 1])
+            ->where(['estado' => 'activa', 'seccion' => 'patrocinada'])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         $paginationPatrocinados = new \yii\data\Pagination([
@@ -200,8 +197,8 @@ public function actionDesbloquear($id)
             ->limit($paginationPatrocinados->limit)
             ->all();
     
-        // Personalizados: Recomendación por categoría
-        $usuarioCategoriaPreferida = 1; // Ejemplo: ID de la categoría preferida
+        // Personalizados: Ofertas recomendadas por categoría (usuario ficticio)
+        $usuarioCategoriaPreferida = 1; // Cambia este valor según la lógica de usuario.
         $queryPersonalizados = Ofertas::find()
             ->where(['estado' => 'activa', 'categoria_id' => $usuarioCategoriaPreferida])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
@@ -228,6 +225,39 @@ public function actionDesbloquear($id)
         ]);
     }
     
+    public function actionSearch($keyword = null)
+    {
+        $query = Ofertas::find()
+            ->where(['like', 'titulo', $keyword])
+            ->orWhere(['like', 'descripcion', $keyword])
+            ->andWhere(['estado' => 'activa']);
+    
+        $models = $query->all();
+    
+        return $this->render('search', [
+            'models' => $models,
+            'keyword' => $keyword,
+        ]);
+    }
+    
 
+    public function actionAdvancedSearch($titulo = null, $categoria = null, $precio_max = null)
+    {
+        $query = Ofertas::find()
+            ->andFilterWhere(['like', 'titulo', $titulo])
+            ->andFilterWhere(['like', 'categoria_id', $categoria])
+            ->andFilterWhere(['<=', 'precio_actual', $precio_max])
+            ->andWhere(['estado' => 'activa']);
+    
+        $models = $query->all();
+    
+        return $this->render('advanced-search', [
+            'models' => $models,
+            'titulo' => $titulo,
+            'categoria' => $categoria,
+            'precio_max' => $precio_max,
+        ]);
+    }
+    
 
 }
