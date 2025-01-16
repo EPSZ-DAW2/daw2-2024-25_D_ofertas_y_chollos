@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Usuarios;
+use app\models\Roles;
 
 
 /**
@@ -71,6 +72,60 @@ class MensajesController extends Controller
             'mensajesOtros' => $mensajesOtros,
         ]);
     }
+
+
+
+    /**
+     * Muestra los avisos de administradores
+     *
+     * @return string
+     */
+    public function actionAdmin()
+    {
+        // Usuario autenticado
+        $usuarioId = Yii::$app->user->id;
+
+
+        $rolesAdmin = Roles::find()
+            ->select('id')
+            ->where(['nombre' => ['admin', 'sysadmin', 'moderador']])
+            ->column();
+
+        if (empty($rolesAdmin)) {
+            throw new \yii\web\ServerErrorHttpException('No se encontraron roles de administrador.');
+        }
+
+        //Consultamos los mensajes que ha recibido el usuario despues de la fecha de su ultimo login
+        $mensajesNoLeidos = Mensajes::find()
+            ->joinWith('usuarioOrigen')
+            ->where(['usuario_destino_id' => $usuarioId])
+            ->andWhere(['usuarios.rol' => $rolesAdmin])
+            ->andWhere(['>', 'fecha_hora', Yii::$app->session->get('fechaUltimoAccesoAnterior', '2000-01-01 00:00:00')])
+
+            ->orderBy(['fecha_hora' => SORT_DESC])
+            ->all();
+
+
+        //Consultamos los demas mensajes, tanto los que le han enviado antes como los que ha enviado
+        $mensajesOtros = Mensajes::find()
+
+            ->joinWith('usuarioOrigen')
+            ->where(['usuario_destino_id' => $usuarioId])
+            ->andWhere(['usuarios.rol' => $rolesAdmin])
+            ->orderBy(['fecha_hora' => SORT_DESC])
+            ->all();
+
+        //Mostramos la vista con los mensajes de la consulta
+        return $this->render('avisos-admin', [
+            'mensajesNoLeidos' => $mensajesNoLeidos,
+            'mensajesOtros' => $mensajesOtros,
+        ]);
+    }
+
+
+
+
+
 
     /**
      * Ver el contenido de un mensaje 

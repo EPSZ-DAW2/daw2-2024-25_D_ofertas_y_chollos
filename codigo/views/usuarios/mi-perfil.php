@@ -73,6 +73,19 @@ $fechaUltimoAccesoAnterior = Yii::$app->session->get('fechaUltimoAccesoAnterior'
     ) ?>
 
 
+    <?= Html::a(
+        isset($mensajesAdminNuevos) && $mensajesAdminNuevos > 0
+            ? "Avisos de Administrador ({$mensajesAdminNuevos})"
+            : 'Avisos de Administrador',
+        ['mensajes/admin'],
+        ['class' => isset($mensajesAdminNuevos) && $mensajesAdminNuevos > 0 ? 'btn btn-primary' : 'btn btn-secondary']
+    ) ?>
+
+
+
+
+
+
     <?php if ($mensajesNuevos > 0): ?>
         <h4>Mensajes Nuevos:</h4>
         <ul>

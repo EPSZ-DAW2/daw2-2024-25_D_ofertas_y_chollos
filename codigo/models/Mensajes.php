@@ -114,4 +114,33 @@ class Mensajes extends \yii\db\ActiveRecord
             ->andWhere(['>', 'fecha_hora', $fechaUltimoLogin])
             ->all();
     }
+
+
+    /**
+     * Obtener mensajes o avisos de administradores
+     */
+
+
+    public static function obtenerMensajesDeAdministradores($usuarioId)
+    {
+
+        //Lista con los roles con los que se va a hacer la búsqueda
+        $rolesAdmin = Roles::find()
+            ->select('id')
+            ->where(['nombre' => ['admin', 'sysadmin', 'moderador']])
+            ->column();
+
+
+
+
+        return self::find()
+            ->joinWith('usuarioOrigen')
+
+            ->where([
+                'usuario_destino_id' => $usuarioId,
+                'usuario_origen_id' => Usuarios::find()->select('id')->where(['rol' => $rolesAdmin]),
+            ])
+            ->orderBy(['fecha_hora' => SORT_DESC])
+            ->all();
+    }
 }
