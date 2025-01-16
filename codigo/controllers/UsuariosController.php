@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Usuarios;
+use app\models\Roles;
 use app\models\Mensajes;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
@@ -70,6 +71,9 @@ class UsuariosController extends Controller
     public function actionCreate()
     {
         $model = new Usuarios();
+        $roles = Roles::getListaRoles();
+
+
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -90,6 +94,7 @@ class UsuariosController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'roles' => $roles, //pasamos roles para el desplegable
         ]);
     }
 

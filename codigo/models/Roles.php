@@ -72,7 +72,8 @@ class Roles extends \yii\db\ActiveRecord
     {
         return self::find()
             ->select(['nombre'])
-            ->indexBy(['id'])
+            ->indexBy('id')
+            ->orderBy(['id' => SORT_ASC])
             ->column();
     }
 }

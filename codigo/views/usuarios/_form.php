@@ -7,8 +7,13 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Usuarios $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
-
+<style>
+    select {
+        display: block !important;
+    }
+</style>
 <div class="usuarios-form">
+
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -22,24 +27,28 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha_registro')->textInput() ?>
+    <!--- $form->field($model, 'fecha_registro')->textInput() --->
 
-    <?= $form->field($model, 'registro_confirmado')->textInput() ?>
+    <!--- $form->field($model, 'registro_confirmado')->textInput() --->
 
-    <?= $form->field($model, 'fecha_ultimo_acceso')->textInput() ?>
+    <!--- $form->field($model, 'fecha_ultimo_acceso')->textInput() --->
 
-    <?= $form->field($model, 'accesos_fallidos')->textInput() ?>
+    <!--- $form->field($model, 'accesos_fallidos')->textInput() --->
 
-    <?= $form->field($model, 'bloqueado')->textInput() ?>
+    <!---- $form->field($model, 'bloqueado')->textInput() --->
 
-    <?= $form->field($model, 'fecha_bloqueo')->textInput() ?>
+    <!----  $form->field($model, 'fecha_bloqueo')->textInput() --->
 
-    <?= $form->field($model, 'motivo_bloqueo')->textInput(['maxlength' => true]) ?>
+    <!--- $form->field($model, 'motivo_bloqueo')->textInput(['maxlength' => true]) --->
 
-    <?= $form->field($model, 'rol')->textInput([
-        'maxlength' => true,
-        'value' => $model->rol . ' ' . ($model->nombreRol ? '(' . $model->nombreRol . ')' : Yii::t('app', 'Rol no asignado'))
-    ]) ?>
+
+
+
+    <?= $form->field($model, 'rol')->dropDownList(
+        $roles,
+        ['prompt' => 'Selecciona un rol']
+    ) ?>
+
 
     <div class="form-group">
         <label><?= Yii::t('app', 'Roles Disponibles') ?></label>
