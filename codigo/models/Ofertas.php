@@ -263,6 +263,11 @@ class Ofertas extends \yii\db\ActiveRecord
         return $this->hasOne(Zonas::class, ['id' => 'zona_id']);
     }
 
+
+    public function getSeguidores()
+{
+    return $this->hasMany(Seguimientos::class, ['oferta_id' => 'id']);
+}
     /**
      * {@inheritdoc}
      * @return OfertasQuery the active query used by this AR class.

@@ -5,8 +5,9 @@ use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var app\models\Ofertas $model */
+/** @var bool $esSeguidor */
 
-$this->title = $model->id;
+$this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ofertas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <!-- Botones de acción -->
     <p>
         <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
@@ -32,6 +34,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <!-- Seguimiento -->
+    <p>
+        <?php if ($esSeguidor): ?>
+            <?= Html::a(Yii::t('app', 'Dejar de Seguir'), ['dejar-de-seguir', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?php else: ?>
+            <?= Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
+    </p>
+
+    <p>
+        <strong>Total de seguidores:</strong> <?= $model->getSeguidores()->count() ?>
+    </p>
+
+    <!-- Detalles de la oferta -->
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -60,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Comentarios',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return implode(', ', array_map(function ($comentario) {
                         return $comentario->texto;
                     }, $model->comentarios));

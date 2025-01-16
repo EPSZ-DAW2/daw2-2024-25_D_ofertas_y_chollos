@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use Yii; 
 use app\models\Ofertas;
+use app\models\Seguimientos;
 use app\models\OfertasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -48,10 +50,23 @@ class OfertasController extends Controller
 
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+    
+        // Verificar si el usuario actual está siguiendo la oferta
+        $esSeguidor = false;
+        if (!Yii::$app->user->isGuest) {
+            $usuarioId = Yii::$app->user->id;
+            $esSeguidor = $model->getSeguidores()
+                ->where(['usuario_id' => $usuarioId])
+                ->exists();
+        }
+    
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'esSeguidor' => $esSeguidor,
         ]);
     }
+    
 
     public function actionCreate()
     {
@@ -105,6 +120,40 @@ class OfertasController extends Controller
         $model->fecha_bloqueo = null;
         $model->save();
         return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    public function actionSeguir($id)
+    {
+        $usuarioId = Yii::$app->user->id;
+
+        if (!$usuarioId) {
+            return $this->redirect(['site/login']); // Redirigir a login si no está autenticado
+        }
+
+        if (Seguimientos::seguir($usuarioId, $id)) {
+            Yii::$app->session->setFlash('success', 'Ahora sigues esta oferta.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo seguir la oferta.');
+        }
+
+        return $this->redirect(['ofertas/view', 'id' => $id]);
+    }
+
+    public function actionDejarDeSeguir($id)
+    {
+        $usuarioId = Yii::$app->user->id;
+
+        if (!$usuarioId) {
+            return $this->redirect(['site/login']); // Redirigir a login si no está autenticado
+        }
+
+        if (Seguimientos::dejarDeSeguir($usuarioId, $id)) {
+            Yii::$app->session->setFlash('success', 'Has dejado de seguir esta oferta.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo dejar de seguir la oferta.');
+        }
+
+        return $this->redirect(['ofertas/view', 'id' => $id]);
     }
 
     protected function findModel($id)
