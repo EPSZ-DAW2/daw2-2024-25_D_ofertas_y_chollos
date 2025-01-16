@@ -165,6 +165,7 @@ class OfertasController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+ 
     public function actionVisor()
     {
         // Recientes: Todas las ofertas activas ordenadas por fecha de creación
