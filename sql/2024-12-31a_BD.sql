@@ -150,6 +150,8 @@ CREATE TABLE `ofertas` (
     `categoria_id` INT,
     `proveedor_id` INT,
     `anuncio_destacado` BOOLEAN DEFAULT FALSE,
+    `patrocinada` TINYINT DEFAULT 0,
+    `destacada` TINYINT DEFAULT 0,
     `estado` VARCHAR(20) NOT NULL DEFAULT 'visible',	
     `denuncias` INT DEFAULT 0,
     `fecha_primer_denuncia` DATETIME DEFAULT NULL,
