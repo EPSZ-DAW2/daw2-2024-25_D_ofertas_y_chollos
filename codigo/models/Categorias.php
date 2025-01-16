@@ -63,6 +63,16 @@ use Yii;
         return $this->hasOne(Categorias::class, ['id' => 'categoria_padre_id']);
     }
 
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOfertas()
+    {
+        return $this->hasMany(Ofertas::class, ['categoria_id' => 'id']);
+    }
+
+
     //Función para obtener un registro aleatorio de la tabla anuncios
     public static function getCategoriaAleatoria()
     {

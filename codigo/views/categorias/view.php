@@ -5,28 +5,54 @@ use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use app\models\Categorias;
+use app\models\Ofertas;
 
 $this->title = 'Detalles de la Categoría';
 ?>
 
-<div class="categorias-index">
+<div class="site-index">
 
-    <h1><?= Html::a($model->nombre)?></h1>
+    <h1><?= Html::encode($model->nombre)?></h1>
     <div class="body-content">
         <div class="jumbotron text-center bg-transparent">
-            <h2>Descripción: <?= Html::a($model->descripcion) ?></h2>
+            <h2>Descripción: <?= Html::encode($model->descripcion) ?></h2>
             <?php if($model->categoria_padre_id != NULL): ?>
-                <h3>Categoría padre: <?= Html::a($model->categoriaPadre->nombre)?></h3>
+                <h3>Categoría padre: <?= Html::encode($model->categoriaPadre->nombre)?></h3>
             <?php endif ?>
-            <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-            <p id='delete'><?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-success',
-                'data' => [
-                    'method' => 'post', // Elimina 'confirm' aquí si usas el JS personalizado
-                ],
-            ]) ?></p>
-            </div>
-        <?= Html::a(Yii::t('app', 'Atrás'), ['index'], ['class' => 'btn btn-success']) ?>
+            <?php if(!Yii::$app->user->isGuest && (Yii::$app->user->identity->rol == 1 || Yii::$app->user->identity->rol == 2 || Yii::$app->user->identity->rol == 3)): ?>
+                <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                <p id='delete'><?= Html::a(Yii::t('app', 'Borrar Categoría'), ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-success',
+                    'data' => [
+                        'method' => 'post', 
+                    ],
+                ]) ?></p>
+                </div>
+            <?php endif?>
+            <?= Html::a(Yii::t('app', 'Atrás'), ['visor'], ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
+
+    <h3>Ofertas relacionadas:</h3>
+
+    <div class="offers">
+        <?php if (!empty($ofertas)): ?>
+            <ul>
+                <?php foreach ($ofertas as $oferta): ?>
+                    <div class="offer">
+                        <li>
+                            <h4><?= Html::encode($oferta->titulo) ?></h4><br>
+                            <strong><?= Html::encode($oferta->descripcion) ?></strong><br>
+                            <span style="text-decoration: line-through;">Precio original: <?= Html::encode($oferta->precio_original) ?>€</span><br>
+                            <span>Precio actual: <?= Html::encode($oferta->precio_actual) ?>€</span><br>
+                            <?= Html::a('Ver detalles', ['ofertas/view', 'id' => $oferta->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                        </li>
+                    </div>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>No hay ofertas relacionadas con esta categoría.</p>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -40,4 +66,4 @@ $this->title = 'Detalles de la Categoría';
             }
         });
     });
-  </script>
+</script>
