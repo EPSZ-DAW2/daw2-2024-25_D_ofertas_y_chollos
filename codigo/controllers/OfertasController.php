@@ -169,8 +169,8 @@ class OfertasController extends Controller
     {
         // Cargar ofertas según las secciones
         $queryRecientes = Ofertas::find()->where(['estado' => 'activa'])->orderBy(['fecha_creacion' => SORT_DESC]);
-        $queryDestacados = Ofertas::find()->where(['estado' => 'activa', 'seccion' => 'destacada'])->orderBy(['fecha_inicio' => SORT_DESC]);
-        $queryPatrocinados = Ofertas::find()->where(['estado' => 'activa', 'seccion' => 'patrocinada'])->orderBy(['fecha_inicio' => SORT_DESC]);
+        $queryDestacados = Ofertas::find()->where(['estado' => 'activa' ])->orderBy(['fecha_inicio' => SORT_DESC]);
+        $queryPatrocinados = Ofertas::find()->where(['estado' => 'activa'])->orderBy(['fecha_inicio' => SORT_DESC]);
         $queryPersonalizados = Ofertas::find()->where(['estado' => 'activa', 'categoria_id' => 1])->orderBy(['fecha_inicio' => SORT_DESC]);
 
         // Paginación

@@ -33,7 +33,7 @@ use Yii;
  * @property string|null $fecha_modificacion
  * @property int|null $destacada
  * @property int|null $patrocinada
- * @property string $seccion
+ *
  *
  * @property Anuncios[] $anuncios
  * @property Categorias $categoria

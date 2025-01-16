@@ -31,7 +31,7 @@ use Yii;
  * @property string|null $fecha_creacion
  * @property int|null $usuario_modificador_id
  * @property string|null $fecha_modificacion
- * @property string|null $seccion
+ * 
  *
  * @property Anuncios[] $anuncios
  * @property Categorias $categoria
@@ -70,8 +70,6 @@ class Ofertas extends \yii\db\ActiveRecord
             [['zona_id', 'categoria_id', 'proveedor_id', 'anuncio_destacado', 'denuncias', 'cerrado_comentar', 'usuario_creador_id', 'usuario_modificador_id'], 'integer'],
             [['titulo', 'url_externa'], 'string', 'max' => 255],
             [['estado'], 'string', 'max' => 20],
-            [['seccion'], 'required'],
-            [['seccion'], 'in', 'range' => ['reciente', 'destacada', 'patrocinada', 'personalizada']],
             [['zona_id'], 'exist', 'skipOnError' => true, 'targetClass' => Zonas::class, 'targetAttribute' => ['zona_id' => 'id']],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::class, 'targetAttribute' => ['categoria_id' => 'id']],
             [['proveedor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedores::class, 'targetAttribute' => ['proveedor_id' => 'id']],
@@ -110,7 +108,7 @@ class Ofertas extends \yii\db\ActiveRecord
             'fecha_creacion' => 'Fecha Creacion',
             'usuario_modificador_id' => 'Usuario Modificador ID',
             'fecha_modificacion' => 'Fecha Modificacion',
-            'seccion' => 'Sección',
+            
         ];
     }
 
