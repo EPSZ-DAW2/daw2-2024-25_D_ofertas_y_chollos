@@ -62,5 +62,12 @@ use Yii;
     {
         return $this->hasOne(Categorias::class, ['id' => 'categoria_padre_id']);
     }
+
+    //Función para obtener un registro aleatorio de la tabla anuncios
+    public static function getCategoriaAleatoria()
+    {
+        $categoria = Categorias::find()->orderBy('rand()')->one();
+        return $categoria;
+    }
  }
 ?>

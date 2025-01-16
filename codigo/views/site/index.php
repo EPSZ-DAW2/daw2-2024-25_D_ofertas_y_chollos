@@ -17,7 +17,7 @@ $this->title = 'Ofertas y Chollos';
                 <li><a href="#">Deportes</a></li>
                 <li><a href="#">Juguetes</a></li>
                 <li><a href="#">Coches</a></li>
-                <li><a href="<?= Yii::$app->urlManager->createUrl(['categorias/index']) ?>">Más...</a></li>
+                <li><a href="<?= Yii::$app->urlManager->createUrl(['categorias/visor']) ?>">Más...</a></li>
             </ul>
         </div>
     </div>

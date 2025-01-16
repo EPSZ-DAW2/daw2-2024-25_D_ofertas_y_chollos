@@ -4,19 +4,65 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Categorias;
+use app\models\CategoriasSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 class CategoriasController extends \yii\web\Controller
 {
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Lists all Anuncio models.
+     *
+     * @return string
+     */
     public function actionIndex()
+    {
+
+        //obtener el registro aleatorio
+        $randomCategoria = $this->getRandomCategoria();
+
+        $searchModel = new CategoriasSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'randomCategoria' => $randomCategoria,
+        ]);
+    }
+
+    protected function getRandomCategoria()
+    {
+        return Categorias::getCategoriaAleatoria();
+    }
+
+    public function actionVisor()
     {
         $this->view->title = 'Ofertas y Chollos - Categorías';
 
         // Mostramos todas las categorías
         $categorias= Categorias::find()->all();
 
-        return $this->render('index', [
+        return $this->render('visor', [
             'categorias'=>$categorias,
         ]);
     }
