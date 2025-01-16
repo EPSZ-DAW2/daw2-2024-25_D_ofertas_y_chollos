@@ -49,6 +49,7 @@ class LoginForm extends Model
 
             if (!$user) {
                 $this->addError($attribute, 'Usuario o contraseña incorrectos');
+                return;
             }
 
             //Verifcar si el usuario no esta bloqueado
