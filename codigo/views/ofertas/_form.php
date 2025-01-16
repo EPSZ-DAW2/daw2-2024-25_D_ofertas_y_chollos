@@ -55,9 +55,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'fecha_creacion')->textInput() ?>
 
     <?= $form->field($model, 'usuario_modificador_id')->textInput() ?>
+    
+    <?= $form->field($model, 'seccion')->dropDownList([
+        'reciente' => 'Reciente',
+        'destacada' => 'Destacada',
+        'patrocinada' => 'Patrocinada',
+        'personalizada' => 'Personalizada',
+    ], ['prompt' => 'Seleccione una sección']) ?>
 
     <?= $form->field($model, 'fecha_modificacion')->textInput() ?>
-
 
 
     <div class="form-group">

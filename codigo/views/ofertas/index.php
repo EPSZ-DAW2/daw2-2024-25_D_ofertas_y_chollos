@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'precio_original',
             //'descuento',
             
-            // Aquí agregamos los cambios para mostrar la categoría, zona, proveedor y estado
+            // Aquí mostramos información adicional
             [
                 'attribute' => 'categoria_id',
                 'value' => 'categoria.nombre',
@@ -60,10 +60,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Estado',
             ],
 
-            // Agregamos la columna de acciones con los botones de bloqueo/desbloqueo
+            // Configuración de la columna de acciones
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {update} {delete} {bloquear} {desbloquear}',
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'view') {
+                        return Url::to(['view', 'id' => $model->id]);
+                    }
+                    if ($action === 'update') {
+                        return Url::to(['update', 'id' => $model->id]);
+                    }
+                    if ($action === 'delete') {
+                        return Url::to(['delete', 'id' => $model->id]);
+                    }
+                    if ($action === 'bloquear') {
+                        return Url::to(['bloquear', 'id' => $model->id]);
+                    }
+                    if ($action === 'desbloquear') {
+                        return Url::to(['desbloquear', 'id' => $model->id]);
+                    }
+                    return '';
+                },
                 'buttons' => [
                     'bloquear' => function ($url, $model, $key) {
                         return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [

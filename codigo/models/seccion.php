@@ -31,7 +31,9 @@ use Yii;
  * @property string|null $fecha_creacion
  * @property int|null $usuario_modificador_id
  * @property string|null $fecha_modificacion
- * @property string|null $seccion
+ * @property int|null $destacada
+ * @property int|null $patrocinada
+ * @property string $seccion
  *
  * @property Anuncios[] $anuncios
  * @property Categorias $categoria
@@ -47,7 +49,7 @@ use Yii;
  * @property Usuarios $usuarioModificador
  * @property Zonas $zona
  */
-class Ofertas extends \yii\db\ActiveRecord
+class seccion extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -63,15 +65,13 @@ class Ofertas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titulo', 'descripcion'], 'required'],
-            [['descripcion', 'motivo_denuncia', 'motivo_bloqueo'], 'string'],
+            [['titulo', 'descripcion', 'seccion'], 'required'],
+            [['descripcion', 'motivo_denuncia', 'motivo_bloqueo', 'seccion'], 'string'],
             [['fecha_inicio', 'fecha_fin', 'fecha_primer_denuncia', 'fecha_bloqueo', 'fecha_creacion', 'fecha_modificacion'], 'safe'],
             [['precio_actual', 'precio_original', 'descuento'], 'number'],
-            [['zona_id', 'categoria_id', 'proveedor_id', 'anuncio_destacado', 'denuncias', 'cerrado_comentar', 'usuario_creador_id', 'usuario_modificador_id'], 'integer'],
+            [['zona_id', 'categoria_id', 'proveedor_id', 'anuncio_destacado', 'denuncias', 'cerrado_comentar', 'usuario_creador_id', 'usuario_modificador_id', 'destacada', 'patrocinada'], 'integer'],
             [['titulo', 'url_externa'], 'string', 'max' => 255],
             [['estado'], 'string', 'max' => 20],
-            [['seccion'], 'required'],
-            [['seccion'], 'in', 'range' => ['reciente', 'destacada', 'patrocinada', 'personalizada']],
             [['zona_id'], 'exist', 'skipOnError' => true, 'targetClass' => Zonas::class, 'targetAttribute' => ['zona_id' => 'id']],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::class, 'targetAttribute' => ['categoria_id' => 'id']],
             [['proveedor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedores::class, 'targetAttribute' => ['proveedor_id' => 'id']],
@@ -110,7 +110,9 @@ class Ofertas extends \yii\db\ActiveRecord
             'fecha_creacion' => 'Fecha Creacion',
             'usuario_modificador_id' => 'Usuario Modificador ID',
             'fecha_modificacion' => 'Fecha Modificacion',
-            'seccion' => 'Sección',
+            'destacada' => 'Destacada',
+            'patrocinada' => 'Patrocinada',
+            'seccion' => 'Seccion',
         ];
     }
 
@@ -233,25 +235,6 @@ class Ofertas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Usuarios::class, ['id' => 'usuario_modificador_id']);
     }
-
-    public static function listaEstadosTerminacion()
-    {
-        return [
-            'finalizada' => 'Finalizada',
-            'cancelada' => 'Cancelada',
-            'en_curso' => 'En curso',
-        ];
-    }
-    
-    public static function listaClasesBloqueo()
-    {
-        return [
-            'fraude' => 'Fraude',
-            'contenido_inapropiado' => 'Contenido inapropiado',
-            'otros' => 'Otros',
-        ];
-    }
-    
 
     /**
      * Gets query for [[Zona]].
