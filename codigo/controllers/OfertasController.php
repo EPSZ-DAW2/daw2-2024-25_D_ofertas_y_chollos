@@ -167,24 +167,39 @@ class OfertasController extends Controller
 
     public function actionVisor()
     {
-        // Cargar ofertas según las secciones
-        $queryRecientes = Ofertas::find()->where(['estado' => 'activa'])->orderBy(['fecha_creacion' => SORT_DESC]);
-        $queryDestacados = Ofertas::find()->where(['estado' => 'activa' ])->orderBy(['fecha_inicio' => SORT_DESC]);
-        $queryPatrocinados = Ofertas::find()->where(['estado' => 'activa'])->orderBy(['fecha_inicio' => SORT_DESC]);
-        $queryPersonalizados = Ofertas::find()->where(['estado' => 'activa', 'categoria_id' => 1])->orderBy(['fecha_inicio' => SORT_DESC]);
-
+        // Recientes: Todas las ofertas activas ordenadas por fecha de creación
+        $queryRecientes = Ofertas::find()
+            ->where(['estado' => 'activa'])
+            ->orderBy(['fecha_creacion' => SORT_DESC]);
+    
+        // Destacados: Ofertas marcadas como destacadas
+        $queryDestacados = Ofertas::find()
+            ->where(['estado' => 'activa', 'anuncio_destacado' => 1])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
+        // Patrocinadas: Ofertas marcadas como patrocinadas
+        $queryPatrocinados = Ofertas::find()
+            ->where(['estado' => 'activa', 'patrocinada' => 1])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
+        // Personalizadas: Lógica de recomendación para el usuario
+        $usuarioCategoriaPreferida = 1; // Ejemplo: Una categoría específica para el usuario
+        $queryPersonalizados = Ofertas::find()
+            ->where(['estado' => 'activa', 'categoria_id' => $usuarioCategoriaPreferida])
+            ->orderBy(['fecha_inicio' => SORT_DESC]);
+    
         // Paginación
-        $paginationRecientes = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryRecientes->count()]);
-        $paginationDestacados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryDestacados->count()]);
-        $paginationPatrocinados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryPatrocinados->count()]);
-        $paginationPersonalizados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryPersonalizados->count()]);
-
-        // Obtener datos
+        $paginationRecientes = new \yii\data\Pagination(['totalCount' => $queryRecientes->count(), 'defaultPageSize' => 10]);
+        $paginationDestacados = new \yii\data\Pagination(['totalCount' => $queryDestacados->count(), 'defaultPageSize' => 10]);
+        $paginationPatrocinados = new \yii\data\Pagination(['totalCount' => $queryPatrocinados->count(), 'defaultPageSize' => 10]);
+        $paginationPersonalizados = new \yii\data\Pagination(['totalCount' => $queryPersonalizados->count(), 'defaultPageSize' => 10]);
+    
+        // Obtención de datos
         $recientes = $queryRecientes->offset($paginationRecientes->offset)->limit($paginationRecientes->limit)->all();
         $destacados = $queryDestacados->offset($paginationDestacados->offset)->limit($paginationDestacados->limit)->all();
         $patrocinados = $queryPatrocinados->offset($paginationPatrocinados->offset)->limit($paginationPatrocinados->limit)->all();
         $personalizados = $queryPersonalizados->offset($paginationPersonalizados->offset)->limit($paginationPersonalizados->limit)->all();
-
+    
         return $this->render('visor', [
             'recientes' => $recientes,
             'destacados' => $destacados,
@@ -196,6 +211,7 @@ class OfertasController extends Controller
             'paginationPersonalizados' => $paginationPersonalizados,
         ]);
     }
+    
 
     public function actionSearch($keyword = null)
     {
