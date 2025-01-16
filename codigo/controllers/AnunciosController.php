@@ -157,4 +157,27 @@ class AnunciosController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+    public function actionVisor()
+{
+    // Consulta para obtener todos los anuncios activos
+    $query = Anuncio::find()->orderBy(['fecha' => SORT_DESC]);
+
+    // Paginación
+    $pagination = new \yii\data\Pagination([
+        'defaultPageSize' => 10,
+        'totalCount' => $query->count(),
+    ]);
+
+    // Anuncios con límite y desplazamiento para la página actual
+    $anuncios = $query->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+    // Renderiza la vista pasando los datos
+    return $this->render('visor', [
+        'anuncios' => $anuncios,
+        'pagination' => $pagination,
+    ]);
+}
+
 }
