@@ -18,9 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Html::a('Nuevo Mensaje', ['create'], ['class' => 'btn btn-success']) ?></p>
-
-
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
 
     <h3>Mensajes no leídos</h3>
     <?php if (!empty($mensajesNoLeidos)): ?>

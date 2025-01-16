@@ -78,6 +78,8 @@ class Usuarios extends ActiveRecord implements IdentityInterface
             [['nick', 'email'], 'required'],
             [['email'], 'email'],
             [['email', 'nick'], 'unique'],
+            [['email'], 'match', 'pattern' => '/^[^@]+@gmail\.com$/i', 'message' => 'El correo debe ser gmail.com'],
+            [['password'], 'string', 'min' => 8, 'tooShort' => 'La contraseña debe tener al menos 8 caracteres.'],
         ];
     }
 

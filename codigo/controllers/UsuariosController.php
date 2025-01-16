@@ -172,17 +172,19 @@ class UsuariosController extends Controller
         $model = new Usuarios();
         //Comprobamos si se ha enviado el formulario
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->registro_confirmado = 0;
+            if ($model->load($this->request->post()) && $model->validate()) {
+
+
+
+                //Encriptamos la contraseña
+                $model->setPassword($model->password);
+                //Valores predeterminados
+                $model->registro_confirmado = 0; //sera 0 hasta que un admin y la acepte
                 $model->fecha_registro = date('Y-m-d H:i:s');
                 $model->accesos_fallidos = 0;
                 $model->bloqueado = 0;
                 $model->rol = 5;
 
-                //Encriptamos la contraseña
-                $model->setPassword($model->password);
-
-                $model->registro_confirmado = 0; //sera 0 hasta que un admin y la acepte
 
 
                 if ($model->save()) {

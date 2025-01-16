@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?= Html::submitButton(Yii::t('app', 'Registrarse')) ?>
+    <?= Html::submitButton(Yii::t('app', 'Registrarse'), ['class' => 'btn btn-primary']) ?>
+
 
 
     <?php ActiveForm::end(); ?>
