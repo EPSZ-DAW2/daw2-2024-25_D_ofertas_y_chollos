@@ -139,11 +139,11 @@ class seccion extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Comentarios]].
      *
-     * @return \yii\db\ActiveQuery|ComentariosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::class, ['oferta_id' => 'id']);
+        return $this->hasMany(Comentario::class, ['oferta_id' => 'id']);
     }
 
     /**
