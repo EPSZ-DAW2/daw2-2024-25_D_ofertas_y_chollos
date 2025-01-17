@@ -18,7 +18,7 @@ class EtiquetasWidget
 
         // Define los tamaños mínimo y máximo en píxeles o em
         $minSize = 16; // Tamaño mínimo
-        $maxSize = 24; // Tamaño máximo
+        $maxSize = 32; // Tamaño máximo
 
         // Renderizar las etiquetas
         $output = '<div class="etiquetas-widget">';
