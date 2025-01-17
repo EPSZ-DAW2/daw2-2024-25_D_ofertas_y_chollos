@@ -131,4 +131,33 @@ class PatrocinadoresController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+
+    public function actionAprobar($id)
+    {
+        $model = $this->findModel($id);
+        $model->aprobado = 1;
+    
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Patrocinador aprobado con éxito.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Error al aprobar al patrocinador.');
+        }
+    
+        return $this->redirect(['index']);
+    }
+    
+    public function actionRechazar($id)
+    {
+        $model = $this->findModel($id);
+        $model->rechazado = 2;
+    
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Patrocinador rechazado con éxito.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Error al rechazar al patrocinador.');
+        }
+    
+        return $this->redirect(['index']);
+    }
+
 }

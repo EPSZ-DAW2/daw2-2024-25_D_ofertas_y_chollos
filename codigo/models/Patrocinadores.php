@@ -37,6 +37,8 @@ class Patrocinadores extends \yii\db\ActiveRecord
             [['creado_en', 'actualizado_en'], 'safe'],
             [['nombre'], 'string', 'max' => 255],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_id' => 'id']],
+            [['aprobado'], 'integer'], // Validación como número entero
+            [['aprobado'], 'default', 'value' => 0], // Por defecto, pendiente
         ];
     }
 
@@ -52,6 +54,7 @@ class Patrocinadores extends \yii\db\ActiveRecord
             'aprobado' => Yii::t('app', 'Aprobado'),
             'creado_en' => Yii::t('app', 'Creado En'),
             'actualizado_en' => Yii::t('app', 'Actualizado En'),
+            'aprobado' => 'Estado de Aprobación',
         ];
     }
 
