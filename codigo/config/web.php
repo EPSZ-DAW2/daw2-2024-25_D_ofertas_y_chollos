@@ -12,56 +12,53 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'components' => [
-        'request' => [
-            'cookieValidationKey' => 'EPSZ_DAW2_2024-25',
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\Usuarios',
-            'enableAutoLogin' => true,
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
-            'viewPath' => '@app/mail',
-            'useFileTransport' => true,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'db' => $db,
-
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => true,
-            'enableStrictParsing' => false,
-            'rules' => [
-                'etiqueta/<id:\d+>' => 'etiqueta/ver'
-            ],
-        ],
-
-        'view' => [
-            'class' => 'yii\web\View',
-            'theme' => [
-                'class' => 'yii\base\Theme',
-                'pathMap' => ['@app/views' => '@app/themes/material-default'],
-                'baseUrl' => '@web/themes/material-default',
-            ],
-        ],
-
-    
+'components' => [
+    'request' => [
+        'cookieValidationKey' => 'EPSZ_DAW2_2024-25',
     ],
+    'authManager' => [
+        'class' => 'yii\rbac\DbManager', // Componente RBAC para la gestión de roles y permisos
+    ],
+    'user' => [
+        'identityClass' => 'app\models\Usuarios',
+        'enableAutoLogin' => true,
+    ],
+    'errorHandler' => [
+        'errorAction' => 'site/error',
+    ],
+    'mailer' => [
+        'class' => \yii\symfonymailer\Mailer::class,
+        'viewPath' => '@app/mail',
+        'useFileTransport' => true,
+    ],
+    'log' => [
+        'traceLevel' => YII_DEBUG ? 3 : 0,
+        'targets' => [
+            [
+                'class' => 'yii\log\FileTarget',
+                'levels' => ['error', 'warning'],
+            ],
+        ],
+    ],
+    'db' => $db,
+    'urlManager' => [
+        'enablePrettyUrl' => true,
+        'showScriptName' => true,
+        'enableStrictParsing' => false,
+        'rules' => [
+            'etiqueta/<id:\d+>' => 'etiqueta/ver'
+        ],
+    ],
+    'view' => [
+        'class' => 'yii\web\View',
+        'theme' => [
+            'class' => 'yii\base\Theme',
+            'pathMap' => ['@app/views' => '@app/themes/material-default'],
+            'baseUrl' => '@web/themes/material-default',
+        ],
+    ],
+],
+
     'name' => 'Ofertas y Chollos',
 ];
 

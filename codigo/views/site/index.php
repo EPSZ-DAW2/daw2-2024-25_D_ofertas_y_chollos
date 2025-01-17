@@ -36,9 +36,9 @@ $this->title = 'Ofertas y Chollos';
                 ]) ?>
             </div>
             <div class="form-group">
-                <?= Html::textInput('categoria', Yii::$app->request->get('categoria'), [
+                <?= Html::textInput('zona_id', Yii::$app->request->get('zona'), [
                     'class' => 'form-control',
-                    'placeholder' => 'Categoría...',
+                    'placeholder' => 'Zona...',
                     'style' => 'width: 200px; margin-right: 10px;'
                 ]) ?>
             </div>
@@ -46,6 +46,13 @@ $this->title = 'Ofertas y Chollos';
                 <?= Html::textInput('precio_max', Yii::$app->request->get('precio_max'), [
                     'class' => 'form-control',
                     'placeholder' => 'Precio máximo...',
+                    'style' => 'width: 200px; margin-right: 10px;'
+                ]) ?>
+            </div>
+            <div class="form-group">
+                <?= Html::input('date', 'fecha_inicio', Yii::$app->request->get('fecha_inicio'), [
+                    'class' => 'form-control',
+                    'placeholder' => 'Fecha de inicio...',
                     'style' => 'width: 200px; margin-right: 10px;'
                 ]) ?>
             </div>
