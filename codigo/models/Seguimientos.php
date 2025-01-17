@@ -36,6 +36,8 @@ class Seguimientos extends \yii\db\ActiveRecord
             [['usuario_id', 'oferta_id'], 'required'],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
+            //Aseguramos que un usuario no pueda seguir una oferta que ya esta siguiendo
+            [['usuario_id', 'oferta_id'], 'unique', 'targetAttribute' => ['usuario_id', 'oferta_id'], 'message' => 'Ya sigues a esta oferta'],
         ];
     }
 
@@ -119,5 +121,17 @@ class Seguimientos extends \yii\db\ActiveRecord
     public static function find()
     {
         return new SeguimientosQuery(get_called_class());
+    }
+
+
+    /**
+     * Obtener las funciones que sigue un usuario
+     */
+    public static function obtenerOfertasSeguidas($usuarioId)
+    {
+        return Ofertas::find()
+            ->joinWith('seguidores')
+            ->where(['seguimientos.usuario_id' => $usuarioId])
+            ->all();
     }
 }
