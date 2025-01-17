@@ -60,9 +60,7 @@ $config = [
             ],
         ],
 
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager', // Configuración del gestor de roles y permisos basado en base de datos
-        ],
+    
     ],
     'name' => 'Ofertas y Chollos',
 ];
