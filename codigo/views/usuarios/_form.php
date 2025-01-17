@@ -49,23 +49,13 @@ use yii\widgets\ActiveForm;
 
 
 
-    <?= $form->field($model, 'rol')->dropDownList(
+    <?= $form->field($model, 'rol', ['options' => ['style' => 'margin-bottom: 20px;']])->dropDownList(
         $roles,
         ['prompt' => 'Selecciona un rol']
     ) ?>
 
 
-    <div class="form-group">
-        <label><?= Yii::t('app', 'Roles Disponibles') ?></label>
-        <p>
-            <?php
-            $roles = \app\models\Roles::find()->select(['id', 'nombre'])->orderBy('id')->all();
-            foreach ($roles as $rol) {
-                echo $rol->id . ' -> ' . $rol->nombre . '<br>';
-            }
-            ?>
-        </p>
-    </div>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

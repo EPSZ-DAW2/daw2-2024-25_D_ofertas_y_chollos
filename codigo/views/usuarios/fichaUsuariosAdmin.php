@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a(Yii::t('app', 'Crear nuevo usuarios'), ['create']) ?>
+        <?= Html::a(Yii::t('app', 'Crear nuevo usuarios'), ['create'],    [
+            'class' => 'btn btn-success'
+        ]) ?>
     </p>
 
 
