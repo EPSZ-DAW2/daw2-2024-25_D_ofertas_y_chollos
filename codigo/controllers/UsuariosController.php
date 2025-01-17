@@ -27,7 +27,7 @@ class UsuariosController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
@@ -109,6 +109,9 @@ class UsuariosController extends Controller
     {
         $model = $this->findModel($id);
 
+
+        $roles = Roles::getListaRoles();
+
         if ($this->request->isPost && $model->load($this->request->post())) {
             //si hay cambiamos en la contaseña la encriptamos otra vez
             if ($model->password) {
@@ -126,6 +129,7 @@ class UsuariosController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'roles' => $roles,
         ]);
     }
 
@@ -140,7 +144,9 @@ class UsuariosController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        Yii::$app->session->setFlash('sucess', 'Usuario eliminado correctamente');
+
+        return $this->redirect(['ficha-usuarios-admin']);
     }
 
     /**

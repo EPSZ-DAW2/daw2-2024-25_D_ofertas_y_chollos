@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => '',
                             'data' => [
                                 'confirm' => 'Vas a eliminar a este usuario ¿Estás seguro?',
-                                'metho' => 'post',
+                                'method' => 'post',
                             ]
                         ]);
                     },
