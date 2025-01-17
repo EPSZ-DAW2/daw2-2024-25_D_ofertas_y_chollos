@@ -72,11 +72,11 @@ class Incidencia extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Comentario]].
      *
-     * @return \yii\db\ActiveQuery|ComentariosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getComentario()
     {
-        return $this->hasOne(Comentarios::class, ['id' => 'comentario_id']);
+        return $this->hasOne(Comentario::class, ['id' => 'comentario_id']);
     }
 
     /**
