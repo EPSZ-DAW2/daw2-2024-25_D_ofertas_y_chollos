@@ -16,7 +16,7 @@ class AnunciosController extends Controller
     /**
      * @inheritDoc
      */
-    /*public function behaviors()
+public function behaviors()
     {
         return array_merge(
             parent::behaviors(),
@@ -29,10 +29,10 @@ class AnunciosController extends Controller
                 ],
             ]
         );
-    }*/
+    }
 
 
-    public function behaviors()
+/*    public function behaviors()
 {
     return array_merge(
         parent::behaviors(),
@@ -43,17 +43,19 @@ class AnunciosController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'], // Solo usuarios autenticados
-                        'matchCallback' => function ($rule, $action) {
-                            // Solo permitir si el usuario tiene rol "admin"
-                            return Yii::$app->user->identity->rol === 'admin';
-                        },
+                        'actions'=>['create','update','delete'],
+                        'roles'=>['admin'],
                     ],
+                    [
+                        'allow'=>true,
+                        'actions'=>['busqueda'],
+                        'roles'=>['invitado'],
+                    ]
                 ],
             ],
         ]
     );
-}
+}*/
 
 
 
