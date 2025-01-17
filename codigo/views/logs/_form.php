@@ -12,11 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fecha_hora')->textInput() ?>
+    <?= $form->field($model, 'nivel')->textInput(['maxlength' => true, 'placeholder' => 'INFO, WARNING o ERROR']) ?>
 
-    <?= $form->field($model, 'nivel')->dropDownList([ 'INFO' => 'INFO', 'WARNING' => 'WARNING', 'ERROR' => 'ERROR', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'modulo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'modulo')->textInput(['maxlength' => true, 'placeholder' => 'Base de datos, Registro, Ofertas...']) ?>
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
 
