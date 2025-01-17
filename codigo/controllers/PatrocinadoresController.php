@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
+use Yii; // Asegúrate de agregar esta línea
 use app\models\Patrocinadores;
 use app\models\PatrocinadoresSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 /**
  * PatrocinadoresController implements the CRUD actions for Patrocinadores model.
  */
@@ -132,32 +132,49 @@ class PatrocinadoresController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
+    /**
+     * Aprobar un patrocinador
+     * @param int $id
+     * @return \yii\web\Response
+     */
     public function actionAprobar($id)
     {
         $model = $this->findModel($id);
-        $model->aprobado = 1;
-    
-        if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Patrocinador aprobado con éxito.');
+
+        if ($model->aprobado != 0) {
+            Yii::$app->session->setFlash('warning', 'El patrocinador ya está aprobado o rechazado.');
         } else {
-            Yii::$app->session->setFlash('error', 'Error al aprobar al patrocinador.');
+            $model->aprobado = 1; // Estado "Aprobado"
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Patrocinador aprobado con éxito.');
+            } else {
+                Yii::$app->session->setFlash('error', 'Error al aprobar al patrocinador.');
+            }
         }
-    
-        return $this->redirect(['index']);
-    }
-    
-    public function actionRechazar($id)
-    {
-        $model = $this->findModel($id);
-        $model->rechazado = 2;
-    
-        if ($model->save()) {
-            Yii::$app->session->setFlash('success', 'Patrocinador rechazado con éxito.');
-        } else {
-            Yii::$app->session->setFlash('error', 'Error al rechazar al patrocinador.');
-        }
-    
+
         return $this->redirect(['index']);
     }
 
+    /**
+     * Rechazar un patrocinador
+     * @param int $id
+     * @return \yii\web\Response
+     */
+    public function actionRechazar($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->aprobado != 0) {
+            Yii::$app->session->setFlash('warning', 'El patrocinador ya está aprobado o rechazado.');
+        } else {
+            $model->aprobado = 2; // Estado "Rechazado"
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Patrocinador rechazado con éxito.');
+            } else {
+                Yii::$app->session->setFlash('error', 'Error al rechazar al patrocinador.');
+            }
+        }
+
+        return $this->redirect(['index']);
+    }
 }
