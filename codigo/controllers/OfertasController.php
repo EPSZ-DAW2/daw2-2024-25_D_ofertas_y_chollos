@@ -175,7 +175,7 @@ class OfertasController extends Controller
     
         // Destacados: Ofertas marcadas como destacadas
         $queryDestacados = Ofertas::find()
-            ->where(['estado' => 'activa', 'anuncio_destacado' => 1])
+            ->where(['estado' => 'activa', 'destacada' => 1])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         // Patrocinadas: Ofertas marcadas como patrocinadas
