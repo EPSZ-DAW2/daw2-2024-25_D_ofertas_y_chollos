@@ -42,11 +42,16 @@ class CategoriasController extends \yii\web\Controller
     {
         $this->view->title = 'Ofertas y Chollos - Categorías';
 
+        $searchModel = new CategoriasSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         // Mostramos todas las categorías
-        $categorias= Categorias::find()->all();
+        $models= Categorias::find()->all();
 
         return $this->render('visor', [
-            'categorias'=>$categorias,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'models'=>$models,
         ]);
     }
 
@@ -165,6 +170,21 @@ class CategoriasController extends \yii\web\Controller
         // Renderizar la vista de actualización con el formulario y el modelo de jornada
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionSearch($keyword = null)
+    {
+        $query = Categorias::find()
+            ->where(['like', 'nombre', $keyword])
+            ->orWhere(['like', 'descripcion', $keyword])
+            ->andWhere(['revisado' => 1]);
+
+        $models = $query->all();
+
+        return $this->render('visor', [
+            'models' => $models,
+            'keyword' => $keyword,
         ]);
     }
 }
