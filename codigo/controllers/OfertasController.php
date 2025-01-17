@@ -170,23 +170,23 @@ class OfertasController extends Controller
     {
         // Recientes: Todas las ofertas activas ordenadas por fecha de creación
         $queryRecientes = Ofertas::find()
-            ->where(['estado' => 'activa'])
+            ->where(['estado' => 'visible'])
             ->orderBy(['fecha_creacion' => SORT_DESC]);
     
         // Destacados: Ofertas marcadas como destacadas
         $queryDestacados = Ofertas::find()
-            ->where(['estado' => 'activa', 'destacada' => 1])
+            ->where(['estado' => 'visible', 'destacada' => 1])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         // Patrocinadas: Ofertas marcadas como patrocinadas
         $queryPatrocinados = Ofertas::find()
-            ->where(['estado' => 'activa', 'patrocinada' => 1])
+            ->where(['estado' => 'visible', 'patrocinada' => 1])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         // Personalizadas: Lógica de recomendación para el usuario
         $usuarioCategoriaPreferida = 1; // Ejemplo: Una categoría específica para el usuario
         $queryPersonalizados = Ofertas::find()
-            ->where(['estado' => 'activa', 'categoria_id' => $usuarioCategoriaPreferida])
+            ->where(['estado' => 'visible', 'categoria_id' => $usuarioCategoriaPreferida])
             ->orderBy(['fecha_inicio' => SORT_DESC]);
     
         // Paginación
