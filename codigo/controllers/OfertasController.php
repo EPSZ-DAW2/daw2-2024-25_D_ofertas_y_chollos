@@ -69,29 +69,32 @@ class OfertasController extends Controller
     public function actionCreate()
     {
         $model = new Ofertas();
-    
-        if ($model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
-    
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
-    
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-    
-        if ($model->load($this->request->post()) && $model->save()) {
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-    
+
         return $this->render('update', [
             'model' => $model,
         ]);
     }
-    
 
     public function actionDelete($id)
     {
@@ -163,7 +166,6 @@ class OfertasController extends Controller
  
     public function actionVisor()
     {
-<<<<<<< Updated upstream
         // Recientes: Todas las ofertas activas ordenadas por fecha de creación
         $queryRecientes = Ofertas::find()
             ->where(['estado' => 'visible'])
@@ -192,21 +194,6 @@ class OfertasController extends Controller
         $paginationPersonalizados = new \yii\data\Pagination(['totalCount' => $queryPersonalizados->count(), 'defaultPageSize' => 10]);
     
         // Obtención de datos
-=======
-        // Cargar ofertas según las secciones
-        $queryRecientes = Ofertas::find()->where(['estado' => 'activa'])->orderBy(['fecha_creacion' => SORT_DESC]);
-        $queryDestacados = Ofertas::find()->where(['estado' => 'activa', 'anuncio_destacado' => 1])->orderBy(['fecha_inicio' => SORT_DESC]);
-        $queryPatrocinados = Ofertas::find()->where(['estado' => 'activa', 'seccion' => 'patrocinada'])->orderBy(['fecha_inicio' => SORT_DESC]);
-        $queryPersonalizados = Ofertas::find()->where(['estado' => 'activa', 'categoria_id' => 1])->orderBy(['fecha_inicio' => SORT_DESC]);
-    
-        // Paginación
-        $paginationRecientes = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryRecientes->count()]);
-        $paginationDestacados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryDestacados->count()]);
-        $paginationPatrocinados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryPatrocinados->count()]);
-        $paginationPersonalizados = new \yii\data\Pagination(['defaultPageSize' => 10, 'totalCount' => $queryPersonalizados->count()]);
-    
-        // Obtener datos
->>>>>>> Stashed changes
         $recientes = $queryRecientes->offset($paginationRecientes->offset)->limit($paginationRecientes->limit)->all();
         $destacados = $queryDestacados->offset($paginationDestacados->offset)->limit($paginationDestacados->limit)->all();
         $patrocinados = $queryPatrocinados->offset($paginationPatrocinados->offset)->limit($paginationPatrocinados->limit)->all();
