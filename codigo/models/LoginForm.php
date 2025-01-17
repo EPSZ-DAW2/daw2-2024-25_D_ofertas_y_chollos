@@ -62,7 +62,7 @@ class LoginForm extends Model
             if (!$user->validatePassword($this->password)) {
                 //incrementamos los intentos del usuario
                 $user->accesos_fallidos++;
-                if ($user->accesos_fallidos >= 3) {
+                if ($user->accesos_fallidos >= Yii::$app->params['intentosAccesoFallidos']) {
                     $user->bloqueado = 1;
                     $user->fecha_bloqueo = date('Y-m-d H:i:s');
                 }

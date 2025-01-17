@@ -19,7 +19,6 @@ class CategoriasSearch extends Categorias
         return [
             [['id', 'categoria_padre_id'], 'integer'],
             [['nombre', 'descripcion'], 'safe'],
-            [['revisado'], 'number'],
         ];
     }
 
@@ -58,14 +57,9 @@ class CategoriasSearch extends Categorias
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'revisado' => $this->revisado,
-            'categoria_padre_id' => $this->categoria_padre_id,
-        ]);
-
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['id' => $this->id])
+              ->andFilterWhere(['like', 'nombre', $this->nombre])
+              ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }
