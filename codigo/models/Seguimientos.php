@@ -86,7 +86,7 @@ class Seguimientos extends \yii\db\ActiveRecord
         $seguimiento = new self();
         $seguimiento->usuario_id = $usuarioId;
         $seguimiento->oferta_id = $ofertaId;
-        $seguimiento->fecha_creacion = date('Y-m-d H:i:s');
+        /* $seguimiento->fecha_creacion = date('Y-m-d H:i:s');*/
         return $seguimiento->save();
     }
 
