@@ -3,8 +3,9 @@
 /** @var yii\web\View $this */
 /** @var app\models\Ofertas[] $models */
 /** @var string $titulo */
-/** @var string $categoria */
+/** @var string $zona */
 /** @var string $precio_max */
+/** @var string $fecha_inicio */
 
 use yii\helpers\Html;
 
@@ -16,8 +17,9 @@ $this->title = 'Resultados de búsqueda avanzada';
     <p>Filtros aplicados:</p>
     <ul>
         <li><strong>Título:</strong> <?= Html::encode($titulo) ?></li>
-        <li><strong>Categoría:</strong> <?= Html::encode($categoria) ?></li>
+        <li><strong>Zona:</strong> <?= Html::encode($zona) ?></li>
         <li><strong>Precio Máximo:</strong> <?= Html::encode($precio_max) ?></li>
+        <li><strong>Fecha de Inicio:</strong> <?= Html::encode($fecha_inicio) ?></li>
     </ul>
 
     <div class="resultados-busqueda">

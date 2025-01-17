@@ -216,6 +216,11 @@ class Usuarios extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Seguimiento::class, ['usuario_id' => 'id']);
     }
 
+    public function tieneRol($rolNombre)
+{
+    return Yii::$app->authManager->getRolesByUser($this->id)[$rolNombre] ?? false;
+}
+
     /**
      * Gets query for [[UsuariosCategorias]].
      *

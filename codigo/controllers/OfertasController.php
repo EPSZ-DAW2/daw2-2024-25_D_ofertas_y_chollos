@@ -23,19 +23,17 @@ class OfertasController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'roles' => ['admin'], // Permitir acceso solo a administradores
+                            'roles' => ['admin'], // Solo administradores
                         ],
-                    ],
-                ],
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+                        [
+                            'allow' => false, // Denegar acceso a todos los demás
+                        ],
                     ],
                 ],
             ]
         );
     }
+    
 
     public function actionIndex()
     {
@@ -229,21 +227,24 @@ class OfertasController extends Controller
         ]);
     }
 
-    public function actionAdvancedSearch($titulo = null, $categoria = null, $precio_max = null)
+    public function actionAdvancedSearch($titulo = null, $zona = null, $precio_max = null, $fecha_inicio = null)
     {
         $query = Ofertas::find()
             ->andFilterWhere(['like', 'titulo', $titulo])
-            ->andFilterWhere(['like', 'categoria_id', $categoria])
+            ->andFilterWhere(['zona_id' => $zona])
             ->andFilterWhere(['<=', 'precio_actual', $precio_max])
-            ->andWhere(['estado' => 'activa']);
-
+            ->andFilterWhere(['>=', 'fecha_inicio', $fecha_inicio]) // Filtro por fecha de inicio
+            ->andWhere(['estado' => 'visible']);
+    
         $models = $query->all();
-
+    
         return $this->render('advanced-search', [
             'models' => $models,
             'titulo' => $titulo,
-            'categoria' => $categoria,
+            'zona' => $zona,
             'precio_max' => $precio_max,
+            'fecha_inicio' => $fecha_inicio,
         ]);
     }
+    
 }
