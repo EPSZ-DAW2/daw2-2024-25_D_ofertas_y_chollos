@@ -22,7 +22,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'password')->passwordInput(
         [
             'maxlength' => true,
-            'value' => ''
+            'value' => '',
+            'placeholder' => 'Deja vacío para mantener la contraseña actual'
         ]
     ) ?>
 

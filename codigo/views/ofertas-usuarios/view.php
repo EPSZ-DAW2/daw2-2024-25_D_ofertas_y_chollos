@@ -11,6 +11,7 @@ $this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ofertas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
 ?>
 <div class="ofertas-view">
 

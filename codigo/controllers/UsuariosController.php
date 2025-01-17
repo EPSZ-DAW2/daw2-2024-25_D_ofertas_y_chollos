@@ -114,10 +114,12 @@ class UsuariosController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             //si hay cambiamos en la contaseña la encriptamos otra vez
-            if (!empty($model->password)) {
+            if (empty($model->password)) {
+                $model->password = $model->getOldAttribute('password');
+            } else {
+                // Si se introduce una nueva contraseña la encriptamos
                 $model->setPassword($model->password);
             }
-
             if ($model->save()) {
                 Yii::$app->session->setFlash('sucess', 'El usuario ha sido actualizado'); //mensaje de éxito
                 return $this->redirect(['view', 'id' => $model->id]);
