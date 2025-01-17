@@ -11,13 +11,14 @@ $this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ofertas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
 ?>
 <div class="ofertas-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <!-- Botones de acción -->
-    <p>
+    <div class="action-buttons">
         <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -26,30 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
-
-    <!-- Botones de Bloquear y Desbloquear -->
-    <p>
         <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-    </p>
+    </div>
 
     <!-- Seguimiento -->
-    <p>
+    <div class="follow-section">
         <?php if ($esSeguidor): ?>
             <?= Html::a(Yii::t('app', 'Dejar de Seguir'), ['dejar-de-seguir', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
         <?php else: ?>
             <?= Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php endif; ?>
-    </p>
-
-    <p>
-        <strong>Total de seguidores:</strong> <?= $model->getSeguidores()->count() ?>
-    </p>
+        <p><strong>Total de seguidores:</strong> <?= $model->getSeguidores()->count() ?></p>
+    </div>
 
     <!-- Detalles de la oferta -->
     <?= DetailView::widget([
         'model' => $model,
+        'options' => ['class' => 'table table-bordered detail-view'],
         'attributes' => [
             'id',
             'titulo',
@@ -60,8 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'precio_actual',
             'precio_original',
             'descuento',
-
-            // Mostrar la categoría, zona, proveedor y comentarios
             [
                 'label' => 'Categoría',
                 'value' => $model->categoria ? $model->categoria->nombre : 'Sin categoría',
@@ -74,28 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Proveedor',
                 'value' => $model->proveedor ? $model->proveedor->razon_social : 'Sin proveedor',
             ],
-            [
-                'label' => 'Comentarios',
-                'value' => function ($model) {
-                    return implode(', ', array_map(function ($comentario) {
-                        return $comentario->texto;
-                    }, $model->comentarios));
-                },
-            ],
-
-            // El resto de atributos
-            'anuncio_destacado',
-            'estado',
-            'denuncias',
-            'fecha_primer_denuncia',
-            'motivo_denuncia:ntext',
-            'fecha_bloqueo',
-            'motivo_bloqueo:ntext',
-            'cerrado_comentar',
-            'usuario_creador_id',
-            'fecha_creacion',
-            'usuario_modificador_id',
-            'fecha_modificacion',
         ],
     ]) ?>
 

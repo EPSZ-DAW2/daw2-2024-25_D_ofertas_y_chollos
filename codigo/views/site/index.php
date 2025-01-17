@@ -72,43 +72,17 @@ $this->title = 'Ofertas y Chollos';
 
     <!-- CONTENEDOR DEBAJO (OFERTAS) -->
     <div class="jumbotron">
-        
-       <h1 class="texto-inicial">Anuncios de ofertas</h1>
+        <h1 class="texto-inicial">Anuncios de ofertas</h1>
         <p style="font-size: 20px; font-weight: bold;">Aprovecha los mejores precios del mercado</p>
         <div class="offers">
-            <div class="offer">
-                <h3>Oferta 1</h3>
-                <p>Descripción breve de la oferta 1.</p>
-                <button>Ver más</button>
-            </div>
-            <div class="offer">
-                <h3>Oferta 2</h3>
-                <p>Descripción breve de la oferta 2.</p>
-                <button>Ver más</button>
-            </div>
-            <div class="offer">
-                <h3>Oferta 3</h3>
-                <p>Descripción breve de la oferta 3.</p>
-                <button>Ver más</button>
-            </div>
-            <div class="offer">
-                <h3>Oferta 4</h3>
-                <p>Descripción breve de la oferta 4.</p>
-                <button>Ver más</button>
-            </div>
-
-            <div class="offer">
-                <h3>Oferta 5</h3>
-                <p>Descripción breve de la oferta 5.</p>
-                <button>Ver más</button>
-            </div>
-
-            <div class="offer">
-                <h3>Oferta 6</h3>
-                <p>Descripción breve de la oferta 6.</p>
-                <button>Ver más</button>
-            </div>
+            <?php foreach ($recientes as $oferta): ?>
+                <div class="offer">
+                    <h3><?= Html::encode($oferta->titulo) ?></h3>
+                    <p><?= Html::encode($oferta->descripcion) ?></p>
+                    <p>Fecha de inicio: <?= Yii::$app->formatter->asDate($oferta->fecha_inicio) ?></p>
+                    <a href="<?= yii\helpers\Url::to(['ofertas/view', 'id' => $oferta->id]) ?>" class="btn btn-primary">Ver más</a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
-
 </div>

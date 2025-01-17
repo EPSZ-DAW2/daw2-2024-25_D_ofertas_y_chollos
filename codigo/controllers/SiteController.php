@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use app\models\Ofertas;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -61,8 +62,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $recientes = Ofertas::find()
+            ->where(['estado' => 'visible'])
+            ->orderBy(['fecha_creacion' => SORT_DESC])
+            ->limit(9)
+            ->all();
+    
+        return $this->render('index', [
+            'recientes' => $recientes,
+        ]);
     }
+    
 
     /**
      * Login action.
@@ -120,6 +130,8 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+    
 
     /**
      * Displays contact page.
