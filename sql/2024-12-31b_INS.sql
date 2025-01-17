@@ -219,96 +219,12 @@ SET @rol_patrocinador_id = (SELECT `id` FROM `roles` WHERE `nombre` = 'patrocina
 SET @rol_normal_id = (SELECT `id` FROM `roles` WHERE `nombre` = 'normal');
 
 -- Superadministrador
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('super@mail.com', 'passsuper', 'superadmin', 'Paco', 'Giménez', @rol_sysadmin_id); 
--- 1
-
--- Administradores
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES 
-('admin1@mail.com', 'passadmin1', 'admin1', 'Juan', 'Martínez', 2),
-('admin2@mail.com', 'passadmin2', 'admin2', 'Ana', 'García', 2),
-('admin3@mail.com', 'passadmin3', 'admin3', 'Luis', 'Sánchez', 2);
-
-
--- Moderadores
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES 
-('modand1@mail.com', 'passmodand1', 'modand1', 'María', 'López', 3),
-('modand2@mail.com', 'passmodand2', 'modand2', 'Pedro', 'Fernández', 3),
-('modand3@mail.com', 'passmodand3', 'modand3', 'Carmen', 'Gómez', 3),
-('modarg1@mail.com', 'passmodarg1', 'modarg1', 'Antonio', 'Rodríguez', 3),
-('modast1@mail.com', 'passmodast1', 'modast1', 'Isabel', 'Pérez', 3),
-('modbal1@mail.com', 'passmodbal1', 'modbal1', 'Manuel', 'Hernández', 3),
-('modcan1@mail.com', 'passmodcan1', 'modcan1', 'Rosa', 'Jiménez', 3),
-('modcant1@mail.com', 'passmodcant1', 'modcant1', 'Miguel', 'Martínez', 3),
-('modcyl1@mail.com', 'passmodcyl1', 'modcyl1', 'Francisco', 'Torres', 3),
-('modcyl2@mail.com', 'passmodcyl2', 'modcyl2', 'Laura', 'Sanz', 3),
-('modcyl3@mail.com', 'passmodcyl3', 'modcyl3', 'Javier', 'Ibáñez', 3),
-('modclm1@mail.com', 'passmodclm1', 'modclm1', 'Marina', 'Garrido', 3),
-('modclm2@mail.com', 'passmodclm2', 'modclm2', 'Carlos', 'Gutiérrez', 3),
-('modcat1@mail.com', 'passmodcat1', 'modcat1', 'Sara', 'Martín', 3),
-('modcat2@mail.com', 'passmodcat2', 'modcat2', 'David', 'Vega', 3),
-('modext1@mail.com', 'passmodext1', 'modext1', 'Elena', 'Ortega', 3),
-('modgal1@mail.com', 'passmodgal1', 'modgal1', 'Jorge', 'García', 3),
-('modgal2@mail.com', 'passmodgal2', 'modgal2', 'Marta', 'Gómez', 3),
-('modmad1@mail.com', 'passmodmad1', 'modmad1', 'Víctor', 'Sánchez', 3),
-('modmur1@mail.com', 'passmodmur1', 'modmur1', 'Patricia', 'Martínez', 3),
-('modnav1@mail.com', 'passmodnav1', 'modnav1', 'Roberto', 'Fernández', 3),
-('modpv1@mail.com', 'passmodpv1', 'modpv1', 'Eva', 'Gómez', 3),
-('modpv2@mail.com', 'passmodpv2', 'modpv2', 'Adrián', 'Sanz', 3),
-('modrio1@mail.com', 'passmodrio1', 'modrio1', 'Cristina', 'Torres', 3),
-('modval1@mail.com', 'passmodval1', 'modval1', 'Sergio', 'Ibáñez', 3),
-('modval2@mail.com', 'passmodval2', 'modval2', 'Nuria', 'Garrido', 3),
-('modceu1@mail.com', 'passmodceu1', 'modceu1', 'Óscar', 'Gutiérrez', 3),
-('modmel1@mail.com', 'passmodmel1', 'modmel1', 'Raquel', 'Martín', 3);
-
-
--- patro
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES 
-('patro1@mail.com', 'passpatro1', 'patro1', 'José', 'Martínez', 4),
-('patro2@mail.com', 'passpatro2', 'patro2', 'María', 'López', 4),
-('patro3@mail.com', 'passpatro3', 'patro3', 'Carlos', 'García', 4),
-('patro4@mail.com', 'passpatro4', 'patro4', 'Ana', 'Sánchez', 4),
-('patro5@mail.com', 'passpatro5', 'patro5', 'Luis', 'Martín', 4),
-('patro6@mail.com', 'passpatro6', 'patro6', 'Elena', 'Pérez', 4),
-('patro7@mail.com', 'passpatro7', 'patro7', 'Javier', 'Gómez', 4),
-('patro8@mail.com', 'passpatro8', 'patro8', 'Laura', 'Hernández', 4),
-('patro9@mail.com', 'passpatro9', 'patro9', 'David', 'Jiménez', 4),
-('patro10@mail.com', 'passpatro10', 'patro10', 'Patricia', 'Ruiz', 4),
-('patro11@mail.com', 'passpatro11', 'patro11', 'Miguel', 'Fernández', 4),
-('patro12@mail.com', 'passpatro12', 'patro12', 'Sara', 'Torres', 4);
-
--- Usuarios
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu1@mail.com', 'passusu1', 'usu1', 'Antonio', 'Martínez', 5); 
--- 45
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu2@mail.com', 'passusu2', 'usu2', 'María', 'López', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu3@mail.com', 'passusu3', 'usu3', 'Carlos', 'García', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu4@mail.com', 'passusu4', 'usu4', 'Ana', 'Sánchez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu5@mail.com', 'passusu5', 'usu5', 'Luis', 'Martín', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu6@mail.com', 'passusu6', 'usu6', 'Elena', 'Pérez', 5); 
--- 50
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu7@mail.com', 'passusu7', 'usu7', 'Javier', 'Gómez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu8@mail.com', 'passusu8', 'usu8', 'Laura', 'Hernández', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu9@mail.com', 'passusu9', 'usu9', 'David', 'Jiménez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu10@mail.com', 'passusu10', 'usu10', 'Patricia', 'Ruiz', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu11@mail.com', 'passusu11', 'usu11', 'Miguel', 'Fernández', 5); 
--- 55
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu12@mail.com', 'passusu12', 'usu12', 'Sara', 'Torres', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu13@mail.com', 'passusu13', 'usu13', 'Antonio', 'García', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu14@mail.com', 'passusu14', 'usu14', 'María', 'Martínez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu15@mail.com', 'passusu15', 'usu15', 'Carlos', 'López', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu16@mail.com', 'passusu16', 'usu16', 'Ana', 'García', 5); 
--- 60
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu17@mail.com', 'passusu17', 'usu17', 'Luis', 'Sánchez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu18@mail.com', 'passusu18', 'usu18', 'Elena', 'Martín', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu19@mail.com', 'passusu19', 'usu19', 'Javier', 'Pérez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu20@mail.com', 'passusu20', 'usu20', 'Laura', 'Gómez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu21@mail.com', 'passusu21', 'usu21', 'David', 'Hernández', 5); 
--- 65
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu22@mail.com', 'passusu22', 'usu22', 'Patricia', 'Jiménez', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu23@mail.com', 'passusu23', 'usu23', 'Miguel', 'Ruiz', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu24@mail.com', 'passusu24', 'usu24', 'Sara', 'Fernández', 5);
-INSERT INTO `usuarios` (`email`, `password`, `nick`, `nombre`, `apellidos`, `rol`) VALUES ('usu25@mail.com', 'passusu25', 'usu25', 'Antonio', 'Torres', 5); 
--- 69
-
+INSERT INTO `usuarios` (`id`, `email`, `password`, `nick`, `nombre`, `apellidos`, `fecha_registro`, `registro_confirmado`, `fecha_ultimo_acceso`, `accesos_fallidos`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `rol`) VALUES
+(1, 'sysadmin@gmail.com', '$2y$13$40MMqNysNRGA3u3gZ/b.Cei.mFXodzxg1kkxR7zxQa0vb2658HLne', 'sysadmin', 'sysadmin', 'sysadmin', '2025-01-18 00:32:16', 1, NULL, 0, 0, NULL, NULL, 1),
+(2, 'admin@gmail.com', '$2y$13$Ln8.sZvSQoHLpl2G7sKoKOD0QK.a2kte.aSaFL3naPtrV1ZJ8lGC2', 'admin', 'admin', 'admin', '2025-01-18 00:05:47', 1, '2025-01-18 00:37:55', 0, 0, NULL, NULL, 2),
+(3, 'cliente1@gmail.com', '$2y$13$N2TV0PvHCaYXtncAAfliGeU.gZeIrfs6/Y6W.LQjO1b9OvZscdaQu', 'cliente1', 'cliente1', 'cliente1', '2025-01-18 00:27:47', 1, NULL, 0, 0, NULL, NULL, 5),
+(4, 'patrocinador1@gmail.com', '$2y$13$tyvGlIEv5gvlt7bAAOr.7u6M0ord0mYamyazKHMrjSk3ma0khMwf2', 'patrocinador1', 'patrocinador1', 'patrocinador1', '2025-01-18 00:28:28', 1, NULL, 0, 0, NULL, NULL, 4),
+(5, 'moderador1@gmail.com', '$2y$13$48lbR.34woipFUb/cPkfEOThNKvyBj3Rc5JqbydiSzreEzxkJe7NS', 'moderador1', 'moderador1', 'moderador1', '2025-01-18 00:31:03', 1, NULL, 0, 0, NULL, NULL, 3);
 
 -- Moderadores de zonas
 INSERT INTO `moderadores_zonas` (`moderador_id`, `zona_id`) VALUES (5, @andalucia_id); 

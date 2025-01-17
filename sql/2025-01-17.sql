@@ -39,14 +39,11 @@ CREATE TABLE `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '2', 1737130748),
-('admin', '3', 1737130748),
-('moderador', '5', 1737130748),
-('moderador', '6', 1737130748),
-('normal', '45', 1737130748),
-('normal', '46', 1737130748),
-('normal', '47', 1737130748),
-('patrocinador', '33', 1737130748),
-('patrocinador', '34', 1737130748);
+('moderador', '5', 1737157162),
+('normal', '3', 1737157129),
+('patrocinador', '4', 1737157148),
+('sysadmin', '1', 1737157110);
+
 
 -- --------------------------------------------------------
 
