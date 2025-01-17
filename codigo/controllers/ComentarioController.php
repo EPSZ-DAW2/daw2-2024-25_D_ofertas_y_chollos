@@ -46,7 +46,7 @@ class ComentarioController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index', 'view'],
-                            roles => ['?'],
+                            'roles' => ['?'],
                         ],
                     ],
                 ],
