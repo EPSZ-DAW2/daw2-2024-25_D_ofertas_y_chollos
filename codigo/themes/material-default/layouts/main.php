@@ -55,6 +55,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
                 ['label' => 'Categorías', 'url' => ['categorias/visor']],    
                 ['label' => 'Contacto', 'url' => ['site/contact']],
                 ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                ['label' => 'Registrarse', 'url' => ['usuarios/registro'], 'visible' => Yii::$app->user->isGuest],
                 ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
                         'items' =>
                         [
