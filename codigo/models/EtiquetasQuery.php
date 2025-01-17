@@ -31,4 +31,18 @@ class EtiquetasQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    /**
+     * Añade un contador de ofertas a la consulta
+     *
+     * @return EtiquetasQuery
+     */
+    public function ofertaCount()
+    {
+        return $this->select(['etiquetas.*', 'COUNT(ofertas_etiquetas.oferta_id) AS num_ofertas'])
+            ->leftJoin('ofertas_etiquetas', 'etiquetas.id = ofertas_etiquetas.etiqueta_id')
+            ->groupBy(['etiquetas.id', 'etiquetas.nombre']);
+    }
+    
+
 }

@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\Ofertas;
+
 use Yii;
 
 /**
@@ -67,6 +69,12 @@ class Etiqueta extends \yii\db\ActiveRecord
     public function getUsuariosEtiquetas()
     {
         return $this->hasMany(UsuariosEtiquetas::class, ['etiqueta_id' => 'id']);
+    }
+
+    public function getOfertas()
+    {
+        return $this->hasMany(Ofertas::class, ['id' => 'oferta_id'])
+            ->viaTable('ofertas_etiquetas', ['etiqueta_id' => 'id']);
     }
 
 
