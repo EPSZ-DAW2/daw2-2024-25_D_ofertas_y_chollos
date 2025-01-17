@@ -79,6 +79,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $usuario = Yii::$app->user->identity; // Obtiene el modelo del usuario autenticado
 
+
             //Comprobar si ya ha sido confirmado el usuario si no debe esperar a ser aceptado
             if (!$usuario->usuarioConfirmado()) {
                 Yii::$app->user->logout();

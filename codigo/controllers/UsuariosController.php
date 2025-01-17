@@ -114,7 +114,7 @@ class UsuariosController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())) {
             //si hay cambiamos en la contaseña la encriptamos otra vez
-            if ($model->password) {
+            if (!empty($model->password)) {
                 $model->setPassword($model->password);
             }
 
