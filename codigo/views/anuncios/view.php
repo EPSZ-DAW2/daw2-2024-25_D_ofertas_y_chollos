@@ -6,36 +6,46 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Anuncio $model */
 
-$this->title = $model->id;
+$this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Anuncios'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$this->registerCssFile('@web/themes/material-default/css/anuncio-view.css');
 ?>
 <div class="anuncio-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+
+    <!-- Botones de acción -->
+    <div class="action-buttons">
+        <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('app', '¿Estás seguro de que desea borrar este anuncio?'),
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+
+        <!-- Botón para ir a la oferta que corresponde dicho anuncio -->
+        <?= Html::a('Ver Oferta', ['ofertas/view', 'id' => $model->oferta_id], ['class' => 'btn btn-primary']) ?>
+
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
+        'options' => ['class' => 'table table-bordered detail-view'],
         'attributes' => [
-            'id',
+            
             'titulo',
             'descripcion:ntext',
             'precio',
             'fecha',
-            'oferta_id',
+            
         ],
     ]) ?>
+
+    
 
 </div>
