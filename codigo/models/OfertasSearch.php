@@ -57,6 +57,9 @@ class OfertasSearch extends Ofertas
             return $dataProvider;
         }
 
+        // Filtro automático: solo mostrar ofertas visibles
+        $query->andFilterWhere(['estado' => 'visible']);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -82,7 +85,6 @@ class OfertasSearch extends Ofertas
         $query->andFilterWhere(['like', 'titulo', $this->titulo])
             ->andFilterWhere(['like', 'descripcion', $this->descripcion])
             ->andFilterWhere(['like', 'url_externa', $this->url_externa])
-            ->andFilterWhere(['like', 'estado', $this->estado])
             ->andFilterWhere(['like', 'motivo_denuncia', $this->motivo_denuncia])
             ->andFilterWhere(['like', 'motivo_bloqueo', $this->motivo_bloqueo]);
 
