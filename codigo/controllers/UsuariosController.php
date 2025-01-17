@@ -216,6 +216,11 @@ class UsuariosController extends Controller
 
     public function actionFichaUsuariosAdmin()
     {
+        //Comprobamos que pueda acceder
+
+        if (!Yii::$app->user->can('accederFichaUsuariosAdmin')) {
+            throw new \yii\web\ForbiddenHttpException('No tienes permiso para acceder a esta pagina.');
+        }
         $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
