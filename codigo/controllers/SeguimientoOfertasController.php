@@ -109,4 +109,28 @@ class SeguimientoOfertasController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
+
+    /**
+     * Accion para ver una oferta
+     */
+    public function actionView($id)
+    {
+        $usuarioId = Yii::$app->user->id;
+
+
+        // Verificar que el usuario está siguiendo la oferta
+        $seguimiento = Seguimientos::findOne(['usuario_id' => $usuarioId, 'oferta_id' => $id]);
+        if (!$seguimiento) {
+            throw new NotFoundHttpException('No estás siguiendo esta oferta.');
+        }
+
+        // Cargar la oferta asociada
+        $oferta = $seguimiento->oferta;
+
+        return $this->render('view', [
+            'model' => $oferta,
+        ]);
+    }
 }

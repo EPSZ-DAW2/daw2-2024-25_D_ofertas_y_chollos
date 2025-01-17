@@ -10,7 +10,7 @@ $this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => 'Ofertas en Seguimiento', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="seguimientos-ofertas-view">
+<div class="ficha-resumen">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= DetailView::widget([

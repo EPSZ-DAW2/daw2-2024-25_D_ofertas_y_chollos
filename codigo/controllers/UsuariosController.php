@@ -71,6 +71,7 @@ class UsuariosController extends Controller
     public function actionCreate()
     {
         $model = new Usuarios();
+        $auth = Yii::$app->authManager;
         $roles = Roles::getListaRoles();
 
 
@@ -81,6 +82,18 @@ class UsuariosController extends Controller
 
 
                 if ($model->save()) {
+
+                    $rolNombre = $roles[$model->rol] ?? 'normal'; //Por defecto es nomal
+
+
+                    $rol = $auth->getRole($rolNombre);
+
+                    if ($rol) {
+                        // Asignar el rol al usuario en auth_assignment
+                        $auth->assign($rol, $model->id);
+                    }
+
+
                     Yii::$app->session->setFlash('sucess', 'Usuario creado correctamente'); //mensaje de éxito
                     return $this->redirect(['view', 'id' => $model->id]);
                 } else {
@@ -109,23 +122,46 @@ class UsuariosController extends Controller
     {
         $model = $this->findModel($id);
 
+        // Obtener lista de roles desde la tabla roles
+        $roles = Roles::getListaRoles(); // Devuelve un array de ['id' => 'nombre']
 
-        $roles = Roles::getListaRoles();
+        // Inicializar AuthManager
+        $auth = Yii::$app->authManager;
 
         if ($this->request->isPost && $model->load($this->request->post())) {
-            //si hay cambiamos en la contaseña la encriptamos otra vez
+            // Si no se introduce una contraseña nueva, mantener la existente
             if (empty($model->password)) {
                 $model->password = $model->getOldAttribute('password');
             } else {
-                // Si se introduce una nueva contraseña la encriptamos
+                // Si se introduce una nueva contraseña, encriptarla
                 $model->setPassword($model->password);
             }
+
+            // Guardar cambios en la tabla usuarios
             if ($model->save()) {
-                Yii::$app->session->setFlash('sucess', 'El usuario ha sido actualizado'); //mensaje de éxito
+                // Obtener el rol actual asignado en auth_assignment
+                $currentRoles = $auth->getRolesByUser($model->id);
+                $currentRole = !empty($currentRoles) ? key($currentRoles) : null;
+
+                // Obtener el nombre del nuevo rol a partir del ID del rol
+                $nuevoRolNombre = $roles[$model->rol] ?? null;
+
+                // Verificar si el rol en la tabla usuarios es diferente al de auth_assignment
+                if ($currentRole !== $nuevoRolNombre) {
+                    // Revocar todos los roles actuales
+                    $auth->revokeAll($model->id);
+
+                    // Asignar el nuevo rol si existe
+                    $nuevoRol = $auth->getRole($nuevoRolNombre);
+                    if ($nuevoRol) {
+                        $auth->assign($nuevoRol, $model->id);
+                    }
+                }
+
+                Yii::$app->session->setFlash('success', 'El usuario ha sido actualizado correctamente.');
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-
-                Yii::$app->session->setFlash('error', 'Error al actualizar'); //mensaje de error
+                Yii::$app->session->setFlash('error', 'Hubo un error al intentar actualizar el usuario.');
             }
         }
 
@@ -134,6 +170,7 @@ class UsuariosController extends Controller
             'roles' => $roles,
         ]);
     }
+
 
     /**
      * Deletes an existing Usuarios model.
@@ -144,7 +181,16 @@ class UsuariosController extends Controller
      */
     public function actionDelete($id)
     {
+
+        $auth = Yii::$app->authManager;
+
+
+        $auth->revokeAll($id); //Eliminar de la tabla todos los roles del usuario
+
+
         $this->findModel($id)->delete();
+
+
 
         Yii::$app->session->setFlash('sucess', 'Usuario eliminado correctamente');
 
@@ -196,6 +242,13 @@ class UsuariosController extends Controller
 
 
                 if ($model->save()) {
+                    //Cualquier usuarios que se registre tendra rol usuario
+                    $auth = Yii::$app->authManager;
+                    $rol = $auth->getRole('normal');
+                    if ($rol) {
+                        $auth->assign($rol, $model->id); //Asignar rol al usuario creado
+                    }
+
                     Yii::$app->session->setFlash('success', 'Registro correcto. Espera hasta que tu cuenta sea aceptada');
                     return $this->redirect(['site/login']);
                 } else {
@@ -390,6 +443,9 @@ class UsuariosController extends Controller
         if (!$usuario) {
             throw new NotFoundHttpException('No se ha encontrado el usuario.');
         }
+
+        //eliminar datos en tabla rbac
+        $auth = Yii::$app->authManager;
 
         //Eliminamos al usuario y los datos relacionados con el
         if ($usuario->delete()) {
