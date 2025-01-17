@@ -30,7 +30,7 @@ class Log extends \yii\db\ActiveRecord
     {
         return [
             [['fecha_hora'], 'safe'],
-            [['nivel'], 'string'],
+            [['nivel'], 'string', 'max' => 20],
             [['modulo'], 'string', 'max' => 50],
             [['descripcion'], 'string', 'max' => 250],
         ];
