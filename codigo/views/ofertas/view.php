@@ -19,6 +19,7 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
 
     <!-- Botones de acción -->
     <div class="action-buttons">
+    <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin'): ?>
         <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -29,33 +30,36 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         ]) ?>
         <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-
-        <?php if ($model->patrocinador_id === null): ?>
-    <?php if (!Yii::$app->user->isGuest): ?>
-        <?= Html::a(Yii::t('app', 'Patrocinar'), ['ofertas/patrocinar', 'id' => $model->id], [
-            'class' => 'btn btn-info',
-            'data' => [
-                'confirm' => Yii::t('app', '¿Estás seguro de que quieres patrocinar esta oferta?'),
-                'method' => 'post',
-            ],
-        ]) ?>
     <?php endif; ?>
-<?php else: ?>
-    <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
-<?php endif; ?>
 
+    <?php if ($model->patrocinador_id === null): ?>
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <?= Html::a(Yii::t('app', 'Patrocinar'), ['ofertas/patrocinar', 'id' => $model->id], [
+                'class' => 'btn btn-info',
+                'data' => [
+                    'confirm' => Yii::t('app', '¿Estás seguro de que quieres patrocinar esta oferta?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php endif; ?>
+    <?php else: ?>
+        <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
+    <?php endif; ?>
+</div>
 
-    </div>
 
     <!-- Seguimiento -->
     <div class="follow-section">
-        <?php if ($esSeguidor): ?>
-            <?= Html::a(Yii::t('app', 'Dejar de Seguir'), ['dejar-de-seguir', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
-        <?php else: ?>
-            <?= Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <?php if ($esSeguidor): ?>
+                <?= Html::a(Yii::t('app', 'Dejar de Seguir'), ['dejar-de-seguir', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+            <?php else: ?>
+                <?= Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php endif; ?>
         <?php endif; ?>
         <p><strong>Total de seguidores:</strong> <?= $model->getSeguidores()->count() ?></p>
     </div>
+
 
     <!-- Detalles de la oferta -->
     <?= DetailView::widget([
