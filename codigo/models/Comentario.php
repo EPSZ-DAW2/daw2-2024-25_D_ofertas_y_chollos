@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Ofertas;
 
 /**
  * This is the model class for table "comentarios".
@@ -48,11 +49,11 @@ class Comentario extends \yii\db\ActiveRecord
             [['texto'], 'required'],
             [['texto', 'motivo_denuncia', 'motivo_bloqueo'], 'string'],
             [['fecha_primer_denuncia', 'fecha_bloqueo', 'fecha_creacion', 'fecha_modificacion'], 'safe'],
-            [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Oferta::class, 'targetAttribute' => ['oferta_id' => 'id']],
+            [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
             [['comentario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_origen_id' => 'id']],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::class, 'targetAttribute' => ['usuario_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_id' => 'id']],
             // Filtro automático para palabras inapropiadas
-            ['texto', 'filter', 'filter' => function($value) {
+            ['texto', 'filter', 'filter' => function ($value) {
                 $palabrasProhibidas = Yii::$app->params['palabrasProhibidas'];
                 foreach ($palabrasProhibidas as $palabra) {
                     $value = preg_replace('/' . preg_quote($palabra, '/') . '/iu', '****', $value);
@@ -122,7 +123,7 @@ class Comentario extends \yii\db\ActiveRecord
      */
     public function getOferta()
     {
-        return $this->hasOne(Oferta::class, ['id' => 'oferta_id']);
+        return $this->hasOne(Ofertas::class, ['id' => 'oferta_id']);
     }
 
     /**
