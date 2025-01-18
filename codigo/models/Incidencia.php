@@ -12,15 +12,13 @@ use Yii;
  * @property string|null $clase
  * @property string|null $texto
  * @property int|null $usuario_origen_id
- * @property int|null $usuario_destino_id
  * @property int|null $oferta_id
  * @property int|null $comentario_id
  * @property string|null $fecha_lectura
  * @property string|null $fecha_aceptado
  *
- * @property Comentarios $comentario
+ * @property Comentario $comentario
  * @property Ofertas $oferta
- * @property Usuarios $usuarioDestino
  * @property Usuarios $usuarioOrigen
  */
 class Incidencia extends \yii\db\ActiveRecord
@@ -41,12 +39,12 @@ class Incidencia extends \yii\db\ActiveRecord
         return [
             [['fecha_hora', 'fecha_lectura', 'fecha_aceptado'], 'safe'],
             [['texto'], 'string'],
-            [['usuario_origen_id', 'usuario_destino_id', 'oferta_id', 'comentario_id'], 'integer'],
+            [['usuario_origen_id', 'oferta_id', 'comentario_id'], 'integer'],
             [['clase'], 'string', 'max' => 50],
             [['usuario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_origen_id' => 'id']],
-            [['usuario_destino_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_destino_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
-            [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::class, 'targetAttribute' => ['comentario_id' => 'id']],
+            [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_id' => 'id']],
+            [['oferta_id', 'comentario_id'], 'default', 'value' => null],
         ];
     }
 
@@ -61,7 +59,6 @@ class Incidencia extends \yii\db\ActiveRecord
             'clase' => Yii::t('app', 'Clase'),
             'texto' => Yii::t('app', 'Texto'),
             'usuario_origen_id' => Yii::t('app', 'Usuario Origen ID'),
-            'usuario_destino_id' => Yii::t('app', 'Usuario Destino ID'),
             'oferta_id' => Yii::t('app', 'Oferta ID'),
             'comentario_id' => Yii::t('app', 'Comentario ID'),
             'fecha_lectura' => Yii::t('app', 'Fecha Lectura'),
@@ -87,16 +84,6 @@ class Incidencia extends \yii\db\ActiveRecord
     public function getOferta()
     {
         return $this->hasOne(Ofertas::class, ['id' => 'oferta_id']);
-    }
-
-    /**
-     * Gets query for [[UsuarioDestino]].
-     *
-     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
-     */
-    public function getUsuarioDestino()
-    {
-        return $this->hasOne(Usuarios::class, ['id' => 'usuario_destino_id']);
     }
 
     /**

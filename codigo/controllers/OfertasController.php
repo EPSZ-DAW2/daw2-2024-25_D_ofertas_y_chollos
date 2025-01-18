@@ -246,5 +246,64 @@ class OfertasController extends Controller
             'fecha_inicio' => $fecha_inicio,
         ]);
     }
+    public function actionPatrocinar($id)
+    {
+        $model = $this->findModel($id);
     
+        if (!$model) {
+            throw new NotFoundHttpException('La oferta no existe.');
+        }
+    
+        // Verificar si ya está patrocinada
+        if ($model->patrocinador_id !== null) {
+            Yii::$app->session->setFlash('error', 'Esta oferta ya está patrocinada.');
+            return $this->redirect(['view', 'id' => $id]);
+        }
+    
+        // Asignar el usuario actual como patrocinador
+        $model->patrocinador_id = Yii::$app->user->id;
+        $model->patrocinada = 1; // Marcar como patrocinada
+    
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Has patrocinado esta oferta exitosamente.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo patrocinar esta oferta.');
+        }
+    
+        return $this->redirect(['view', 'id' => $id]);
+    }
+    
+    
+    
+    public function actionPatrocinadas()
+    {
+        $ofertasPatrocinadas = Ofertas::find()
+            ->where(['patrocinada' => 1]) // Solo ofertas marcadas como patrocinadas
+            ->with('patrocinador') // Cargar la relación con el patrocinador
+            ->all();
+    
+        return $this->render('patrocinadas', [
+            'ofertasPatrocinadas' => $ofertasPatrocinadas,
+        ]);
+    }
+
+    public function actionDestacar($id)
+{
+    $usuarioId = Yii::$app->user->id;
+
+    if (!$usuarioId) {
+        return $this->redirect(['site/login']); // Redirigir a login si no está autenticado
+    }
+
+    $model = $this->findModel($id);
+    $model->destacada = 1; // Cambiar la columna 'destacada' a 1
+    $model->save();
+
+    Yii::$app->session->setFlash('success', 'La oferta ha sido destacada exitosamente.');
+    return $this->redirect(['ofertas/view', 'id' => $id]);
+}
+
+    
+
+
 }

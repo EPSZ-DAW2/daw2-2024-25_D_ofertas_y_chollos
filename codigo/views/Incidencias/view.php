@@ -34,12 +34,10 @@ $this->registerCssFile('@web/themes/material-default/css/incidencia-view.css');
         'model' => $model,
         'attributes' => [
             'id',
-            
-            'clase',
             'fecha_hora',
+            'clase',
             'texto:ntext',
             'usuario_origen_id',
-            'usuario_destino_id',
             [
                 'attribute' => 'oferta_id',
                 'visible' => !is_null($model->oferta_id),
@@ -64,4 +62,3 @@ $this->registerCssFile('@web/themes/material-default/css/incidencia-view.css');
     </div>
 
 </div>
-

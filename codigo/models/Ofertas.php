@@ -75,6 +75,9 @@ class Ofertas extends \yii\db\ActiveRecord
             [['proveedor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedores::class, 'targetAttribute' => ['proveedor_id' => 'id']],
             [['usuario_creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_creador_id' => 'id']],
             [['usuario_modificador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_modificador_id' => 'id']],
+            [['patrocinador_id'], 'integer'],
+            [['patrocinador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['patrocinador_id' => 'id']],
+            [['patrocinada'], 'boolean'],
         ];
     }
 
@@ -286,4 +289,17 @@ class Ofertas extends \yii\db\ActiveRecord
     {
         return new OfertasQuery(get_called_class());
     }
+
+    public function getPatrocinador()
+    {
+        return $this->hasOne(Usuarios::class, ['id' => 'patrocinador_id']);
+    }
+
+    // Método para asignar un patrocinador
+    public function asignarPatrocinador($usuarioId)
+    {
+        $this->patrocinador_id = $usuarioId;
+        return $this->save();
+    }
+
 }

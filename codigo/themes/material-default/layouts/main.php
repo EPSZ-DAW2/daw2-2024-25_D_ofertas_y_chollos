@@ -41,29 +41,37 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </header>
 
-
   <nav class="light-blue lighten-1" role="navigation">
     <div class="container">
-      <div class="nav-wrapper">
-        <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
-        <?= Menu::widget([
-            'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
-            'items' => [
-                ['label' => 'Inicio', 'url' => ['site/index']],
-                ['label' => 'Ofertas', 'url' => ['ofertas/visor']],
-                ['label' => 'Anuncios', 'url' => ['anuncios/visor']],
-                ['label' => 'Categorías', 'url' => ['categorias/visor']],    
-                ['label' => 'Contacto', 'url' => ['site/contact']],
-                ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => 'Registrarse', 'url' => ['usuarios/registro'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
-                        'items' =>
-                        [
-                            ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
-                        ],'visible' => !Yii::$app->user->isGuest,],
-            ],
+        <div class="nav-wrapper">
+            <?= Menu::widget([
+                'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
+                'items' => [
+                    ['label' => 'Inicio', 'url' => ['site/index']],
+                    ['label' => 'Ofertas', 'url' => ['ofertas/visor']],
+                    ['label' => 'Anuncios', 'url' => ['anuncios/visor']],
+                    ['label' => 'Categorías', 'url' => ['categorias/visor']],
+                    ['label' => 'Contacto', 'url' => ['site/contact']],
+                    
+                    // Opciones para invitados
+                    ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Registrarse', 'url' => ['usuarios/registro'], 'visible' => Yii::$app->user->isGuest],
 
-        ]); ?>
+                    // Opciones para usuarios logueados
+                    ['label' => 'Mi perfil', 'url' => ['usuarios/mi-perfil'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
+                        'items' => [
+                            ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                        ],
+                        'visible' => !Yii::$app->user->isGuest,
+                    ],
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+
+
         
      
         
@@ -81,11 +89,41 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </nav>
 
+
+
+
+
+
         <div class="container-nav">
           <div class="navbar" id="navbar">
               <?= EtiquetasWidget::widget() ?>
           </div>
         </div>
+
+        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getNombreRol() === 'admin'): ?>
+    <div class="admin-menu">
+        <h3>Mantenimiento Admin</h3>
+        <?= Menu::widget([
+            'items' => [
+                ['label' => ' Ofertas', 'url' => ['ofertas/index']],
+                ['label' => 'Anuncios', 'url' => ['anuncios/index']],
+                ['label' => 'Categorías', 'url' => ['categorias/index']],
+                ['label' => 'Comentarios', 'url' => ['comentario/index']],
+                ['label' => 'Etiquetas', 'url' => ['etiquetas/index']],
+                ['label' => 'Incidencias', 'url' => ['incidencias/index']],
+                ['label' => 'Usuarios', 'url' => ['usuarios/index']],
+                ['label' => 'Logs', 'url' => ['logs/index']],
+                ['label' => 'Mensajes', 'url' => ['mensajes/index']],
+                ['label' => 'Patrocinadores', 'url' => ['patrocinadores/index']],
+                ['label' => 'Preferencias', 'url' => ['preferencias/index']],
+            ],
+            'options' => ['class' => 'nav nav-pills nav-horizontal'],
+        ]) ?>
+    </div>
+<?php endif; ?>
+
+
+
 
   <div class="container">
     <div class="section">
@@ -97,6 +135,7 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </div>
 
+  
   
   
   <footer class="color-footer">
