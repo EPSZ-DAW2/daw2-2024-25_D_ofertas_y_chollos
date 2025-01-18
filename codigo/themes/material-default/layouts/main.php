@@ -44,7 +44,6 @@ use app\views\etiquetas\EtiquetasWidget; ?>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
             <?= Menu::widget([
                 'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
                 'items' => [
