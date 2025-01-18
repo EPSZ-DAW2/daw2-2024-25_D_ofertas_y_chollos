@@ -246,5 +246,42 @@ class OfertasController extends Controller
             'fecha_inicio' => $fecha_inicio,
         ]);
     }
+    public function actionPatrocinar($id)
+    {
+        $model = Ofertas::findOne($id);
     
+        if (!$model) {
+            throw new NotFoundHttpException('La oferta no existe.');
+        }
+    
+        if ($model->patrocinador_id !== null) {
+            Yii::$app->session->setFlash('error', 'Esta oferta ya está patrocinada.');
+            return $this->redirect(['view', 'id' => $id]);
+        }
+    
+        $model->patrocinador_id = Yii::$app->user->id;
+    
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Has patrocinado esta oferta exitosamente.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo patrocinar esta oferta.');
+        }
+    
+        return $this->redirect(['view', 'id' => $id]);
+    }
+    
+    
+    public function actionPatrocinadas()
+{
+    $ofertasPatrocinadas = Ofertas::find()
+        ->where(['IS NOT', 'patrocinador_id', null]) // Filtra solo las patrocinadas
+        ->with('patrocinador') // Carga la relación del patrocinador
+        ->all();
+
+    return $this->render('patrocinadas', [
+        'ofertasPatrocinadas' => $ofertasPatrocinadas,
+    ]);
+}
+
+
 }

@@ -274,4 +274,17 @@ class Ofertas extends \yii\db\ActiveRecord
     {
         return new OfertasQuery(get_called_class());
     }
+
+    public function getPatrocinador()
+    {
+        return $this->hasOne(Usuarios::class, ['id' => 'patrocinador_id']);
+    }
+
+    // Método para asignar un patrocinador
+    public function asignarPatrocinador($usuarioId)
+    {
+        $this->patrocinador_id = $usuarioId;
+        return $this->save();
+    }
+
 }

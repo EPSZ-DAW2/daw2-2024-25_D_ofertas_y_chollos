@@ -29,6 +29,18 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         ]) ?>
         <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
         <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+
+        <?php if ($model->patrocinador_id === null): ?>
+            <?= Html::a(Yii::t('app', 'Patrocinar'), ['ofertas/patrocinadas', 'id' => $model->id], [
+                'class' => 'btn btn-info',
+                'data' => [
+                    'confirm' => Yii::t('app', '¿Estás seguro de que quieres patrocinar esta oferta?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php else: ?>
+            <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
+        <?php endif; ?>
     </div>
 
     <!-- Seguimiento -->
