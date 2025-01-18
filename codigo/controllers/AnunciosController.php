@@ -182,9 +182,11 @@ class AnunciosController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
     public function actionVisor()
-{
+    {
     // Consulta para obtener todos los anuncios activos
-    $query = Anuncio::find()->orderBy(['fecha' => SORT_DESC]);
+    $query = Anuncio::find()
+        ->where(['estado' => 'visible'])
+        ->orderBy(['fecha' => SORT_DESC]);
 
     // Paginación
     $pagination = new \yii\data\Pagination([
@@ -202,6 +204,23 @@ class AnunciosController extends Controller
         'anuncios' => $anuncios,
         'pagination' => $pagination,
     ]);
-}
+    }
+
+
+    public function actionBloquear($id)
+    {
+        $model = $this->findModel($id);
+        $model->estado = 'bloqueado';
+        $model->save();
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    public function actionDesbloquear($id)
+    {
+        $model = $this->findModel($id);
+        $model->estado = 'visible';
+        $model->save();
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
 
 }
