@@ -4,7 +4,6 @@ USE `daw_proyectod`;
 
 
 
-
 INSERT INTO `anuncios` (`titulo`, `descripcion`, `precio`, `fecha`, `oferta_id`)
 SELECT 
     CONCAT('Anuncio ', `titulo`),

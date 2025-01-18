@@ -4,6 +4,7 @@ SET time_zone = "+00:00";
 SET AUTOCOMMIT=0;
 START TRANSACTION;
 
+
 -- Creación de la base de datos
 DROP DATABASE IF EXISTS `daw_proyectod`;
 CREATE DATABASE IF NOT EXISTS `daw_proyectod`

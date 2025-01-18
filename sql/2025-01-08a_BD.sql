@@ -6,6 +6,7 @@ START TRANSACTION;
 
 USE `daw_proyectod`;
 
+
 -- Tabla de anuncios de ofertas
 CREATE TABLE `anuncios` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,

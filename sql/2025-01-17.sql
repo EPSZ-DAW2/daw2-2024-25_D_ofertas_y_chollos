@@ -50,6 +50,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 
 -- --------------------------------------------------------
 
+
 --
 -- Estructura de tabla para la tabla `auth_item`
 --

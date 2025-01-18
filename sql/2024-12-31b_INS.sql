@@ -205,6 +205,7 @@ INSERT INTO `categorias` (`nombre`, `descripcion`, `categoria_padre_id`) VALUES
 ('Pescado', 'Pescado fresco y de calidad', @aliment_id);
 
 
+
 -- Actualización del campo revisado
 UPDATE `categorias`
 SET `revisado` = TRUE;
