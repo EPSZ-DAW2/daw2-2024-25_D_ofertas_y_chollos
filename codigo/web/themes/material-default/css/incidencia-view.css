@@ -1,0 +1,65 @@
+.incidencia-view {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.incidencia-view h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.incidencia-view p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.follow-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.follow-section p {
+    font-size: 16px;
+    color: #555;
+}
+
+.detail-view {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.detail-view th {
+    text-align: left;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.detail-view td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.detail-view tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.detail-view tr:nth-child(odd) {
+    background-color: #ffffff;
+}
