@@ -28,6 +28,8 @@ $this->registerCssFile('@web/themes/material-default/css/anuncio-view.css');
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?php endif; ?>
 
         <!-- Botón para ir a la oferta que corresponde dicho anuncio -->
@@ -44,6 +46,7 @@ $this->registerCssFile('@web/themes/material-default/css/anuncio-view.css');
             'descripcion:ntext',
             'precio',
             'fecha',
+            'estado',
             
         ],
     ]) ?>
