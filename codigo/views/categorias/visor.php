@@ -3,16 +3,20 @@ use yii\helpers\Html;
 use app\models\Categorias;
 $this->title = Yii::t('app', 'Categorías');
 $this->params['breadcrumbs'][] = $this->title;
+$this->registerCssFile('@web/themes/material-default/css/visor.css');
 ?>
 
 
-<div class='site-index'>
-    <h1><?= Html::encode($this->title) ?></h1>
-        
-    <?php if(!Yii::$app->user->isGuest && (Yii::$app->user->identity->rol == 1 || Yii::$app->user->identity->rol == 2 || Yii::$app->user->identity->rol == 3)): ?>
-        <?= Html::a(Yii::t('app', 'Crear Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Lista de categorías'), ['index'], ['class' => 'btn btn-success']) ?>
-    <?php endif?>
+<div class='visor-container'>
+    
+    <div class="visor-header">  
+        <?php if(!Yii::$app->user->isGuest && (Yii::$app->user->identity->rol == 1 || Yii::$app->user->identity->rol == 2 || Yii::$app->user->identity->rol == 3)): ?>
+            <?= Html::a(Yii::t('app', 'Crear Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Yii::t('app', 'Lista de categorías'), ['index'], ['class' => 'btn btn-success']) ?>
+        <?php endif?>
+    </div>
+
+    <h1 class="visor-title">Visor de <?= Html::encode($this->title) ?></h1>
 
     <!-- CONTENEDOR FLEX PARA LOS BUSCADORES -->
     <div class="search-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -31,16 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="offers">
-        <?php foreach ($models as $categoria): ?>
-            <div class="offer">
-                <h2><?= Html::encode($categoria->nombre)?></h2>
-                <p>Descripción: <?= Html::encode($categoria->descripcion) ?></p>
-                <?php if($categoria->categoria_padre_id != NULL): ?>
-                    <p>Categoría padre: <?= Html::encode($categoria->categoriaPadre == NULL ? '' : $categoria->categoriaPadre->nombre) ?></p>
-                <?php endif ?>
-                <?= Html::a('Ver Detalles', ['categorias/view', 'id'=> $categoria->id], ['class' => 'btn btn-success']) ?>
-            </div>
-        <?php endforeach; ?>
+    <div class="section">
+        <div class="ofertas-list">
+            <?php foreach ($models as $categoria): ?>
+                <div class="oferta-card">
+                    <h2><?= Html::encode($categoria->nombre)?></h2>
+                    <p>Descripción: <?= Html::encode($categoria->descripcion) ?></p>
+                    <?php if($categoria->categoria_padre_id != NULL): ?>
+                        <p>Categoría padre: <?= Html::encode($categoria->categoriaPadre == NULL ? '' : $categoria->categoriaPadre->nombre) ?></p>
+                    <?php endif ?>
+                    <?= Html::a('Ver Detalles', ['categorias/view', 'id'=> $categoria->id], ['class' => 'btn btn-success']) ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
