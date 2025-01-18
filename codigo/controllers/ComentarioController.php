@@ -24,44 +24,21 @@ class ComentarioController extends Controller
             parent::behaviors(),
             [
                 'access' => [
-                    'class' => AccessControl::className(),
-                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear', 'revisar-denuncias'],
+                    'class' => \yii\filters\AccessControl::class,
+                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear'],
                     'rules' => [
-                        // Administradores
                         [
                             'allow' => true,
-                            'actions' => ['bloquear', 'desbloquear', 'revisar-denuncias', 'delete', 'update'],
-                            'roles' => ['@'],
-                            'matchCallback' => function ($rule, $action) {
-                                return Yii::$app->user->identity->rol === 'admin';
-                            },
+                            'roles' => ['admin'], // Solo administradores
                         ],
-                        // Usuarios autenticados
                         [
-                            'allow' => true,
-                            'actions' => ['create', 'view'],
-                            'roles' => ['@'],
+                            'allow' => false, // Denegar acceso a todos los demás
                         ],
-                        // Invitados
-                        [
-                            'allow' => true,
-                            'actions' => ['index', 'view'],
-                            'roles' => ['?'],
-                        ],
-                    ],
-                ],
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                        'bloquear' => ['POST'],
-                        'desbloquear' => ['POST'],
                     ],
                 ],
             ]
         );
     }
-
     /**
      * Lists all Comentario models.
      *
