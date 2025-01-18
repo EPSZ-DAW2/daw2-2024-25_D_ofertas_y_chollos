@@ -266,13 +266,11 @@ CREATE TABLE `incidencias` (
     `clase` VARCHAR(50),
     `texto` TEXT,
     `usuario_origen_id` INT,
-    `usuario_destino_id` INT,
     `oferta_id` INT DEFAULT NULL,
     `comentario_id` INT DEFAULT NULL,
     `fecha_lectura` DATETIME DEFAULT NULL,
     `fecha_aceptado` DATETIME DEFAULT NULL,
     FOREIGN KEY (`usuario_origen_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (`usuario_destino_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`oferta_id`) REFERENCES `ofertas`(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`comentario_id`) REFERENCES `comentarios`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;

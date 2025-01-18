@@ -552,9 +552,9 @@ INSERT INTO `seguimientos` (`usuario_id`, `oferta_id`) VALUES (63, 6);
 
 -- Incidencias
 
-INSERT INTO `incidencias` (`fecha_hora`, `clase`, `texto`, `usuario_origen_id`, `usuario_destino_id`, `oferta_id`, `comentario_id`, `fecha_lectura`, `fecha_aceptado`) VALUES 
-(CURRENT_TIMESTAMP, 'Reclamación', 'El producto no coincide con la descripción.', 1, 2, 1, NULL, NULL, NULL),
-(CURRENT_TIMESTAMP, 'Denuncia', 'Comentario inapropiado.', 3, 4, NULL, 1, NULL, NULL);
+INSERT INTO `incidencias` (`fecha_hora`, `clase`, `texto`, `usuario_origen_id`, `oferta_id`, `comentario_id`, `fecha_lectura`, `fecha_aceptado`) VALUES 
+(CURRENT_TIMESTAMP, 'Reclamación', 'El producto no coincide con la descripción.', 1, 1, NULL, NULL, NULL),
+(CURRENT_TIMESTAMP, 'Denuncia', 'Comentario inapropiado.', 3, NULL, 1, NULL, NULL);
 
 
 -- logs
