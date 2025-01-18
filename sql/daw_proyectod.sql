@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-01-2025 a las 00:48:50
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 18-01-2025 a las 20:34:35
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,19 +33,111 @@ CREATE TABLE `anuncios` (
   `descripcion` text NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `fecha` datetime NOT NULL,
-  `oferta_id` int(11) NOT NULL
+  `oferta_id` int(11) NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'visible'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `anuncios`
 --
 
-INSERT INTO `anuncios` (`id`, `titulo`, `descripcion`, `precio`, `fecha`, `oferta_id`) VALUES
-(1, 'Anuncio Oferta 2', 'Descripcion del anuncio de la Oferta 2', 75.00, '2025-01-21 16:15:17', 2),
-(2, 'Anuncio Oferta 4', 'Descripcion del anuncio de la Oferta 4', 40.00, '2025-01-23 16:15:17', 4),
-(3, 'Anuncio Oferta 6', 'Descripcion del anuncio de la Oferta 6', 60.00, '2025-01-25 16:15:17', 6),
-(4, 'Anuncio Oferta 8', 'Descripcion del anuncio de la Oferta 8', 80.00, '2025-01-21 16:15:17', 8),
-(5, 'Anuncio Oferta 10', 'Descripcion del anuncio de la Oferta 10', 100.00, '2025-01-23 16:15:17', 10);
+INSERT INTO `anuncios` (`id`, `titulo`, `descripcion`, `precio`, `fecha`, `oferta_id`, `estado`) VALUES
+(1, 'Traje de gala', 'Traje de gala en color azul, ideal para eventos, disponible en tallas L y XL', '75.00', '2025-01-24 01:06:30', 2, 'visible'),
+(2, 'Banco de pesas', 'Banco de pesas de inicio, ideal para las personas que desean comenzar a utilizar este tipo de material', '40.00', '2025-01-26 01:06:30', 4, 'visible'),
+(3, 'Plaza de garaje', 'Alquiler de plaza de garaje en zona centro, plaza amplia y de fácil acceso', '60.00', '2025-01-28 01:06:30', 6, 'visible'),
+(4, 'Viaje cultural', 'Viaje de 4 días, con excursiones culturales y rutas guiadas por los lugares mas emblemáticos.', '80.00', '2025-01-24 01:06:30', 8, 'visible'),
+(5, 'Volante y pedales', 'Volante y pedales para el uso de videojuegos de conducción, sensibles y de simulación realista', '100.00', '2025-01-26 01:06:30', 10, 'visible');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `auth_assignment`
+--
+
+CREATE TABLE `auth_assignment` (
+  `item_name` varchar(64) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
+  `created_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `auth_assignment`
+--
+
+INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('admin', '2', 1737130748),
+('admin', '3', 1737130748),
+('admin', '70', 1737158885),
+('moderador', '5', 1737130748),
+('moderador', '6', 1737130748),
+('moderador', '72', 1737159453),
+('normal', '45', 1737130748),
+('normal', '46', 1737130748),
+('normal', '47', 1737130748),
+('normal', '71', 1737159302),
+('patrocinador', '33', 1737130748),
+('patrocinador', '34', 1737130748),
+('patrocinador', '73', 1737159436);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `auth_item`
+--
+
+CREATE TABLE `auth_item` (
+  `name` varchar(64) NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text DEFAULT NULL,
+  `rule_name` varchar(64) DEFAULT NULL,
+  `data` longblob DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `auth_item`
+--
+
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('accederFichaUsuariosAdmin', 2, 'Permiso para acceder a la ficha de usuarios del administrador', NULL, NULL, 1737133083, 1737133083),
+('admin', 1, 'Administrador del sistema', NULL, NULL, 1737130748, 1737130748),
+('moderador', 1, 'Moderador de contenido', NULL, NULL, 1737130748, 1737130748),
+('normal', 1, 'Usuario normal del sistema', NULL, NULL, 1737130748, 1737130748),
+('patrocinador', 1, 'Patrocinador de ofertas', NULL, NULL, 1737130748, 1737130748),
+('sysadmin', 1, 'Super Administrador del sistema', NULL, NULL, 1737130748, 1737130748);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `auth_item_child`
+--
+
+CREATE TABLE `auth_item_child` (
+  `parent` varchar(64) NOT NULL,
+  `child` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `auth_item_child`
+--
+
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('admin', 'accederFichaUsuariosAdmin'),
+('sysadmin', 'accederFichaUsuariosAdmin');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `auth_rule`
+--
+
+CREATE TABLE `auth_rule` (
+  `name` varchar(64) NOT NULL,
+  `data` longblob DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -157,36 +249,36 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id`, `oferta_id`, `texto`, `comentario_origen_id`, `cerrado`, `denuncias`, `fecha_primer_denuncia`, `motivo_denuncia`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `usuario_id`, `fecha_creacion`, `fecha_modificacion`) VALUES
-(1, 1, 'Comentario 1', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 45, '2025-01-15 16:15:17', NULL),
-(2, 1, 'Comentario 2', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-15 16:15:17', NULL),
-(3, 1, 'Comentario 3', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 47, '2025-01-15 16:15:17', NULL),
-(4, 2, 'Comentario 4', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 48, '2025-01-15 16:15:17', NULL),
-(5, 2, 'Comentario 5', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 49, '2025-01-15 16:15:17', NULL),
-(6, 2, 'Comentario 6', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 50, '2025-01-15 16:15:17', NULL),
-(7, 3, 'Comentario 7', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 51, '2025-01-15 16:15:17', NULL),
-(8, 3, 'Comentario 8', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 52, '2025-01-15 16:15:17', NULL),
-(9, 3, 'Comentario 9', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 53, '2025-01-15 16:15:17', NULL),
-(10, 4, 'Comentario 10', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 54, '2025-01-15 16:15:17', NULL),
-(11, 4, 'Comentario 11', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 55, '2025-01-15 16:15:17', NULL),
-(12, 4, 'Comentario 12', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 56, '2025-01-15 16:15:17', NULL),
-(13, 5, 'Comentario 13', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 57, '2025-01-15 16:15:17', NULL),
-(14, 5, 'Comentario 14', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 58, '2025-01-15 16:15:17', NULL),
-(15, 5, 'Comentario 15', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 59, '2025-01-15 16:15:17', NULL),
-(16, 6, 'Comentario 16', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 60, '2025-01-15 16:15:17', NULL),
-(17, 6, 'Comentario 17', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 61, '2025-01-15 16:15:17', NULL),
-(18, 6, 'Comentario 18', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 62, '2025-01-15 16:15:17', NULL),
-(19, 7, 'Comentario 19', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 63, '2025-01-15 16:15:17', NULL),
-(20, 7, 'Comentario 20', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 64, '2025-01-15 16:15:17', NULL),
-(21, 7, 'Comentario 21', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 65, '2025-01-15 16:15:17', NULL),
-(22, 8, 'Comentario 22', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 66, '2025-01-15 16:15:17', NULL),
-(23, 8, 'Comentario 23', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 67, '2025-01-15 16:15:17', NULL),
-(24, 8, 'Comentario 24', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 68, '2025-01-15 16:15:17', NULL),
-(25, 9, 'Comentario 25', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 69, '2025-01-15 16:15:17', NULL),
-(26, 9, 'Comentario 26', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 45, '2025-01-15 16:15:17', NULL),
-(27, 9, 'Comentario 27', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-15 16:15:17', NULL),
-(28, 1, 'Respuesta Comentario 1', 1, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-15 16:15:17', NULL),
-(29, 1, 'Respuesta Comentario 2', 2, 0, 0, NULL, NULL, 0, NULL, NULL, 47, '2025-01-15 16:15:17', NULL),
-(30, 6, 'Respuesta Comentario 16', 16, 0, 0, NULL, NULL, 0, NULL, NULL, 48, '2025-01-15 16:15:17', NULL);
+(1, 1, 'Comentario 1', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 45, '2025-01-18 01:06:30', NULL),
+(2, 1, 'Comentario 2', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-18 01:06:30', NULL),
+(3, 1, 'Comentario 3', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 47, '2025-01-18 01:06:30', NULL),
+(4, 2, 'Comentario 4', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 48, '2025-01-18 01:06:30', NULL),
+(5, 2, 'Comentario 5', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 49, '2025-01-18 01:06:30', NULL),
+(6, 2, 'Comentario 6', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 50, '2025-01-18 01:06:30', NULL),
+(7, 3, 'Comentario 7', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 51, '2025-01-18 01:06:30', NULL),
+(8, 3, 'Comentario 8', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 52, '2025-01-18 01:06:30', NULL),
+(9, 3, 'Comentario 9', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 53, '2025-01-18 01:06:30', NULL),
+(10, 4, 'Comentario 10', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 54, '2025-01-18 01:06:30', NULL),
+(11, 4, 'Comentario 11', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 55, '2025-01-18 01:06:30', NULL),
+(12, 4, 'Comentario 12', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 56, '2025-01-18 01:06:30', NULL),
+(13, 5, 'Comentario 13', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 57, '2025-01-18 01:06:30', NULL),
+(14, 5, 'Comentario 14', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 58, '2025-01-18 01:06:30', NULL),
+(15, 5, 'Comentario 15', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 59, '2025-01-18 01:06:30', NULL),
+(16, 6, 'Comentario 16', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 60, '2025-01-18 01:06:30', NULL),
+(17, 6, 'Comentario 17', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 61, '2025-01-18 01:06:30', NULL),
+(18, 6, 'Comentario 18', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 62, '2025-01-18 01:06:30', NULL),
+(19, 7, 'Comentario 19', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 63, '2025-01-18 01:06:30', NULL),
+(20, 7, 'Comentario 20', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 64, '2025-01-18 01:06:30', NULL),
+(21, 7, 'Comentario 21', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 65, '2025-01-18 01:06:30', NULL),
+(22, 8, 'Comentario 22', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 66, '2025-01-18 01:06:30', NULL),
+(23, 8, 'Comentario 23', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 67, '2025-01-18 01:06:30', NULL),
+(24, 8, 'Comentario 24', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 68, '2025-01-18 01:06:30', NULL),
+(25, 9, 'Comentario 25', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 69, '2025-01-18 01:06:30', NULL),
+(26, 9, 'Comentario 26', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 45, '2025-01-18 01:06:30', NULL),
+(27, 9, 'Comentario 27', NULL, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-18 01:06:30', NULL),
+(28, 1, 'Respuesta Comentario 1', 1, 0, 0, NULL, NULL, 0, NULL, NULL, 46, '2025-01-18 01:06:30', NULL),
+(29, 1, 'Respuesta Comentario 2', 2, 0, 0, NULL, NULL, 0, NULL, NULL, 47, '2025-01-18 01:06:30', NULL),
+(30, 6, 'Respuesta Comentario 16', 16, 0, 0, NULL, NULL, 0, NULL, NULL, 48, '2025-01-18 01:06:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -234,8 +326,8 @@ CREATE TABLE `incidencias` (
 --
 
 INSERT INTO `incidencias` (`id`, `fecha_hora`, `clase`, `texto`, `usuario_origen_id`, `usuario_destino_id`, `oferta_id`, `comentario_id`, `fecha_lectura`, `fecha_aceptado`) VALUES
-(1, '2025-01-15 16:15:17', 'Reclamación', 'El producto no coincide con la descripción.', 1, 2, 1, NULL, NULL, NULL),
-(2, '2025-01-15 16:15:17', 'Denuncia', 'Comentario inapropiado.', 3, 4, NULL, 1, NULL, NULL);
+(1, '2025-01-18 01:06:30', 'Reclamación', 'El producto no coincide con la descripción.', 1, 2, 1, NULL, NULL, NULL),
+(2, '2025-01-18 01:06:30', 'Denuncia', 'Comentario inapropiado.', 3, 4, NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -256,11 +348,11 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `fecha_hora`, `nivel`, `modulo`, `descripcion`) VALUES
-(1, '2025-01-15 16:15:17', 'INFO', 'Autenticación', 'Usuario admin1 inició sesión correctamente.'),
-(2, '2025-01-15 16:15:17', 'WARNING', 'Base de Datos', 'El espacio en disco está por debajo del 10%.'),
-(3, '2025-01-15 16:15:17', 'ERROR', 'API', 'Error al conectar con el servicio externo.'),
-(4, '2025-01-15 16:15:17', 'INFO', 'Registro', 'Nuevo usuario registrado con éxito.'),
-(5, '2025-01-15 16:15:17', 'ERROR', 'Autenticación', 'Intento de inicio de sesión fallido para el usuario admin2.');
+(1, '2025-01-18 01:06:30', 'INFO', 'Autenticación', 'Usuario admin1 inició sesión correctamente.'),
+(2, '2025-01-18 01:06:30', 'WARNING', 'Base de Datos', 'El espacio en disco está por debajo del 10%.'),
+(3, '2025-01-18 01:06:30', 'ERROR', 'API', 'Error al conectar con el servicio externo.'),
+(4, '2025-01-18 01:06:30', 'INFO', 'Registro', 'Nuevo usuario registrado con éxito.'),
+(5, '2025-01-18 01:06:30', 'ERROR', 'Autenticación', 'Intento de inicio de sesión fallido para el usuario admin2.');
 
 -- --------------------------------------------------------
 
@@ -281,21 +373,21 @@ CREATE TABLE `mensajes` (
 --
 
 INSERT INTO `mensajes` (`id`, `fecha_hora`, `texto`, `usuario_origen_id`, `usuario_destino_id`) VALUES
-(1, '2025-01-15 16:15:17', 'Mensaje 1', 45, 46),
-(2, '2025-01-15 16:15:17', 'Mensaje 2', 46, 47),
-(3, '2025-01-15 16:15:17', 'Mensaje 3', 47, 45),
-(4, '2025-01-15 16:15:17', 'Mensaje 4', 48, 49),
-(5, '2025-01-15 16:15:17', 'Mensaje 5', 49, 50),
-(6, '2025-01-15 16:15:17', 'Mensaje 6', 50, 48),
-(7, '2025-01-15 16:15:17', 'Mensaje 7', 51, 52),
-(8, '2025-01-15 16:15:17', 'Mensaje 8', 52, 53),
-(9, '2025-01-15 16:15:17', 'Mensaje 9', 53, 51),
-(10, '2025-01-15 16:15:17', 'Mensaje 10', 54, 55),
-(11, '2025-01-15 16:15:17', 'Mensaje 11', 55, 56),
-(12, '2025-01-15 16:15:17', 'Mensaje 12', 56, 54),
-(13, '2025-01-15 16:15:17', 'Mensaje 13', 57, 58),
-(14, '2025-01-15 16:15:17', 'Mensaje 14', 58, 59),
-(15, '2025-01-15 16:15:17', 'Mensaje 15', 59, 57);
+(1, '2025-01-18 01:06:30', 'Mensaje 1', 45, 46),
+(2, '2025-01-18 01:06:30', 'Mensaje 2', 46, 47),
+(3, '2025-01-18 01:06:30', 'Mensaje 3', 47, 45),
+(4, '2025-01-18 01:06:30', 'Mensaje 4', 48, 49),
+(5, '2025-01-18 01:06:30', 'Mensaje 5', 49, 50),
+(6, '2025-01-18 01:06:30', 'Mensaje 6', 50, 48),
+(7, '2025-01-18 01:06:30', 'Mensaje 7', 51, 52),
+(8, '2025-01-18 01:06:30', 'Mensaje 8', 52, 53),
+(9, '2025-01-18 01:06:30', 'Mensaje 9', 53, 51),
+(10, '2025-01-18 01:06:30', 'Mensaje 10', 54, 55),
+(11, '2025-01-18 01:06:30', 'Mensaje 11', 55, 56),
+(12, '2025-01-18 01:06:30', 'Mensaje 12', 56, 54),
+(13, '2025-01-18 01:06:30', 'Mensaje 13', 57, 58),
+(14, '2025-01-18 01:06:30', 'Mensaje 14', 58, 59),
+(15, '2025-01-18 01:06:30', 'Mensaje 15', 59, 57);
 
 -- --------------------------------------------------------
 
@@ -363,6 +455,8 @@ CREATE TABLE `ofertas` (
   `categoria_id` int(11) DEFAULT NULL,
   `proveedor_id` int(11) DEFAULT NULL,
   `anuncio_destacado` tinyint(1) DEFAULT 0,
+  `patrocinada` tinyint(1) DEFAULT 0,
+  `destacada` tinyint(1) DEFAULT 0,
   `estado` varchar(20) NOT NULL DEFAULT 'visible',
   `denuncias` int(11) DEFAULT 0,
   `fecha_primer_denuncia` datetime DEFAULT NULL,
@@ -374,25 +468,24 @@ CREATE TABLE `ofertas` (
   `fecha_creacion` datetime DEFAULT current_timestamp(),
   `usuario_modificador_id` int(11) DEFAULT NULL,
   `fecha_modificacion` datetime DEFAULT NULL,
-  `destacada` tinyint(1) DEFAULT 0,
-  `patrocinada` tinyint(1) DEFAULT 0
+  `patrocinador_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `ofertas`
 --
 
-INSERT INTO `ofertas` (`id`, `titulo`, `descripcion`, `url_externa`, `fecha_inicio`, `fecha_fin`, `precio_actual`, `precio_original`, `descuento`, `zona_id`, `categoria_id`, `proveedor_id`, `anuncio_destacado`, `estado`, `denuncias`, `fecha_primer_denuncia`, `motivo_denuncia`, `fecha_bloqueo`, `motivo_bloqueo`, `cerrado_comentar`, `usuario_creador_id`, `fecha_creacion`, `usuario_modificador_id`, `fecha_modificacion`, `destacada`, `patrocinada`) VALUES
-(1, 'Oferta 1', 'Descripción de la oferta 1', NULL, '2025-01-15 16:15:17', '2025-01-20 16:15:17', 50.00, 100.00, 50.00, 2, 1, 1, 0, 'activa', 0, NULL, NULL, NULL, NULL, 0, 51, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(2, 'Oferta 2 alex', 'Descripción de la oferta 2', '', '2025-01-15 16:15:17', '2025-01-21 16:15:17', 75.00, 150.00, 50.00, 3, 2, 2, 1, 'activa', 0, NULL, '', NULL, '', 0, 34, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(3, 'Oferta 3', 'Descripción de la oferta 3', '', '2025-01-15 16:15:17', '2025-01-22 16:15:17', 30.00, 60.00, 50.00, 4, 3, 3, 0, 'activa', 0, NULL, '', NULL, '', 0, 53, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(4, 'Oferta 4', 'Descripción de la oferta 4', NULL, '2025-01-15 16:15:17', '2025-01-23 16:15:17', 40.00, 80.00, 50.00, 5, 4, 4, 1, 'visible', 0, NULL, NULL, NULL, NULL, 0, 35, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(5, 'Oferta 5', 'Descripción de la oferta 5', NULL, '2025-01-15 16:15:17', '2025-01-24 16:15:17', 20.00, 40.00, 50.00, 6, 5, 5, 0, 'visible', 0, NULL, NULL, NULL, NULL, 0, 55, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(6, 'Oferta 6', 'Descripción de la oferta 6', NULL, '2025-01-15 16:15:17', '2025-01-25 16:15:17', 60.00, 120.00, 50.00, 7, 6, 6, 1, 'visible', 0, NULL, NULL, NULL, NULL, 0, 36, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(7, 'Oferta 7', 'Descripción de la oferta 7', NULL, '2025-01-15 16:15:17', '2025-01-20 16:15:17', 90.00, 180.00, 50.00, 8, 7, 7, 0, 'visible', 0, NULL, NULL, NULL, NULL, 0, 57, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(8, 'Oferta 8', 'Descripción de la oferta 8', NULL, '2025-01-15 16:15:17', '2025-01-21 16:15:17', 80.00, 160.00, 50.00, 9, 8, 8, 1, 'visible', 0, NULL, NULL, NULL, NULL, 0, 38, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(9, 'Oferta 9', 'Descripción de la oferta 9', NULL, '2025-01-15 16:15:17', '2025-01-22 16:15:17', 70.00, 140.00, 50.00, 10, 9, 9, 0, 'visible', 0, NULL, NULL, NULL, NULL, 0, 59, '2025-01-15 16:15:17', NULL, NULL, 0, 0),
-(10, 'Oferta 10', 'Descripción de la oferta 10', '', '2025-01-15 16:15:17', '2025-01-23 16:15:17', 100.00, 200.00, 50.00, 11, 10, 10, 1, 'bloqueada', 0, NULL, '', '2025-01-16 00:27:17', '', 0, 39, '2025-01-15 16:15:17', NULL, NULL, 0, 0);
+INSERT INTO `ofertas` (`id`, `titulo`, `descripcion`, `url_externa`, `fecha_inicio`, `fecha_fin`, `precio_actual`, `precio_original`, `descuento`, `zona_id`, `categoria_id`, `proveedor_id`, `anuncio_destacado`, `patrocinada`, `destacada`, `estado`, `denuncias`, `fecha_primer_denuncia`, `motivo_denuncia`, `fecha_bloqueo`, `motivo_bloqueo`, `cerrado_comentar`, `usuario_creador_id`, `fecha_creacion`, `usuario_modificador_id`, `fecha_modificacion`, `patrocinador_id`) VALUES
+(1, 'Kit básico electrónica', 'Kit básico de electrónica, ideal para principiantes, con todos los componentes necesarios para dar los primeros pasos', '', '2025-01-18 01:06:30', '2025-01-23 01:06:30', '50.00', '100.00', '50.00', 2, 1, 1, 0, 1, 0, 'visible', 0, NULL, '', NULL, '', 0, 51, '2025-01-18 01:06:30', NULL, NULL, 73),
+(2, 'Traje de gala', 'Traje de gala en color azul, ideal para eventos, disponible en tallas L y XL', '', '2025-01-18 01:06:30', '2025-01-24 01:06:30', '75.00', '150.00', '50.00', 3, 2, 2, 1, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 34, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(3, 'Mesa salón', 'Mesa ideal para el salón, para poder realizar reuniones y pequeños eventos familiares', '', '2025-01-18 01:06:30', '2025-01-25 01:06:30', '30.00', '60.00', '50.00', 4, 3, 3, 0, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 53, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(4, 'Banco de pesas', 'Banco de pesas de inicio, ideal para las personas que desean comenzar a utilizar este tipo de material', '', '2025-01-18 01:06:30', '2025-01-26 01:06:30', '40.00', '80.00', '50.00', 5, 4, 4, 1, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 35, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(5, 'Kit pinchazos', 'Kit de reparación de pinchazos, compuesto de todo el material necesario, para una emergencia causada por el pinchazo en la rueda de su vehículo', '', '2025-01-18 01:06:30', '2025-01-27 01:06:30', '20.00', '40.00', '50.00', 6, 5, 5, 0, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 55, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(6, 'Plaza de garaje', 'Alquiler de plaza de garaje en zona centro, plaza amplia y de fácil acceso', '', '2025-01-18 01:06:30', '2025-01-28 01:06:30', '60.00', '120.00', '50.00', 7, 6, 6, 1, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 36, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(7, 'Bono ida y vuelta', 'Bono descuento aplicable a billetes de ida y vuelta, para viajes en ave', '', '2025-01-18 01:06:30', '2025-01-23 01:06:30', '90.00', '180.00', '50.00', 8, 7, 7, 0, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 57, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(8, 'Viaje cultural', 'Viaje de 4 días, con excursiones culturales y rutas guiadas por los lugares mas emblemáticos.', '', '2025-01-18 01:06:30', '2025-01-24 01:06:30', '80.00', '160.00', '50.00', 9, 8, 8, 1, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 38, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(9, 'Planchas de pelo', 'Planchas de alisado, con placas cerámicas, temperatura de hasta 200ºC y protección de picos de tensión.', '', '2025-01-18 01:06:30', '2025-01-25 01:06:30', '70.00', '140.00', '50.00', 10, 9, 9, 0, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 59, '2025-01-18 01:06:30', NULL, NULL, NULL),
+(10, 'Volante y pedales', 'Volante y pedales para el uso de videojuegos de conducción, sensibles y de simulación realista', '', '2025-01-18 01:06:30', '2025-01-26 01:06:30', '100.00', '200.00', '50.00', 11, 10, 10, 1, 0, 0, 'visible', 0, NULL, '', NULL, '', 0, 39, '2025-01-18 01:06:30', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -470,33 +563,66 @@ CREATE TABLE `ofertas_valoraciones` (
 --
 
 INSERT INTO `ofertas_valoraciones` (`id`, `oferta_id`, `usuario_id`, `valoracion`, `fecha_valoracion`) VALUES
-(1, 1, 45, 1, '2025-01-15 16:15:17'),
-(2, 1, 46, -1, '2025-01-15 16:15:17'),
-(3, 1, 47, -1, '2025-01-15 16:15:17'),
-(4, 2, 48, 1, '2025-01-15 16:15:17'),
-(5, 2, 49, -1, '2025-01-15 16:15:17'),
-(6, 2, 50, 1, '2025-01-15 16:15:17'),
-(7, 3, 51, -1, '2025-01-15 16:15:17'),
-(8, 3, 52, -1, '2025-01-15 16:15:17'),
-(9, 3, 53, 1, '2025-01-15 16:15:17'),
-(10, 4, 54, 1, '2025-01-15 16:15:17'),
-(11, 4, 55, -1, '2025-01-15 16:15:17'),
-(12, 4, 56, 1, '2025-01-15 16:15:17'),
-(13, 5, 57, -1, '2025-01-15 16:15:17'),
-(14, 5, 58, 1, '2025-01-15 16:15:17'),
-(15, 5, 59, -1, '2025-01-15 16:15:17'),
-(16, 6, 60, 1, '2025-01-15 16:15:17'),
-(17, 6, 61, 1, '2025-01-15 16:15:17'),
-(18, 6, 62, -1, '2025-01-15 16:15:17'),
-(19, 7, 63, 1, '2025-01-15 16:15:17'),
-(20, 7, 64, -1, '2025-01-15 16:15:17'),
-(21, 7, 65, -1, '2025-01-15 16:15:17'),
-(22, 8, 66, 1, '2025-01-15 16:15:17'),
-(23, 8, 67, -1, '2025-01-15 16:15:17'),
-(24, 8, 68, 1, '2025-01-15 16:15:17'),
-(25, 9, 69, -1, '2025-01-15 16:15:17'),
-(26, 9, 45, -1, '2025-01-15 16:15:17'),
-(27, 9, 46, -1, '2025-01-15 16:15:17');
+(1, 1, 45, 1, '2025-01-18 01:06:30'),
+(2, 1, 46, -1, '2025-01-18 01:06:30'),
+(3, 1, 47, -1, '2025-01-18 01:06:30'),
+(4, 2, 48, 1, '2025-01-18 01:06:30'),
+(5, 2, 49, -1, '2025-01-18 01:06:30'),
+(6, 2, 50, 1, '2025-01-18 01:06:30'),
+(7, 3, 51, -1, '2025-01-18 01:06:30'),
+(8, 3, 52, -1, '2025-01-18 01:06:30'),
+(9, 3, 53, 1, '2025-01-18 01:06:30'),
+(10, 4, 54, 1, '2025-01-18 01:06:30'),
+(11, 4, 55, -1, '2025-01-18 01:06:30'),
+(12, 4, 56, 1, '2025-01-18 01:06:30'),
+(13, 5, 57, -1, '2025-01-18 01:06:30'),
+(14, 5, 58, 1, '2025-01-18 01:06:30'),
+(15, 5, 59, -1, '2025-01-18 01:06:30'),
+(16, 6, 60, 1, '2025-01-18 01:06:30'),
+(17, 6, 61, 1, '2025-01-18 01:06:30'),
+(18, 6, 62, -1, '2025-01-18 01:06:30'),
+(19, 7, 63, 1, '2025-01-18 01:06:30'),
+(20, 7, 64, -1, '2025-01-18 01:06:30'),
+(21, 7, 65, -1, '2025-01-18 01:06:30'),
+(22, 8, 66, 1, '2025-01-18 01:06:30'),
+(23, 8, 67, -1, '2025-01-18 01:06:30'),
+(24, 8, 68, 1, '2025-01-18 01:06:30'),
+(25, 9, 69, -1, '2025-01-18 01:06:30'),
+(26, 9, 45, -1, '2025-01-18 01:06:30'),
+(27, 9, 46, -1, '2025-01-18 01:06:30');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `patrocinadores`
+--
+
+CREATE TABLE `patrocinadores` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `aprobado` tinyint(1) DEFAULT 0,
+  `creado_en` timestamp NOT NULL DEFAULT current_timestamp(),
+  `actualizado_en` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `patrocinadores`
+--
+
+INSERT INTO `patrocinadores` (`id`, `usuario_id`, `nombre`, `aprobado`, `creado_en`, `actualizado_en`) VALUES
+(1, 33, 'José', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(2, 34, 'María', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(3, 35, 'Carlos', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(4, 36, 'Ana', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(5, 37, 'Luis', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(6, 38, 'Elena', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(7, 39, 'Javier', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(8, 40, 'Laura', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(9, 41, 'David', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(10, 42, 'Patricia', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(11, 43, 'Miguel', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31'),
+(12, 44, 'Sara', 0, '2025-01-16 14:34:31', '2025-01-16 14:34:31');
 
 -- --------------------------------------------------------
 
@@ -658,75 +784,79 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `password`, `nick`, `nombre`, `apellidos`, `fecha_registro`, `registro_confirmado`, `fecha_ultimo_acceso`, `accesos_fallidos`, `bloqueado`, `fecha_bloqueo`, `motivo_bloqueo`, `rol`) VALUES
-(1, 'super@mail.com', 'passsuper', 'superadmin', 'Paco', 'Giménez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 1),
-(2, 'admin1@mail.com', 'passadmin1', 'admin1', 'Juan', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 2),
-(3, 'admin2@mail.com', 'passadmin2', 'admin2', 'Ana', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 2),
-(4, 'admin3@mail.com', 'passadmin3', 'admin3', 'Luis', 'Sánchez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 2),
-(5, 'modand1@mail.com', 'passmodand1', 'modand1', 'María', 'López', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(6, 'modand2@mail.com', 'passmodand2', 'modand2', 'Pedro', 'Fernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(7, 'modand3@mail.com', 'passmodand3', 'modand3', 'Carmen', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(8, 'modarg1@mail.com', 'passmodarg1', 'modarg1', 'Antonio', 'Rodríguez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(9, 'modast1@mail.com', 'passmodast1', 'modast1', 'Isabel', 'Pérez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(10, 'modbal1@mail.com', 'passmodbal1', 'modbal1', 'Manuel', 'Hernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(11, 'modcan1@mail.com', 'passmodcan1', 'modcan1', 'Rosa', 'Jiménez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(12, 'modcant1@mail.com', 'passmodcant1', 'modcant1', 'Miguel', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(13, 'modcyl1@mail.com', 'passmodcyl1', 'modcyl1', 'Francisco', 'Torres', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(14, 'modcyl2@mail.com', 'passmodcyl2', 'modcyl2', 'Laura', 'Sanz', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(15, 'modcyl3@mail.com', 'passmodcyl3', 'modcyl3', 'Javier', 'Ibáñez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(16, 'modclm1@mail.com', 'passmodclm1', 'modclm1', 'Marina', 'Garrido', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(17, 'modclm2@mail.com', 'passmodclm2', 'modclm2', 'Carlos', 'Gutiérrez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(18, 'modcat1@mail.com', 'passmodcat1', 'modcat1', 'Sara', 'Martín', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(19, 'modcat2@mail.com', 'passmodcat2', 'modcat2', 'David', 'Vega', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(20, 'modext1@mail.com', 'passmodext1', 'modext1', 'Elena', 'Ortega', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(21, 'modgal1@mail.com', 'passmodgal1', 'modgal1', 'Jorge', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(22, 'modgal2@mail.com', 'passmodgal2', 'modgal2', 'Marta', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(23, 'modmad1@mail.com', 'passmodmad1', 'modmad1', 'Víctor', 'Sánchez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(24, 'modmur1@mail.com', 'passmodmur1', 'modmur1', 'Patricia', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(25, 'modnav1@mail.com', 'passmodnav1', 'modnav1', 'Roberto', 'Fernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(26, 'modpv1@mail.com', 'passmodpv1', 'modpv1', 'Eva', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(27, 'modpv2@mail.com', 'passmodpv2', 'modpv2', 'Adrián', 'Sanz', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(28, 'modrio1@mail.com', 'passmodrio1', 'modrio1', 'Cristina', 'Torres', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(29, 'modval1@mail.com', 'passmodval1', 'modval1', 'Sergio', 'Ibáñez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(30, 'modval2@mail.com', 'passmodval2', 'modval2', 'Nuria', 'Garrido', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(31, 'modceu1@mail.com', 'passmodceu1', 'modceu1', 'Óscar', 'Gutiérrez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(32, 'modmel1@mail.com', 'passmodmel1', 'modmel1', 'Raquel', 'Martín', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 3),
-(33, 'patro1@mail.com', 'passpatro1', 'patro1', 'José', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(34, 'patro2@mail.com', 'passpatro2', 'patro2', 'María', 'López', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(35, 'patro3@mail.com', 'passpatro3', 'patro3', 'Carlos', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(36, 'patro4@mail.com', 'passpatro4', 'patro4', 'Ana', 'Sánchez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(37, 'patro5@mail.com', 'passpatro5', 'patro5', 'Luis', 'Martín', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(38, 'patro6@mail.com', 'passpatro6', 'patro6', 'Elena', 'Pérez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(39, 'patro7@mail.com', 'passpatro7', 'patro7', 'Javier', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(40, 'patro8@mail.com', 'passpatro8', 'patro8', 'Laura', 'Hernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(41, 'patro9@mail.com', 'passpatro9', 'patro9', 'David', 'Jiménez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(42, 'patro10@mail.com', 'passpatro10', 'patro10', 'Patricia', 'Ruiz', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(43, 'patro11@mail.com', 'passpatro11', 'patro11', 'Miguel', 'Fernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(44, 'patro12@mail.com', 'passpatro12', 'patro12', 'Sara', 'Torres', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 4),
-(45, 'usu1@mail.com', 'passusu1', 'usu1', 'Antonio', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(46, 'usu2@mail.com', 'passusu2', 'usu2', 'María', 'López', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(47, 'usu3@mail.com', 'passusu3', 'usu3', 'Carlos', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(48, 'usu4@mail.com', 'passusu4', 'usu4', 'Ana', 'Sánchez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(49, 'usu5@mail.com', 'passusu5', 'usu5', 'Luis', 'Martín', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(50, 'usu6@mail.com', 'passusu6', 'usu6', 'Elena', 'Pérez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(51, 'usu7@mail.com', 'passusu7', 'usu7', 'Javier', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(52, 'usu8@mail.com', 'passusu8', 'usu8', 'Laura', 'Hernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(53, 'usu9@mail.com', 'passusu9', 'usu9', 'David', 'Jiménez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(54, 'usu10@mail.com', 'passusu10', 'usu10', 'Patricia', 'Ruiz', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(55, 'usu11@mail.com', 'passusu11', 'usu11', 'Miguel', 'Fernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(56, 'usu12@mail.com', 'passusu12', 'usu12', 'Sara', 'Torres', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(57, 'usu13@mail.com', 'passusu13', 'usu13', 'Antonio', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(58, 'usu14@mail.com', 'passusu14', 'usu14', 'María', 'Martínez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(59, 'usu15@mail.com', 'passusu15', 'usu15', 'Carlos', 'López', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(60, 'usu16@mail.com', 'passusu16', 'usu16', 'Ana', 'García', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(61, 'usu17@mail.com', 'passusu17', 'usu17', 'Luis', 'Sánchez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(62, 'usu18@mail.com', 'passusu18', 'usu18', 'Elena', 'Martín', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(63, 'usu19@mail.com', 'passusu19', 'usu19', 'Javier', 'Pérez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(64, 'usu20@mail.com', 'passusu20', 'usu20', 'Laura', 'Gómez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(65, 'usu21@mail.com', 'passusu21', 'usu21', 'David', 'Hernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(66, 'usu22@mail.com', 'passusu22', 'usu22', 'Patricia', 'Jiménez', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(67, 'usu23@mail.com', 'passusu23', 'usu23', 'Miguel', 'Ruiz', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(68, 'usu24@mail.com', 'passusu24', 'usu24', 'Sara', 'Fernández', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5),
-(69, 'usu25@mail.com', 'passusu25', 'usu25', 'Antonio', 'Torres', '2025-01-15 16:15:17', 0, NULL, 0, 0, NULL, NULL, 5);
+(1, 'super@mail.com', 'passsuper', 'superadmin', 'Paco', 'Giménez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 1),
+(2, 'admin1@mail.com', 'passadmin1', 'admin1', 'Juan', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 2),
+(3, 'admin2@mail.com', 'passadmin2', 'admin2', 'Ana', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 2),
+(4, 'admin3@mail.com', 'passadmin3', 'admin3', 'Luis', 'Sánchez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 2),
+(5, 'modand1@mail.com', 'passmodand1', 'modand1', 'María', 'López', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(6, 'modand2@mail.com', 'passmodand2', 'modand2', 'Pedro', 'Fernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(7, 'modand3@mail.com', 'passmodand3', 'modand3', 'Carmen', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(8, 'modarg1@mail.com', 'passmodarg1', 'modarg1', 'Antonio', 'Rodríguez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(9, 'modast1@mail.com', 'passmodast1', 'modast1', 'Isabel', 'Pérez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(10, 'modbal1@mail.com', 'passmodbal1', 'modbal1', 'Manuel', 'Hernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(11, 'modcan1@mail.com', 'passmodcan1', 'modcan1', 'Rosa', 'Jiménez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(12, 'modcant1@mail.com', 'passmodcant1', 'modcant1', 'Miguel', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(13, 'modcyl1@mail.com', 'passmodcyl1', 'modcyl1', 'Francisco', 'Torres', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(14, 'modcyl2@mail.com', 'passmodcyl2', 'modcyl2', 'Laura', 'Sanz', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(15, 'modcyl3@mail.com', 'passmodcyl3', 'modcyl3', 'Javier', 'Ibáñez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(16, 'modclm1@mail.com', 'passmodclm1', 'modclm1', 'Marina', 'Garrido', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(17, 'modclm2@mail.com', 'passmodclm2', 'modclm2', 'Carlos', 'Gutiérrez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(18, 'modcat1@mail.com', 'passmodcat1', 'modcat1', 'Sara', 'Martín', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(19, 'modcat2@mail.com', 'passmodcat2', 'modcat2', 'David', 'Vega', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(20, 'modext1@mail.com', 'passmodext1', 'modext1', 'Elena', 'Ortega', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(21, 'modgal1@mail.com', 'passmodgal1', 'modgal1', 'Jorge', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(22, 'modgal2@mail.com', 'passmodgal2', 'modgal2', 'Marta', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(23, 'modmad1@mail.com', 'passmodmad1', 'modmad1', 'Víctor', 'Sánchez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(24, 'modmur1@mail.com', 'passmodmur1', 'modmur1', 'Patricia', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(25, 'modnav1@mail.com', 'passmodnav1', 'modnav1', 'Roberto', 'Fernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(26, 'modpv1@mail.com', 'passmodpv1', 'modpv1', 'Eva', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(27, 'modpv2@mail.com', 'passmodpv2', 'modpv2', 'Adrián', 'Sanz', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(28, 'modrio1@mail.com', 'passmodrio1', 'modrio1', 'Cristina', 'Torres', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(29, 'modval1@mail.com', 'passmodval1', 'modval1', 'Sergio', 'Ibáñez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(30, 'modval2@mail.com', 'passmodval2', 'modval2', 'Nuria', 'Garrido', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(31, 'modceu1@mail.com', 'passmodceu1', 'modceu1', 'Óscar', 'Gutiérrez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(32, 'modmel1@mail.com', 'passmodmel1', 'modmel1', 'Raquel', 'Martín', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 3),
+(33, 'patro1@mail.com', 'passpatro1', 'patro1', 'José', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(34, 'patro2@mail.com', 'passpatro2', 'patro2', 'María', 'López', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(35, 'patro3@mail.com', 'passpatro3', 'patro3', 'Carlos', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(36, 'patro4@mail.com', 'passpatro4', 'patro4', 'Ana', 'Sánchez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(37, 'patro5@mail.com', 'passpatro5', 'patro5', 'Luis', 'Martín', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(38, 'patro6@mail.com', 'passpatro6', 'patro6', 'Elena', 'Pérez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(39, 'patro7@mail.com', 'passpatro7', 'patro7', 'Javier', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(40, 'patro8@mail.com', 'passpatro8', 'patro8', 'Laura', 'Hernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(41, 'patro9@mail.com', 'passpatro9', 'patro9', 'David', 'Jiménez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(42, 'patro10@mail.com', 'passpatro10', 'patro10', 'Patricia', 'Ruiz', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(43, 'patro11@mail.com', 'passpatro11', 'patro11', 'Miguel', 'Fernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(44, 'patro12@mail.com', 'passpatro12', 'patro12', 'Sara', 'Torres', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 4),
+(45, 'usu1@mail.com', 'passusu1', 'usu1', 'Antonio', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(46, 'usu2@mail.com', 'passusu2', 'usu2', 'María', 'López', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(47, 'usu3@mail.com', 'passusu3', 'usu3', 'Carlos', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(48, 'usu4@mail.com', 'passusu4', 'usu4', 'Ana', 'Sánchez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(49, 'usu5@mail.com', 'passusu5', 'usu5', 'Luis', 'Martín', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(50, 'usu6@mail.com', 'passusu6', 'usu6', 'Elena', 'Pérez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(51, 'usu7@mail.com', 'passusu7', 'usu7', 'Javier', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(52, 'usu8@mail.com', 'passusu8', 'usu8', 'Laura', 'Hernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(53, 'usu9@mail.com', 'passusu9', 'usu9', 'David', 'Jiménez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(54, 'usu10@mail.com', 'passusu10', 'usu10', 'Patricia', 'Ruiz', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(55, 'usu11@mail.com', 'passusu11', 'usu11', 'Miguel', 'Fernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(56, 'usu12@mail.com', 'passusu12', 'usu12', 'Sara', 'Torres', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(57, 'usu13@mail.com', 'passusu13', 'usu13', 'Antonio', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(58, 'usu14@mail.com', 'passusu14', 'usu14', 'María', 'Martínez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(59, 'usu15@mail.com', 'passusu15', 'usu15', 'Carlos', 'López', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(60, 'usu16@mail.com', 'passusu16', 'usu16', 'Ana', 'García', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(61, 'usu17@mail.com', 'passusu17', 'usu17', 'Luis', 'Sánchez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(62, 'usu18@mail.com', 'passusu18', 'usu18', 'Elena', 'Martín', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(63, 'usu19@mail.com', 'passusu19', 'usu19', 'Javier', 'Pérez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(64, 'usu20@mail.com', 'passusu20', 'usu20', 'Laura', 'Gómez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(65, 'usu21@mail.com', 'passusu21', 'usu21', 'David', 'Hernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(66, 'usu22@mail.com', 'passusu22', 'usu22', 'Patricia', 'Jiménez', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(67, 'usu23@mail.com', 'passusu23', 'usu23', 'Miguel', 'Ruiz', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(68, 'usu24@mail.com', 'passusu24', 'usu24', 'Sara', 'Fernández', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(69, 'usu25@mail.com', 'passusu25', 'usu25', 'Antonio', 'Torres', '2025-01-18 01:06:29', 0, NULL, 0, 0, NULL, NULL, 5),
+(70, 'admin@gmail.com', '$2y$13$eFnrLInYV1CmWozWOIMOz.wFI2lGsGMIcJ4tTuQpGe9CkrjEkCS3O', 'admin', 'admin', 'admin', '2025-01-18 01:08:05', 1, '2025-01-18 19:32:12', 0, 0, NULL, NULL, 2),
+(71, 'cliente1@gmail.com', '$2y$13$CMdoDvGgGA4tFaGbLhv7b.u4EBeQntwVHsP/o7rqY1VeeydSeVipG', 'cliente1', 'cliente1', 'cliente1', '2025-01-18 01:15:02', 1, '2025-01-18 19:30:56', 0, 0, NULL, NULL, 5),
+(72, 'moderador1@gmail.com', '$2y$13$6wLNjvx7FK6vZ6AtJr5wpOjmY5rnpy8F1F7DzYNiRKqOXPvy93sDW', 'moderador1', 'moderador1', 'moderador1', '2025-01-18 01:15:22', 1, '2025-01-18 01:18:15', 0, 0, NULL, NULL, 3),
+(73, 'patrocinador1@gmail.com', '$2y$13$L09OMZIO77JAnwXTA56kr.eOZvPifme6GqqVe7/u5bdzsoRDeTaUa', 'patrocinador1', 'patrocinador1', 'patrocinador1', '2025-01-18 01:16:04', 1, '2025-01-18 18:38:16', 0, 0, NULL, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -867,6 +997,32 @@ ALTER TABLE `anuncios`
   ADD KEY `oferta_id` (`oferta_id`);
 
 --
+-- Indices de la tabla `auth_assignment`
+--
+ALTER TABLE `auth_assignment`
+  ADD PRIMARY KEY (`item_name`,`user_id`);
+
+--
+-- Indices de la tabla `auth_item`
+--
+ALTER TABLE `auth_item`
+  ADD PRIMARY KEY (`name`),
+  ADD KEY `rule_name` (`rule_name`);
+
+--
+-- Indices de la tabla `auth_item_child`
+--
+ALTER TABLE `auth_item_child`
+  ADD PRIMARY KEY (`parent`,`child`),
+  ADD KEY `child` (`child`);
+
+--
+-- Indices de la tabla `auth_rule`
+--
+ALTER TABLE `auth_rule`
+  ADD PRIMARY KEY (`name`);
+
+--
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -929,7 +1085,8 @@ ALTER TABLE `ofertas`
   ADD KEY `categoria_id` (`categoria_id`),
   ADD KEY `proveedor_id` (`proveedor_id`),
   ADD KEY `usuario_creador_id` (`usuario_creador_id`),
-  ADD KEY `usuario_modificador_id` (`usuario_modificador_id`);
+  ADD KEY `usuario_modificador_id` (`usuario_modificador_id`),
+  ADD KEY `fk_ofertas_patrocinador_id` (`patrocinador_id`);
 
 --
 -- Indices de la tabla `ofertas_enlaces`
@@ -959,6 +1116,13 @@ ALTER TABLE `ofertas_imagenes`
 ALTER TABLE `ofertas_valoraciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `oferta_id` (`oferta_id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `patrocinadores`
+--
+ALTER TABLE `patrocinadores`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
@@ -1107,6 +1271,12 @@ ALTER TABLE `ofertas_valoraciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT de la tabla `patrocinadores`
+--
+ALTER TABLE `patrocinadores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
@@ -1128,7 +1298,7 @@ ALTER TABLE `seguimientos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_categorias`
@@ -1163,6 +1333,25 @@ ALTER TABLE `zonas`
 --
 ALTER TABLE `anuncios`
   ADD CONSTRAINT `anuncios_ibfk_1` FOREIGN KEY (`oferta_id`) REFERENCES `ofertas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `auth_assignment`
+--
+ALTER TABLE `auth_assignment`
+  ADD CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `auth_item`
+--
+ALTER TABLE `auth_item`
+  ADD CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `auth_item_child`
+--
+ALTER TABLE `auth_item_child`
+  ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `categorias`
@@ -1205,6 +1394,8 @@ ALTER TABLE `moderadores_zonas`
 -- Filtros para la tabla `ofertas`
 --
 ALTER TABLE `ofertas`
+  ADD CONSTRAINT `fk_ofertas_patrocinador` FOREIGN KEY (`patrocinador_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_ofertas_patrocinador_id` FOREIGN KEY (`patrocinador_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ofertas_ibfk_1` FOREIGN KEY (`zona_id`) REFERENCES `zonas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ofertas_ibfk_2` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `ofertas_ibfk_3` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -1236,6 +1427,12 @@ ALTER TABLE `ofertas_imagenes`
 ALTER TABLE `ofertas_valoraciones`
   ADD CONSTRAINT `ofertas_valoraciones_ibfk_1` FOREIGN KEY (`oferta_id`) REFERENCES `ofertas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `ofertas_valoraciones_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `patrocinadores`
+--
+ALTER TABLE `patrocinadores`
+  ADD CONSTRAINT `patrocinadores_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `proveedores`
