@@ -77,7 +77,7 @@ class Ofertas extends \yii\db\ActiveRecord
             [['usuario_modificador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_modificador_id' => 'id']],
             [['patrocinador_id'], 'integer'],
             [['patrocinador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['patrocinador_id' => 'id']],
-        
+            [['patrocinada'], 'boolean'],
         ];
     }
 

@@ -262,6 +262,7 @@ class OfertasController extends Controller
     
         // Asignar el usuario actual como patrocinador
         $model->patrocinador_id = Yii::$app->user->id;
+        $model->patrocinada = 1; // Marcar como patrocinada
     
         if ($model->save()) {
             Yii::$app->session->setFlash('success', 'Has patrocinado esta oferta exitosamente.');
@@ -273,10 +274,11 @@ class OfertasController extends Controller
     }
     
     
+    
     public function actionPatrocinadas()
     {
         $ofertasPatrocinadas = Ofertas::find()
-            ->where(['IS NOT', 'patrocinador_id', null]) // Solo ofertas con patrocinador
+            ->where(['patrocinada' => 1]) // Solo ofertas marcadas como patrocinadas
             ->with('patrocinador') // Cargar la relación con el patrocinador
             ->all();
     
@@ -284,6 +286,7 @@ class OfertasController extends Controller
             'ofertasPatrocinadas' => $ofertasPatrocinadas,
         ]);
     }
+    
     
 
 
