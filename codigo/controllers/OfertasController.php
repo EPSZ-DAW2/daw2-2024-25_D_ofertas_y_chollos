@@ -217,7 +217,7 @@ class OfertasController extends Controller
         $query = Ofertas::find()
             ->where(['like', 'titulo', $keyword])
             ->orWhere(['like', 'descripcion', $keyword])
-            ->andWhere(['estado' => 'activa']);
+            ->andWhere(['estado' => 'visible']);
 
         $models = $query->all();
 
