@@ -17,7 +17,7 @@ use Yii;
  * @property string|null $fecha_lectura
  * @property string|null $fecha_aceptado
  *
- * @property Comentarios $comentario
+ * @property Comentario $comentario
  * @property Ofertas $oferta
  * @property Usuarios $usuarioOrigen
  */
@@ -43,7 +43,7 @@ class Incidencia extends \yii\db\ActiveRecord
             [['clase'], 'string', 'max' => 50],
             [['usuario_origen_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_origen_id' => 'id']],
             [['oferta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ofertas::class, 'targetAttribute' => ['oferta_id' => 'id']],
-            [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::class, 'targetAttribute' => ['comentario_id' => 'id']],
+            [['comentario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::class, 'targetAttribute' => ['comentario_id' => 'id']],
             [['oferta_id', 'comentario_id'], 'default', 'value' => null],
         ];
     }
@@ -69,11 +69,11 @@ class Incidencia extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Comentario]].
      *
-     * @return \yii\db\ActiveQuery|ComentariosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getComentario()
     {
-        return $this->hasOne(Comentarios::class, ['id' => 'comentario_id']);
+        return $this->hasOne(Comentario::class, ['id' => 'comentario_id']);
     }
 
     /**
