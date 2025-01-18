@@ -248,17 +248,19 @@ class OfertasController extends Controller
     }
     public function actionPatrocinar($id)
     {
-        $model = Ofertas::findOne($id);
+        $model = $this->findModel($id);
     
         if (!$model) {
             throw new NotFoundHttpException('La oferta no existe.');
         }
     
+        // Verificar si ya está patrocinada
         if ($model->patrocinador_id !== null) {
             Yii::$app->session->setFlash('error', 'Esta oferta ya está patrocinada.');
             return $this->redirect(['view', 'id' => $id]);
         }
     
+        // Asignar el usuario actual como patrocinador
         $model->patrocinador_id = Yii::$app->user->id;
     
         if ($model->save()) {
@@ -272,16 +274,17 @@ class OfertasController extends Controller
     
     
     public function actionPatrocinadas()
-{
-    $ofertasPatrocinadas = Ofertas::find()
-        ->where(['IS NOT', 'patrocinador_id', null]) // Filtra solo las patrocinadas
-        ->with('patrocinador') // Carga la relación del patrocinador
-        ->all();
-
-    return $this->render('patrocinadas', [
-        'ofertasPatrocinadas' => $ofertasPatrocinadas,
-    ]);
-}
+    {
+        $ofertasPatrocinadas = Ofertas::find()
+            ->where(['IS NOT', 'patrocinador_id', null]) // Solo ofertas con patrocinador
+            ->with('patrocinador') // Cargar la relación con el patrocinador
+            ->all();
+    
+        return $this->render('patrocinadas', [
+            'ofertasPatrocinadas' => $ofertasPatrocinadas,
+        ]);
+    }
+    
 
 
 }
