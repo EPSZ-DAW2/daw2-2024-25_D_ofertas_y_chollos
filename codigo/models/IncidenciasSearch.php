@@ -17,7 +17,7 @@ class IncidenciasSearch extends Incidencia
     public function rules()
     {
         return [
-            [['id', 'usuario_origen_id', 'usuario_destino_id', 'oferta_id', 'comentario_id'], 'integer'],
+            [['id', 'usuario_origen_id', 'oferta_id', 'comentario_id'], 'integer'],
             [['fecha_hora', 'clase', 'texto', 'fecha_lectura', 'fecha_aceptado'], 'safe'],
         ];
     }
@@ -61,7 +61,6 @@ class IncidenciasSearch extends Incidencia
             'id' => $this->id,
             'fecha_hora' => $this->fecha_hora,
             'usuario_origen_id' => $this->usuario_origen_id,
-            'usuario_destino_id' => $this->usuario_destino_id,
             'oferta_id' => $this->oferta_id,
             'comentario_id' => $this->comentario_id,
             'fecha_lectura' => $this->fecha_lectura,
