@@ -30,7 +30,10 @@ class UsuariosEtiquetas extends \yii\db\ActiveRecord
         return [
             [['usuario_id', 'etiqueta_id'], 'required'],
             [['usuario_id', 'etiqueta_id'], 'integer'],
-            [['usuario_id', 'etiqueta_id'], 'unique', 'targetAttribute' => ['usuario_id', 'etiqueta_id']],
+            [['usuario_id', 'etiqueta_id'], 'unique', 'targetAttribute' => ['usuario_id', 'etiqueta_id'], 'message' => 'Ya estás siguiendo esta etiqueta.'],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::class, 'targetAttribute' => ['usuario_id' => 'id']],
+            [['etiqueta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Etiqueta::class, 'targetAttribute' => ['etiqueta_id' => 'id']],
+
         ];
     }
 
