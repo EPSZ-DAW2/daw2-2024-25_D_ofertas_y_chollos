@@ -19,6 +19,7 @@ $this->registerCssFile('@web/themes/material-default/css/anuncio-view.css');
 
     <!-- Botones de acción -->
     <div class="action-buttons">
+    <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin'): ?>
         <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -27,6 +28,7 @@ $this->registerCssFile('@web/themes/material-default/css/anuncio-view.css');
                 'method' => 'post',
             ],
         ]) ?>
+        <?php endif; ?>
 
         <!-- Botón para ir a la oferta que corresponde dicho anuncio -->
         <?= Html::a('Ver Oferta', ['ofertas/view', 'id' => $model->oferta_id], ['class' => 'btn btn-primary']) ?>
