@@ -6,40 +6,60 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Incidencia $model */
 
-$this->title = $model->id;
+$this->title = 'Incidencia '.$model->id.', '.$model->clase;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Incidencias'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+$this->registerCssFile('@web/themes/material-default/css/incidencia-view.css');
 ?>
 <div class="incidencia-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+    <div class="action-buttons">
+        <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('app', '¿Estás seguro de que desea borrar esta incidencia?'),
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+        <?php if (is_null($model->fecha_aceptado)) {
+            echo Html::a('Aceptar', ['aceptar', 'id' => $model->id], ['class' => 'btn btn-success']);
+        } ?>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'fecha_hora',
+            
             'clase',
+            'fecha_hora',
             'texto:ntext',
             'usuario_origen_id',
             'usuario_destino_id',
-            'oferta_id',
-            'comentario_id',
-            'fecha_lectura',
-            'fecha_aceptado',
+            [
+                'attribute' => 'oferta_id',
+                'visible' => !is_null($model->oferta_id),
+            ],
+            [
+                'attribute' => 'comentario_id',
+                'visible' => !is_null($model->comentario_id),
+            ],
+            [
+                'attribute' => 'fecha_lectura',
+                'visible' => !is_null($model->fecha_lectura),
+            ],
+            [
+                'attribute' => 'fecha_aceptado',
+                'visible' => !is_null($model->fecha_aceptado),
+            ],
         ],
     ]) ?>
 
+</div>
+<div class="action-buttons">
+        <?= Html::a(Yii::t('app', 'Volver'), ['index'], ['class' => 'btn btn-primary']) ?>
 </div>
