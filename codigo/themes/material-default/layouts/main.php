@@ -41,32 +41,37 @@ use app\views\etiquetas\EtiquetasWidget; ?>
     </div>
   </header>
 
-
   <nav class="light-blue lighten-1" role="navigation">
     <div class="container">
-      <div class="nav-wrapper">
-        <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
-        <?= Menu::widget([
-            'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
-            'items' => [
-                ['label' => 'Inicio', 'url' => ['site/index']],
-                ['label' => 'Ofertas', 'url' => ['ofertas/visor']],
-                ['label' => 'Anuncios', 'url' => ['anuncios/visor']],
-                ['label' => 'Categorías', 'url' => ['categorias/visor']],    
-                ['label' => 'Contacto', 'url' => ['site/contact']],
-                ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => 'Registrarse', 'url' => ['usuarios/registro'], 'visible' => Yii::$app->user->isGuest],
-                ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
-                        'items' =>
-                        [
+        <div class="nav-wrapper">
+            <a href="<?= Yii::$app->homeUrl ?>" id="logo-container" class="brand-logo">Cholloferta</a>
+            <?= Menu::widget([
+                'options' => ['id' => 'nav-mobile', 'class' => 'right side-nav'],
+                'items' => [
+                    ['label' => 'Inicio', 'url' => ['site/index']],
+                    ['label' => 'Ofertas', 'url' => ['ofertas/visor']],
+                    ['label' => 'Anuncios', 'url' => ['anuncios/visor']],
+                    ['label' => 'Categorías', 'url' => ['categorias/visor']],
+                    ['label' => 'Contacto', 'url' => ['site/contact']],
+                    
+                    // Opciones para invitados
+                    ['label' => 'Acceder', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Registrarse', 'url' => ['usuarios/registro'], 'visible' => Yii::$app->user->isGuest],
+
+                    // Opciones para usuarios logueados
+                    ['label' => 'Mi perfil', 'url' => ['usuarios/mi-perfil'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => Yii::$app->user->isGuest ? '' : 'Bienvenido, ' . Yii::$app->user->identity->nick,
+                        'items' => [
                             ['label' => 'Cerrar sesión', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
-                        ],'visible' => !Yii::$app->user->isGuest,],
-            ],
+                        ],
+                        'visible' => !Yii::$app->user->isGuest,
+                    ],
+                ],
+            ]) ?>
+        </div>
+    </div>
 
-        ]); ?>
-        
 
-        
 
         
      

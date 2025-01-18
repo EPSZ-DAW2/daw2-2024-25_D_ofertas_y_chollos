@@ -6454,6 +6454,7 @@ nav ul.left {
   flex-direction: column; /* Cambia el eje para apilar elementos verticalmente */
   align-items: center; /* Centra los elementos horizontalmente */
   margin-top: 10px; /* Separación del navbar */
+  margin-bottom: 40px;
 }
 
 .admin-menu h3 {
