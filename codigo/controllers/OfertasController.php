@@ -286,7 +286,23 @@ class OfertasController extends Controller
             'ofertasPatrocinadas' => $ofertasPatrocinadas,
         ]);
     }
-    
+
+    public function actionDestacar($id)
+{
+    $usuarioId = Yii::$app->user->id;
+
+    if (!$usuarioId) {
+        return $this->redirect(['site/login']); // Redirigir a login si no está autenticado
+    }
+
+    $model = $this->findModel($id);
+    $model->destacada = 1; // Cambiar la columna 'destacada' a 1
+    $model->save();
+
+    Yii::$app->session->setFlash('success', 'La oferta ha sido destacada exitosamente.');
+    return $this->redirect(['ofertas/view', 'id' => $id]);
+}
+
     
 
 

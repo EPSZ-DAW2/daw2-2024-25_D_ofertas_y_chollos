@@ -45,8 +45,22 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
     <?php else: ?>
         <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
     <?php endif; ?>
-</div>
 
+
+
+        <?php if ($model->destacada == 0): ?>
+            <?= Html::a(Yii::t('app', 'Destacar'), ['ofertas/destacar', 'id' => $model->id], [
+                'class' => 'btn btn-info',
+                'data' => [
+                    'confirm' => Yii::t('app', '¿Estás seguro de que quieres destacar esta oferta?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php else: ?>
+            <p><strong>     oferta  destacada.</strong></p>
+        <?php endif; ?>
+   
+</div>
 
     <!-- Seguimiento -->
     <div class="follow-section">
