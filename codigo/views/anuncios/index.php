@@ -35,11 +35,42 @@ $this->params['breadcrumbs'][] = $this->title;
             'precio',
             'fecha',
             //'oferta_id',
+            // Configuración de la columna de acciones
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Anuncio $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template' => '{view} {update} {delete} {bloquear} {desbloquear}',
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'view') {
+                        return Url::to(['view', 'id' => $model->id]);
+                    }
+                    if ($action === 'update') {
+                        return Url::to(['update', 'id' => $model->id]);
+                    }
+                    if ($action === 'delete') {
+                        return Url::to(['delete', 'id' => $model->id]);
+                    }
+                    if ($action === 'bloquear') {
+                        return Url::to(['bloquear', 'id' => $model->id]);
+                    }
+                    if ($action === 'desbloquear') {
+                        return Url::to(['desbloquear', 'id' => $model->id]);
+                    }
+                    return '';
+                },
+                'buttons' => [
+                    'bloquear' => function ($url, $model, $key) {
+                        return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                            'class' => 'btn boton-bloq',
+                            'data-confirm' => '¿Está seguro de bloquear este anuncio?',
+                        ]);
+                    },
+                    'desbloquear' => function ($url, $model, $key) {
+                        return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                            'class' => 'btn boton-desbloq',
+                            'data-confirm' => '¿Está seguro de desbloquear este anuncio?',
+                        ]);
+                    },
+                ],
             ],
         ],
     ]); ?>
