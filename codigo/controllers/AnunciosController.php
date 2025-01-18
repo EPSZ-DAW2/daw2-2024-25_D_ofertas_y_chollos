@@ -16,7 +16,7 @@ class AnunciosController extends Controller
     /**
      * @inheritDoc
      */
-public function behaviors()
+/*public function behaviors()
     {
         return array_merge(
             parent::behaviors(),
@@ -29,10 +29,10 @@ public function behaviors()
                 ],
             ]
         );
-    }
+    }*/
 
 
-/*    public function behaviors()
+    public function behaviors()
 {
     return array_merge(
         parent::behaviors(),
@@ -55,7 +55,7 @@ public function behaviors()
             ],
         ]
     );
-}*/
+}
 
 
 
