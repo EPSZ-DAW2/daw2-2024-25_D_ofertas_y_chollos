@@ -8,7 +8,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
  * IncidenciasController implements the CRUD actions for Incidencia model.
  */
@@ -16,7 +15,7 @@ class IncidenciasController extends Controller
 {
     /**
      * @inheritDoc
-     
+     *
     public function behaviors()
     {
         return array_merge(
@@ -33,33 +32,26 @@ class IncidenciasController extends Controller
     }
         */
 
-    
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'access' => [
-                    'class' => \yii\filters\AccessControl::class,
-                    'only' => ['index','view','create', 'update', 'delete'], // Acciones restringidas
-                    'rules' => [
-                        [
-                            'allow' => true,
-                            'actions'=>['create','update','delete','index','view','aceptar'],
-                            'roles'=>['admin'],
+        public function behaviors()
+        {
+            return array_merge(
+                parent::behaviors(),
+                [
+                    'access' => [
+                        'class' => \yii\filters\AccessControl::class,
+                        'only' => ['index','view','create', 'update', 'delete'], // Acciones restringidas
+                        'rules' => [
+                            [
+                                'allow' => true,
+                                'actions'=>['create','update','delete','index','view','aceptar'],
+                                'roles'=>['admin'],
+                            ],
+                            
                         ],
-                        
                     ],
-                ],
-            ]
-        );   
-    }
-
-
-
-
-
-
+                ]
+            );   
+        }
 
     /**
      * Lists all Incidencia models.
@@ -100,6 +92,14 @@ class IncidenciasController extends Controller
         $model = new Incidencia();
 
         if ($this->request->isPost) {
+            // verificamos si los campos de oferta_id y comentario_id son nulos y los ponemos a null
+            if ($this->request->post('Incidencia')['oferta_id'] == '') {
+                $model->oferta_id = null;
+            }
+            if ($this->request->post('Incidencia')['comentario_id'] == '') {
+                $model->comentario_id = null;
+            }
+            
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -162,7 +162,6 @@ class IncidenciasController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-
     /**
      * Acepta una incidencia
      * @param int $id ID
@@ -172,7 +171,6 @@ class IncidenciasController extends Controller
     {
         $model = $this->findModel($id);
         $model->fecha_aceptado = date('Y-m-d H:i:s');
-        $model->usuario_destino_id = Yii::$app->user->id;
         $model->save();
 
         return $this->redirect(['view', 'id' => $model->id]);
