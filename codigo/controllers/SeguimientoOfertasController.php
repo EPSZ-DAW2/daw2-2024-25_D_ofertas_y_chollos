@@ -119,18 +119,22 @@ class SeguimientoOfertasController extends Controller
     {
         $usuarioId = Yii::$app->user->id;
 
-
-        // Verificar que el usuario está siguiendo la oferta
-        $seguimiento = Seguimientos::findOne(['usuario_id' => $usuarioId, 'oferta_id' => $id]);
-        if (!$seguimiento) {
-            throw new NotFoundHttpException('No estás siguiendo esta oferta.');
+        //Busca la oferta aunque no la siga el usuario para que no de error
+        $oferta = Ofertas::findOne($id);
+        if (!$oferta) {
+            throw new NotFoundHttpException('La oferta no existe.');
         }
 
-        // Cargar la oferta asociada
-        $oferta = $seguimiento->oferta;
+        // Verificar que el usuario está siguiendo la oferta
+        $seguimiento = Seguimientos::find()
+            ->where(['usuario_id' => $usuarioId, 'oferta_id' => $id])
+            ->exists();
+
+
 
         return $this->render('view', [
             'model' => $oferta,
+            'seguimiento' => $seguimiento,
         ]);
     }
 }
