@@ -111,7 +111,7 @@ class Ofertas extends \yii\db\ActiveRecord
             'fecha_creacion' => 'Fecha Creacion',
             'usuario_modificador_id' => 'Usuario Modificador ID',
             'fecha_modificacion' => 'Fecha Modificacion',
-            
+
         ];
     }
 
@@ -133,6 +133,18 @@ class Ofertas extends \yii\db\ActiveRecord
     public function getCategoria()
     {
         return $this->hasOne(Categorias::class, ['id' => 'categoria_id']);
+    }
+
+
+
+    /**
+     * Gets query for [[Etiqueta]].
+     *
+     * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
+     */
+    public function getEtiquetas()
+    {
+        return $this->hasOne(UsuariosEtiquetas::class, ['etiqueta_id' => 'id']);
     }
 
     /**
@@ -243,7 +255,7 @@ class Ofertas extends \yii\db\ActiveRecord
             'en_curso' => 'En curso',
         ];
     }
-    
+
     public static function listaClasesBloqueo()
     {
         return [
@@ -252,7 +264,7 @@ class Ofertas extends \yii\db\ActiveRecord
             'otros' => 'Otros',
         ];
     }
-    
+
 
     /**
      * Gets query for [[Zona]].
@@ -266,9 +278,9 @@ class Ofertas extends \yii\db\ActiveRecord
 
 
     public function getSeguidores()
-{
-    return $this->hasMany(Seguimientos::class, ['oferta_id' => 'id']);
-}
+    {
+        return $this->hasMany(Seguimientos::class, ['oferta_id' => 'id']);
+    }
     /**
      * {@inheritdoc}
      * @return OfertasQuery the active query used by this AR class.
