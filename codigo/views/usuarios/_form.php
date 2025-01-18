@@ -20,11 +20,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(
-        [
-            'maxlength' => true,
-            'value' => '',
-            'placeholder' => 'Deja vacío para mantener la contraseña actual'
-        ]
+        //si es un registro nuevo no se mostrara ese mensaje
+        $model->isNewRecord
+            ? ['maxlenght' => true] //Para create no se muestra nada
+            : [
+                'maxlength' => true,
+                'value' => '',
+                'placeholder' => 'Deja vacío para mantener la contraseña actual'
+            ]
     ) ?>
 
     <?= $form->field($model, 'nick')->textInput(['maxlength' => true]) ?>
