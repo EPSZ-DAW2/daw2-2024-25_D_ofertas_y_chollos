@@ -59,7 +59,9 @@ $this->registerCssFile('@web/themes/material-default/css/incidencia-view.css');
         ],
     ]) ?>
 
+    <div class="action-buttons">
+            <?= Html::a(Yii::t('app', 'Volver'), ['index'], ['class' => 'btn btn-primary', 'style' => 'margin-top: 20px;']) ?>
+    </div>
+
 </div>
-<div class="action-buttons">
-        <?= Html::a(Yii::t('app', 'Volver'), ['index'], ['class' => 'btn btn-primary']) ?>
-</div>
+
