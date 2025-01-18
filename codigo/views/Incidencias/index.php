@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Crear Incidencia'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Incidencia'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'clase',
             'texto:ntext',
             'usuario_origen_id',
-            //'usuario_destino_id',
             //'oferta_id',
             //'comentario_id',
             //'fecha_lectura',

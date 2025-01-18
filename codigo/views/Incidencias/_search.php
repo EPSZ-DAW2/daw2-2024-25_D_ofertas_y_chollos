@@ -25,8 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'usuario_origen_id') ?>
 
-    <?php // echo $form->field($model, 'usuario_destino_id') ?>
-
     <?php // echo $form->field($model, 'oferta_id') ?>
 
     <?php // echo $form->field($model, 'comentario_id') ?>
