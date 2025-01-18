@@ -131,4 +131,19 @@ class IncidenciasController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+
+
+    /**
+     * Acepta una incidencia
+     * @param int $id ID
+     * @return \yii\web\Response
+     */
+    public function actionAceptar($id)
+    {
+        $model = $this->findModel($id);
+        $model->fecha_aceptado = date('Y-m-d H:i:s');
+        $model->save();
+
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
 }
