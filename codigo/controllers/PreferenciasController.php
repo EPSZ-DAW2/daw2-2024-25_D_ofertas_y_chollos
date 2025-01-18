@@ -54,7 +54,7 @@ class PreferenciasController extends Controller
         //consulta de las zonas preferidas
         $zonasPreferidas = UsuariosZonas::find()
             ->where(['usuario_id' => $usuarioId])
-            ->with('zonas')
+            ->with('zona')
             ->all();
 
 
