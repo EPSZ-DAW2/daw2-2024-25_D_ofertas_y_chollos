@@ -30,20 +30,18 @@ class ComentarioController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
-                            'matchCallback' => function ($rule, $action) {
-    							return !Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin';
-    						},
+                            'roles' => ['admin'], // Solo administradores
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create', 'update', 'delete'],
                             'roles' => ['@'], // Usuarios autenticados pueden crear, actualizar y eliminar sus propios comentarios
-                            'matchCallback' => function ($rule, $action) {
-                    			if ($action->id === 'create') return true;
-                    			$id = Yii::$app->request->get('id');
-                    			$comentario = Comentario::findOne($id);
-                    			return $comentario && $comentario->usuario_id == Yii::$app->user->id;
-                    		}
+                            'matchCallback' => function ($rule, $action)  {
+                                if ($action->id === 'create') return true;
+                                $id = Yii::$app->request->get('id');
+                                $comentario = Comentario::findOne($id);
+                                return $comentario && $comentario->usuario_id == Yii::$app->user->id;
+                            }
                         ],
                         [
                             'allow' => true,
