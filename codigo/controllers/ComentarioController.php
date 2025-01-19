@@ -159,7 +159,7 @@ class ComentarioController extends Controller
         } else {
             Yii::$app->session->setFlash('info', 'El comentario ya está bloqueado.');
         }
-        return $this->redirect(['view', 'id' => $model->id]);
+        return $this->redirect(['revisar-denuncias']);
     }
 
     /**
@@ -178,7 +178,7 @@ class ComentarioController extends Controller
         } else {
             Yii::$app->session->setFlash('info', 'El comentario no está bloqueado.');
         }
-        return $this->redirect(['view', 'id' => $model->id]);
+        eturn $this->redirect(['revisar-denuncias']);
     }
 
     /**
