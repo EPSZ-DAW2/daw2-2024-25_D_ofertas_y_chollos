@@ -24,15 +24,24 @@ class ComentarioController extends Controller
             parent::behaviors(),
             [
                 'access' => [
-                    'class' => \yii\filters\AccessControl::class,
+                    'class' => AccessControl::class,
                     'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear'],
                     'rules' => [
                         [
                             'allow' => true,
-                            'roles' => ['admin'], // Solo administradores
+                            'actions' => ['create', 'update', 'delete'],
+                            'roles' => ['@'], // Usuarios autenticados
+                            'matchCallback' => function ($rule, $action) {
+                                // Permitir solo si el comentario pertenece al usuario
+                                $id = Yii::$app->request->get('id');
+                                $comentario = Comentario::findOne($id);
+                                return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
+                            }
                         ],
                         [
-                            'allow' => false, // Denegar acceso a todos los demás
+                            'allow' => true,
+                            'actions' => ['bloquear', 'desbloquear'],
+                            'roles' => ['admin'], // Solo administradores
                         ],
                     ],
                 ],
@@ -186,10 +195,11 @@ class ComentarioController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Comentario::findOne(['id' => $id])) !== null) {
+        $model = Comentario::findOne(['id' => $id]));
+        if (($model !== null && $model->usuario_id === Yii::$app->user->id) {
             return $model;
         }
 
-        throw new NotFoundHttpException('El comentario solicitado no existe.');
+        throw new NotFoundHttpException('El comentario solicitado no existe o no tienes permiso para acceder a él.');
     }
 }
