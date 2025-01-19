@@ -27,7 +27,6 @@ $this->title = 'Detalles de la Categoría';
                         'method' => 'post', 
                     ],
                 ]) ?></p>
-                </div>
             <?php endif?>
             <?= Html::a(Yii::t('app', 'Atrás'), ['visor'], ['class' => 'btn btn-success']) ?>
         </div>
