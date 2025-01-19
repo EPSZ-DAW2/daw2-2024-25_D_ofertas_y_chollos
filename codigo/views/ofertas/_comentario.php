@@ -53,7 +53,7 @@ function denunciarComentario(id) {
 	if (motivo) {
 		var form = document.createElement('form');
 		form.method = 'POST';
-		form.action = '<?= \yii\helpers\Url::to(['comentario/denunciar']) ?>/' + id;
+		form.action = '<?= \yii\helpers\Url::to(['/comentario/denunciar', 'id' => '']) ?>' + id;
 
 		var input = document.createElement('input');
 		input.type = 'hidden';
