@@ -196,7 +196,7 @@ class ComentarioController extends Controller
     protected function findModel($id)
     {
         $model = Comentario::findOne(['id' => $id]));
-        if (($model !== null && $model->usuario_id === Yii::$app->user->id) {
+        if ($model !== null && $model->usuario_id === Yii::$app->user->id) {
             return $model;
         }
 
