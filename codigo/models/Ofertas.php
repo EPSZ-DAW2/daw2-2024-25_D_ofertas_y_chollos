@@ -174,7 +174,7 @@ class Ofertas extends \yii\db\ActiveRecord
             ->orderBy(['fecha_creacion' => SORT_DESC]);
     }
     
-    // Añade una nueva relación para obtener todos los comentarios si es necesario
+    // Para obtener todos los comentarios (por si acaso)
     public function getTodosComentarios()
     {
         return $this->hasMany(Comentario::class, ['oferta_id' => 'id'])
