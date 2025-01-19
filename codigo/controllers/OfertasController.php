@@ -13,27 +13,33 @@ use app\models\Zonas;
 
 class OfertasController extends Controller
 {
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'access' => [
-                    'class' => \yii\filters\AccessControl::class,
-                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear'],
-                    'rules' => [
-                        [
-                            'allow' => true,
-                            'roles' => ['admin'], // Solo administradores
-                        ],
-                        [
-                            'allow' => false, // Denegar acceso a todos los demás
-                        ],
+public function behaviors()
+{
+    return array_merge(
+        parent::behaviors(),
+        [
+            'access' => [
+                'class' => \yii\filters\AccessControl::class,
+                'only' => ['index', 'create', 'update', 'delete', 'bloquear', 'desbloquear', 'busqueda'],
+                'rules' => [
+                    // Permitir solo a administradores las acciones de administración
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                        'roles' => ['admin'],
+                    ],
+                    // Permitir a cualquier usuario autenticado acceder a "busqueda"
+                    [
+                        'allow' => true,
+                        'actions' => ['busqueda'],
+                        'roles' => ['@'],
                     ],
                 ],
-            ]
-        );
-    }
+            ],
+        ]
+    );
+}
+
     
 
     public function actionIndex()
