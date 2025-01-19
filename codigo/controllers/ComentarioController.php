@@ -25,7 +25,7 @@ class ComentarioController extends Controller
             [
                 'access' => [
                     'class' => AccessControl::class,
-                    'only' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                    'only' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear', 'denunciar'],
                     'rules' => [
                         [
                             'allow' => true,
@@ -47,6 +47,11 @@ class ComentarioController extends Controller
                             'actions' => ['bloquear', 'desbloquear'],
                             'roles' => ['admin'], // Solo administradores pueden bloquear o desbloquear comentarios
                         ],
+                        [
+                            'allow' => true,
+                            'actions' => ['denunciar'],
+                            'roles' => ['@'], // Usuarios autenticados pueden denunciar comentarios
+                        ], 
                     ],
                 ],
             ]
@@ -191,6 +196,29 @@ class ComentarioController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Denuncia un comentario
+     */
+      public function actionDenunciar($id)
+      {
+          $model = $this->findModel($id);
+          $model->denuncias += 1;
+          
+          if ($model->denuncias >= Yii::$app->params['umbralDenuncias']) {
+              $model->bloqueado = 1;
+              $model->fecha_bloqueo = date('Y-m-d H:i:s');
+              $model->motivo_denuncia = 'Exceso de denuncias';
+          }
+    
+          if ($model->save(false)) {
+              Yii::$app->session->setFlash('success', 'Comentario denunciado correctamente.');
+          } else {
+              Yii::$app->session->setFlash('error', 'No se pudo denunciar el comentario.');
+          }
+    
+          return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
+      }
 
     /**
      * Finds the Comentario model based on its primary key value.
