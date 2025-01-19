@@ -30,7 +30,9 @@ class ComentarioController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
-                            'roles' => ['admin'], // Solo administradores
+                            'matchCallback' => function ($rule, $action) {
+    							return !Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin';
+    						},
                         ],
                         [
                             'allow' => true,
