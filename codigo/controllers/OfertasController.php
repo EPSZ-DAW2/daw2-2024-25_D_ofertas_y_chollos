@@ -9,6 +9,7 @@ use app\models\OfertasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Zonas;
 
 class OfertasController extends Controller
 {
@@ -226,15 +227,28 @@ class OfertasController extends Controller
             'keyword' => $keyword,
         ]);
     }
-
     public function actionAdvancedSearch($titulo = null, $zona = null, $precio_max = null, $fecha_inicio = null)
     {
         $query = Ofertas::find()
+            ->joinWith('zona') // Relación con la tabla 'zonas'
             ->andFilterWhere(['like', 'titulo', $titulo])
-            ->andFilterWhere(['zona_id' => $zona])
+            ->andFilterWhere(['like', 'zonas.nombre', $zona]) // Comparar con el nombre de la zona
             ->andFilterWhere(['<=', 'precio_actual', $precio_max])
             ->andFilterWhere(['>=', 'fecha_inicio', $fecha_inicio]) // Filtro por fecha de inicio
             ->andWhere(['estado' => 'visible']);
+    
+        // Validación de filtros vacíos
+        if (empty($titulo) && empty($zona) && empty($precio_max) && empty($fecha_inicio)) {
+            $mensaje = 'Por favor, aplique al menos un filtro para realizar la búsqueda.';
+            return $this->render('advanced-search', [
+                'models' => [],
+                'titulo' => $titulo,
+                'zona' => $zona,
+                'precio_max' => $precio_max,
+                'fecha_inicio' => $fecha_inicio,
+                'mensaje' => $mensaje,
+            ]);
+        }
     
         $models = $query->all();
     
@@ -244,8 +258,11 @@ class OfertasController extends Controller
             'zona' => $zona,
             'precio_max' => $precio_max,
             'fecha_inicio' => $fecha_inicio,
+            'mensaje' => null,
         ]);
     }
+    
+    
     public function actionPatrocinar($id)
     {
         $model = $this->findModel($id);
