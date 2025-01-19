@@ -39,20 +39,23 @@ class AnunciosController extends Controller
         [
             'access' => [
                 'class' => \yii\filters\AccessControl::class,
-                'only' => ['create', 'update', 'delete'], // Acciones restringidas
+                'only' => ['index', 'create', 'update', 'delete', 'bloquear', 'desbloquear','busqueda'], // Acciones restringidas
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions'=>['create','update','delete'],
+                        'actions'=>['index', 'create', 'update', 'delete', 'bloquear', 'desbloquear','busqueda'],
                         'roles'=>['admin'],
                     ],
                     [
                         'allow'=>true,
                         'actions'=>['busqueda'],
-                        'roles'=>['invitado'],
+                        'roles'=>['@'],
+                        
                     ]
                 ],
             ],
+
+            
         ]
     );
 }

@@ -47,11 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'bloquear' => function($url, $model, $key) {
                         if (!$model->bloqueado) {
-                            return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                            return Html::a('Bloquear', ['comentario/bloquear', 'id' => $model->id], [
                                 'class' => 'btn btn-danger btn-sm',
                                 'data' => [
                                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
-                                    'method' => 'post',
                                 ],
                             ]);
                         }
@@ -59,11 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'desbloquear' => function($url, $model, $key) {
                         if ($model->bloqueado) {
-                            return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                            return Html::a('Desbloquear', ['comentario/desbloquear', 'id' => $model->id], [
                                 'class' => 'btn btn-success btn-sm',
                                 'data' => [
                                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
-                                    'method' => 'post',
                                 ],
                             ]);
                         }

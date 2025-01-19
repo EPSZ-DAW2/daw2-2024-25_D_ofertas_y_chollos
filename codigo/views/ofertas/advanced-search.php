@@ -3,7 +3,7 @@
 /** @var yii\web\View $this */
 /** @var app\models\Ofertas[] $models */
 /** @var string $titulo */
-/** @var string $zona */
+/** @var string $zona_id */
 /** @var string $precio_max */
 /** @var string $fecha_inicio */
 /** @var string $mensaje */

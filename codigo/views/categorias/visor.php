@@ -8,11 +8,20 @@ $this->registerCssFile('@web/themes/material-default/css/visor.css');
 
 
 <div class='visor-container'>
+
+    <?php if (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
+
     
-    <div class="visor-header">  
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <?php if(!Yii::$app->user->isGuest): ?>
+            <p><?= Html::a(Yii::t('app', 'Proponer Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?></p>
+        <?php endif?>
         <?php if(!Yii::$app->user->isGuest && (Yii::$app->user->identity->rol == 1 || Yii::$app->user->identity->rol == 2 || Yii::$app->user->identity->rol == 3)): ?>
-            <?= Html::a(Yii::t('app', 'Crear Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?>
-            <?= Html::a(Yii::t('app', 'Lista de categorías'), ['index'], ['class' => 'btn btn-success']) ?>
+            <p><?= Html::a(Yii::t('app', 'Lista de categorías'), ['index'], ['class' => 'btn btn-success']) ?></p>
         <?php endif?>
     </div>
 
@@ -36,6 +45,7 @@ $this->registerCssFile('@web/themes/material-default/css/visor.css');
     </div>
 
     <div class="section">
+    <h2 class="section-title">Categorías disponibles</h2>
         <div class="ofertas-list">
             <?php foreach ($models as $categoria): ?>
                 <div class="oferta-card">

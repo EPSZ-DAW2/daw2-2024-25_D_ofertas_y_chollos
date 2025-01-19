@@ -41,7 +41,7 @@ $this->title = 'Ofertas y Chollos';
             ]) ?>
         </div>
         <div class="form-group">
-            <?= Html::textInput('zona_id', Yii::$app->request->get('zona'), [
+            <?= Html::textInput('zona', Yii::$app->request->get('zona'), [
                 'class' => 'form-control',
                 'placeholder' => 'Zona...',
                 'style' => 'width: 200px; margin-right: 10px;'

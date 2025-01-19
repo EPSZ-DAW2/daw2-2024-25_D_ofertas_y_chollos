@@ -19,6 +19,12 @@ class CategoriasController extends \yii\web\Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->rol != 1 && Yii::$app->user->identity->rol != 2 && Yii::$app->user->identity->rol != 3))
+        {
+            // Usuario no autenticado o no tiene el rol adecuado
+            Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
+            return $this->redirect(['visor']);
+        }
 
         //obtener el registro aleatorio
         $randomCategoria = $this->getRandomCategoria();
@@ -46,7 +52,7 @@ class CategoriasController extends \yii\web\Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         // Mostramos todas las categorías
-        $models= Categorias::find()->all();
+        $models = Categorias::find()->where(['revisado' => 1])->all();
 
         return $this->render('visor', [
             'searchModel' => $searchModel,
@@ -89,12 +95,12 @@ class CategoriasController extends \yii\web\Controller
 
     public function actionCreate()
     {
-        /*if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->id_rol != 1 && Yii::$app->user->identity->id_rol != 2 && Yii::$app->user->identity->id_rol != 4))
+        if (Yii::$app->user->isGuest)
         {
             // Usuario no autenticado o no tiene el rol adecuado
             Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
-            return $this->redirect(['index']);
-        }*/
+            return $this->redirect(['visor']);
+        }
 
         $model = new Categorias();
 
@@ -123,12 +129,12 @@ class CategoriasController extends \yii\web\Controller
     // Acción para borrar un partido
     public function actionDelete($id)
     {
-        /*if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->id_rol != 1 && Yii::$app->user->identity->id_rol != 2 && Yii::$app->user->identity->id_rol != 4))
+        if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->rol != 1 && Yii::$app->user->identity->rol != 2 && Yii::$app->user->identity->rol != 3))
         {
             // Usuario no autenticado o no tiene el rol adecuado
             Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
-            return $this->redirect(['index']);
-        }*/
+            return $this->redirect(['visor']);
+        }
 
         $categoria = Categorias::findOne($id);
 
@@ -143,12 +149,12 @@ class CategoriasController extends \yii\web\Controller
 
     public function actionUpdate($id)
     {
-        /*if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->id_rol != 1 && Yii::$app->user->identity->id_rol != 2 && Yii::$app->user->identity->id_rol != 4))
+        if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->rol != 1 && Yii::$app->user->identity->rol != 2 && Yii::$app->user->identity->rol != 3))
         {
             // Usuario no autenticado o no tiene el rol adecuado
             Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
-            return $this->redirect(['index']);
-        }*/
+            return $this->redirect(['visor']);
+        }
 
         // Buscar el partido por su ID
         $model = Categorias::findOne($id);

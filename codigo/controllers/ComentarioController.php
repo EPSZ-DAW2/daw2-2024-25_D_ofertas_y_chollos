@@ -29,38 +29,25 @@ class ComentarioController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index', 'view'],
-                            'roles' => ['admin'], // Solo administradores pueden acceder a index y view
+                            'actions' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                            'roles' => ['admin'], // Solo administradores
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create', 'update', 'delete'],
                             'roles' => ['@'], // Usuarios autenticados pueden crear, actualizar y eliminar sus propios comentarios
-                            'matchCallback' => function ($rule, $action) {
+                            'matchCallback' => function ($rule, $action)  {
+                                if ($action->id === 'create') return true;
                                 $id = Yii::$app->request->get('id');
                                 $comentario = Comentario::findOne($id);
-                                return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
+                                return $comentario && $comentario->usuario_id == Yii::$app->user->id;
                             }
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['bloquear', 'desbloquear'],
-                            'roles' => ['admin'], // Solo administradores pueden bloquear o desbloquear comentarios
                         ],
                         [
                             'allow' => true,
                             'actions' => ['denunciar'],
                             'roles' => ['@'], // Usuarios autenticados pueden denunciar comentarios
                         ], 
-                    ],
-                ],
-                'verbs' => [
-                    'class' => VerbFilter::class,
-                    'actions' => [
-                        'delete' => ['POST'],
-                        'bloquear' => ['POST'],
-                        'desbloquear' => ['POST'],
-                        'denunciar' => ['POST'],
                     ],
                 ],
             ]
@@ -103,6 +90,9 @@ class ComentarioController extends Controller
     public function actionCreate()
     {
         $model = new Comentario();
+
+        $model->oferta_id = Yii::$app->request->get('oferta_id');
+        $model->comentario_origen_id = Yii::$app->request->get('comentario_origen_id');
 
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
@@ -239,10 +229,16 @@ class ComentarioController extends Controller
     protected function findModel($id)
     {
         $model = Comentario::findOne(['id' => $id]);
-        if ($model !== null && $model->usuario_id === Yii::$app->user->id) {
-            return $model;
+        
+        if ($model === null) {
+            throw new NotFoundHttpException('El comentario solicitado no existe.');
         }
-
-        throw new NotFoundHttpException('El comentario solicitado no existe o no tienes permiso para acceder a él.');
+        
+        // Verificar si el usuario es admin o es el propietario del comentario
+        if (!Yii::$app->user->can('admin') && $model->usuario_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException('No tienes permiso para acceder a este comentario.');
+        }
+        
+        return $model;
     }
 }
