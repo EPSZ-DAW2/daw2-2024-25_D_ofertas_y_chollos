@@ -44,12 +44,12 @@ class AnunciosController extends Controller
                     [
                         'allow' => true,
                         'actions'=>['index', 'create', 'update', 'delete', 'bloquear', 'desbloquear','busqueda'],
-                        'roles'=>['admin'],
+                        'roles'=>['permisosAdministrador'],
                     ],
                     [
                         'allow'=>true,
                         'actions'=>['busqueda'],
-                        'roles'=>['@'],
+                        'roles'=>['permisosBasicos'],
                         
                     ]
                 ],
