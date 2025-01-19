@@ -120,5 +120,28 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
             <?php endforeach; ?>
         </div>
     </div>
+    <?php
+    $this->registerCss("
+        .comentarios-lista {
+            margin-top: 20px;
+        }
+    
+        .comentario {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .comentario p {
+            margin: 0;
+        }
+    
+        .btn-link {
+            padding: 0;
+            margin-right: 10px;
+        }
+    ");
+    ?>
 
 </div>
