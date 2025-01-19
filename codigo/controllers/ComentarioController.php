@@ -50,15 +50,6 @@ class ComentarioController extends Controller
                         ], 
                     ],
                 ],
-                'verbs' => [
-                    'class' => VerbFilter::class,
-                    'actions' => [
-                        'delete' => ['POST'],
-                        'bloquear' => ['POST'],
-                        'desbloquear' => ['POST'],
-                        'denunciar' => ['POST'],
-                    ],
-                ],
             ]
         );
     }
