@@ -78,7 +78,7 @@ class ComentarioController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, false),
         ]);
     }
 
@@ -118,7 +118,7 @@ class ComentarioController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, true);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -201,7 +201,7 @@ class ComentarioController extends Controller
      */
     public function actionDenunciar($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, false);
         
         // Verificar que no sea un comentario propio
         if ($model->usuario_id === Yii::$app->user->id) {
