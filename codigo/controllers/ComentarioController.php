@@ -29,8 +29,8 @@ class ComentarioController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                            'roles' => ['admin'], // Solo administradores pueden acceder a index y view
+                            'actions' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                            'roles' => ['admin'], // Solo administradores
                         ],
                         [
                             'allow' => true,
@@ -41,11 +41,6 @@ class ComentarioController extends Controller
                                 $comentario = Comentario::findOne($id);
                                 return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
                             }
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['bloquear', 'desbloquear'],
-                            'roles' => ['admin'], // Solo administradores pueden bloquear o desbloquear comentarios
                         ],
                         [
                             'allow' => true,
