@@ -133,7 +133,7 @@ class Comentario extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::class, ['id' => 'usuario_id']);
+        return $this->hasOne(Usuarios::class, ['id' => 'usuario_id']);
     }
 
     /**

@@ -24,15 +24,28 @@ class ComentarioController extends Controller
             parent::behaviors(),
             [
                 'access' => [
-                    'class' => \yii\filters\AccessControl::class,
-                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                    'class' => AccessControl::class,
+                    'only' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
                     'rules' => [
                         [
                             'allow' => true,
-                            'roles' => ['admin'], // Solo administradores
+                            'actions' => ['index', 'view'],
+                            'roles' => ['admin'], // Solo administradores pueden acceder a index y view
                         ],
                         [
-                            'allow' => false, // Denegar acceso a todos los demás
+                            'allow' => true,
+                            'actions' => ['create', 'update', 'delete'],
+                            'roles' => ['@'], // Usuarios autenticados pueden crear, actualizar y eliminar sus propios comentarios
+                            'matchCallback' => function ($rule, $action) {
+                                $id = Yii::$app->request->get('id');
+                                $comentario = Comentario::findOne($id);
+                                return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
+                            }
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['bloquear', 'desbloquear'],
+                            'roles' => ['admin'], // Solo administradores pueden bloquear o desbloquear comentarios
                         ],
                     ],
                 ],
@@ -77,12 +90,14 @@ class ComentarioController extends Controller
     {
         $model = new Comentario();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            $model->usuario_id = Yii::$app->user->id;
+            $model->fecha_creacion = date('Y-m-d H:i:s');
+
+            if ($model->save()) {
+                return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -186,10 +201,11 @@ class ComentarioController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Comentario::findOne(['id' => $id])) !== null) {
+        $model = Comentario::findOne(['id' => $id]);
+        if ($model !== null && $model->usuario_id === Yii::$app->user->id) {
             return $model;
         }
 
-        throw new NotFoundHttpException('El comentario solicitado no existe.');
+        throw new NotFoundHttpException('El comentario solicitado no existe o no tienes permiso para acceder a él.');
     }
 }

@@ -104,4 +104,44 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         ],
     ]) ?>
 
+    <!-- Sección de Comentarios -->
+    <div class="comentarios-section">
+        <h2>Comentarios</h2>
+    
+        <?php if (Yii::$app->user->isGuest): ?>
+            <p>Inicia sesión para dejar un comentario.</p>
+        <?php else: ?>
+            <?= Html::a('Añadir Comentario', ['comentario/create', 'oferta_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?php endif; ?>
+    
+        <div class="comentarios-lista">
+            <?php foreach ($model->comentarios as $comentario): ?>
+                <?= $this->render('_comentario', ['comentario' => $comentario, 'nivel' => 0]) ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php
+    $this->registerCss("
+        .comentarios-lista {
+            margin-top: 20px;
+        }
+    
+        .comentario {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .comentario p {
+            margin: 0;
+        }
+    
+        .btn-link {
+            padding: 0;
+            margin-right: 10px;
+        }
+    ");
+    ?>
+
 </div>
