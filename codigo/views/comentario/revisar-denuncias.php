@@ -33,7 +33,7 @@ use yii\widgets\Pjax;
 					
 					$html = '<ul class="lista-sin-estilo">';
 					foreach ($denuncias as $userId => $motivo) {
-						$usuario = \app\models\Usuario::findOne($userId);
+						$usuario = \app\models\Usuarios::findOne($userId);
 						$nombreUsuario = $usuario ? Html::encode($usuario->nombre) : 'Usuario #' . $userId;
 						$html .= '<li><strong>' . $nombreUsuario . '</strong>: ' . Html::encode($motivo) . '</li>';
 					}
