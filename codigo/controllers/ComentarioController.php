@@ -50,15 +50,6 @@ class ComentarioController extends Controller
                         ], 
                     ],
                 ],
-                'verbs' => [
-                    'class' => VerbFilter::class,
-                    'actions' => [
-                        'delete' => ['POST'],
-                        'bloquear' => ['POST'],
-                        'desbloquear' => ['POST'],
-                        'denunciar' => ['POST'],
-                    ],
-                ],
             ]
         );
     }
@@ -99,6 +90,9 @@ class ComentarioController extends Controller
     public function actionCreate()
     {
         $model = new Comentario();
+
+        $model->oferta_id = Yii::$app->request->get('oferta_id');
+        $model->comentario_origen_id = Yii::$app->request->get('comentario_origen_id');
 
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());

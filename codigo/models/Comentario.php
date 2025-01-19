@@ -137,6 +137,15 @@ class Comentario extends \yii\db\ActiveRecord
     }
 
     /**
+     * Obtiene las respuestas
+     */
+    public function getRespuestas()
+    {
+        return $this->hasMany(Comentario::class, ['comentario_origen_id' => 'id'])
+            ->orderBy(['fecha_creacion' => SORT_ASC]);
+    }
+
+    /**
      * Método antes de guardar el registro
      */
     public function beforeSave($insert)

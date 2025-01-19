@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => '¿Estás seguro de que deseas eliminar este comentario?',
-                'method' => 'post',
             ],
         ]) ?>
         <?php if (!$model->bloqueado): ?>
@@ -29,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
-                    'method' => 'post',
                 ],
             ]) ?>
         <?php else: ?>
@@ -37,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'btn btn-success',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
-                    'method' => 'post',
                 ],
             ]) ?>
         <?php endif; ?>
