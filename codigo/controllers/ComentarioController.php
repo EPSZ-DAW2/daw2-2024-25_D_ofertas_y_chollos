@@ -215,6 +215,7 @@ class ComentarioController extends Controller
         }
         
         $model->denuncias += 1;
+        $model->motivo_denuncia = Yii::$app->request->post('motivo_denuncia');
         
         if ($model->denuncias >= Yii::$app->params['umbralDenuncias']) {
             $model->bloqueado = 1;
