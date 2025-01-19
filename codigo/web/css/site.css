@@ -82,3 +82,29 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* Sección de Comentarios */
+.comentarios-section {
+    margin-top: 20px;
+}
+
+.comentarios-lista {
+    margin-top: 20px;
+}
+
+.comentario {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.comentario p {
+    margin: 0;
+}
+
+.comentario .btn-link {
+    padding: 0;
+    margin-right: 10px;
+}
+
