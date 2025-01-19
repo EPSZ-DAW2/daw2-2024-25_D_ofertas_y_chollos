@@ -25,14 +25,18 @@ class ComentarioController extends Controller
             [
                 'access' => [
                     'class' => AccessControl::class,
-                    'only' => ['create', 'update', 'delete', 'bloquear', 'desbloquear'],
+                    'only' => ['index', 'view', 'create', 'update', 'delete', 'bloquear', 'desbloquear'],
                     'rules' => [
                         [
                             'allow' => true,
+                            'actions' => ['index', 'view'],
+                            'roles' => ['admin'], // Solo administradores pueden acceder a index y view
+                        ],
+                        [
+                            'allow' => true,
                             'actions' => ['create', 'update', 'delete'],
-                            'roles' => ['@'], // Usuarios autenticados
+                            'roles' => ['@'], // Usuarios autenticados pueden crear, actualizar y eliminar sus propios comentarios
                             'matchCallback' => function ($rule, $action) {
-                                // Permitir solo si el comentario pertenece al usuario
                                 $id = Yii::$app->request->get('id');
                                 $comentario = Comentario::findOne($id);
                                 return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
@@ -41,7 +45,7 @@ class ComentarioController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['bloquear', 'desbloquear'],
-                            'roles' => ['admin'], // Solo administradores
+                            'roles' => ['admin'], // Solo administradores pueden bloquear o desbloquear comentarios
                         ],
                     ],
                 ],
