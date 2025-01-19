@@ -86,12 +86,14 @@ class ComentarioController extends Controller
     {
         $model = new Comentario();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            $model->usuario_id = Yii::$app->user->id;
+            $model->fecha_creacion = date('Y-m-d H:i:s');
+
+            if ($model->save()) {
+                return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
