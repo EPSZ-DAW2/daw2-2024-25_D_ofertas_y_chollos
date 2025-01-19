@@ -178,7 +178,7 @@ class ComentarioController extends Controller
         } else {
             Yii::$app->session->setFlash('info', 'El comentario no está bloqueado.');
         }
-        eturn $this->redirect(['revisar-denuncias']);
+        return $this->redirect(['revisar-denuncias']);
     }
 
     /**
