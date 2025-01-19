@@ -14,7 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'texto')->textarea(['rows' => 6]) ?>
 
-    <?php if (!$model->cerrado): ?>
+    <?= $form->field($model, 'oferta_id')->hiddenInput()->label(false) ?>
+
+    <?php if ($model->comentario_origen_id): ?>
         <?= $form->field($model, 'comentario_origen_id')->hiddenInput()->label(false) ?>
     <?php endif; ?>
 
