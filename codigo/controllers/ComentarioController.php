@@ -201,35 +201,46 @@ class ComentarioController extends Controller
      */
     public function actionDenunciar($id)
     {
-        $model = $this->findModel($id, false);
-        
-        // Verificar que no sea un comentario propio
-        if ($model->usuario_id === Yii::$app->user->id) {
-            Yii::$app->session->setFlash('error', 'No puedes denunciar tus propios comentarios.');
-            return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
-        }
-        
-        // Si es la primera denuncia, registrar la fecha
-        if ($model->denuncias == 0) {
-            $model->fecha_primer_denuncia = date('Y-m-d H:i:s');
-        }
-        
-        $model->denuncias += 1;
-        $model->motivo_denuncia = Yii::$app->request->post('Comentario')['motivo_denuncia'];
-        
-        if ($model->denuncias >= Yii::$app->params['umbralDenuncias']) {
-            $model->bloqueado = 1;
-            $model->fecha_bloqueo = date('Y-m-d H:i:s');
-            $model->motivo_bloqueo = 'Exceso de denuncias';
-        }
+    	$model = $this->findModel($id, false);
+    	
+    	// Verificar que no sea un comentario propio
+    	if ($model->usuario_id === Yii::$app->user->id) {
+    		Yii::$app->session->setFlash('error', 'No puedes denunciar tus propios comentarios.');
+    		return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
+    	}
+    	
+    	// Decodificar usuarios que han denunciado
+    	$denuncias = $model->motivo_denuncia ? json_decode($model->motivo_denuncia, true) : [];
+    	
+    	// Verificar si el usuario ya denunció
+    	if (isset($denuncias[Yii::$app->user->id])) {
+    		Yii::$app->session->setFlash('error', 'Ya has denunciado este comentario anteriormente.');
+    		return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
+    	}
+    	
+    	// Registrar nueva denuncia
+    	$denuncias[Yii::$app->user->id] = Yii::$app->request->post('Comentario')['motivo_denuncia'];
+    	$model->motivo_denuncia = json_encode($denuncias);
+    	$model->denuncias = count($denuncias);
+    	
+    	// Si es la primera denuncia, registrar la fecha
+    	if ($model->denuncias == 1) {
+    		$model->fecha_primer_denuncia = date('Y-m-d H:i:s');
+    	}
+    	
+    	if ($model->denuncias >= Yii::$app->params['umbralDenuncias']) {
+    		$model->bloqueado = 1;
+    		$model->fecha_bloqueo = date('Y-m-d H:i:s');
+    		$model->motivo_bloqueo = 'Exceso de denuncias';
+    	}
     
-        if ($model->save(false)) {
-            Yii::$app->session->setFlash('success', 'Comentario denunciado correctamente.');
-        } else {
-            Yii::$app->session->setFlash('error', 'No se pudo denunciar el comentario.');
-        }
+    	if ($model->save(false)) {
+    		Yii::$app->session->setFlash('success', 'Comentario denunciado correctamente.');
+    	} else {
+    		Yii::$app->session->setFlash('error', 'No se pudo denunciar el comentario.');
+    	}
     
-        return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
+    	return $this->redirect(['ofertas/view', 'id' => $model->oferta_id]);
     }
 
     /**
