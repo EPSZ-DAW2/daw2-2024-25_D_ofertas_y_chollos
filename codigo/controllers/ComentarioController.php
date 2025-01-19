@@ -235,10 +235,16 @@ class ComentarioController extends Controller
     protected function findModel($id)
     {
         $model = Comentario::findOne(['id' => $id]);
-        if ($model !== null && $model->usuario_id === Yii::$app->user->id) {
-            return $model;
+        
+        if ($model === null) {
+            throw new NotFoundHttpException('El comentario solicitado no existe.');
         }
-
-        throw new NotFoundHttpException('El comentario solicitado no existe o no tienes permiso para acceder a él.');
+        
+        // Verificar si el usuario es admin o es el propietario del comentario
+        if (!Yii::$app->user->can('admin') && $model->usuario_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException('No tienes permiso para acceder a este comentario.');
+        }
+        
+        return $model;
     }
 }
