@@ -11,4 +11,5 @@ return [
     'rutaBackup' => '@app/backups', // Ruta para almacenar las copias de seguridad
     'diasRegistroObsoleto' => 30, // Días para considerar un registro como obsoleto
     'palabrasProhibidas' => ['palabra1', 'palabra2', 'palabra3'], // Lista de palabras prohibidas
+    'umbralDenuncias' => 5, // Número de denuncias para bloquear un comentario
 ];
