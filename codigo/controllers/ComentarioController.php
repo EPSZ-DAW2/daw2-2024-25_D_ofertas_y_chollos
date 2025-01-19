@@ -37,10 +37,11 @@ class ComentarioController extends Controller
                             'actions' => ['create', 'update', 'delete'],
                             'roles' => ['@'], // Usuarios autenticados pueden crear, actualizar y eliminar sus propios comentarios
                             'matchCallback' => function ($rule, $action) {
-                                $id = Yii::$app->request->get('id');
-                                $comentario = Comentario::findOne($id);
-                                return $comentario ? $comentario->usuario_id == Yii::$app->user->id : false;
-                            }
+                    			if ($action->id === 'create') return true;
+                    			$id = Yii::$app->request->get('id');
+                    			$comentario = Comentario::findOne($id);
+                    			return $comentario && $comentario->usuario_id == Yii::$app->user->id;
+                    		}
                         ],
                         [
                             'allow' => true,
