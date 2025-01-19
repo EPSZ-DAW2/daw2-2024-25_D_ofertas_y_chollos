@@ -19,7 +19,7 @@ use yii\helpers\Html;
     ]) ?>
     <?php if (Yii::$app->user->can('admin')): ?>
         <?php if (!$comentario->bloqueado): ?>
-            <?= Html::a('Bloquear', ['bloquear', 'id' => $comentario->id], [
+            <?= Html::a('Bloquear', ['comentario/bloquear', 'id' => $comentario->id], [
                 'class' => 'btn btn-danger btn-sm',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
@@ -27,7 +27,7 @@ use yii\helpers\Html;
                 ],
             ]) ?>
         <?php else: ?>
-            <?= Html::a('Desbloquear', ['desbloquear', 'id' => $comentario->id], [
+            <?= Html::a('Desbloquear', ['comentario/desbloquear', 'id' => $comentario->id], [
                 'class' => 'btn btn-success btn-sm',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
