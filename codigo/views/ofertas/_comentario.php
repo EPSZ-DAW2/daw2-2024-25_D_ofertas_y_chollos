@@ -1,3 +1,9 @@
+<?php
+
+use yii\helpers\Html;
+
+?>
+
 <div class="comentario" style="margin-left: <?= $nivel * 20 ?>px; border-left: <?= $nivel > 0 ? '2px solid #ccc' : 'none' ?>; padding-left: 10px;">
     <p><strong><?= Html::encode($comentario->usuario->nombre) ?></strong> (<?= Yii::$app->formatter->asDatetime($comentario->fecha_creacion) ?>)</p>
     <p><?= Html::encode($comentario->texto) ?></p>
