@@ -93,20 +93,11 @@ public function behaviors()
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-    
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $estadoTerminacionId = Yii::$app->request->post('estado_terminacion_id'); // Recoger el estado de terminación enviado desde el formulario
-            if ($estadoTerminacionId) {
-                $model->estado_terminacion_id = $estadoTerminacionId; // Asignar el estado de terminación
-            }
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'La oferta ha sido actualizada.');
-            } else {
-                Yii::$app->session->setFlash('error', 'No se pudo actualizar la oferta.');
-            }
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-    
+
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -122,35 +113,27 @@ public function behaviors()
     public function actionBloquear($id)
     {
         $model = $this->findModel($id);
-    
-        if (Yii::$app->request->isPost) {
-            $claseBloqueoId = Yii::$app->request->post('clase_bloqueo_id'); // Recoger la clase de bloqueo enviada desde el formulario
-            if ($claseBloqueoId) {
-                $model->estado = 'bloqueada';
-                $model->clase_bloqueo_id = $claseBloqueoId; // Asignar la clase de bloqueo
-                $model->fecha_bloqueo = date('Y-m-d H:i:s');
-                if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'La oferta ha sido bloqueada.');
-                } else {
-                    Yii::$app->session->setFlash('error', 'No se pudo bloquear la oferta.');
-                }
-            } else {
-                Yii::$app->session->setFlash('error', 'Debe seleccionar una razón de bloqueo.');
-            }
+        $model->estado = 'bloqueada'; // Cambiar el estado a "bloqueada"
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'La oferta ha sido bloqueada.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo bloquear la oferta.');
         }
-    
         return $this->redirect(['view', 'id' => $model->id]);
     }
     
-
     public function actionDesbloquear($id)
     {
         $model = $this->findModel($id);
-        $model->estado = 'activa';
-        $model->fecha_bloqueo = null;
-        $model->save();
+        $model->estado = 'visible'; // Cambiar el estado a "visible"
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'La oferta ha sido desbloqueada.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo desbloquear la oferta.');
+        }
         return $this->redirect(['view', 'id' => $model->id]);
     }
+    
 
     public function actionSeguir($id)
     {

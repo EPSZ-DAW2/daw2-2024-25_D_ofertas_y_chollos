@@ -20,16 +20,22 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
     <!-- Botones de acción -->
     <div class="action-buttons">
         <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin'): ?>
-            <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
+            <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Borrar', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('app', '¿Estás seguro de que desea borrar esta oferta?'),
-                    'method' => 'post',
-                ],
+                'data' => ['confirm' => '¿Estás seguro de borrar esta oferta?', 'method' => 'post'],
             ]) ?>
-            <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-            <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?php if ($model->estado === 'visible'): ?>
+                <?= Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                    'class' => 'btn btn-warning',
+                    'data-confirm' => '¿Estás seguro de bloquear esta oferta?',
+                ]) ?>
+            <?php elseif ($model->estado === 'bloqueada'): ?>
+                <?= Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                    'class' => 'btn btn-success',
+                    'data-confirm' => '¿Estás seguro de desbloquear esta oferta?',
+                ]) ?>
+            <?php endif; ?>
         <?php endif; ?>
 
         <?php if ($model->patrocinador_id === null): ?>
@@ -97,14 +103,7 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
                 'label' => 'Proveedor',
                 'value' => $model->proveedor ? $model->proveedor->razon_social : 'Sin proveedor',
             ],
-            [
-                'label' => 'Estado de Terminación',
-                'value' => $model->estadoTerminacion ? $model->estadoTerminacion->descripcion : 'En curso',
-            ],
-            [
-                'label' => 'Razón de Bloqueo',
-                'value' => $model->claseBloqueo ? $model->claseBloqueo->descripcion : 'No bloqueada',
-            ],
+            'estado',
         ],
     ]) ?>
 

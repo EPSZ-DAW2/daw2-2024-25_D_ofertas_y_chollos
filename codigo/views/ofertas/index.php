@@ -21,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Crear nueva oferta'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -34,12 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion:ntext',
             'url_externa:url',
             'fecha_inicio',
-            //'fecha_fin',
-            //'precio_actual',
-            //'precio_original',
-            //'descuento',
-            
-            // Aquí mostramos información adicional
+
             [
                 'attribute' => 'categoria_id',
                 'value' => 'categoria.nombre',
@@ -60,45 +53,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Estado',
             ],
 
-            // Configuración de la columna de acciones
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {update} {delete} {bloquear} {desbloquear}',
                 'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'view') {
-                        return Url::to(['view', 'id' => $model->id]);
-                    }
-                    if ($action === 'update') {
-                        return Url::to(['update', 'id' => $model->id]);
-                    }
-                    if ($action === 'delete') {
-                        return Url::to(['delete', 'id' => $model->id]);
-                    }
-                    if ($action === 'bloquear') {
-                        return Url::to(['bloquear', 'id' => $model->id]);
-                    }
-                    if ($action === 'desbloquear') {
-                        return Url::to(['desbloquear', 'id' => $model->id]);
-                    }
-                    return '';
+                    return Url::to([$action, 'id' => $model->id]);
                 },
                 'buttons' => [
                     'bloquear' => function ($url, $model, $key) {
-                        return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
-                            'class' => 'btn boton-bloq',
-                            'data-confirm' => '¿Estás seguro de bloquear esta oferta?',
-                        ]);
+                        if ($model->estado === 'visible') {
+                            return Html::a('Bloquear', $url, [
+                                'class' => 'btn btn-warning',
+                                'data-confirm' => '¿Estás seguro de bloquear esta oferta?',
+                            ]);
+                        }
+                        return '';
                     },
                     'desbloquear' => function ($url, $model, $key) {
-                        return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
-                            'class' => 'btn boton-desbloq',
-                            'data-confirm' => '¿Estás seguro de desbloquear esta oferta?',
-                        ]);
+                        if ($model->estado === 'bloqueada') {
+                            return Html::a('Desbloquear', $url, [
+                                'class' => 'btn btn-success',
+                                'data-confirm' => '¿Estás seguro de desbloquear esta oferta?',
+                            ]);
+                        }
+                        return '';
                     },
                 ],
             ],
         ],
     ]); ?>
-
 
 </div>
