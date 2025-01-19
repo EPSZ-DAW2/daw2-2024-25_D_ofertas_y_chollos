@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Gestión de Preferencias';
+$this->title = 'GESTIÓN DE PREFERENCIAS';
 ?>
 <div class="preferencias-usuarios-index">
 
@@ -17,6 +17,7 @@ $this->title = 'Gestión de Preferencias';
         </div>
     <?php endif; ?>
 
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
 
 
     <h1><?= Html::encode($this->title) ?></h1>

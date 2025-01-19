@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /** @var app\models\ComentarioSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Mis Comentarios';
+$this->title = 'MIS COMENTARIOS';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comentario-index">
@@ -30,6 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Yii::$app->session->getFlash('info') ?>
         </div>
     <?php endif; ?>
+
+
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
 
 
     <h1><?= Html::encode($this->title) ?></h1>

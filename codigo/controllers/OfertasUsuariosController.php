@@ -20,16 +20,28 @@ class OfertasUsuariosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+
                 'access' => [
                     'class' => AccessControl::class,
                     'rules' => [
+
                         [
                             'allow' => true,
-                            'roles' => ['@'], // Permitir a usuarios logueados
+                            'actions' => [
+                                'index',
+                                'view',
+                                'create',
+                                'update',
+                                'delete',
+                            ],
+                            'roles' => ['permisosBasicos'], // Para usuarios con permisos
                         ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
                     ],
                 ],
-
             ]
         );
     }

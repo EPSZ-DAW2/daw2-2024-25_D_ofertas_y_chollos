@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Etiquetas en Seguimiento';
+$this->title = 'ETIQUETAS EN SEGUIMIENTO';
 ?>
 <div class="seguimiento-etiquetas-index">
 
@@ -20,6 +20,7 @@ $this->title = 'Etiquetas en Seguimiento';
         </div>
     <?php endif; ?>
 
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
 
 
     <h1><?= Html::encode($this->title) ?></h1>

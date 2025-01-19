@@ -23,7 +23,31 @@ class PreferenciasController extends Controller
      */
     public function behaviors()
     {
-        return array_merge();
+        return array_merge(
+            parent::behaviors(),
+            [
+
+                'access' => [
+                    'class' => \yii\filters\AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => [
+                                'index',
+                                'anadir',
+                                'eliminar',
+                            ],
+                            'roles' => ['permisosBasicos'], // Para usuarios con permisos
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
+                    ],
+                ],
+            ]
+        );
     }
 
     /**

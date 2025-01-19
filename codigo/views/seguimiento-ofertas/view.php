@@ -7,10 +7,14 @@ use yii\widgets\DetailView;
 /** @var app\models\Ofertas $model */
 
 $this->title = $model->titulo;
-$this->params['breadcrumbs'][] = ['label' => 'Ofertas en Seguimiento', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'OFERTAS EN SEGUIMIENTO', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ficha-resumen">
+
+
+    <p><?= Html::a('VOLVER A OFERTAS EN SEGUIMIENTO', ['seguimiento-ofertas/index'], ['class' => 'btn btn-success']) ?></p>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= DetailView::widget([

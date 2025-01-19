@@ -8,9 +8,12 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 
 
-$this->title = 'Cambio de Contraseña';
+$this->title = 'CAMBIO DE CONTRASEÑA';
+
 ?>
 <div class="usuarios-form">
+
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
 
     <h1><?= Html::encode($this->title) ?></h1>
 

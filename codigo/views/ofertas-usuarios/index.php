@@ -10,10 +10,13 @@ use yii\grid\GridView;
 /** @var app\models\OfertasSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Mis Ofertas');
+$this->title = Yii::t('app', 'MIS OFERTAS');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ofertas-index">
+
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 

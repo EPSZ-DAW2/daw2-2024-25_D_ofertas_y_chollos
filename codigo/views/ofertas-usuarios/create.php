@@ -5,11 +5,14 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Ofertas $model */
 
-$this->title = Yii::t('app', 'Create Ofertas');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Mis Ofertas'), 'url' => ['index']];
+$this->title = Yii::t('app', 'CREAR OFERTA');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'MIS OFERTAS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ofertas-create">
+
+    <p><?= Html::a('VOLVER A MIS OFERTAS', ['ofertas-usuarios/index'], ['class' => 'btn btn-success']) ?></p>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 

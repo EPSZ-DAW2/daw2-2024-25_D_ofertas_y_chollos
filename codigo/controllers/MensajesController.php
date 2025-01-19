@@ -11,6 +11,7 @@ use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Usuarios;
 use app\models\Roles;
+use yii\filters\AccessControl;
 
 
 /**
@@ -26,10 +27,25 @@ class MensajesController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => [
+                                'index',
+                                'view',
+                                'admin',
+                                'delete',
+                            ],
+                            'roles' => ['permisosBasicos'], // Para usuarios con permisos
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
                     ],
                 ],
             ]

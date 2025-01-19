@@ -3,9 +3,13 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Nuevas ofertas de tu preferencia';
+$this->title = 'NUEVAS OFERTAS DE TU PREFERENCIA';
 ?>
 <div class="preferencias-usuarios-index">
+
+
+    <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (!empty($ofertas)): ?>

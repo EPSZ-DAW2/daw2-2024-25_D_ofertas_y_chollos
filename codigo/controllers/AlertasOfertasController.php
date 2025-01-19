@@ -10,6 +10,7 @@ use app\models\OfertaEtiqueta;
 use app\models\UsuariosZonas;
 use app\models\Zonas;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 
 
 /**
@@ -17,7 +18,34 @@ use yii\web\Controller;
  */
 class AlertasOfertasController extends Controller
 {
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
 
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => [
+                                'index',
+                                'view',
+
+                            ],
+                            'roles' => ['permisosBasicos'], // Para usuarios con permisos
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
+                    ],
+                ],
+            ]
+        );
+    }
     /**
      * Muestra las ofertas nuevas según sus preferencias.
      *

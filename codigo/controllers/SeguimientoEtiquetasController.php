@@ -19,7 +19,31 @@ class SeguimientoEtiquetasController extends Controller
      */
     public function behaviors()
     {
-        return array_merge();
+        return array_merge(
+            parent::behaviors(),
+            [
+
+                'access' => [
+                    'class' => \yii\filters\AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => [
+                                'index',
+                                'seguir',
+                                'dejar-de-seguir',
+                            ],
+                            'roles' => ['permisosBasicos'], // Para usuarios con permisos
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
+                    ],
+                ],
+            ]
+        );
     }
 
     /**

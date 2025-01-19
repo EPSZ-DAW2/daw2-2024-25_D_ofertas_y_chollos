@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 
 
-$this->title = 'Mi Perfil';
+$this->title = 'MI PERFIL';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="perfil">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <div class="usuarios-form">
-        <h3>Datos de Usuario</h3>
+        <h3>DATOS DE USUARIO</h3>
         <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr>
 
     <div class="perfil-opciones">
-        <h3>Opciones del Perfil</h3>
+        <h3>OPCIONES DE PERFIL</h3>
 
         <?= Html::a('Cambiar Contraseña', ['usuarios/cambiar-contrasena'], ['class' => 'btn btn-warning']) ?>
 
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <div class="perfil-mensajes">
-        <h3>Mensajes Nuevos</h3>
+        <h3>MENSAJES NUEVOS</h3>
         <?php if (isset($mensajesNuevos) && $mensajesNuevos > 0): ?>
             <ul>
                 <?php
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <div class="perfil-funcionalidades">
-        <h3>Más Opciones</h3>
+        <h3>MÁS OPCIONES</h3>
         <div class="row">
             <div class="col-md-4">
                 <?= Html::a('Mis Comentarios', ['usuario-comentario/index'], ['class' => 'btn btn-info btn-block']) ?>

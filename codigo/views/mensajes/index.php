@@ -11,14 +11,17 @@ use yii\widgets\Pjax;
 /** @var app\models\MensajesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', ' Mis Mensajes');
+$this->title = Yii::t('app', ' MIS MENSAJES');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mensajes-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?= Html::a('Volver a Mi Perfil', ['usuarios/mi-perfil'], ['class' => 'btn btn-success']) ?></p>
+
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
 
     <h3>Mensajes no leídos</h3>
     <?php if (!empty($mensajesNoLeidos)): ?>
