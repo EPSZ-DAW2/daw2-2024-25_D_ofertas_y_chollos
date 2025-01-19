@@ -104,4 +104,33 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         ],
     ]) ?>
 
+    <!-- Sección de Comentarios -->
+    <div class="comentarios-section">
+        <h2>Comentarios</h2>
+    
+        <?php if (Yii::$app->user->isGuest): ?>
+            <p>Inicia sesión para dejar un comentario.</p>
+        <?php else: ?>
+            <?= Html::a('Añadir Comentario', ['comentario/create', 'oferta_id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?php endif; ?>
+    
+        <?php foreach ($model->comentarios as $comentario): ?>
+            <div class="comentario">
+                <p><strong><?= Html::encode($comentario->usuario->nombre) ?></strong> (<?= Yii::$app->formatter->asDatetime($comentario->fecha_creacion) ?>)</p>
+                <p><?= Html::encode($comentario->texto) ?></p>
+                <?php if (!$comentario->cerrado): ?>
+                    <?= Html::a('Responder', ['comentario/create', 'oferta_id' => $model->id, 'comentario_origen_id' => $comentario->id], ['class' => 'btn btn-link']) ?>
+                <?php endif; ?>
+                <?= Html::a('Denunciar', ['comentario/denunciar', 'id' => $comentario->id], [
+                    'class' => 'btn btn-link text-danger',
+                    'data' => [
+                        'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
+                <hr>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 </div>
