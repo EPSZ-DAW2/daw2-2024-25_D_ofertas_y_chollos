@@ -29,7 +29,7 @@ class ComentarioController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index', 'view'],
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
                             'roles' => ['admin'], // Solo administradores pueden acceder a index y view
                         ],
                         [
