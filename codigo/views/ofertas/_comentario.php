@@ -29,7 +29,8 @@ use yii\widgets\ActiveForm;
                         </button>
                     </div>
                     <?php $form = ActiveForm::begin([
-                        'action' => ['comentario/denunciar', 'id' => $comentario->id]
+                        'action' => ['comentario/denunciar', 'id' => $comentario->id],
+                        'method' => 'post',
                     ]); ?>
                     <div class="modal-body">
                         <?= $form->field($comentario, 'motivo_denuncia')->textarea([
