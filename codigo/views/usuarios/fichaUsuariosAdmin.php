@@ -10,7 +10,7 @@ use yii\bootstrap5\LinkPager;
 /** @var app\models\UsuariosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Gestión de Usuarios');
+$this->title = Yii::t('app', 'USUARIOS');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuarios-index">
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a(Yii::t('app', 'Crear nuevo usuarios'), ['create'],    [
+        <?= Html::a(Yii::t('app', 'Crear nuevo usuario'), ['create'],    [
             'class' => 'btn btn-success'
         ]) ?>
     </p>
