@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+        <?= Html::a('Actualizar', ['comentario/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['comentario/delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => '¿Estás seguro de que deseas eliminar este comentario?',
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?php if (!$model->bloqueado): ?>
-            <?= Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+            <?= Html::a('Bloquear', ['comentario/bloquear', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         <?php else: ?>
-            <?= Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+            <?= Html::a('Desbloquear', ['comentario/desbloquear', 'id' => $model->id], [
                 'class' => 'btn btn-success',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
