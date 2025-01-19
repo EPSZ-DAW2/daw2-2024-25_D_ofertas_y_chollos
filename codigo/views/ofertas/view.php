@@ -114,23 +114,11 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
             <?= Html::a('Añadir Comentario', ['comentario/create', 'oferta_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?php endif; ?>
     
-        <?php foreach ($model->comentarios as $comentario): ?>
-            <div class="comentario">
-                <p><strong><?= Html::encode($comentario->usuario->nombre) ?></strong> (<?= Yii::$app->formatter->asDatetime($comentario->fecha_creacion) ?>)</p>
-                <p><?= Html::encode($comentario->texto) ?></p>
-                <?php if (!$comentario->cerrado): ?>
-                    <?= Html::a('Responder', ['comentario/create', 'oferta_id' => $model->id, 'comentario_origen_id' => $comentario->id], ['class' => 'btn btn-link']) ?>
-                <?php endif; ?>
-                <?= Html::a('Denunciar', ['comentario/denunciar', 'id' => $comentario->id], [
-                    'class' => 'btn btn-link text-danger',
-                    'data' => [
-                        'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-                <hr>
-            </div>
-        <?php endforeach; ?>
+        <div class="comentarios-lista">
+            <?php foreach ($model->comentarios as $comentario): ?>
+                <?= $this->render('_comentario', ['comentario' => $comentario, 'nivel' => 0]) ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 
 </div>
