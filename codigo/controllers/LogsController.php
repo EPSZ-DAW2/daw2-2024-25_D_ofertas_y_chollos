@@ -17,19 +17,25 @@ class LogsController extends Controller
      * @inheritDoc
      */
     public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+{
+    return array_merge(
+        parent::behaviors(),
+        [
+            'access' => [
+                'class' => \yii\filters\AccessControl::class,
+                'only' => ['index', 'view','create', 'update', 'delete'], // Acciones restringidas
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions'=>['index', 'view', 'create', 'update', 'delete'],
+                        'roles'=>['admin'],
                     ],
+                    
                 ],
-            ]
-        );
-    }
+            ],
+        ]
+    );
+}
 
     /**
      * Lists all Log models.

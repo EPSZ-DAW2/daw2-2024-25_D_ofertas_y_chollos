@@ -16,20 +16,6 @@ class IncidenciasController extends Controller
     /**
      * @inheritDoc
      *
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
         */
 
         public function behaviors()
@@ -39,7 +25,7 @@ class IncidenciasController extends Controller
                 [
                     'access' => [
                         'class' => \yii\filters\AccessControl::class,
-                        'only' => ['index','view','create', 'update', 'delete'], // Acciones restringidas
+                        'only' => ['create','update','delete','index','view','aceptar'], // Acciones restringidas
                         'rules' => [
                             [
                                 'allow' => true,
