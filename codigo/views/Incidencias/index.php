@@ -39,6 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'fecha_lectura',
             //'fecha_aceptado',
             [
+                'attribute' => 'aceptada',
+                'label' => 'Aceptada',
+                'value' => function ($model) {
+                    return $model->fecha_aceptado === null ? 'No' : 'Sí';
+                },
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Incidencia $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
