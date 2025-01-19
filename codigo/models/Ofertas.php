@@ -169,7 +169,16 @@ class Ofertas extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentario::class, ['oferta_id' => 'id']);
+        return $this->hasMany(Comentario::class, ['oferta_id' => 'id'])
+            ->where(['comentario_origen_id' => null])
+            ->orderBy(['fecha_creacion' => SORT_DESC]);
+    }
+    
+    // Añade una nueva relación para obtener todos los comentarios si es necesario
+    public function getTodosComentarios()
+    {
+        return $this->hasMany(Comentario::class, ['oferta_id' => 'id'])
+            ->orderBy(['fecha_creacion' => SORT_DESC]);
     }
 
     /**
