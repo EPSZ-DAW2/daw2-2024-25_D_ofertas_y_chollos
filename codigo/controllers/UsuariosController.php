@@ -37,13 +37,30 @@ class UsuariosController extends Controller
 
                         [
                             'allow' => true,
-                            'actions' => ['create'],
-                            'roles' => ['permisosAdministrador'],
+                            'actions' => [
+                                'index',
+                                'view',
+                                'create',
+                                'update',
+                                'delete',
+                                'registro',
+                                'ficha-usuarios-admin',
+                                'confirmar-usuario',
+                                'bloquear-usuario'
+                            ],
+                            'roles' => ['permisosAdministrador'], // Solo pueden administradores
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['ficha-usuarios-admin', 'bloquear-usuario'],
-                            'roles' => ['permisosAdministrador'],
+                            'actions' => [
+                                'mi-perfil',
+                                'cambiar-contrasena',
+                                'solicitar-baja'
+                            ],
+                            'roles' => ['permisosBasicos'], // Solo usuarios autenticados
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
                         ],
 
                     ],

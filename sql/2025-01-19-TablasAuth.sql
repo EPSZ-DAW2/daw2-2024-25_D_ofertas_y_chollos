@@ -108,7 +108,10 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('permisosModerador', 'permisosBasicos'),
 ('permisosProveedor', 'permisosBasicos'),
 ('sysadmin', 'accederFichaUsuariosAdmin'),
-('sysadmin', 'permisosAdministrador');
+('sysadmin', 'permisosAdministrador'),
+('normal', 'permisosBasicos'),
+('moderador', 'permisosModerador'),
+('proveedor', 'permisosProveedor');
 
 -- --------------------------------------------------------
 

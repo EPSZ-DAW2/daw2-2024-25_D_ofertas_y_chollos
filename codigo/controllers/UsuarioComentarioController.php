@@ -23,7 +23,39 @@ class UsuarioComentarioController extends Controller
      */
     public function behaviors()
     {
-        return array_merge();
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::class,
+                    'actions' => [
+                        'delete' => ['POST', 'GET'],
+                    ],
+                ],
+
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => [
+                                'index',
+                                'view',
+                                'create',
+                                'update',
+                                'delete'
+                            ],
+                            'roles' => ['permisosBasicos'], // Solo pueden administradores
+                        ],
+                        [
+                            'allow' => false, //negar acceso por defecto
+                        ],
+
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
