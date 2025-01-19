@@ -17,8 +17,10 @@ $this->registerCssFile('@web/themes/material-default/css/visor.css');
 
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <?php if(!Yii::$app->user->isGuest): ?>
+            <p><?= Html::a(Yii::t('app', 'Proponer Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?></p>
+        <?php endif?>
         <?php if(!Yii::$app->user->isGuest && (Yii::$app->user->identity->rol == 1 || Yii::$app->user->identity->rol == 2 || Yii::$app->user->identity->rol == 3)): ?>
-            <p><?= Html::a(Yii::t('app', 'Crear Nueva Categoría'), ['create'], ['class' => 'btn btn-success']) ?></p>
             <p><?= Html::a(Yii::t('app', 'Lista de categorías'), ['index'], ['class' => 'btn btn-success']) ?></p>
         <?php endif?>
     </div>

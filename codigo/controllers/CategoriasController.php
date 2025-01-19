@@ -52,7 +52,7 @@ class CategoriasController extends \yii\web\Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         // Mostramos todas las categorías
-        $models= Categorias::find()->all();
+        $models = Categorias::find()->where(['revisado' => 1])->all();
 
         return $this->render('visor', [
             'searchModel' => $searchModel,
@@ -95,7 +95,7 @@ class CategoriasController extends \yii\web\Controller
 
     public function actionCreate()
     {
-        if (Yii::$app->user->isGuest ||(Yii::$app->user->identity->rol != 1 && Yii::$app->user->identity->rol != 2 && Yii::$app->user->identity->rol != 3))
+        if (Yii::$app->user->isGuest)
         {
             // Usuario no autenticado o no tiene el rol adecuado
             Yii::$app->session->setFlash('error', 'No tienes permisos para realizar esta acción.');
