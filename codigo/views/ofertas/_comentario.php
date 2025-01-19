@@ -14,7 +14,6 @@ use yii\helpers\Html;
         'class' => 'btn btn-link text-danger',
         'data' => [
             'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
-            'method' => 'post',
         ],
     ]) ?>
     <?php if (Yii::$app->user->can('admin')): ?>
@@ -23,7 +22,6 @@ use yii\helpers\Html;
                 'class' => 'btn btn-danger btn-sm',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
-                    'method' => 'post',
                 ],
             ]) ?>
         <?php else: ?>
@@ -31,7 +29,6 @@ use yii\helpers\Html;
                 'class' => 'btn btn-success btn-sm',
                 'data' => [
                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
-                    'method' => 'post',
                 ],
             ]) ?>
         <?php endif; ?>
