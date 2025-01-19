@@ -91,6 +91,9 @@ class ComentarioController extends Controller
     {
         $model = new Comentario();
 
+        $model->oferta_id = Yii::$app->request->get('oferta_id');
+        $model->comentario_origen_id = Yii::$app->request->get('comentario_origen_id');
+
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             $model->usuario_id = Yii::$app->user->id;
