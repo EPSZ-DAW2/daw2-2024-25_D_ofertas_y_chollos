@@ -28,7 +28,7 @@ class LogsController extends Controller
                     [
                         'allow' => true,
                         'actions'=>['index', 'view', 'create', 'update', 'delete'],
-                        'roles'=>['admin'],
+                        'roles'=>['permisosAdministrador'],
                     ],
                     
                 ],

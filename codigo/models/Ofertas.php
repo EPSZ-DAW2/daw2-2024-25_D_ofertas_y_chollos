@@ -325,4 +325,16 @@ class Ofertas extends \yii\db\ActiveRecord
         $this->patrocinador_id = $usuarioId;
         return $this->save();
     }
+
+    public function getClaseBloqueo()
+    {
+        return $this->hasOne(ClasesBloqueo::class, ['id' => 'clase_bloqueo_id']);
+    }
+    
+    public function getEstadoTerminacion()
+    {
+        return $this->hasOne(EstadosTerminacion::class, ['id' => 'estado_terminacion_id']);
+    }
+    
+
 }

@@ -30,7 +30,7 @@ class IncidenciasController extends Controller
                             [
                                 'allow' => true,
                                 'actions'=>['create','update','delete','index','view','aceptar'],
-                                'roles'=>['admin'],
+                                'roles'=>['permisosAdministrador'],
                             ],
                             
                         ],

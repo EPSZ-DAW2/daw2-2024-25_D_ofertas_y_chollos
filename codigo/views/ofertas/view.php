@@ -19,34 +19,32 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
 
     <!-- Botones de acción -->
     <div class="action-buttons">
-    <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin'): ?>
-        <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', '¿Estás seguro de que desea borrar esta oferta?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-    <?php endif; ?>
-
-    <?php if ($model->patrocinador_id === null): ?>
-        <?php if (!Yii::$app->user->isGuest): ?>
-            <?= Html::a(Yii::t('app', 'Patrocinar'), ['ofertas/patrocinar', 'id' => $model->id], [
-                'class' => 'btn btn-info',
+        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rol === 'admin'): ?>
+            <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('app', 'Borrar'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Yii::t('app', '¿Estás seguro de que quieres patrocinar esta oferta?'),
+                    'confirm' => Yii::t('app', '¿Estás seguro de que desea borrar esta oferta?'),
                     'method' => 'post',
                 ],
             ]) ?>
+            <?= Html::a(Yii::t('app', 'Bloquear'), ['bloquear', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+            <?= Html::a(Yii::t('app', 'Desbloquear'), ['desbloquear', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?php endif; ?>
-    <?php else: ?>
-        <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
-    <?php endif; ?>
 
-
+        <?php if ($model->patrocinador_id === null): ?>
+            <?php if (!Yii::$app->user->isGuest): ?>
+                <?= Html::a(Yii::t('app', 'Patrocinar'), ['ofertas/patrocinar', 'id' => $model->id], [
+                    'class' => 'btn btn-info',
+                    'data' => [
+                        'confirm' => Yii::t('app', '¿Estás seguro de que quieres patrocinar esta oferta?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <p><strong>Patrocinador:</strong> <?= Html::encode($model->patrocinador->nick) ?></p>
+        <?php endif; ?>
 
         <?php if ($model->destacada == 0): ?>
             <?= Html::a(Yii::t('app', 'Destacar'), ['ofertas/destacar', 'id' => $model->id], [
@@ -57,10 +55,9 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
                 ],
             ]) ?>
         <?php else: ?>
-            <p><strong>     oferta  destacada.</strong></p>
+            <p><strong>Oferta destacada.</strong></p>
         <?php endif; ?>
-   
-</div>
+    </div>
 
     <!-- Seguimiento -->
     <div class="follow-section">
@@ -73,7 +70,6 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         <?php endif; ?>
         <p><strong>Total de seguidores:</strong> <?= $model->getSeguidores()->count() ?></p>
     </div>
-
 
     <!-- Detalles de la oferta -->
     <?= DetailView::widget([
@@ -101,19 +97,27 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
                 'label' => 'Proveedor',
                 'value' => $model->proveedor ? $model->proveedor->razon_social : 'Sin proveedor',
             ],
+            [
+                'label' => 'Estado de Terminación',
+                'value' => $model->estadoTerminacion ? $model->estadoTerminacion->descripcion : 'En curso',
+            ],
+            [
+                'label' => 'Razón de Bloqueo',
+                'value' => $model->claseBloqueo ? $model->claseBloqueo->descripcion : 'No bloqueada',
+            ],
         ],
     ]) ?>
 
     <!-- Sección de Comentarios -->
     <div class="comentarios-section">
         <h2>Comentarios</h2>
-    
+
         <?php if (Yii::$app->user->isGuest): ?>
             <p>Inicia sesión para dejar un comentario.</p>
         <?php else: ?>
             <?= Html::a('Añadir Comentario', ['comentario/create', 'oferta_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?php endif; ?>
-    
+
         <div class="comentarios-lista">
             <?php foreach ($model->comentarios as $comentario): ?>
                 <?= $this->render('_comentario', ['comentario' => $comentario, 'nivel' => 0]) ?>
@@ -125,18 +129,18 @@ $this->registerCssFile('@web/themes/material-default/css/oferta-view.css');
         .comentarios-lista {
             margin-top: 20px;
         }
-    
+
         .comentario {
             background-color: #f9f9f9;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
         }
-    
+
         .comentario p {
             margin: 0;
         }
-    
+
         .btn-link {
             padding: 0;
             margin-right: 10px;
