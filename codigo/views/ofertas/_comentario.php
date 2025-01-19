@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 ?>
 
@@ -10,12 +11,42 @@ use yii\helpers\Html;
     <?php if (!$comentario->cerrado): ?>
         <?= Html::a('Responder', ['comentario/create', 'oferta_id' => $comentario->oferta_id, 'comentario_origen_id' => $comentario->id], ['class' => 'btn btn-link']) ?>
     <?php endif; ?>
-    <?= Html::a('Denunciar', ['comentario/denunciar', 'id' => $comentario->id], [
-        'class' => 'btn btn-link text-danger',
-        'data' => [
-            'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
-        ],
-    ]) ?>
+    <?php if (!$comentario->cerrado && Yii::$app->user->id !== $comentario->usuario_id): ?>
+        <?= Html::a('Denunciar', '#', [
+            'class' => 'btn btn-link text-danger',
+            'data-toggle' => 'modal',
+            'data-target' => "#modalDenuncia{$comentario->id}"
+        ]) ?>
+
+        <!-- Modal de Denuncia -->
+        <div class="modal fade" id="modalDenuncia<?= $comentario->id ?>" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Denunciar Comentario</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <?php $form = ActiveForm::begin([
+                        'action' => ['comentario/denunciar', 'id' => $comentario->id],
+                        'method' => 'post',
+                    ]); ?>
+                    <div class="modal-body">
+                        <?= $form->field($comentario, 'motivo_denuncia')->textarea([
+                            'rows' => 4,
+                            'placeholder' => 'Describe el motivo de la denuncia'
+                        ])->label('Motivo de la denuncia') ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <?= Html::submitButton('Denunciar', ['class' => 'btn btn-danger']) ?>
+                    </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <?php if (Yii::$app->user->can('admin')): ?>
         <?php if (!$comentario->bloqueado): ?>
             <?= Html::a('Bloquear', ['comentario/bloquear', 'id' => $comentario->id], [
@@ -35,7 +66,12 @@ use yii\helpers\Html;
     <?php endif; ?>
     <hr>
 
-    <?php foreach ($comentario->comentarios as $respuesta): ?>
-        <?= $this->render('_comentario', ['comentario' => $respuesta, 'nivel' => $nivel + 1]) ?>
-    <?php endforeach; ?>
+    <?php if (!empty($comentario->respuestas)): ?>
+        <?php foreach ($comentario->respuestas as $respuesta): ?>
+            <?= $this->render('_comentario', [
+                'comentario' => $respuesta,
+                'nivel' => $nivel + 1
+            ]) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>

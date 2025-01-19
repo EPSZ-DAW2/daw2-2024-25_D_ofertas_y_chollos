@@ -59,16 +59,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'buttons' => [
                     'bloquear' => function ($url, $model, $key) {
-                        return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
-                            'class' => 'btn boton-bloq',
-                            'data-confirm' => '¿Está seguro de bloquear este anuncio?',
-                        ]);
+                        if ($model->estado === 'visible') {
+                            return Html::a('Bloquear', ['bloquear', 'id' => $model->id], [
+                                'class' => 'btn btn-warning',
+                                'data-confirm' => '¿Está seguro de bloquear este anuncio?',
+                            ]);
+                        }
+                        return '';
                     },
                     'desbloquear' => function ($url, $model, $key) {
-                        return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
-                            'class' => 'btn boton-desbloq',
-                            'data-confirm' => '¿Está seguro de desbloquear este anuncio?',
-                        ]);
+                        if ($model->estado === 'bloqueado') {
+                            return Html::a('Desbloquear', ['desbloquear', 'id' => $model->id], [
+                                'class' => 'btn btn-success',
+                                'data-confirm' => '¿Está seguro de desbloquear este anuncio?',
+                            ]);
+                        }
+                        return '';
                     },
                 ],
             ],

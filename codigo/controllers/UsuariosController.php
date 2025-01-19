@@ -30,6 +30,24 @@ class UsuariosController extends Controller
                         'delete' => ['POST', 'GET'],
                     ],
                 ],
+
+                'access' => [
+                    'class' => \yii\filters\AccessControl::class,
+                    'rules' => [
+
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['permisosAdministrador'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['ficha-usuarios-admin', 'bloquear-usuario'],
+                            'roles' => ['permisosAdministrador'],
+                        ],
+
+                    ],
+                ],
             ]
         );
     }
@@ -270,10 +288,10 @@ class UsuariosController extends Controller
     public function actionFichaUsuariosAdmin()
     {
         //Comprobamos que pueda acceder
-
+        /*
         if (!Yii::$app->user->can('accederFichaUsuariosAdmin')) {
             throw new \yii\web\ForbiddenHttpException('No tienes permiso para acceder a esta pagina.');
-        }
+        }*/
         $searchModel = new UsuariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -446,6 +464,9 @@ class UsuariosController extends Controller
 
         //eliminar datos en tabla rbac
         $auth = Yii::$app->authManager;
+
+
+        $auth->revokeAll($usuario->id);
 
         //Eliminamos al usuario y los datos relacionados con el
         if ($usuario->delete()) {
