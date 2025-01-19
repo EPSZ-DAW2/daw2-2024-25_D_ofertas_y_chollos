@@ -81,6 +81,21 @@ class Ofertas extends \yii\db\ActiveRecord
         ];
     }
 
+
+
+    /**
+     * Escenario para form de usuarios
+     */
+
+
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['usuario'] = ['titulo', 'descripcion', 'precio_actual', 'fecha_inicio', 'fecha_fin'];
+        return $scenarios;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -301,5 +316,4 @@ class Ofertas extends \yii\db\ActiveRecord
         $this->patrocinador_id = $usuarioId;
         return $this->save();
     }
-
 }

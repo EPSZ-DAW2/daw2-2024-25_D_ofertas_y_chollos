@@ -5,7 +5,22 @@ use yii\helpers\Html;
 $this->title = 'Gestión de Preferencias';
 ?>
 <div class="preferencias-usuarios-index">
+
+
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
+
+
+
     <h1><?= Html::encode($this->title) ?></h1>
+
 
 
     <h3>Categorías que sigues</h3>

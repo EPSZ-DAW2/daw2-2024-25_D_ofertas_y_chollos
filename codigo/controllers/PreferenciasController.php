@@ -109,7 +109,7 @@ class PreferenciasController extends Controller
 
 
         if ($modelo->save()) {
-            Yii::$app->session->setFlash('success', 'Preferencia añadida correcatmente');
+            Yii::$app->session->setFlash('success', 'Preferencia añadida correctamente');
         } else {
             Yii::$app->session->setFlash('error', 'No se ha podido añadir esta preferencia');
         }

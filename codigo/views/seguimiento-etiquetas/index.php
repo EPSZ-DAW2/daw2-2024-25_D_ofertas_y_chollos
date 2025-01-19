@@ -5,6 +5,23 @@ use yii\helpers\Html;
 $this->title = 'Etiquetas en Seguimiento';
 ?>
 <div class="seguimiento-etiquetas-index">
+
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php elseif (Yii::$app->session->hasFlash('info')): ?>
+        <div class="alert alert-info">
+            <?= Yii::$app->session->getFlash('info') ?>
+        </div>
+    <?php endif; ?>
+
+
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <h3>Etiquetas que sigues</h3>

@@ -70,9 +70,9 @@ class OfertasUsuariosController extends Controller
     {
         $model = new Ofertas();
         $model->usuario_creador_id = Yii::$app->user->id; //Asignar usuario logueado como creador
-
+        $model->scenario = 'usuario';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('sucess', 'Oferta creada correctamente');
+            Yii::$app->session->setFlash('success', 'Oferta creada correctamente');
             return $this->redirect(['index']);
         }
 
@@ -89,6 +89,10 @@ class OfertasUsuariosController extends Controller
         if ($model->usuario_creador_id !== Yii::$app->user->id) { //si el logueado no es el creador
             throw new NotFoundHttpException('No tienes permiso para modificar esta oferta.');
         }
+
+
+
+        $model->scenario = 'usuario';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('sucess', 'Oferta actualizada correctamente');
@@ -112,9 +116,13 @@ class OfertasUsuariosController extends Controller
         }
 
 
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('success', 'Oferta eliminada correctamente.');
+        } else {
+            Yii::$app->session->setFlash('error', 'No se pudo eliminar la oferta.');
+        }
 
-        $model->delete();
-        Yii::$app->session->setFlash('sucess', 'Oferta eliminada correctamente');
+        return $this->redirect(['index']);
     }
 
 
