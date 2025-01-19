@@ -57,8 +57,8 @@ class OfertasSearch extends Ofertas
             return $dataProvider;
         }
 
-        // Filtro automático: solo mostrar ofertas visibles
-        $query->andFilterWhere(['estado' => 'visible']);
+        // Mostrar tanto ofertas visibles como bloqueadas
+        $query->andFilterWhere(['in', 'estado', ['visible', 'bloqueada']]);
 
         // grid filtering conditions
         $query->andFilterWhere([

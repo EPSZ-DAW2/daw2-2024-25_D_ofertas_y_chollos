@@ -78,7 +78,7 @@ class ComentarioController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, false),
         ]);
     }
 
@@ -118,7 +118,7 @@ class ComentarioController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, true);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -201,7 +201,7 @@ class ComentarioController extends Controller
      */
     public function actionDenunciar($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, false);
         
         // Verificar que no sea un comentario propio
         if ($model->usuario_id === Yii::$app->user->id) {
@@ -239,19 +239,21 @@ class ComentarioController extends Controller
      * @return Comentario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $comprobarTitular = true)
     {
-        $model = Comentario::findOne(['id' => $id]);
-        
-        if ($model === null) {
-            throw new NotFoundHttpException('El comentario solicitado no existe.');
-        }
-        
-        // Verificar si el usuario es admin o es el propietario del comentario
-        if (!Yii::$app->user->can('admin') && $model->usuario_id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException('No tienes permiso para acceder a este comentario.');
-        }
-        
-        return $model;
+    	$model = Comentario::findOne(['id' => $id]);
+    	
+    	if ($model === null) {
+    		throw new NotFoundHttpException('El comentario solicitado no existe.');
+    	}
+    	
+    	// Solo verificar propiedad si se requiere
+    	if ($comprobarTitular && !Yii::$app->user->can('admin')) {
+    		if ($model->usuario_id !== Yii::$app->user->id) {
+    			throw new ForbiddenHttpException('No tienes permiso para acceder a este comentario.');
+    		}
+    	}
+    	
+    	return $model;
     }
 }

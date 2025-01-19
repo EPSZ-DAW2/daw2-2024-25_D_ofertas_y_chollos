@@ -326,15 +326,6 @@ class Ofertas extends \yii\db\ActiveRecord
         return $this->save();
     }
 
-    public function getClaseBloqueo()
-    {
-        return $this->hasOne(ClasesBloqueo::class, ['id' => 'clase_bloqueo_id']);
-    }
-    
-    public function getEstadoTerminacion()
-    {
-        return $this->hasOne(EstadosTerminacion::class, ['id' => 'estado_terminacion_id']);
-    }
-    
+ 
 
 }
