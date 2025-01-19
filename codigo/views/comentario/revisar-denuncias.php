@@ -52,10 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				'template' => '{view} {bloquear} {desbloquear} {delete}',
 				'buttons' => [
 					'view' => function($url, $model) {
-						return Html::a('<i class="fas fa-eye"></i>', ['view', 'id' => $model->id], [
-							'class' => 'btn btn-info btn-sm',
-							'title' => 'Ver detalle'
-						]);
+						return Html::a('Ver', ['view', 'id' => $model->id], [
+					            'class' => 'btn btn-info btn-sm mr-1',
+					            'title' => 'Ver detalle'
+					        ]);
 					},
 					'bloquear' => function($url, $model) {
 						if (!$model->bloqueado) {
