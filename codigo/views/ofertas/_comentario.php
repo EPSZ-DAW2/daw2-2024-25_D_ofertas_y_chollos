@@ -10,12 +10,14 @@ use yii\helpers\Html;
     <?php if (!$comentario->cerrado): ?>
         <?= Html::a('Responder', ['comentario/create', 'oferta_id' => $comentario->oferta_id, 'comentario_origen_id' => $comentario->id], ['class' => 'btn btn-link']) ?>
     <?php endif; ?>
-    <?= Html::a('Denunciar', ['comentario/denunciar', 'id' => $comentario->id], [
-        'class' => 'btn btn-link text-danger',
-        'data' => [
-            'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
-        ],
-    ]) ?>
+    <?php if (!$comentario->cerrado && Yii::$app->user->id !== $comentario->usuario_id): ?>
+        <?= Html::a('Denunciar', ['comentario/denunciar', 'id' => $comentario->id], [
+            'class' => 'btn btn-link text-danger',
+            'data' => [
+                'confirm' => '¿Estás seguro de que deseas denunciar este comentario?',
+            ],
+        ]) ?>
+    <?php endif; ?>
     <?php if (Yii::$app->user->can('admin')): ?>
         <?php if (!$comentario->bloqueado): ?>
             <?= Html::a('Bloquear', ['comentario/bloquear', 'id' => $comentario->id], [
