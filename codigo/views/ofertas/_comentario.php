@@ -34,6 +34,16 @@ use yii\helpers\Html;
 			]) ?>
 		<?php endif; ?>
 	<?php endif; ?>
+	
+	<?php if ($comentario->respuestas): ?>
+		<?php foreach ($comentario->respuestas as $respuesta): ?>
+			<?= $this->render('_comentario', [
+				'comentario' => $respuesta,
+				'nivel' => $nivel + 1
+			]) ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+	
 	<hr>
 </div>
 
