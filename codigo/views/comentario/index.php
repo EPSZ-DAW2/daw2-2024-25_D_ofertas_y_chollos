@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'btn btn-danger btn-sm',
                                 'data' => [
                                     'confirm' => '¿Estás seguro de que deseas bloquear este comentario?',
-                                    'method' => 'post',
                                 ],
                             ]);
                         }
@@ -63,7 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'btn btn-success btn-sm',
                                 'data' => [
                                     'confirm' => '¿Estás seguro de que deseas desbloquear este comentario?',
-                                    'method' => 'post',
                                 ],
                             ]);
                         }
