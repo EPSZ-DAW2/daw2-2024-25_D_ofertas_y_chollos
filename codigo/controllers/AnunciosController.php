@@ -189,6 +189,7 @@ class AnunciosController extends Controller
     // Consulta para obtener todos los anuncios activos
     $query = Anuncio::find()
         ->where(['estado' => 'visible'])
+        ->andWhere(['>', 'fecha', new \yii\db\Expression('NOW()')])
         ->orderBy(['fecha' => SORT_DESC]);
 
     // Paginación
