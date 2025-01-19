@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'precio')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha')->textInput() ?>
+    <?= $form->field($model, 'fecha')->input('datetime-local') ?>
 
     <?= $form->field($model, 'oferta_id')->textInput() ?>
 
